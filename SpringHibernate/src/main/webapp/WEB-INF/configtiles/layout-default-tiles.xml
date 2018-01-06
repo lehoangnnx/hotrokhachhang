@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<definition name="defaultlayout"
+		template="/WEB-INF/views/layout/default/layout-default.jsp">
+
+		<put-attribute name="head"
+			value="/WEB-INF/views/layout/default/head/head.jsp" />
+		<put-attribute name="headtag"
+			value="/WEB-INF/views/layout/default/headtag/headtag.jsp" />
+		<put-attribute name="navbar"
+			value="/WEB-INF/views/layout/default/navbar/navbar.jsp" />
+		<put-attribute name="sitebar"
+			value="/WEB-INF/views/layout/default/sidebar/sidebar.jsp" />
+
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/layout/default/footer/footer.jsp" />
+		<put-attribute name="footertag"
+			value="/WEB-INF/views/layout/default/footertag/footertag.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/layout/default/footertag/footertagmore.jsp" />
+
+	</definition>
+
+
+	<definition name="home" extends="defaultlayout">
+
+		<put-attribute name="body" value="/WEB-INF/views/layout/default/index.jsp" />
+		<put-attribute name="footertag"
+					   value="/WEB-INF/views/layout/default/footertag/index-footertag.jsp" />
+
+	</definition>
+
+	<!-- Trang đăng nhập -->
+    <definition name="login" extends="defaultlayout">
+        <put-attribute name="title" value="Đăng nhập"/>
+        
+        <put-attribute name="body"
+                       value="/WEB-INF/views/administrator/login.jsp"/>
+        <put-attribute name="footertagmore"
+					   value="/WEB-INF/views/layout/default/footertag/loginfootertag.jsp" />
+    </definition>
+    
+	<definition name="chitiet" extends="defaultlayout">
+<put-attribute name="head"
+			value="/WEB-INF/views/layout/default/head/chitiet-head.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/layout/default/chitietbaiviet.jsp" />
+		<put-attribute name="footertag"
+					   value="/WEB-INF/views/layout/default/footertag/chitiet-footertag.jsp" />
+	</definition>
+
+	<definition name="tonghop" extends="defaultlayout">
+		<put-attribute name="body"
+					   value="/WEB-INF/views/layout/default/trangtonghop.jsp" />
+
+	</definition>
+	<definition name="search" extends="defaultlayout">
+		<put-attribute name="body"
+					   value="/WEB-INF/views/layout/default/search.jsp" />
+
+	</definition>
+	<definition name="canhan" extends="defaultlayout">
+		<put-attribute name="body"
+					   value="/WEB-INF/views/layout/default/trangcanhan.jsp" />
+		<put-attribute name="footertag"
+					   value="/WEB-INF/views/layout/default/footertag/canhan-footertag.jsp" />
+		<put-attribute name="sitebar"
+					   value="" />
+	</definition>
+
+	<definition name="game" extends="defaultlayout">
+		<put-attribute name="body"
+					   value="/WEB-INF/views/layout/default/tranggame.jsp" />
+		<put-attribute name="footertag"
+					   value="/WEB-INF/views/layout/default/footertag/game-footertag.jsp" />
+		<put-attribute name="sitebar"
+					   value="" />
+	</definition>
+
+	<definition name="chitietgame" extends="defaultlayout">
+		<put-attribute name="body"
+					   value="/WEB-INF/views/layout/default/trangchitietgame.jsp" />
+		<put-attribute name="footertag"
+					   value="/WEB-INF/views/layout/default/footertag/chitietgame-footertag.jsp" />
+		<put-attribute name="sitebar"
+					   value="" />
+
+	</definition>
+	<!-- <definition name="403" extends="defaultlayout">
+		<put-attribute name="title" value="Trang Loi" />
+		<put-attribute name="body" value="/WEB-INF/views/layout/default/403.jsp" />
+		<put-attribute name="sitebar" value="" />
+
+	</definition>
+ -->
+	<definition name="forgotpassword" extends="defaultlayout">
+		<put-attribute name="title" value="Lấy Lại Mật Khẩu" />
+		<put-attribute name="body" value="/WEB-INF/views/layout/default/forgotpassword.jsp" />
+		<put-attribute name="sitebar" value="" />
+	</definition>
+
+
+
+</tiles-definitions>

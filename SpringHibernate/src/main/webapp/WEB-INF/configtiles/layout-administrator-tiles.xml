@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="adminlayout"
+		template="/WEB-INF/views/layout/administrator/layout-admin.jsp">
+		<put-attribute name="title" value="Hỗ trợ bán hàng - Admin" />
+		<put-attribute name="head"
+			value="/WEB-INF/views/layout/administrator/head/head.jsp" />
+		<put-attribute name="topheader"
+			value="/WEB-INF/views/layout/administrator/header/topheader.jsp" />
+		<put-attribute name="headtag"
+			value="/WEB-INF/views/layout/administrator/headtag/headtag.jsp" />
+		<put-attribute name="navbar"
+			value="/WEB-INF/views/layout/administrator/navbar/navbar.jsp" />
+		<put-attribute name="sidebar"
+			value="/WEB-INF/views/layout/administrator/sidebar/sidebar.jsp" />
+		<put-attribute name="controlsidebar"
+			value="/WEB-INF/views/layout/administrator/sidebar/" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/layout/administrator/footer/footer.jsp" />
+		<put-attribute name="footertag"
+			value="/WEB-INF/views/layout/administrator/footertag/footertag.jsp" />
+		<put-attribute name="headtagmore"
+			value="/WEB-INF/views/layout/administrator/headtag/headtagmore.jsp" />
+		<put-attribute name="footertagmore"
+			value="" />
+		<put-attribute name="footertagmodel" value="" />
+
+	</definition>
+
+	<!-- Trang Chủ -->
+	<definition name="index" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/index.jsp" />
+	</definition>
+
+	<definition name="themtaikhoan" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/users/themtaikhoan.jsp" />
+	</definition>
+
+	<!-- Trang Người Dùng -->
+	<definition name="usersmng" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị Người Dùng" />
+		<put-attribute name="headtagmore"
+			value="/WEB-INF/views/layout/administrator/headtag/headtagmore.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/layout/administrator/footertag/footertagmore.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/quanlytaikhoan.jsp" />
+	</definition>
+
+	<!-- Trang quản lý Quyền -->
+	<definition name="rolesmng" extends="adminlayout">
+		<put-attribute name="title"
+			value="Trang quản trị Quyền của người dùng" />
+		<put-attribute name="headtagmore"
+			value="/WEB-INF/views/layout/administrator/headtag/headtagmore.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/layout/administrator/footertag/footertagmore.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/users/roles.jsp" />
+		<put-attribute name="footertagmodel"
+			value="/WEB-INF/views/layout/administrator/footertag/roles-footertag.jsp" />
+	</definition>
+
+	<!-- Trang quản sửa lý Quyền -->
+	<definition name="updateroles" extends="adminlayout">
+		<put-attribute name="title"
+			value="Trang quản trị Quyền của người dùng" />
+		<put-attribute name="headtagmore"
+			value="/WEB-INF/views/layout/administrator/headtag/headtagmore.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/layout/administrator/footertag/footertagmore.jsp" />
+		<put-attribute name="footertagmodel"
+			value="/WEB-INF/views/layout/administrator/footertag/roles-footertag.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/users/roles.jsp" />
+	</definition>
+
+	<!-- Trang Người Dùng -->
+	<definition name="users" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị Người Dùng" />
+		<put-attribute name="headtag"
+			value="/WEB-INF/views/administrator/headtag/users/users-headtag.jsp" />
+		<put-attribute name="footertag"
+			value="/WEB-INF/views/administrator/footertag/users/users-footertag.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/users/users.jsp" />
+	</definition>
+
+	<definition name="adminlogin" template="/WEB-INF/views/administrator/index.jsp">
+	</definition>
+
+
+<!-- ///////////////////////////////////////////////////////////////////////////////////////  -->
+
+	<!-- Trang Danh Sách Loại Khách Hàng -->
+	<definition name="danhsachloaikhachhang" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/loaikhachhang/danhsachloaikhachhang.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/loaikhachhang/footertag/loaikhachhang-footertag.jsp" />
+	</definition>
+	<!-- Trang Thêm Loại Khách Hàng -->
+	<definition name="themloaikhachhang" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/loaikhachhang/themloaikhachhang.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/loaikhachhang/footertag/themloaikhachhang-footertag.jsp" />
+	</definition>
+	<!-- Trang Sửa Loại Khách Hàng -->
+	<definition name="sualoaikhachhang" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/loaikhachhang/sualoaikhachhang.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/loaikhachhang/footertag/sualoaikhachhang-footertag.jsp" />
+	</definition>
+
+
+<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- Trang Danh Sách Nhóm Khách Hàng -->
+	<definition name="danhsachnhomkhachhang" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/nhomkhachhang/danhsachnhomkhachhang.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/nhomkhachhang/footertag/nhomkhachhang-footertag.jsp" />
+	</definition>
+	<!-- Trang Thêm Nhóm Khách Hàng -->
+	<definition name="themnhomkhachhang" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/nhomkhachhang/themnhomkhachhang.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/nhomkhachhang/footertag/themnhomkhachhang-footertag.jsp" />
+	</definition>
+	<!-- Trang Sửa Nhóm Khách Hàng -->
+	<definition name="suanhomkhachhang" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/nhomkhachhang/suanhomkhachhang.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/nhomkhachhang/footertag/suanhomkhachhang-footertag.jsp" />
+	</definition>
+
+<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
+
+
+<!-- Trang Danh Sách Nhóm Hàng -->
+	<definition name="danhsachnhomhang" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/nhomhang/danhsachnhomhang.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/nhomhang/footertag/nhomhang-footertag.jsp" />
+	</definition>
+	<!-- Trang Thêm Nhóm Hàng -->
+	<definition name="themnhomhang" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/nhomhang/themnhomhang.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/nhomhang/footertag/themnhomhang-footertag.jsp" />
+	</definition>
+	<!-- Trang Sửa Nhóm Hàng -->
+	<definition name="suanhomhang" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/nhomhang/suanhomhang.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/nhomhang/footertag/suanhomhang-footertag.jsp" />
+	</definition>
+	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
+	
+	<!-- Trang Danh Sách Hàng Hóa -->
+	<definition name="danhsachhanghoa" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/hanghoa/danhsachhanghoa.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/hanghoa/footertag/hanghoa-footertag.jsp" />
+	</definition>
+	<!-- Trang Thêm Hàng Hóa -->
+	<definition name="themhanghoa" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/hanghoa/themhanghoa.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/hanghoa/footertag/themhanghoa-footertag.jsp" />
+	</definition>
+	<!-- Trang Sửa Hàng Hóa -->
+	<definition name="suahanghoa" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/hanghoa/suahanghoa.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/hanghoa/footertag/suahanghoa-footertag.jsp" />
+	</definition>
+	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
+	
+	<!-- Trang Danh Sách Bộ Phận -->
+	<definition name="danhsachbophan" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/bophan/danhsachbophan.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/bophan/footertag/bophan-footertag.jsp" />
+	</definition>
+	<!-- Trang Thêm Bộ Phận -->
+	<definition name="thembophan" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/bophan/thembophan.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/bophan/footertag/thembophan-footertag.jsp" />
+	</definition>
+	<!-- Trang Sửa Bộ Phận -->
+	<definition name="suabophan" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/bophan/suabophan.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/bophan/footertag/suabophan-footertag.jsp" />
+	</definition>
+	
+	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
+	
+	
+	
+	
+	<!-- Trang Lỗi -->
+	<definition name="403" template="/WEB-INF/views/administrator/403.jsp">
+
+	</definition>
+</tiles-definitions>

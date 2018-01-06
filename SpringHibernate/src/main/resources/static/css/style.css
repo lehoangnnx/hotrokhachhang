@@ -1,0 +1,21 @@
+body {
+	
+}
+.md-radio-inline  label{
+	margin-right: 20px;
+	cursor: pointer;
+}
+
+.error {
+	color: red;
+}
+
+.box-login {
+	max-width: 400px;
+	margin: auto;
+}
+
+.box-login .control-label {
+	width: 100%;
+	text-align: left;
+}
