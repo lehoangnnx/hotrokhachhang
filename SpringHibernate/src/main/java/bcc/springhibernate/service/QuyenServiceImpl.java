@@ -43,9 +43,15 @@ public class QuyenServiceImpl implements QuyenService {
 	}
 
 	@Override
-	public List<Quyen> findAllByTrangThaiOrderByIdDesc(String trangthai) {
+	public List<Quyen> findByTrangthaiOrderByIdDesc(String trangthai) {
 		// TODO Auto-generated method stub
-		return quyenRepository.findAllByTrangthaiOrderByIdDesc(trangthai);
+		return quyenRepository.findByTrangthaiOrderByIdDesc(trangthai);
+	}
+
+	@Override
+	public Quyen findByMaquyen(String maquyen) {
+		
+		return quyenRepository.findByMaquyen(maquyen);
 	}
 
 }

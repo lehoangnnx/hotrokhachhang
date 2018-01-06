@@ -57,7 +57,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 			taikhoan.setMatkhau(passwordEncoder.encode("123456"));
 			taikhoan.setThongtinkhac("123");
 			Quyen quyen = quyenRepository.findById(1);
-			Nhanvien nhanvien =nhanvienRepository.getById(1);
+			Nhanvien nhanvien =nhanvienRepository.findById(1);
 			taikhoan.setQuyen(quyen);
 			taikhoan.setNhanvien(nhanvien);
 			taikhoanRepository.save(taikhoan);

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import bcc.springhibernate.model.Nhanvien;
 import bcc.springhibernate.model.Taikhoan;
 import bcc.springhibernate.repository.TaikhoanRepository;
 
@@ -26,11 +27,7 @@ public class TaikhoanServiceImpl implements TaikhoanService {
 		
 	}
 
-	@Override
-	public void deleteOne(Integer id) {
-		taikhoanRepository.delete(id);
-		
-	}
+	
 
 	@Override
 	public Taikhoan findById(Integer id) {
@@ -42,6 +39,18 @@ public class TaikhoanServiceImpl implements TaikhoanService {
 	public Taikhoan findByUsername(String username) {
 		
 		return taikhoanRepository.findByUsername(username);
+	}
+
+	@Override
+	public List<Taikhoan> findByTrangthaiOrderByIdDesc(String trangthai) {
+		
+		return taikhoanRepository.findByTrangthaiOrderByIdDesc(trangthai);
+	}
+
+	@Override
+	public Nhanvien findByEmail(String email) {
+		
+		return taikhoanRepository.findByEmail(email);
 	}
 
 }

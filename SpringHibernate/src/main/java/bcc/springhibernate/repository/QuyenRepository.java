@@ -12,6 +12,7 @@ import bcc.springhibernate.model.Quyen;
 public interface QuyenRepository extends JpaRepository<Quyen, Integer> {
 	Quyen findById(Integer id);
 	Quyen findByTenquyen(String tenquyen);
-	List<Quyen> findAllByTrangthaiOrderByIdDesc(String trangthai);
+	Quyen findByMaquyen(String maquyen);
+	List<Quyen> findByTrangthaiOrderByIdDesc(String trangthai);
 	
 }

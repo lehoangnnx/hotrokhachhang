@@ -10,5 +10,6 @@ public interface QuyenService {
 	void deleteOne(Integer id);
 	Quyen findById(Integer id);
 	Quyen findByTenQuyen(String tenquyen);
-	List<Quyen> findAllByTrangThaiOrderByIdDesc(String trangthai);
+	Quyen findByMaquyen(String maquyen);
+	List<Quyen> findByTrangthaiOrderByIdDesc(String trangthai);
 }

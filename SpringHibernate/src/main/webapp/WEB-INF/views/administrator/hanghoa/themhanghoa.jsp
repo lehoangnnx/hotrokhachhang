@@ -48,29 +48,29 @@
 							<label for="giaban">Giá Bán</label>
 							<form:input path="giaban" type="number" class="form-control"
 								placeholder="Giá Bán" />
-						<label id="_giaban-error" class="error" style="display: none;"></label>
+							<label id="_giaban-error" class="error" style="display: none;"></label>
 						</div>
 						<div class="form-group">
 							<label for="giakhuyenmai">Giá Khuyến Mãi</label>
-							<form:input path="giakhuyenmai" type="number" class="form-control"
-								placeholder="Giá Khuyến Mãi" />
-<label id="_giakhuyenmai-error" class="error" style="display: none;"></label>
+							<form:input path="giakhuyenmai" type="number"
+								class="form-control" placeholder="Giá Khuyến Mãi" />
+							<label id="_giakhuyenmai-error" class="error"
+								style="display: none;"></label>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="donvitinh">Đơn Vị Tính</label>
 							<form:input path="donvitinh" type="text" class="form-control"
 								placeholder="Đơn Vị Tính" />
 
 						</div>
-						
+
 						<div class="form-group">
-							<label> Nhóm Hàng</label> <select
-								class="form-control select2" name="nhomhang"
-								style="width: 100%;">
-								
+							<label> Nhóm Hàng</label> <select class="form-control select2"
+								name="nhomhang" style="width: 100%;">
+
 								<c:forEach var="nh" items="${listNhomhang }">
-									<option value="${nh.id }">${nh.manhom }- ${nh.tennhom }</option>
+									<option value="${nh.id }">${nh.manhom }-${nh.tennhom }</option>
 								</c:forEach>
 
 							</select>

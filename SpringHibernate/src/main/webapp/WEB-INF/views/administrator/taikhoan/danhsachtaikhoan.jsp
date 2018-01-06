@@ -10,9 +10,9 @@
 <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Loại Khách Hàng
-        <small><a href="${contextPath }/admin/roles?status=active">Danh Sách Bộ Phận</a></small>
-        <small><a class="btn btn-success" href="${contextPath }/admin/bophan/add">Thêm mới</a></small>
+        Tài Khoản
+        <small><a href="${contextPath }/admin/roles?status=active">Danh Sách Tài Khoản</a></small>
+        <small><a class="btn btn-success" href="${contextPath }/admin/taikhoan/add">Thêm mới</a></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="${contextPath }/"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -42,34 +42,33 @@
 				</ul>
 		          <div class="box">
 		            <div class="box-header">
-		              <h3 class="box-title">Danh Sách Bộ Phận</h3>
+		              <h3 class="box-title">Danh Sách Tài Khoản</h3>
 		            </div>
 		            <!-- /.box-header -->
 		            <div class="box-body">
 		              <table id="example1" class="table table-bordered table-striped">
 		                <thead>
 		                <tr>
-		                  <th>Tên Bộ Phận</th>
-		                 
-		                  <th>Vị Trí</th>
-		                  <th>Mô Tả</th>
-		                  
-		                  <th>Thao tác</th>
+		                  <th>User Name</th>
+		                  <th>Email</th>
+		                  <th>Nhân Viên</th>
+		                  <th>Quyền</th>
+		                   <th>Thao Tác</th>
 		                </tr>
 		                </thead>
 		                <tbody>
-		                <c:forEach var="bp" items="${listBophan }" >
+		                <c:forEach var="tk" items="${listTaikhoan }" >
 		                	<tr>
-			                  	<td>${bp.tenbophan }</td>
-			                  	
-			                  	<td>${bp.vitri }</td>
-			                  	<td>${bp.mota }</td>
+			                  	<td>${tk.username }</td>
+			                  <td>${tk.email }</td>
+			                  <td>${tk.nhanvien.manhanvien }</td>
+			                  <td>${tk.quyen.tenquyen }</td>
 			                  	<td>
-			                  		<a href="${contextPath }/admin/bophan/${bp.id}">
+			                  		<a href="${contextPath }/admin/quyen/${tk.id}">
 			                  			<i style="color: blue;" class="fa fa-pencil fa-lg" aria-hidden="true" title="Sửa">
 			                  			</i>
 			                  		</a> 
-			                  		<a onclick="deleteOne(${bp.id});" href="#" data-toggle="modal" data-target="#myModal"
+			                  		<a onclick="deleteOne(${tk.id});" href="#" data-toggle="modal" data-target="#myModal"
 										style="color: red; margin-left: 10px;"> 
 										<i class="fa fa-trash-o fa-lg" aria-hidden="true" title="Xóa"></i></a>
 								</td>
@@ -78,12 +77,11 @@
 		                </tbody>
 		                <tfoot>
 		                <tr>
-		                 <th>Tên Bộ Phận</th>
-		                 
-		                  <th>Vị Trí</th>
-		                  <th>Mô Tả</th>
-		                  
-		                  <th>Thao tác</th>
+		                  <th>User Name</th>
+		                  <th>Email</th>
+		                  <th>Nhân Viên</th>
+		                  <th>Quyền</th>
+		                   <th>Thao Tác</th>
 		                </tr>
 		                </tfoot>
 		              </table>

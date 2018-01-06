@@ -15,21 +15,27 @@
 			<!-- general form elements -->
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">Thêm Loại Khách Hàng</h3>
+					<h3 class="box-title">Thêm Bộ Phận</h3>
 				</div>
 				<!-- /.box-header -->
 				<!-- form start -->
-				<form:form role="form" id="formLoaiKhachHang"
-					action="${contextPath }/admin/loaikhachhang" method="patch" modelAttribute="loaikhachhang">
-					
+				<form:form role="form" id="formBoPhan"
+					action="${contextPath }/admin/bophan" method="patch" modelAttribute="bophan">
 					<form:hidden path="id"/>
 					<div class="box-body">
 						<div class="form-group">
-							<label for="tenLoai">Tên Loại Khách Hàng</label> <form:input path="tenloai"
-								type="text" class="form-control" id="tenloai" name="tenloai"
-								placeholder="Nhập Tên Loại Khách Hàng" />
+							<label for="tenbophan">Tên Bộ Phận</label> <form:input path="tenbophan"
+								type="text" class="form-control"
+								placeholder="Tên Bộ Phận" />
 								<label id="error" class="error" style="display: none;" ></label>
 						</div>
+						<div class="form-group">
+							<label for="vitri">Vị Trí</label> <form:input path="vitri"
+								type="text" class="form-control"
+								placeholder="Vị Trí" />
+							
+						</div>
+						
 						<div class="form-group">
 							<label for="moTa">Mô tả</label> <form:input path="mota" type="text"
 								class="form-control" id="mota" name="mota"

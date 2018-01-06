@@ -1,8 +1,16 @@
 $(document).ready(function() {
 	// Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
-	$("#formLoaiKhachHang").validate({
+	$("#formBoPhan").validate({
 		rules : {
-			tenloai : {
+			tenbophan : {
+				required : true,
+				normalizer : function(value) {
+
+					return $.trim(value);
+				}
+
+			},
+			vitri : {
 				required : true,
 				normalizer : function(value) {
 
@@ -21,12 +29,17 @@ $(document).ready(function() {
 		},
 		messages : {
 			tenloai : {
-				required : "Vui Lòng Nhập Tên Loại Khách Hàng"
+				required : "* Vui Lòng Nhập Tên Bộ Phận"
+				
+
+			},
+			vitri : {
+				required : "* Vui Lòng Nhập Vị Trí"
 				
 
 			},
 			mota : {
-				required : "Vui Lòng Nhập Mô Tả"
+				required : "* Vui Lòng Nhập Mô Tả"
 			}
 
 		}
@@ -34,12 +47,12 @@ $(document).ready(function() {
 });
 
 var timeout = null;
-function kiemtratenloaikhachhang(){
+function kiemtratenbophan(){
 	clearTimeout(timeout);
 	timeout = setTimeout(function() {
-		var loaikhachhang = {};
-		loaikhachhang["tenloai"] = $('#tenloai').val().trim();
-		loaikhachhang["id"] = $("#id").val().trim();
+		var bophan = {};
+		bophan["tenbophan"] = $('#tenbophan').val().trim();
+		bophan["id"] = $("#id").val().trim();
 		var token = $("meta[name='_csrf']").attr("content");
         var header = $("meta[name='_csrf_header']").attr("content");
         $(document).ajaxSend(function (e, xhr, options) {
@@ -50,15 +63,15 @@ function kiemtratenloaikhachhang(){
 
 			type : "POST",
 			contentType : "application/json",
-			url : contextPath + "/admin/kiemtratenloaikhachhang",
-			data : JSON.stringify(loaikhachhang),
+			url : contextPath + "/admin/kiemtratenbophan",
+			data : JSON.stringify(bophan),
 			// dataType: 'json',
 			// timeout: 600000,
 			success : function(result) {
 				console.log(result);
 				if(result == "error"){
 					$('#error').css("display", "block");
-					$('#error').text("* Tên Loại Đã Tồn Tại");
+					$('#error').text("* Tên Bộ Phận Đã Tồn Tại");
 					$('#btn-submit').attr('type','button');
 				}else {
 					$('#error').css("display", "none");
@@ -73,11 +86,11 @@ function kiemtratenloaikhachhang(){
 		});
 	}, 100);
 };
-$('#tenloai').on('keyup keypress keydown', function(event){
+$('#tenbophan').on('keyup keypress keydown', function(event){
 	
-	if($('#tenloai').val().trim() != ''){
+	if($('#tenbophan').val().trim() != ''){
 		
-		kiemtratenloaikhachhang();
+		kiemtratenbophan();
 		
 	}else {
 		$('#error').css("display", "none");

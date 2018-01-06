@@ -1,8 +1,8 @@
 $(document).ready(function() {
 	// Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
-	$("#formBoPhan").validate({
+	$("#formQuyen").validate({
 		rules : {
-			tenbophan : {
+			maquyen : {
 				required : true,
 				normalizer : function(value) {
 
@@ -10,8 +10,9 @@ $(document).ready(function() {
 				}
 
 			},
-			vitri : {
+			tenquyen : {
 				required : true,
+				
 				normalizer : function(value) {
 
 					return $.trim(value);
@@ -28,16 +29,16 @@ $(document).ready(function() {
 
 		},
 		messages : {
-			tenloai : {
-				required : "* Vui Lòng Nhập Tên Bộ Phận"
+			maquyen : {
+				required : "* Vui Lòng Nhập Mã Quyền"
+				
+			},
+			tenquyen : {
+				required : "* Vui Lòng Nhập Tên Quyền"
 				
 
 			},
-			vitri : {
-				required : "* Vui Lòng Nhập Vị Trí"
-				
-
-			},
+			
 			mota : {
 				required : "* Vui Lòng Nhập Mô Tả"
 			}
@@ -47,12 +48,12 @@ $(document).ready(function() {
 });
 
 var timeout = null;
-function kiemtratenbophan(){
+function kiemtramaquyen(){
 	clearTimeout(timeout);
 	timeout = setTimeout(function() {
-		var bophan = {};
-		bophan["tenbophan"] = $('#tenbophan').val().trim();
-		bophan["id"] = $("#id").val().trim();
+		var quyen = {};
+		quyen["maquyen"] = $('#maquyen').val().trim();
+		quyen["id"] = $("#id").val().trim();
 		var token = $("meta[name='_csrf']").attr("content");
         var header = $("meta[name='_csrf_header']").attr("content");
         $(document).ajaxSend(function (e, xhr, options) {
@@ -63,15 +64,15 @@ function kiemtratenbophan(){
 
 			type : "POST",
 			contentType : "application/json",
-			url : contextPath + "/admin/kiemtratenbophan",
-			data : JSON.stringify(bophan),
+			url : contextPath + "/admin/kiemtramaquyen",
+			data : JSON.stringify(quyen),
 			// dataType: 'json',
 			// timeout: 600000,
 			success : function(result) {
 				console.log(result);
 				if(result == "error"){
 					$('#error').css("display", "block");
-					$('#error').text("* Tên Bộ Phận Đã Tồn Tại");
+					$('#error').text("* Tên Mã Quyền Đã Tồn Tại");
 					$('#btn-submit').attr('type','button');
 				}else {
 					$('#error').css("display", "none");
@@ -86,17 +87,23 @@ function kiemtratenbophan(){
 		});
 	}, 100);
 };
-$('#tenbophan').on('keyup keypress keydown', function(event){
+$('#maquyen').on('keyup keypress keydown', function(event){
 	
-	if($('#tenbophan').val().trim() != ''){
+	if($('#maquyen').val().trim() != ''){
+		var a = $("#maquyen").val().toUpperCase();
+        $("#maquyen").val(a);
+		if(a.substr(0, 5) === "ROLE_"){
+            $("#error").text("");
+            kiemtramaquyen();
+		}else{
+			$('#error').css("display", "block");
+            $("#error").text("Tên Quyền Phải Bắt Đầu Bằng ROLE_");
+		}
 		
-		kiemtratenbophan();
 		
 	}else {
 		$('#error').css("display", "none");
 		$('#error').text("");
-		
 	}
 	
-});
-
+})

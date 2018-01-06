@@ -42,10 +42,8 @@
 					class="fa fa-angle-left pull-right"></i>
 			</span> </a>
 			<ul class="treeview-menu">
-				<li><a href="${contextPath }/usersmng">Dánh sách tài khoản</a></li>
-				<li><a href="${contextPath }/taikhoan">Thêm tài khoản</a></li>
-				<li><a href="${contextPath }/usersmng">Loại tài khoản</a></li>
-				<li><a href="${contextPath }/roles">Quyền</a></li>
+				<li><a href="${contextPath }/admin/taikhoan">Tài Khoản</a></li>
+				<li><a href="${contextPath }/admin/quyen">Quyền</a></li>
 			</ul></li>
 
 		<li class="treeview"><a href="#"><i class="fa fa-link"></i> <span>Khách

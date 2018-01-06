@@ -15,31 +15,35 @@
 			<!-- general form elements -->
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">Thêm Bộ Phận</h3>
+					<h3 class="box-title">Sửa Quyền</h3>
 				</div>
 				<!-- /.box-header -->
 				<!-- form start -->
-				<form:form role="form" id="formBoPhan"
-					action="${contextPath }/admin/bophan" method="post" modelAttribute="bophan">
-					<form:hidden path="id"/>
+				<form:form role="form" id="formQuyen"
+					action="${contextPath }/admin/quyen" method="patch"
+					modelAttribute="quyen">
+					<form:hidden path="id" />
 					<div class="box-body">
 						<div class="form-group">
-							<label for="tenbophan">Tên Bộ Phận</label> <form:input path="tenbophan"
-								type="text" class="form-control"
-								placeholder="Tên Bộ Phận" />
-								<label id="error" class="error" style="display: none;" ></label>
-						</div>
-						<div class="form-group">
-							<label for="vitri">Vị Trí</label> <form:input path="vitri"
-								type="text" class="form-control"
-								placeholder="Vị Trí" />
-							
+							<label for="maquyen">Mã Quyền</label>
+							<form:input path="maquyen" type="text" class="form-control"
+								placeholder="Mã Quyền" />
+							<label id="error" class="error" style="display: none;"></label>
 						</div>
 						
+
+
 						<div class="form-group">
-							<label for="moTa">Mô tả</label> <form:input path="mota" type="text"
-								class="form-control" id="mota" name="mota"
-								placeholder="Mô Tả" />
+							<label for="tenquyen">Tên Quyền</label>
+							<form:input path="tenquyen" type="text" class="form-control"
+								placeholder="Tên Quyền" />
+
+						</div>
+
+						<div class="form-group">
+							<label for="mota">Mô tả</label>
+							<form:input path="mota" type="text" class="form-control"
+								id="mota" name="mota" placeholder="Mô Tả" />
 						</div>
 
 
@@ -48,7 +52,8 @@
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 					<div class="box-footer">
-						<button id="btn-submit" type="submit" class="btn btn-primary">Xác Nhận</button>
+						<button id="btn-submit" type="submit" class="btn btn-primary">Xác
+							Nhận</button>
 					</div>
 				</form:form>
 			</div>

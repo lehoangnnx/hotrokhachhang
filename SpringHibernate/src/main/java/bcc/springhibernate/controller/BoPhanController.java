@@ -82,7 +82,7 @@ public class BoPhanController {
 			arrayId.forEach(x -> {
 
 				Bophan bophan= boPhanService.findById(x);
-				bophan.setTrangthai("active");
+				bophan.setTrangthai("deleted");
 	        	boPhanService.saveOrUpdate(bophan);
 
 			});
