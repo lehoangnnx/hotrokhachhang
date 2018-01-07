@@ -9,8 +9,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface NhanvienRepository extends JpaRepository<Nhanvien, Integer> {
-
+	
     Nhanvien findById(Integer id);
+    Nhanvien findByManhanvien(String manhanvien);
     List<Nhanvien> findAll();
    List<Nhanvien> findByTrangthaiOrderByIdDesc(String trangthai);
 }

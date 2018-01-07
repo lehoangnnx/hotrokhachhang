@@ -48,7 +48,7 @@ public class TaikhoanServiceImpl implements TaikhoanService {
 	}
 
 	@Override
-	public Nhanvien findByEmail(String email) {
+	public Taikhoan findByEmail(String email) {
 		
 		return taikhoanRepository.findByEmail(email);
 	}

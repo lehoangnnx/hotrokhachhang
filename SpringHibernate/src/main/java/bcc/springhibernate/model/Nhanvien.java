@@ -62,6 +62,42 @@ public class Nhanvien implements java.io.Serializable {
 
 	public Nhanvien(Bophan bophan, String manhanvien, String tennhanvien, String socmnd, Date ngaycap, String noicap,
 			String sodienthoai, String diachi, Date ngayvaolam, String trangthai, Integer loainhanvien,
+			String thongtinkhac, String ghichu) {
+	
+		this.bophan = bophan;
+		this.manhanvien = manhanvien;
+		this.tennhanvien = tennhanvien;
+		this.socmnd = socmnd;
+		this.ngaycap = ngaycap;
+		this.noicap = noicap;
+		this.sodienthoai = sodienthoai;
+		this.diachi = diachi;
+		this.ngayvaolam = ngayvaolam;
+		this.trangthai = trangthai;
+		this.loainhanvien = loainhanvien;
+		this.thongtinkhac = thongtinkhac;
+		this.ghichu = ghichu;
+	}
+	public Nhanvien(Integer id,Bophan bophan, String manhanvien, String tennhanvien, String socmnd, Date ngaycap, String noicap,
+			String sodienthoai, String diachi, Date ngayvaolam, String trangthai, Integer loainhanvien,
+			String thongtinkhac, String ghichu) {
+	this.id=id;
+		this.bophan = bophan;
+		this.manhanvien = manhanvien;
+		this.tennhanvien = tennhanvien;
+		this.socmnd = socmnd;
+		this.ngaycap = ngaycap;
+		this.noicap = noicap;
+		this.sodienthoai = sodienthoai;
+		this.diachi = diachi;
+		this.ngayvaolam = ngayvaolam;
+		this.trangthai = trangthai;
+		this.loainhanvien = loainhanvien;
+		this.thongtinkhac = thongtinkhac;
+		this.ghichu = ghichu;
+	}
+	public Nhanvien(Bophan bophan, String manhanvien, String tennhanvien, String socmnd, Date ngaycap, String noicap,
+			String sodienthoai, String diachi, Date ngayvaolam, String trangthai, Integer loainhanvien,
 			String thongtinkhac, String ghichu, Set<Hoadon> hoadonsForIdnhanvienlaphoadon,
 			Set<Hoadon> hoadonsForIdnhanvienban, Set<Hoadon> hoadonsForIdnhanvienban_1,
 			Set<Hoadon> hoadonsForIdnhanvienlaphoadon_1, Set<Hoadon> hoadonsForIdnhanvienchamsoc,

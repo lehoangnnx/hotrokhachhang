@@ -30,4 +30,16 @@ NhanvienRepository nhanvienRepository;
 		
 		return nhanvienRepository.findByTrangthaiOrderByIdDesc(trangthai);
 	}
+
+	@Override
+	public void saveOrUpdate(Nhanvien nhanvien) {
+		nhanvienRepository.save(nhanvien);
+		
+	}
+
+	@Override
+	public Nhanvien findByManhanvien(String manhanvien) {
+		
+		return nhanvienRepository.findByManhanvien(manhanvien);
+	}
 }

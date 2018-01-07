@@ -1,8 +1,8 @@
 $(document).ready(function() {
 	// Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
-	$("#formQuyen").validate({
+	$("#formTaiKhoan").validate({
 		rules : {
-			maquyen : {
+			username : {
 				required : true,
 				normalizer : function(value) {
 
@@ -10,16 +10,16 @@ $(document).ready(function() {
 				}
 
 			},
-			tenquyen : {
+			email : {
 				required : true,
-				
+				email : true,
 				normalizer : function(value) {
 
 					return $.trim(value);
 				}
 
 			},
-			mota : {
+			matkhau : {
 				required : true,
 				normalizer : function(value) {
 
@@ -29,18 +29,18 @@ $(document).ready(function() {
 
 		},
 		messages : {
-			maquyen : {
-				required : "* Vui Lòng Nhập Mã Quyền"
-				
-			},
-			tenquyen : {
-				required : "* Vui Lòng Nhập Tên Quyền"
-				
+			username : {
+				required : "* Vui Lòng Nhập User Name"
 
 			},
-			
-			mota : {
-				required : "* Vui Lòng Nhập Mô Tả"
+			email : {
+				required : "* Vui Lòng Nhập Email",
+				email : "* Vui Lòng Nhập Đúng Email"
+
+			},
+
+			matkhau : {
+				required : "* Vui Lòng Nhập Mật Khẩu"
 			}
 
 		}
@@ -48,36 +48,57 @@ $(document).ready(function() {
 });
 
 var timeout = null;
-function kiemtramaquyen(){
+function kiemtrausernamevaemailtaikhoan() {
 	clearTimeout(timeout);
 	timeout = setTimeout(function() {
-		var quyen = {};
-		quyen["maquyen"] = $('#maquyen').val().trim();
-		quyen["id"] = $("#id").val().trim();
+		var taikhoan = {};
+		taikhoan["username"] = $('#username').val().trim();
+		taikhoan["email"] = $('#email').val().trim();
+		taikhoan["id"] = $("#id").val().trim();
 		var token = $("meta[name='_csrf']").attr("content");
-        var header = $("meta[name='_csrf_header']").attr("content");
-        $(document).ajaxSend(function (e, xhr, options) {
-            xhr.setRequestHeader(header, token);
-        });
-       
+		var header = $("meta[name='_csrf_header']").attr("content");
+		$(document).ajaxSend(function(e, xhr, options) {
+			xhr.setRequestHeader(header, token);
+		});
+
 		$.ajax({
 
 			type : "POST",
 			contentType : "application/json",
-			url : contextPath + "/admin/kiemtramaquyen",
-			data : JSON.stringify(quyen),
+			url : contextPath + "/admin/kiemtrausernamevaemailtaikhoan",
+			data : JSON.stringify(taikhoan),
 			// dataType: 'json',
 			// timeout: 600000,
 			success : function(result) {
 				console.log(result);
-				if(result == "error"){
-					$('#error').css("display", "block");
-					$('#error').text("* Tên Mã Quyền Đã Tồn Tại");
-					$('#btn-submit').attr('type','button');
-				}else {
-					$('#error').css("display", "none");
-					$('#error').text("");
-					$('#btn-submit').attr('type','submit');
+				if (result == "error") {
+					$('#_username-error').css("display", "block");
+					$('#_username-error').text("* User Name Đã Tồn Tại");
+
+					$('#_email-error').css("display", "block");
+					$('#_email-error').text("* Email Đã Tồn Tại");
+
+					$('#btn-submit').attr('type', 'button');
+				} else if (result == "errorusername") {
+					$('#_username-error').css("display", "block");
+					$('#_username-error').text("* User Name Đã Tồn Tại");
+					$('#_email-error').css("display", "none");
+					$('#_email-error').text("");
+					$('#btn-submit').attr('type', 'button');
+				} else if (result == "erroremail") {
+					$('#_email-error').css("display", "block");
+					$('#_email-error').text("* Email Đã Tồn Tại");
+					$('#_username-error').css("display", "none");
+					$('#_username-error').text("");
+					$('#btn-submit').attr('type', 'button');
+				}
+
+				else {
+					$('#_username-error').css("display", "none");
+					$('#_username-error').text("");
+					$('#_email-error').css("display", "none");
+					$('#_email-error').text("");
+					$('#btn-submit').attr('type', 'submit');
 				}
 
 			},
@@ -87,23 +108,28 @@ function kiemtramaquyen(){
 		});
 	}, 100);
 };
-$('#maquyen').on('keyup keypress keydown', function(event){
-	
-	if($('#maquyen').val().trim() != ''){
-		var a = $("#maquyen").val().toUpperCase();
-        $("#maquyen").val(a);
-		if(a.substr(0, 5) === "ROLE_"){
-            $("#error").text("");
-            kiemtramaquyen();
-		}else{
-			$('#error').css("display", "block");
-            $("#error").text("Tên Quyền Phải Bắt Đầu Bằng ROLE_");
-		}
-		
-		
-	}else {
-		$('#error').css("display", "none");
-		$('#error').text("");
+$('#username').on('keyup keypress keydown', function(event) {
+
+	if ($('#username').val().trim() != '') {
+
+		kiemtrausernamevaemailtaikhoan();
+
+	} else {
+		$('#_username-error').css("display", "none");
+		$('#_username-error').text("");
 	}
-	
-})
+
+});
+
+$('#email').on('keyup keypress keydown', function(event) {
+
+	if ($('#email').val().trim() != '') {
+
+		kiemtrausernamevaemailtaikhoan();
+
+	} else {
+		$('#_email-error').css("display", "none");
+		$('#_email-error').text("");
+	}
+
+});

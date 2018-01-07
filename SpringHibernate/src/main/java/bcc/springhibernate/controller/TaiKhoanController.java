@@ -4,6 +4,7 @@ package bcc.springhibernate.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,6 +38,9 @@ public class TaiKhoanController {
 	
 	@Autowired
 	QuyenService quyenService;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
     @GetMapping("/taikhoan")
     String pageDanhSachTaiKhoan(Model model){
@@ -74,6 +78,7 @@ public class TaiKhoanController {
     	try {
     		Nhanvien nhanVienById =  nhanVienService.findById(nhanvien);
     		Quyen quyenById = quyenService.findById(quyen);
+    		taikhoan.setMatkhau(passwordEncoder.encode(taikhoan.getMatkhau()));
     		taikhoan.setTrangthai("active");
     		taikhoan.setNhanvien(nhanVienById);
     		taikhoan.setQuyen(quyenById);

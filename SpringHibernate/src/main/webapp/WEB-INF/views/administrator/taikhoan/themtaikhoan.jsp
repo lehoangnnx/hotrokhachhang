@@ -19,7 +19,7 @@
 				</div>
 				<!-- /.box-header -->
 				<!-- form start -->
-				<form:form role="form" id="formQuyen"
+				<form:form role="form" id="formTaiKhoan"
 					action="${contextPath }/admin/taikhoan" method="post"
 					modelAttribute="taikhoan">
 					<form:hidden path="id" />
@@ -28,16 +28,16 @@
 							<label for="username">User Name</label>
 							<form:input path="username" type="text" class="form-control"
 								placeholder="User Name" />
-							<label id="error" class="error" style="display: none;"></label>
+							<label id="_username-error" class="error" style="display: none;"></label>
 						</div>
 
 
 
 						<div class="form-group">
 							<label for="email">Email</label>
-							<form:input path="email" type="text" class="form-control"
+							<form:input path="email" type="email" class="form-control"
 								placeholder="Email" />
-
+							<label id="_email-error" class="error" style="display: none;"></label>
 						</div>
 						<div class="form-group">
 							<label for="matkhau">Mật Khẩu</label>

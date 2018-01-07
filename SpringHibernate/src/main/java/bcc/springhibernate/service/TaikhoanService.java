@@ -11,7 +11,7 @@ public interface TaikhoanService {
 	
 	Taikhoan findById(Integer id);
 	Taikhoan findByUsername(String username);
-	  Nhanvien findByEmail(String email);
+	  Taikhoan findByEmail(String email);
 	List<Taikhoan> findByTrangthaiOrderByIdDesc(String trangthai);
 	
 }

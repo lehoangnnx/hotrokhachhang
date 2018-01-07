@@ -236,6 +236,37 @@
 	
 	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
 	
+	
+	
+	
+	<!-- Trang Danh Sách Nhân Viên -->
+	<definition name="danhsachnhanvien" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/nhanvien/danhsachnhanvien.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/nhanvien/footertag/nhanvien-footertag.jsp" />
+	</definition>
+	<!-- Trang Thêm Nhân Viên -->
+	<definition name="themnhanvien" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/nhanvien/themnhanvien.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/nhanvien/footertag/themnhanvien-footertag.jsp" />
+	</definition>
+	<!-- Trang Sửa Nhân Viên -->
+	<definition name="suanhanvien" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/nhanvien/suanhanvien.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/nhanvien/footertag/suanhanvien-footertag.jsp" />
+	</definition>
+	
+	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
+	
+	
 	<!-- Trang Lỗi -->
 	<definition name="403" template="/WEB-INF/views/administrator/403.jsp">
 

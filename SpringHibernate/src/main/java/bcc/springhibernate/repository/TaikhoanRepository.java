@@ -13,6 +13,6 @@ public interface TaikhoanRepository extends JpaRepository<Taikhoan, Integer>{
 	Taikhoan findById(int id);
 	Taikhoan findByUsername(String username);
 	
-	    Nhanvien findByEmail(String email);
+	    Taikhoan findByEmail(String email);
 	List<Taikhoan> findByTrangthaiOrderByIdDesc(String trangthai);
 }

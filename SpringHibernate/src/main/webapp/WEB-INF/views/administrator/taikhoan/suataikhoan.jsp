@@ -15,38 +15,64 @@
 			<!-- general form elements -->
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">Sửa Quyền</h3>
+					<h3 class="box-title">Sửa Tài Khoản</h3>
 				</div>
 				<!-- /.box-header -->
 				<!-- form start -->
-				<form:form role="form" id="formQuyen"
-					action="${contextPath }/admin/quyen" method="patch"
-					modelAttribute="quyen">
+				<form:form role="form" id="formTaiKhoan"
+					action="${contextPath }/admin/taikhoan" method="patch"
+					modelAttribute="taikhoan">
 					<form:hidden path="id" />
 					<div class="box-body">
 						<div class="form-group">
-							<label for="maquyen">Mã Quyền</label>
-							<form:input path="maquyen" type="text" class="form-control"
-								placeholder="Mã Quyền" />
-							<label id="error" class="error" style="display: none;"></label>
+							<label for="username">User Name</label>
+							<form:input path="username" type="text" class="form-control"
+								placeholder="User Name" />
+							<label id="_username-error" class="error" style="display: none;"></label>
 						</div>
-						
+
 
 
 						<div class="form-group">
-							<label for="tenquyen">Tên Quyền</label>
-							<form:input path="tenquyen" type="text" class="form-control"
-								placeholder="Tên Quyền" />
+							<label for="email">Email</label>
+							<form:input path="email" type="text" class="form-control"
+								placeholder="Email" />
+							<label id="_email-error" class="error" style="display: none;"></label>
+						</div>
+						<div class="form-group">
+							<label for="matkhau">Mật Khẩu</label>
+							<form:input path="matkhau" type="password" class="form-control"
+								placeholder="Mật Khẩu" />
 
+						</div>
+						<div class="form-group">
+							<label for="thongtinkhac">Thông Tin Khác</label>
+							<form:input path="thongtinkhac" type="text" class="form-control"
+								placeholder="Thông Tin Khác" />
 						</div>
 
 						<div class="form-group">
-							<label for="mota">Mô tả</label>
-							<form:input path="mota" type="text" class="form-control"
-								id="mota" name="mota" placeholder="Mô Tả" />
+							<label> Nhân Viên</label> <select class="form-control select2"
+								name="nhanvien" style="width: 100%;">
+
+								<c:forEach var="nv" items="${listNhanvien }">
+									<option ${nv.id == taikhoan.nhanvien.id ? 'selected' : '' }
+										value="${nv.id }">${nv.manhanvien}- ${nv.tennhanvien}</option>
+								</c:forEach>
+
+							</select>
 						</div>
+						<div class="form-group">
+							<label> Quyền</label> <select class="form-control select2"
+								name="quyen" style="width: 100%;">
 
+								<c:forEach var="q" items="${listQuyen }">
+									<option ${q.id == taikhoan.quyen.id ? 'selected' : '' }
+										value="${q.id }">${q.maquyen}- ${q.tenquyen}</option>
+								</c:forEach>
 
+							</select>
+						</div>
 					</div>
 					<!-- /.box-body -->
 					<input type="hidden" name="${_csrf.parameterName}"
