@@ -94,7 +94,7 @@
 									data-mask=""> <label id="_sodienthoai-error"
 									class="error" style="display: none;"></label>
 							</div>
-<label id="sodienthoai-error" class="error" for="sodienthoai"></label>
+							<label id="sodienthoai-error" class="error" for="sodienthoai"></label>
 						</div>
 						<div class="form-group">
 							<label for="diachi">Địa Chỉ</label>

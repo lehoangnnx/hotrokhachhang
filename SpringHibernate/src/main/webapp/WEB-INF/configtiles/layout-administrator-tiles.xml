@@ -267,6 +267,69 @@
 	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
 	
 	
+	
+	
+	
+	
+	<!-- Trang Danh Sách KPI -->
+	<definition name="danhsachkpi" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/kpi/danhsachkpi.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/kpi/footertag/kpi-footertag.jsp" />
+	</definition>
+	<!-- Trang Thêm KPI-->
+	<definition name="themkpi" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/kpi/themkpi.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/kpi/footertag/themkpi-footertag.jsp" />
+	</definition>
+	<!-- Trang Sửa KPI-->
+	<definition name="suakpi" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/kpi/suakpi.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/kpi/footertag/suakpi-footertag.jsp" />
+	</definition>
+	
+	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
+	
+	
+	
+	
+	
+	<!-- Trang Danh Sách Nhân Viên KPI -->
+	<definition name="danhsachnhanvienkpi" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/nhanvienkpi/danhsachnhanvienkpi.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/nhanvienkpi/footertag/nhanvienkpi-footertag.jsp" />
+	</definition>
+	<!-- Trang Thêm Nhân Viên KPI-->
+	<definition name="themnhanvienkpi" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/nhanvienkpi/themnhanvienkpi.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/nhanvienkpi/footertag/themnhanvienkpi-footertag.jsp" />
+	</definition>
+	<!-- Trang Sửa Nhân Viên KPI-->
+	<definition name="suanhanvienkpi" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/nhanvienkpi/suanhanvienkpi.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/nhanvienkpi/footertag/suanhanvienkpi-footertag.jsp" />
+	</definition>
+	
+	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
+	
+	
 	<!-- Trang Lỗi -->
 	<definition name="403" template="/WEB-INF/views/administrator/403.jsp">
 

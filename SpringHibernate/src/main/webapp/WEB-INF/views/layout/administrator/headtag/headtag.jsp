@@ -13,7 +13,8 @@
         apply the skin class to the body tag so the changes take effect.
         
   -->
-  
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="${contextPath }/css/plugins/iCheck/all.css">
   <!-- daterange picker -->
   <link rel="stylesheet" href="${contextPath }/css/plugins/daterangepicker/daterangepicker.css">
   <!-- bootstrap datepicker -->

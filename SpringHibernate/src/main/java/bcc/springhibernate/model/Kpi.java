@@ -22,7 +22,7 @@ public class Kpi implements java.io.Serializable {
 	private Integer id;
 	private String ten;
 	private Integer so;
-	private Integer phantram;
+	private Double phantram;
 	private String trangthai;
 	private String mota;
 	private Set<Nhanvienkpi> nhanvienkpis = new HashSet<Nhanvienkpi>(0);
@@ -31,7 +31,7 @@ public class Kpi implements java.io.Serializable {
 	public Kpi() {
 	}
 
-	public Kpi(String ten, Integer so, Integer phantram, String trangthai, String mota, Set<Nhanvienkpi> nhanvienkpis,
+	public Kpi(String ten, Integer so, Double phantram, String trangthai, String mota, Set<Nhanvienkpi> nhanvienkpis,
 			Set<Nhanvienkpi> nhanvienkpis_1) {
 		this.ten = ten;
 		this.so = so;
@@ -73,11 +73,11 @@ public class Kpi implements java.io.Serializable {
 	}
 
 	@Column(name = "phantram")
-	public Integer getPhantram() {
+	public Double getPhantram() {
 		return this.phantram;
 	}
 
-	public void setPhantram(Integer phantram) {
+	public void setPhantram(Double phantram) {
 		this.phantram = phantram;
 	}
 

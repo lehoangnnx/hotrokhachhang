@@ -28,14 +28,14 @@ public class Nhanvienkpi implements java.io.Serializable {
 	private Date ngaydangky;
 	private Date ngayhoanthanh;
 	private String trangthai;
-	private Integer mucdohoanthanh;
+	private Double mucdohoanthanh;
 	private String mota;
 
 	public Nhanvienkpi() {
 	}
 
 	public Nhanvienkpi(Kpi kpi, Nhanvien nhanvien, Integer so, Date ngaydangky, Date ngayhoanthanh, String trangthai,
-			Integer mucdohoanthanh, String mota) {
+			Double mucdohoanthanh, String mota) {
 		this.kpi = kpi;
 		this.nhanvien = nhanvien;
 		this.so = so;
@@ -117,11 +117,11 @@ public class Nhanvienkpi implements java.io.Serializable {
 	}
 
 	@Column(name = "mucdohoanthanh")
-	public Integer getMucdohoanthanh() {
+	public Double getMucdohoanthanh() {
 		return this.mucdohoanthanh;
 	}
 
-	public void setMucdohoanthanh(Integer mucdohoanthanh) {
+	public void setMucdohoanthanh(Double mucdohoanthanh) {
 		this.mucdohoanthanh = mucdohoanthanh;
 	}
 
