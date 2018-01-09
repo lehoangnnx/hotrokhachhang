@@ -9,6 +9,6 @@ public interface NhanVienKpiService {
 	void saveOrUpdate(Nhanvienkpi nhanvienkpi);
 	List<Nhanvienkpi> findAll();
 	List<Nhanvienkpi> findByTrangthaiOrderByIdDesc(String trangthai);
-	
+	List<Nhanvienkpi> findByTrangthaiNotOrderByIdDesc(String trangthai);
 	Nhanvienkpi findById(Integer id);
 }

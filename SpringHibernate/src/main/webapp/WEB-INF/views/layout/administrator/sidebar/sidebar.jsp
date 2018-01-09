@@ -35,8 +35,7 @@
 		<li class="header">HEADER</li>
 		<!-- Optionally, you can add icons to the links -->
 
-		<li><a href="#"><i class="fa fa-link"></i> <span>Another
-					Link</span></a></li>
+		<li><a href="${contextPath }/admin/hoadon"><i class="fa fa-link"></i> <span>Hóa Đơn</span></a></li>
 		<li class="treeview"><a href="#"><i class="fa fa-link"></i> <span>Tài
 					khoản</span> <span class="pull-right-container"> <i
 					class="fa fa-angle-left pull-right"></i>

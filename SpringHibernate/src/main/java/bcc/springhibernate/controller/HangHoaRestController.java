@@ -1,5 +1,9 @@
 package bcc.springhibernate.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -7,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.google.gson.Gson;
 
 import bcc.springhibernate.model.Hanghoa;
 import bcc.springhibernate.model.Loaikhachhang;
@@ -23,6 +29,24 @@ public class HangHoaRestController {
 
 	@Autowired
 	HangHoaService hangHoaService;
+	
+	@PostMapping("/gethanghoabyid")
+	Map<String, Object> getHangHoa(@RequestBody Integer id) {
+		
+		Hanghoa hanghoa = null;
+		Map<String, Object> hangHoaMap = new HashMap<String, Object>();
+		try {
+			 hanghoa = hangHoaService.findById(id);
+			 hangHoaMap.put("id", hanghoa.getId());
+			 hangHoaMap.put("mahang", hanghoa.getMahang());
+			 hangHoaMap.put("tenhang", hanghoa.getTenhang());
+			 hangHoaMap.put("giaban", hanghoa.getGiaban());
+		} catch (Exception e) {
+			
+		}
+		return hangHoaMap;
+		
+	}
 	@PostMapping("/kiemtramahang")
 	String kiemTraTenNhomKhachHang(@RequestBody Hanghoa hanghoa
 			) {

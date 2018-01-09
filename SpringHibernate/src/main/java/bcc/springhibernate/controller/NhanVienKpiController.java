@@ -40,7 +40,7 @@ public class NhanVienKpiController {
 	KpiService	kpiService; 
     @GetMapping("/nhanvienkpi")
     String pageDanhSachNhanVienKpi(Model model){
-    	List<Nhanvienkpi> listNhanvienkpi = nhanVienKpiService.findByTrangthaiOrderByIdDesc("active");
+    	List<Nhanvienkpi> listNhanvienkpi = nhanVienKpiService.findByTrangthaiNotOrderByIdDesc("deleted");
     	model.addAttribute("listNhanvienkpi", listNhanvienkpi);
         return "danhsachnhanvienkpi";
     }

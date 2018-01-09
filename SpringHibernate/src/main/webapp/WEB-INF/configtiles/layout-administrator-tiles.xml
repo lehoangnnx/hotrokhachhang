@@ -330,6 +330,38 @@
 	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
 	
 	
+	
+	
+	
+	<!-- Trang Danh Sách Hóa Đơn -->
+	<definition name="danhsachhoadon" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/hoadon/danhsachhoadon.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/hoadon/footertag/hoadon-footertag.jsp" />
+	</definition>
+	<!-- Trang Thêm Hóa Đơn-->
+	<definition name="themhoadon" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/hoadon/themhoadon.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/hoadon/footertag/themhoadon-footertag.jsp" />
+	</definition>
+	<!-- Trang Sửa Hóa Đơn-->
+	<definition name="suahoadon" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/hoadon/suahoadon.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/hoadon/footertag/suahoadon-footertag.jsp" />
+	</definition>
+	
+	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
+	
+	
+	
 	<!-- Trang Lỗi -->
 	<definition name="403" template="/WEB-INF/views/administrator/403.jsp">
 
