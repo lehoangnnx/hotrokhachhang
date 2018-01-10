@@ -1,1 +1,0 @@
-<span>Index - footer tag</span>

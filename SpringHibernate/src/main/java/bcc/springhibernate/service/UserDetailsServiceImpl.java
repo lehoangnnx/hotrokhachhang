@@ -36,8 +36,11 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         }
 
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-		Quyen q = taikhoan.getQuyen();
-		grantedAuthorities.add(new SimpleGrantedAuthority(q.getMaquyen()));
+		Set<Quyen> quyen = taikhoan.getQuyens();
+		for (Quyen q : quyen) {
+			grantedAuthorities.add(new SimpleGrantedAuthority(q.getMaquyen()));
+		}
+		
 		return new org.springframework.security.core.userdetails.User(taikhoan.getUsername(), taikhoan.getMatkhau(), grantedAuthorities);
 	}
 

@@ -1,5 +1,5 @@
 package bcc.springhibernate.model;
-// Generated Jan 5, 2018 7:55:13 PM by Hibernate Tools 5.1.5.Final
+// Generated Jan 9, 2018 8:25:15 PM by Hibernate Tools 5.1.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -27,6 +30,7 @@ public class Quyen implements java.io.Serializable {
 	private String trangthai;
 	private Set<Taikhoan> taikhoans = new HashSet<Taikhoan>(0);
 	private Set<Taikhoan> taikhoans_1 = new HashSet<Taikhoan>(0);
+	private Set<Taikhoan> taikhoans_2 = new HashSet<Taikhoan>(0);
 
 	public Quyen() {
 	}
@@ -36,13 +40,14 @@ public class Quyen implements java.io.Serializable {
 	}
 
 	public Quyen(String maquyen, String tenquyen, String mota, String trangthai, Set<Taikhoan> taikhoans,
-			Set<Taikhoan> taikhoans_1) {
+			Set<Taikhoan> taikhoans_1, Set<Taikhoan> taikhoans_2) {
 		this.maquyen = maquyen;
 		this.tenquyen = tenquyen;
 		this.mota = mota;
 		this.trangthai = trangthai;
 		this.taikhoans = taikhoans;
 		this.taikhoans_1 = taikhoans_1;
+		this.taikhoans_2 = taikhoans_2;
 	}
 
 	@Id
@@ -102,13 +107,25 @@ public class Quyen implements java.io.Serializable {
 		this.taikhoans = taikhoans;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "quyen")
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "taikhoan_quyen", catalog = "hotrobanhang", joinColumns = {
+			@JoinColumn(name = "quyen_id", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "taikhoan_id", nullable = false, updatable = false) })
 	public Set<Taikhoan> getTaikhoans_1() {
 		return this.taikhoans_1;
 	}
 
 	public void setTaikhoans_1(Set<Taikhoan> taikhoans_1) {
 		this.taikhoans_1 = taikhoans_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "quyen")
+	public Set<Taikhoan> getTaikhoans_2() {
+		return this.taikhoans_2;
+	}
+
+	public void setTaikhoans_2(Set<Taikhoan> taikhoans_2) {
+		this.taikhoans_2 = taikhoans_2;
 	}
 
 }

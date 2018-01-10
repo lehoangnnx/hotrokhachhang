@@ -39,6 +39,10 @@
 			value="/WEB-INF/views/administrator/index.jsp" />
 	</definition>
 
+	<!-- Trang Login -->
+	<definition name="login" template="/WEB-INF/views/administrator/login.jsp">
+		
+	</definition>
 	
 
 	

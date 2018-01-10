@@ -31,21 +31,31 @@
 					<div class="box-body">
 
 						<div class="form-group">
-							<label>Nhân Viên</label> <select class="form-control select2"
-								name="" style="width: 100%;">
+							<label>Nhân Viên Bán Hàng</label> <select class="form-control select2"
+								name="nhanvienbanhang" style="width: 100%;">
 
-								<c:forEach var="bp" items="${listBophan }">
-									<option value="${bp.id }">${bp.tenbophan}</option>
+								<c:forEach var="nv" items="${listNhanvien }">
+									<option value="${nv.id }">${nv.manhanvien} - ${nv.tennhanvien }</option>
+								</c:forEach>
+
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Nhân Viên Chăm Sóc</label> <select class="form-control select2"
+								name="nhanvienchamsoc" style="width: 100%;">
+
+								<c:forEach var="nv" items="${listNhanvien }">
+									<option value="${nv.id }">${nv.manhanvien} - ${nv.tennhanvien }</option>
 								</c:forEach>
 
 							</select>
 						</div>
 						<div class="form-group">
 							<label>Khách Hàng</label> <select class="form-control select2"
-								name="" style="width: 100%;">
+								name="khachhang" style="width: 100%;">
 
-								<c:forEach var="bp" items="${listBophan }">
-									<option value="${bp.id }">${bp.tenbophan}</option>
+								<c:forEach var="kh" items="${listKhachhang }">
+									<option value="${kh.id }">${kh.makh} - ${kh.ten }</option>
 								</c:forEach>
 
 							</select>
@@ -91,6 +101,8 @@
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
+									<th>ID Hàng Hóa</th>
+									<th>Mã Hàng Hóa</th>
 										<th>Tên Hàng Hóa</th>
 										<th>Giá Bán</th>
 										<th>Số Lượng</th>
@@ -100,19 +112,11 @@
 								</thead>
 								<tbody>
 
-									<tr>
-										<td><span>Dầu Nhớt 01 </span></td>
-										<td><input type="number"></td>
-										<td><input type="number"></td>
-										<td><input type="number"></td>
-										<td><a href="#"> <i style="color: red;"
-												class="fa fa-close" aria-hidden="true" title="Sửa"> </i>
-										</a></td>
-									</tr>
-
 								</tbody>
 								<tfoot>
 									<tr>
+									<th>ID Hàng Hóa</th>
+									<th>Mã Hàng Hóa</th>
 										<th>Tên Hàng Hóa</th>
 										<th>Giá Bán</th>
 										<th>Số Lượng</th>
@@ -122,26 +126,7 @@
 								</tfoot>
 							</table>
 						</div>
-						<!-- <div>
-							<div class="col-md-5">
-								<label>Tên : </label><br> <span>Dầu Nhớt 01 </span>
-							</div>
-							<div class="col-md-2">
-								<label>Số Lượng : </label> <input type="number"  >
-							</div>
-							<div class="col-md-2">
-								<label>Đơn Giá : </label> <input type="number">
-							</div>
-							<div class="col-md-2">
-								<label>Thành Tiền : </label> <input type="number">
-							</div>
-							<div class="col-md-1">
-								<a href="#"> <i
-									style="color: red;" class="fa fa-close"
-									aria-hidden="true" title="Sửa"> </i>
-								</a>
-							</div>
-						</div> -->
+						
 
 						<div class="form-group">
 							<label for="hinhthucthanhtoan">Hình Thức Thanh Toán</label> <br>
@@ -240,7 +225,7 @@
 									<i class="fa fa-phone"></i>
 								</div>
 								<input type="text" class="form-control" name="sodienthoai"
-									value="${nhanvien.sodienthoai}"
+									value="${hoadon.sodienthoai}"
 									data-inputmask="&quot;mask&quot;: &quot;999-999-99999&quot;"
 									data-mask=""> <label id="_sodienthoai-error"
 									class="error" style="display: none;"></label>

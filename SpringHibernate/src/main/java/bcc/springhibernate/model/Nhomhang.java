@@ -1,5 +1,5 @@
 package bcc.springhibernate.model;
-// Generated Jan 5, 2018 7:55:13 PM by Hibernate Tools 5.1.5.Final
+// Generated Jan 9, 2018 8:25:15 PM by Hibernate Tools 5.1.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,7 +25,6 @@ public class Nhomhang implements java.io.Serializable {
 	private Integer manhomcha;
 	private String tennhom;
 	private String trangthai;
-	
 	private String mota;
 	private Set<Hanghoa> hanghoas = new HashSet<Hanghoa>(0);
 	private Set<Hanghoa> hanghoas_1 = new HashSet<Hanghoa>(0);
@@ -33,8 +32,8 @@ public class Nhomhang implements java.io.Serializable {
 	public Nhomhang() {
 	}
 
-	public Nhomhang(String manhom, Integer manhomcha,String tennhom, String trangthai, String mota, Set<Hanghoa> hanghoas,
-			Set<Hanghoa> hanghoas_1) {
+	public Nhomhang(String manhom, Integer manhomcha, String tennhom, String trangthai, String mota,
+			Set<Hanghoa> hanghoas, Set<Hanghoa> hanghoas_1) {
 		this.manhom = manhom;
 		this.manhomcha = manhomcha;
 		this.tennhom = tennhom;
@@ -74,7 +73,7 @@ public class Nhomhang implements java.io.Serializable {
 		this.manhomcha = manhomcha;
 	}
 
-	@Column(name = "tennhom", length = 255)
+	@Column(name = "tennhom")
 	public String getTennhom() {
 		return this.tennhom;
 	}
@@ -82,7 +81,7 @@ public class Nhomhang implements java.io.Serializable {
 	public void setTennhom(String tennhom) {
 		this.tennhom = tennhom;
 	}
-	
+
 	@Column(name = "trangthai", length = 45)
 	public String getTrangthai() {
 		return this.trangthai;

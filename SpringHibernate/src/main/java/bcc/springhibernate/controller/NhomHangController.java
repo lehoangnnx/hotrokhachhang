@@ -56,6 +56,7 @@ public class NhomHangController {
     		
     		nhomhang.setTrangthai("active");
         	nhomHangService.saveOrUpdate(nhomhang);
+        	
         	redirectAttributes.addFlashAttribute("msg", "Thêm Thành Công");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thất Bại");

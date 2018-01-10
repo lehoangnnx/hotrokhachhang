@@ -1,5 +1,5 @@
 package bcc.springhibernate.model;
-// Generated Jan 5, 2018 7:55:13 PM by Hibernate Tools 5.1.5.Final
+// Generated Jan 9, 2018 8:25:15 PM by Hibernate Tools 5.1.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -72,7 +72,7 @@ public class Kpi implements java.io.Serializable {
 		this.so = so;
 	}
 
-	@Column(name = "phantram")
+	@Column(name = "phantram", precision = 22, scale = 0)
 	public Double getPhantram() {
 		return this.phantram;
 	}

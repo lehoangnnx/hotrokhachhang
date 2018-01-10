@@ -1,5 +1,5 @@
 package bcc.springhibernate.model;
-// Generated Jan 5, 2018 7:55:13 PM by Hibernate Tools 5.1.5.Final
+// Generated Jan 9, 2018 8:25:15 PM by Hibernate Tools 5.1.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -62,42 +62,6 @@ public class Nhanvien implements java.io.Serializable {
 
 	public Nhanvien(Bophan bophan, String manhanvien, String tennhanvien, String socmnd, Date ngaycap, String noicap,
 			String sodienthoai, String diachi, Date ngayvaolam, String trangthai, Integer loainhanvien,
-			String thongtinkhac, String ghichu) {
-	
-		this.bophan = bophan;
-		this.manhanvien = manhanvien;
-		this.tennhanvien = tennhanvien;
-		this.socmnd = socmnd;
-		this.ngaycap = ngaycap;
-		this.noicap = noicap;
-		this.sodienthoai = sodienthoai;
-		this.diachi = diachi;
-		this.ngayvaolam = ngayvaolam;
-		this.trangthai = trangthai;
-		this.loainhanvien = loainhanvien;
-		this.thongtinkhac = thongtinkhac;
-		this.ghichu = ghichu;
-	}
-	public Nhanvien(Integer id,Bophan bophan, String manhanvien, String tennhanvien, String socmnd, Date ngaycap, String noicap,
-			String sodienthoai, String diachi, Date ngayvaolam, String trangthai, Integer loainhanvien,
-			String thongtinkhac, String ghichu) {
-	this.id=id;
-		this.bophan = bophan;
-		this.manhanvien = manhanvien;
-		this.tennhanvien = tennhanvien;
-		this.socmnd = socmnd;
-		this.ngaycap = ngaycap;
-		this.noicap = noicap;
-		this.sodienthoai = sodienthoai;
-		this.diachi = diachi;
-		this.ngayvaolam = ngayvaolam;
-		this.trangthai = trangthai;
-		this.loainhanvien = loainhanvien;
-		this.thongtinkhac = thongtinkhac;
-		this.ghichu = ghichu;
-	}
-	public Nhanvien(Bophan bophan, String manhanvien, String tennhanvien, String socmnd, Date ngaycap, String noicap,
-			String sodienthoai, String diachi, Date ngayvaolam, String trangthai, Integer loainhanvien,
 			String thongtinkhac, String ghichu, Set<Hoadon> hoadonsForIdnhanvienlaphoadon,
 			Set<Hoadon> hoadonsForIdnhanvienban, Set<Hoadon> hoadonsForIdnhanvienban_1,
 			Set<Hoadon> hoadonsForIdnhanvienlaphoadon_1, Set<Hoadon> hoadonsForIdnhanvienchamsoc,
@@ -130,6 +94,44 @@ public class Nhanvien implements java.io.Serializable {
 		this.luongs_1 = luongs_1;
 	}
 
+	public Nhanvien(Bophan bophan, String manhanvien, String tennhanvien, String socmnd, Date ngaycap, String noicap,
+			String sodienthoai, String diachi, Date ngayvaolam, String trangthai, Integer loainhanvien,
+			String thongtinkhac, String ghichu) {
+		super();
+		this.bophan = bophan;
+		this.manhanvien = manhanvien;
+		this.tennhanvien = tennhanvien;
+		this.socmnd = socmnd;
+		this.ngaycap = ngaycap;
+		this.noicap = noicap;
+		this.sodienthoai = sodienthoai;
+		this.diachi = diachi;
+		this.ngayvaolam = ngayvaolam;
+		this.trangthai = trangthai;
+		this.loainhanvien = loainhanvien;
+		this.thongtinkhac = thongtinkhac;
+		this.ghichu = ghichu;
+	}
+
+	public Nhanvien(Integer id,Bophan bophan, String manhanvien, String tennhanvien, String socmnd, Date ngaycap, String noicap,
+			String sodienthoai, String diachi, Date ngayvaolam, String trangthai, Integer loainhanvien,
+			String thongtinkhac, String ghichu) {
+		super();
+		this.id = id;
+		this.bophan = bophan;
+		this.manhanvien = manhanvien;
+		this.tennhanvien = tennhanvien;
+		this.socmnd = socmnd;
+		this.ngaycap = ngaycap;
+		this.noicap = noicap;
+		this.sodienthoai = sodienthoai;
+		this.diachi = diachi;
+		this.ngayvaolam = ngayvaolam;
+		this.trangthai = trangthai;
+		this.loainhanvien = loainhanvien;
+		this.thongtinkhac = thongtinkhac;
+		this.ghichu = ghichu;
+	}
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 
@@ -161,7 +163,7 @@ public class Nhanvien implements java.io.Serializable {
 		this.manhanvien = manhanvien;
 	}
 
-	@Column(name = "tennhanvien", length = 45)
+	@Column(name = "tennhanvien")
 	public String getTennhanvien() {
 		return this.tennhanvien;
 	}

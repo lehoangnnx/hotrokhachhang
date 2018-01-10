@@ -1,5 +1,5 @@
 package bcc.springhibernate.model;
-// Generated Jan 5, 2018 7:55:13 PM by Hibernate Tools 5.1.5.Final
+// Generated Jan 9, 2018 8:25:15 PM by Hibernate Tools 5.1.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,10 +19,6 @@ import javax.persistence.Table;
 @Table(name = "bophan", catalog = "hotrobanhang")
 public class Bophan implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3514459895503456304L;
 	private Integer id;
 	private String tenbophan;
 	private String mota;

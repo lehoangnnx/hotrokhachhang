@@ -119,28 +119,54 @@ function getHangHoaById() {
 			data: id,
 			success : function(result) {
 				
-				//Get the reference of the Table's TBODY element.
-				var tBody = $("#example1 > TBODY")[0];
-				 
-			    //Add Row.
-			    row = tBody.insertRow(-1);
+				
+				
+				var id = result.id;
+		    	var soluong = parseInt($('#soluong').val());
+		    	var giaban = parseFloat(result.giaban);
+		    	
+		    	var thanhtien = soluong * giaban;
+		    	
+		    	
+		    	
+				
+			    	if($('#idhh'+id).text() != ''){
+			    		var soluongcu = parseInt($('#soluonghh'+id).val());
+			    		$('#soluonghh'+id).val(soluongcu + soluong);
+			    		
+			    		var soluongmoi = parseInt($('#soluonghh'+id).val());
+			    		$('#thanhtienhh'+id).val(soluongmoi * giaban);
+			    	}else {
+			    		//Get the reference of the Table's TBODY element.
+						var tBody = $("#example1 > TBODY")[0];
+						 
+					    //Add Row.
+					    row = tBody.insertRow(-1);
 
-			    //Add Name cell.
-			    var cell = $(row.insertCell(-1));
+					    //Add Name cell.
+					    var cell = $(row.insertCell(-1));
+			    		cell.html('<input hidden value="'+id+'" name="idhh" ><span id="idhh'+id+'">'+id+'</span>');
+				    	
+			    		cell = $(row.insertCell(-1));
+				    	cell.html('<span id="mahanghh'+id+'">'+result.mahang+'</span>');
+			    		
+				    	cell = $(row.insertCell(-1));
+				    	cell.html('<span id="tenhanghh'+id+'">'+result.tenhang+'</span>');
+				    	
+				    	cell = $(row.insertCell(-1));
+				    	cell.html('<input name="giabanhh" id="giabanhh'+id+'" type="number" value="'+giaban+'" >');
+				    	
+				    	cell = $(row.insertCell(-1));
+				    	cell.html('<input name="soluonghh" id="soluonghh'+id+'" type="number" value="'+soluong+'" >');
+				    	
+				    	cell = $(row.insertCell(-1));
+				    	cell.html('<input name="thanhtienhh" id="thanhtienhh'+id+'" type="number" value="'+thanhtien+'" >');
+				    	
+				    	cell = $(row.insertCell(-1));
+				    	cell.html('<a onclick="Remove(this,'+id+');" href="javascript:void(0);"> <i style="color: red;" class="fa fa-close" aria-hidden="true" title="Sửa"> </i></a>');
+				    
+			    	}
 			    	
-			    	var soluong = $('#soluong').val();
-			    	var giaban = parseFloat(result.giaban);
-			    	var tongtien = soluong * giaban;
-			    	cell.html(result.tenhang);
-			    	cell = $(row.insertCell(-1));
-			    	cell.html('<input type="number" value="'+giaban+'" >');
-			    	cell = $(row.insertCell(-1));
-			    	cell.html('<input type="number" value="'+soluong+'" >');
-			    	cell = $(row.insertCell(-1));
-			    	cell.html('<input type="number" value="'+tongtien+'" >');
-			    	cell = $(row.insertCell(-1));
-			    	cell.html('<a href="#"> <i style="color: red;" class="fa fa-close" aria-hidden="true" title="Sửa"> </i></a>');
-			    
 				
 			},
 			error : function(e) {
@@ -149,10 +175,24 @@ function getHangHoaById() {
 		});
 	}, 100);
 };
+function Remove(button,id) {
+    //Determine the reference of the Row using the Button.
+    var row = $(button).closest("TR");
+    var tenhang = $('#tenhanghh'+id).text();
+    var mahang = $('#mahanghh'+id).text();
+    if (confirm("Bạn Muốn Xóa : " + mahang +' - '+ tenhang)) {
 
+        //Get the reference of the Table.
+        var table = $("#example1")[0];
+
+        //Delete the Table row using it's Index.
+        table.deleteRow(row[0].rowIndex);
+    }
+};
 $('#btn-thhvcthd').click(function (){
 	
 	if($('#soluong').val() > 0){
+		$('.odd').remove();
 		$('#_hanghoa-error').css("display", "none");
 		$('#_hanghoa-error').text("");
 		getHangHoaById();
@@ -221,5 +261,17 @@ $('#manhanvien').on('keyup keypress keydown', function(event) {
 		$('#_manhanvien-error').text("");
 	}
 
+});
+
+$(document).ready(function(){
+	var dateObj = new Date();
+	var month = dateObj.getUTCMonth() + 1;
+	var day = dateObj.getUTCDate();
+	var year = dateObj.getUTCFullYear();
+	var minutes = dateObj.getUTCMinutes();
+	var seconds = dateObj.getUTCSeconds();
+	var milliseconds = dateObj.getUTCMilliseconds();
+	var newdate ='HD'+ year  + month + day  + minutes  + seconds  + milliseconds;
+	$('#sohoadon').val(newdate);
 });
 

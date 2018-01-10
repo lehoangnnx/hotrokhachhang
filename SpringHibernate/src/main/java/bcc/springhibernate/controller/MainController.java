@@ -17,32 +17,24 @@ public class MainController {
 	TaikhoanService taikhoanService;
 	
 	
-	@RequestMapping(value = {"/", "/home"})
+	@RequestMapping("/")
 	public String index(Model model){
+		
+		
+		return "login";
+	}
+	@RequestMapping("/admin")
+	public String home(Model model){
 		
 		
 		return "index";
 	}
-	@GetMapping(value = {"taikhoan"})
-	public String themtaikhoan(Model model){
+	@GetMapping(value = {"login"})
+	public String pageLogin(Model model){
 
 
-		return "themtaikhoan";
-	}
-
-	@RequestMapping(value = "/usersmng")
-	public String adminindex(Model model){
-		List<Taikhoan> lstTaiKhoan = taikhoanService.findAll();
-		model.addAttribute("lsttaikhoan",lstTaiKhoan);
-		return "usersmng";
-	}
-	
-	@GetMapping(value = "/login")
-	public String loginpage(Model model){
-		
 		return "login";
 	}
-	
 	@GetMapping(value = {"403"})
 	public String page403(Model model){
 

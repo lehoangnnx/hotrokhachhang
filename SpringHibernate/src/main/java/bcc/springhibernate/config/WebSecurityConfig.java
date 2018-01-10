@@ -88,14 +88,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     	http
         .authorizeRequests()
            
-            .antMatchers("/admin/**").permitAll()
+            .antMatchers("/admin/**").hasRole("ADMIN")
             .antMatchers("/login").permitAll()
             .and()
         .formLogin()
             .loginPage("/login")
             .usernameParameter("username")
             .passwordParameter("password")
-            .defaultSuccessUrl("/")
+            .defaultSuccessUrl("/admin")
             .failureUrl("/login?error")
             .and()
         .exceptionHandling()
