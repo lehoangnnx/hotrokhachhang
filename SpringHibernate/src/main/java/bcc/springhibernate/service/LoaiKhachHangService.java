@@ -6,8 +6,8 @@ import bcc.springhibernate.model.Loaikhachhang;
 
 public interface LoaiKhachHangService {
 	List<Loaikhachhang> findAll();
-	List<Loaikhachhang> findLoaikhachhangByTrangthaiOrderByIdDesc(String trangthai);
+	List<Loaikhachhang> findByTrangthaiOrderByIdDesc(String trangthai);
 	void saveOrUpdate(Loaikhachhang loaikhachhang);
-	Loaikhachhang findLoaikhachhangByTenloai(String tenloai);
-	Loaikhachhang findLoaikhachhangById(Integer id);
+	Loaikhachhang findByTenloai(String tenloai);
+	Loaikhachhang findById(Integer id);
 }

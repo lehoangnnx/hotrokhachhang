@@ -1,5 +1,5 @@
 package bcc.springhibernate.model;
-// Generated Jan 9, 2018 8:25:15 PM by Hibernate Tools 5.1.5.Final
+// Generated Jan 10, 2018 6:48:04 PM by Hibernate Tools 5.1.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -31,6 +31,7 @@ public class Quyen implements java.io.Serializable {
 	private Set<Taikhoan> taikhoans = new HashSet<Taikhoan>(0);
 	private Set<Taikhoan> taikhoans_1 = new HashSet<Taikhoan>(0);
 	private Set<Taikhoan> taikhoans_2 = new HashSet<Taikhoan>(0);
+	private Set<Taikhoan> taikhoans_3 = new HashSet<Taikhoan>(0);
 
 	public Quyen() {
 	}
@@ -40,7 +41,7 @@ public class Quyen implements java.io.Serializable {
 	}
 
 	public Quyen(String maquyen, String tenquyen, String mota, String trangthai, Set<Taikhoan> taikhoans,
-			Set<Taikhoan> taikhoans_1, Set<Taikhoan> taikhoans_2) {
+			Set<Taikhoan> taikhoans_1, Set<Taikhoan> taikhoans_2, Set<Taikhoan> taikhoans_3) {
 		this.maquyen = maquyen;
 		this.tenquyen = tenquyen;
 		this.mota = mota;
@@ -48,6 +49,7 @@ public class Quyen implements java.io.Serializable {
 		this.taikhoans = taikhoans;
 		this.taikhoans_1 = taikhoans_1;
 		this.taikhoans_2 = taikhoans_2;
+		this.taikhoans_3 = taikhoans_3;
 	}
 
 	@Id
@@ -119,13 +121,25 @@ public class Quyen implements java.io.Serializable {
 		this.taikhoans_1 = taikhoans_1;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "quyen")
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "taikhoan_quyen", catalog = "hotrobanhang", joinColumns = {
+			@JoinColumn(name = "quyen_id", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "taikhoan_id", nullable = false, updatable = false) })
 	public Set<Taikhoan> getTaikhoans_2() {
 		return this.taikhoans_2;
 	}
 
 	public void setTaikhoans_2(Set<Taikhoan> taikhoans_2) {
 		this.taikhoans_2 = taikhoans_2;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "quyen")
+	public Set<Taikhoan> getTaikhoans_3() {
+		return this.taikhoans_3;
+	}
+
+	public void setTaikhoans_3(Set<Taikhoan> taikhoans_3) {
+		this.taikhoans_3 = taikhoans_3;
 	}
 
 }

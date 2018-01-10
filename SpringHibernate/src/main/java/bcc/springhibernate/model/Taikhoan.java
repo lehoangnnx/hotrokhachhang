@@ -1,5 +1,5 @@
 package bcc.springhibernate.model;
-// Generated Jan 9, 2018 8:25:15 PM by Hibernate Tools 5.1.5.Final
+// Generated Jan 10, 2018 6:48:04 PM by Hibernate Tools 5.1.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -32,6 +32,7 @@ public class Taikhoan implements java.io.Serializable {
 	private String thongtinkhac;
 	private String trangthai;
 	private Set<Quyen> quyens = new HashSet<Quyen>(0);
+	private Set<Quyen> quyens_1 = new HashSet<Quyen>(0);
 
 	public Taikhoan() {
 	}
@@ -44,7 +45,7 @@ public class Taikhoan implements java.io.Serializable {
 	}
 
 	public Taikhoan(Nhanvien nhanvien, Quyen quyen, String username, String matkhau, String email, String thongtinkhac,
-			String trangthai, Set<Quyen> quyens) {
+			String trangthai, Set<Quyen> quyens, Set<Quyen> quyens_1) {
 		this.nhanvien = nhanvien;
 		this.quyen = quyen;
 		this.username = username;
@@ -53,6 +54,7 @@ public class Taikhoan implements java.io.Serializable {
 		this.thongtinkhac = thongtinkhac;
 		this.trangthai = trangthai;
 		this.quyens = quyens;
+		this.quyens_1 = quyens_1;
 	}
 
 	@Id
@@ -142,6 +144,18 @@ public class Taikhoan implements java.io.Serializable {
 
 	public void setQuyens(Set<Quyen> quyens) {
 		this.quyens = quyens;
+	}
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "taikhoan_quyen", catalog = "hotrobanhang", joinColumns = {
+			@JoinColumn(name = "taikhoan_id", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "quyen_id", nullable = false, updatable = false) })
+	public Set<Quyen> getQuyens_1() {
+		return this.quyens_1;
+	}
+
+	public void setQuyens_1(Set<Quyen> quyens_1) {
+		this.quyens_1 = quyens_1;
 	}
 
 }

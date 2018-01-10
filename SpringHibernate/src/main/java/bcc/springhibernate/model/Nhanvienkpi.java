@@ -1,5 +1,5 @@
 package bcc.springhibernate.model;
-// Generated Jan 9, 2018 8:25:15 PM by Hibernate Tools 5.1.5.Final
+// Generated Jan 10, 2018 6:48:04 PM by Hibernate Tools 5.1.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;

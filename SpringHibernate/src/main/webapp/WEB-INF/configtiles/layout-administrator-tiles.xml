@@ -75,6 +75,35 @@
 	</definition>
 
 
+<!-- ///////////////////////////////////////////////////////////////////////////////////////  -->
+
+	<!-- Trang Danh Sách  Khách Hàng -->
+	<definition name="danhsachkhachhang" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/khachhang/danhsachkhachhang.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/khachhang/footertag/khachhang-footertag.jsp" />
+	</definition>
+	<!-- Trang Thêm  Khách Hàng -->
+	<definition name="themkhachhang" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/khachhang/themkhachhang.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/khachhang/footertag/themkhachhang-footertag.jsp" />
+	</definition>
+	<!-- Trang Sửa  Khách Hàng -->
+	<definition name="suakhachhang" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/khachhang/suakhachhang.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/khachhang/footertag/suakhachhang-footertag.jsp" />
+	</definition>
+
+
+
 <!-- /////////////////////////////////////////////////////////////////////////////////////// -->
 <!-- Trang Danh Sách Nhóm Khách Hàng -->
 	<definition name="danhsachnhomkhachhang" extends="adminlayout">

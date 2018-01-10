@@ -25,21 +25,21 @@ public class LoaiKhachHangServiceImpl implements LoaiKhachHangService {
 	}
 
 	@Override
-	public Loaikhachhang findLoaikhachhangByTenloai(String tenloai) {
+	public Loaikhachhang findByTenloai(String tenloai) {
 		
-		return loaiKhachHangRepository.findLoaikhachhangByTenloai(tenloai);
+		return loaiKhachHangRepository.findByTenloai(tenloai);
 	}
 
 	@Override
-	public Loaikhachhang findLoaikhachhangById(Integer id) {
+	public Loaikhachhang findById(Integer id) {
 		
-		return loaiKhachHangRepository.findLoaikhachhangById(id);
+		return loaiKhachHangRepository.findById(id);
 	}
 
 	@Override
-	public List<Loaikhachhang> findLoaikhachhangByTrangthaiOrderByIdDesc(String trangthai) {
+	public List<Loaikhachhang> findByTrangthaiOrderByIdDesc(String trangthai) {
 		
-		return loaiKhachHangRepository.findLoaikhachhangByTrangthaiOrderByIdDesc(trangthai);
+		return loaiKhachHangRepository.findByTrangthaiOrderByIdDesc(trangthai);
 	}
 
 }

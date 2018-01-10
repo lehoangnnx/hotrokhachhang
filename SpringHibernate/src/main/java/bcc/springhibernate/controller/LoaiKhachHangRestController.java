@@ -23,7 +23,7 @@ public class LoaiKhachHangRestController {
 		System.out.println(loaikhachhang.getId());
 		Loaikhachhang loaikhachhangByTenLoai = null;
 		try {
-			loaikhachhangByTenLoai =  loaiKhachHangService.findLoaikhachhangByTenloai(loaikhachhang.getTenloai());
+			loaikhachhangByTenLoai =  loaiKhachHangService.findByTenloai(loaikhachhang.getTenloai());
 			if (loaikhachhang.getId() == null) {
 				System.out.println(1);
 				if(loaikhachhangByTenLoai == null) {

@@ -1,5 +1,5 @@
 package bcc.springhibernate.model;
-// Generated Jan 9, 2018 8:25:15 PM by Hibernate Tools 5.1.5.Final
+// Generated Jan 10, 2018 6:48:04 PM by Hibernate Tools 5.1.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -30,7 +30,7 @@ public class Khachhang implements java.io.Serializable {
 	private Nhomkhachhang nhomkhachhang;
 	private String makh;
 	private String ten;
-	private int manganhnghe;
+	private Integer manganhnghe;
 	private String sotaikhoan;
 	private String diachi;
 	private String sodienthoai;
@@ -60,19 +60,19 @@ public class Khachhang implements java.io.Serializable {
 	public Khachhang() {
 	}
 
-	public Khachhang(Nhomkhachhang nhomkhachhang, String makh, String ten, int manganhnghe) {
+	public Khachhang(Nhomkhachhang nhomkhachhang, String makh, String ten) {
 		this.nhomkhachhang = nhomkhachhang;
 		this.makh = makh;
 		this.ten = ten;
-		this.manganhnghe = manganhnghe;
 	}
 
-	public Khachhang(Loaikhachhang loaikhachhang, Nhomkhachhang nhomkhachhang, String makh, String ten, int manganhnghe,
-			String sotaikhoan, String diachi, String sodienthoai, String tendaidien, String dienthoaidaidien,
-			Date ngaysinhnhatndd, String tenphutrach, String dienthoaiphutrach, Date ngaysinhphutrach, String sogpkd,
-			Date ngaycap, String noicap, String trangthai, Long sotienchamsoc, Long sotiendachamsoc, Integer diem,
-			Integer solanchamsoc, Integer solandamphan, Boolean trangthainhac, Integer diemtiemnang, String ghichu,
-			Set<Chamsoc> chamsocs, Set<Chamsoc> chamsocs_1, Set<Hoadon> hoadons, Set<Hoadon> hoadons_1) {
+	public Khachhang(Loaikhachhang loaikhachhang, Nhomkhachhang nhomkhachhang, String makh, String ten,
+			Integer manganhnghe, String sotaikhoan, String diachi, String sodienthoai, String tendaidien,
+			String dienthoaidaidien, Date ngaysinhnhatndd, String tenphutrach, String dienthoaiphutrach,
+			Date ngaysinhphutrach, String sogpkd, Date ngaycap, String noicap, String trangthai, Long sotienchamsoc,
+			Long sotiendachamsoc, Integer diem, Integer solanchamsoc, Integer solandamphan, Boolean trangthainhac,
+			Integer diemtiemnang, String ghichu, Set<Chamsoc> chamsocs, Set<Chamsoc> chamsocs_1, Set<Hoadon> hoadons,
+			Set<Hoadon> hoadons_1) {
 		this.loaikhachhang = loaikhachhang;
 		this.nhomkhachhang = nhomkhachhang;
 		this.makh = makh;
@@ -137,7 +137,7 @@ public class Khachhang implements java.io.Serializable {
 		this.nhomkhachhang = nhomkhachhang;
 	}
 
-	@Column(name = "makh", unique = true, nullable = false, length = 20)
+	@Column(name = "makh", unique = true, nullable = false, length = 45)
 	public String getMakh() {
 		return this.makh;
 	}
@@ -146,7 +146,7 @@ public class Khachhang implements java.io.Serializable {
 		this.makh = makh;
 	}
 
-	@Column(name = "ten", nullable = false, length = 45)
+	@Column(name = "ten", nullable = false)
 	public String getTen() {
 		return this.ten;
 	}
@@ -155,12 +155,12 @@ public class Khachhang implements java.io.Serializable {
 		this.ten = ten;
 	}
 
-	@Column(name = "manganhnghe", nullable = false)
-	public int getManganhnghe() {
+	@Column(name = "manganhnghe")
+	public Integer getManganhnghe() {
 		return this.manganhnghe;
 	}
 
-	public void setManganhnghe(int manganhnghe) {
+	public void setManganhnghe(Integer manganhnghe) {
 		this.manganhnghe = manganhnghe;
 	}
 

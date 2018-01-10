@@ -1,5 +1,5 @@
 package bcc.springhibernate.model;
-// Generated Jan 9, 2018 8:25:15 PM by Hibernate Tools 5.1.5.Final
+// Generated Jan 10, 2018 6:48:04 PM by Hibernate Tools 5.1.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -74,6 +74,30 @@ public class Hoadon implements java.io.Serializable {
 		this.ghichu = ghichu;
 		this.chitiethoadons = chitiethoadons;
 		this.chitiethoadons_1 = chitiethoadons_1;
+	}
+
+	public Hoadon(Integer id, Khachhang khachhang, Nhanvien nhanvienByIdnhanvienlaphoadon,
+			Nhanvien nhanvienByIdnhanvienban, Nhanvien nhanvienByIdnhanvienchamsoc, String sohoadon,
+			String hinhthucthanhtoan, Date ngaylap, Date ngayxuat, Date ngaythanhtoan, Long tongtien, Long congno,
+			Long tiendatra, String diachigiaohang, String sodienthoai, String trangthai, String ghichu) {
+		super();
+		this.id = id;
+		this.khachhang = khachhang;
+		this.nhanvienByIdnhanvienlaphoadon = nhanvienByIdnhanvienlaphoadon;
+		this.nhanvienByIdnhanvienban = nhanvienByIdnhanvienban;
+		this.nhanvienByIdnhanvienchamsoc = nhanvienByIdnhanvienchamsoc;
+		this.sohoadon = sohoadon;
+		this.hinhthucthanhtoan = hinhthucthanhtoan;
+		this.ngaylap = ngaylap;
+		this.ngayxuat = ngayxuat;
+		this.ngaythanhtoan = ngaythanhtoan;
+		this.tongtien = tongtien;
+		this.congno = congno;
+		this.tiendatra = tiendatra;
+		this.diachigiaohang = diachigiaohang;
+		this.sodienthoai = sodienthoai;
+		this.trangthai = trangthai;
+		this.ghichu = ghichu;
 	}
 
 	@Id

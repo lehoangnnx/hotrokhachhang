@@ -32,7 +32,7 @@ public class LoaiKhachHangController {
 	
     @GetMapping("/loaikhachhang")
     String pageDanhSachLoaiKhachHangg(Model model){
-    	List<Loaikhachhang> listLoaiKhachHang = loaiKhachHangService.findLoaikhachhangByTrangthaiOrderByIdDesc("active");
+    	List<Loaikhachhang> listLoaiKhachHang = loaiKhachHangService.findByTrangthaiOrderByIdDesc("active");
     	model.addAttribute("listLoaiKhachHang", listLoaiKhachHang);
         return "danhsachloaikhachhang";
     }
@@ -44,7 +44,7 @@ public class LoaiKhachHangController {
     }
     @GetMapping("/loaikhachhang/{id}")
     String pageSuaLoaiKhachHangg(Model model, @PathVariable("id") Integer id ){
-    	Loaikhachhang loaikhachhang = loaiKhachHangService.findLoaikhachhangById(id);
+    	Loaikhachhang loaikhachhang = loaiKhachHangService.findById(id);
     		model.addAttribute("loaikhachhang", loaikhachhang);
         return "sualoaikhachhang";
     }
@@ -80,7 +80,7 @@ public class LoaiKhachHangController {
     	try {
 			arrayId.forEach(x -> {
 
-				Loaikhachhang loaikhachhang = loaiKhachHangService.findLoaikhachhangById(x);
+				Loaikhachhang loaikhachhang = loaiKhachHangService.findById(x);
 				loaikhachhang.setTrangthai("deleted");
 				loaiKhachHangService.saveOrUpdate(loaikhachhang);
 
