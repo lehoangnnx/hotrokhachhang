@@ -38,7 +38,7 @@
 								<c:forEach var="nv" items="${listNhanvien }">
 									<option
 										${hoadon.nhanvienByIdnhanvienban.id == nv.id ? 'selected' : '' }
-										value="${nv.id }">${nv.manhanvien}- ${nv.tennhanvien }</option>
+										value="${nv.id }">${nv.manhanvien}-${nv.tennhanvien }</option>
 								</c:forEach>
 
 							</select>
@@ -51,7 +51,7 @@
 								<c:forEach var="nv" items="${listNhanvien }">
 									<option
 										${hoadon.nhanvienByIdnhanvienchamsoc.id == nv.id ? 'selected' : '' }
-										value="${nv.id }">${nv.manhanvien}- ${nv.tennhanvien }</option>
+										value="${nv.id }">${nv.manhanvien}-${nv.tennhanvien }</option>
 								</c:forEach>
 
 							</select>
@@ -62,7 +62,7 @@
 
 								<c:forEach var="kh" items="${listKhachhang }">
 									<option ${hoadon.khachhang.id == kh.id ? 'selected' : '' }
-										value="${kh.id }">${kh.makh}- ${kh.ten }</option>
+										value="${kh.id }">${kh.makh}-${kh.ten }</option>
 								</c:forEach>
 
 							</select>
@@ -120,30 +120,33 @@
 									</tr>
 								</thead>
 								<tbody>
-										<c:forEach var="cthd" items="${listChitiethoadon }">
+									<c:forEach var="cthd" items="${listChitiethoadon }">
 										<tr>
-									<td><input hidden value="${cthd.id }" name="idcthd" >
-									<input hidden value="${cthd.hanghoa.id }" name="idhh" >
-									<span id="idhh${cthd.hanghoa.id }">${cthd.hanghoa.id }</span></td>
-									<td><span id="mahanghh${cthd.hanghoa.id }">${cthd.hanghoa.mahang }</span></td>
-									<td><span id="tenhanghh${cthd.hanghoa.id }">${cthd.hanghoa.tenhang }</span></td>
-									<td><input name="giabanhh" id="giabanhh${cthd.hanghoa.id }" 
-									type="number" value="${cthd.giaban }" ></td>
-									<td><input name="soluonghh" id="soluonghh${cthd.hanghoa.id }" 
-									type="number" value="${cthd.soluong }" ></td>
-									<td><input name="thanhtienhh" id="thanhtienhh${cthd.hanghoa.id }" 
-									type="number" value="${cthd.thanhtien }" ></td>
-									
-									<td>
-									<a onclick="Remove(this,${cthd.hanghoa.id },${cthd.id });" href="javascript:void(0);"> 
-									<i style="color: red;" class="fa fa-close" aria-hidden="true" title="Sửa"> </i></a>
-									</td>
+											<td><input hidden value="${cthd.id }" name="idcthd">
+												<input hidden value="${cthd.hanghoa.id }" name="idhh">
+												<span id="idhh${cthd.hanghoa.id }">${cthd.hanghoa.id }</span></td>
+											<td><span id="mahanghh${cthd.hanghoa.id }">${cthd.hanghoa.mahang }</span></td>
+											<td><span id="tenhanghh${cthd.hanghoa.id }">${cthd.hanghoa.tenhang }</span></td>
+											<td><input name="giabanhh"
+												id="giabanhh${cthd.hanghoa.id }" type="number"
+												value="${cthd.giaban }"></td>
+											<td><input name="soluonghh"
+												id="soluonghh${cthd.hanghoa.id }" type="number"
+												value="${cthd.soluong }"></td>
+											<td><input name="thanhtienhh"
+												id="thanhtienhh${cthd.hanghoa.id }" type="number"
+												value="${cthd.thanhtien }"></td>
+
+											<td><a
+												onclick="Remove(this,${cthd.hanghoa.id },${cthd.id });"
+												href="javascript:void(0);"> <i style="color: red;"
+													class="fa fa-close" aria-hidden="true" title="Sửa"> </i></a></td>
 										</tr>
-										</c:forEach>
+									</c:forEach>
 								</tbody>
 								<tfoot>
 									<tr>
-									
+
 										<th>ID Hàng Hóa</th>
 										<th>Mã Hàng Hóa</th>
 										<th>Tên Hàng Hóa</th>
@@ -160,15 +163,13 @@
 						<div class="form-group">
 							<label for="hinhthucthanhtoan">Hình Thức Thanh Toán</label> <br>
 							<label class="lb-flat-red"> <input value="tienmat"
-								type="radio" 
+								type="radio"
 								${hoadon.hinhthucthanhtoan == 'tienmat' ? 'checked' : '' }
-								name="hinhthucthanhtoan" class="flat-red" >
-								Tiền Mặt
+								name="hinhthucthanhtoan" class="flat-red"> Tiền Mặt
 							</label> <label class="lb-flat-red"> <input value="chuyenkhoan"
-								type="radio" 
+								type="radio"
 								${hoadon.hinhthucthanhtoan == 'chuyenkhoan' ? 'checked' : '' }
-								name="hinhthucthanhtoan" class="flat-red">
-								Chuyển Khoản
+								name="hinhthucthanhtoan" class="flat-red"> Chuyển Khoản
 							</label>
 						</div>
 
@@ -277,11 +278,10 @@
 							</label> <label class="lb-flat-red"> <input value="chuathanhtoan"
 								type="radio"
 								${hoadon.trangthai == 'chuathanhtoan' ? 'checked' : '' }
-								 name="trangthai" class="flat-red" >
-								Chưa Thanh Toán
+								name="trangthai" class="flat-red"> Chưa Thanh Toán
 							</label> <label class="lb-flat-red"> <input value="dangno"
-								${hoadon.trangthai == 'dangno' ? 'checked' : '' }
-								type="radio" name="trangthai" class="flat-red"> Đang Nợ
+								${hoadon.trangthai == 'dangno' ? 'checked' : '' } type="radio"
+								name="trangthai" class="flat-red"> Đang Nợ
 							</label>
 						</div>
 

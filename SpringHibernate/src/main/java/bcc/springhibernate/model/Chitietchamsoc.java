@@ -36,6 +36,17 @@ public class Chitietchamsoc implements java.io.Serializable {
 		this.mota = mota;
 	}
 
+	public Chitietchamsoc(Integer id, Chamsoc chamsoc, Tieuchichamsoc tieuchichamsoc, Integer diem, String trangthai,
+			String mota) {
+		super();
+		this.id = id;
+		this.chamsoc = chamsoc;
+		this.tieuchichamsoc = tieuchichamsoc;
+		this.diem = diem;
+		this.trangthai = trangthai;
+		this.mota = mota;
+	}
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 

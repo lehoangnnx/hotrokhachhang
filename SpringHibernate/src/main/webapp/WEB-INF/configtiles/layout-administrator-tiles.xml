@@ -395,6 +395,64 @@
 	
 	
 	
+	
+	<!-- Trang Danh Sách Tiêu Chí Chăm Sóc -->
+	<definition name="danhsachtieuchichamsoc" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/tieuchichamsoc/danhsachtieuchichamsoc.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/tieuchichamsoc/footertag/tieuchichamsoc-footertag.jsp" />
+	</definition>
+	<!-- Trang Thêm Tiêu Chí Chăm Sóc-->
+	<definition name="themtieuchichamsoc" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/tieuchichamsoc/themtieuchichamsoc.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/tieuchichamsoc/footertag/themtieuchichamsoc-footertag.jsp" />
+	</definition>
+	<!-- Trang Sửa Tiêu Chí Chăm Sóc-->
+	<definition name="suatieuchichamsoc" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/tieuchichamsoc/suatieuchichamsoc.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/tieuchichamsoc/footertag/suatieuchichamsoc-footertag.jsp" />
+	</definition>
+	
+	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
+	
+	
+	
+	<!-- Trang Danh Sách  Chăm Sóc -->
+	<definition name="danhsachchamsoc" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/chamsoc/danhsachchamsoc.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/chamsoc/footertag/chamsoc-footertag.jsp" />
+	</definition>
+	<!-- Trang Thêm  Chăm Sóc-->
+	<definition name="themchamsoc" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/chamsoc/themchamsoc.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/chamsoc/footertag/themchamsoc-footertag.jsp" />
+	</definition>
+	<!-- Trang Sửa  Chăm Sóc-->
+	<definition name="suachamsoc" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/chamsoc/suachamsoc.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/chamsoc/footertag/suachamsoc-footertag.jsp" />
+	</definition>
+	
+	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
+	
+	
 	<!-- Trang Lỗi -->
 	<definition name="403" template="/WEB-INF/views/administrator/403.jsp">
 

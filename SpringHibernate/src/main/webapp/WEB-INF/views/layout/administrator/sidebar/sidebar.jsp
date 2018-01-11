@@ -36,6 +36,14 @@
 		<!-- Optionally, you can add icons to the links -->
 
 		<li><a href="${contextPath }/admin/hoadon"><i class="fa fa-link"></i> <span>Hóa Đơn</span></a></li>
+		<li class="treeview"><a href="#"><i class="fa fa-link"></i> <span>Chăm Sóc</span> <span class="pull-right-container"> <i
+					class="fa fa-angle-left pull-right"></i>
+			</span> </a>
+			<ul class="treeview-menu">
+				<li><a href="${contextPath }/admin/chamsoc">Chăm Sóc</a></li>
+				<li><a href="${contextPath }/admin/tieuchichamsoc">Tiêu Chí Chăm Sóc</a></li>
+			</ul></li>
+		
 		<li class="treeview"><a href="#"><i class="fa fa-link"></i> <span>Tài
 					khoản</span> <span class="pull-right-container"> <i
 					class="fa fa-angle-left pull-right"></i>
