@@ -299,6 +299,34 @@
 	
 	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
 	
+	<!-- Trang Danh Sách Lương -->
+	<definition name="danhsachluong" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/luong/danhsachluong.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/luong/footertag/luong-footertag.jsp" />
+	</definition>
+	<!-- Trang Thêm Lương -->
+	<definition name="themluong" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/luong/themluong.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/luong/footertag/themluong-footertag.jsp" />
+	</definition>
+	<!-- Trang Sửa Lương -->
+	<definition name="sualuong" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/luong/sualuong.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/luong/footertag/sualuong-footertag.jsp" />
+	</definition>
+	
+	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
+	
+	
 	
 	
 	

@@ -82,7 +82,7 @@
 			<ul class="treeview-menu">
 	<li><a href="${contextPath }/admin/nhanvien">Nhân Viên</a></li>
 				<li><a href="${contextPath }/admin/bophan">Bộ Phận</a></li>
-				
+				<li><a href="${contextPath }/admin/luong">Lương</a></li>
 			</ul></li>
 			<li class="treeview"><a href="#"><i class="fa fa-link"></i> <span>KPI</span> <span class="pull-right-container"> <i
 					class="fa fa-angle-left pull-right"></i>
