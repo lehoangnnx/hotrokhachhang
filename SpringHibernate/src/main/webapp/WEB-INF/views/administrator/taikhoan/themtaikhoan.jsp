@@ -56,12 +56,13 @@
 								name="nhanvien" style="width: 100%;">
 
 								<c:forEach var="nv" items="${listNhanvien }">
-									<option value="${nv.id }">${nv.manhanvien} - ${nv.tennhanvien}</option>
+									<option value="${nv.id }">${nv.manhanvien}-
+										${nv.tennhanvien}</option>
 								</c:forEach>
 
 							</select>
 						</div>
-						<div class="form-group">
+						<%-- <div class="form-group">
 							<label> Quyền</label> <select class="form-control select2"
 								name="quyen" style="width: 100%;">
 
@@ -69,6 +70,15 @@
 									<option value="${q.id }">${q.maquyen} - ${q.tenquyen}</option>
 								</c:forEach>
 
+							</select>
+						</div> --%>
+						<div class="form-group">
+							<label>Quyền</label> <select class="form-control select2"
+								multiple="multiple" data-placeholder="Select a State" name="quyen"
+								style="width: 100%;">
+								<c:forEach var="q" items="${listQuyen }">
+									<option value="${q.id }">${q.maquyen} - ${q.tenquyen}</option>
+								</c:forEach>
 							</select>
 						</div>
 					</div>

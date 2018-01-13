@@ -120,18 +120,23 @@ function getTieuChiChamSocId() {
 			success : function(result) {
 				
 				
-				
+				$('.odd').remove();
 				var id = result.id;
 				var tentieuchi = result.tentieuchi;
-		    	var diem = parseInt($('#diem').val());
-		    	
+		    	var kieutieuchitccs = $('#kieutieuchitccs').val();
+		    	if(kieutieuchitccs == 'true'){
+		    		kieutieuchitccs = 'Có';
+		    	}
+		    	if(kieutieuchitccs == 'false'){
+		    		kieutieuchitccs = 'Không';
+		    	}
 		    	
 		    	
 		    	
 				
 			    	if($('#idtccs'+id).text() != ''){
-			    		var diemcu = parseInt($('#diemtccs'+id).val());
-			    		$('#diemtccs'+id).val(diem + diemcu);
+			    		
+			    		$('#kieutieuchitccs'+id).text(kieutieuchitccs);
 			    		
 			    		
 			    	}else {
@@ -150,7 +155,7 @@ function getTieuChiChamSocId() {
 			    		
 				    	
 				    	cell = $(row.insertCell(-1));
-				    	cell.html('<input name="diemtccs" id="diemtccs'+id+'" type="number" value="'+diem+'" >');
+				    	cell.html('<input hidden value="'+$('#kieutieuchitccs').val()+'" name="kieutieuchitccs" ><span  id="kieutieuchitccs'+id+'"   >'+kieutieuchitccs+'</span>');
 				    	
 				    	
 				    	
@@ -183,7 +188,7 @@ function Remove(button,id) {
 };
 $('#btn-ttccsvctcs').click(function (){
 	
-	if($('#diem').val() > 0){
+	/*if($('#diem').val() > 0){
 		$('.odd').remove();
 		$('#_diem-error').css("display", "none");
 		$('#_diem-error').text("");
@@ -193,10 +198,75 @@ $('#btn-ttccsvctcs').click(function (){
 		$('#_diem-error').css("display", "block");
 		$('#_diem-error').text("* Vui Lòng Nhập Điểm");
 
-	}
+	}*/
 	
-	
-    
+	//getTieuChiChamSocId();
+	//console.log("â");
 });
+
+function getKieuTieuChi() {
+	clearTimeout(timeout);
+	timeout = setTimeout(function() {
+		var id = $('#tieuchichamsoc :selected').val();
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		$(document).ajaxSend(function(e, xhr, options) {
+			xhr.setRequestHeader(header, token);
+		});
+		
+		$.ajax({
+
+			type : "POST",
+			contentType : "application/json",
+			url : contextPath + "/admin/getkieutieuchi",
+			data: id,
+			success : function(result) {
+				var kieutieuchi = result.kieutieuchi;
+			    console.log(kieutieuchi);	
+			    if(kieutieuchi == 'so' || kieutieuchi == 'tien'  ){
+			    	var html = '<input type="number" id="kieutieuchitccs" class="form-control" value="0" ' +
+						 ' placeholder="Nhập Điểm"> <span class="input-group-btn"> ' +
+						' <button id="btn-ttccsvctcs" type="button" onclick="getTieuChiChamSocId();" '+
+							'class="btn btn-info btn-flat">Thêm</button>'+
+					'</span>';
+			    	$('#dkieutieuchi').html(html);
+			    }else {
+			    	var html = '<select class="form-control select2" name="" id="kieutieuchitccs"'+
+						'style="width: 100%;">'+
+				'	<option value="true" selected="selected">Có</option>'+		
+					'<option value="false">Không</option>'+
+				'	</select> <span class="input-group-btn">'+
+				'	<button id="btn-ttccsvctcs" type="button" onclick="getTieuChiChamSocId();"'+
+					'	class="btn btn-info btn-flat">Thêm</button>'+
+					'	</span>';
+		    	$('#dkieutieuchi').html(html);
+			    }
+			    	
+				
+			},
+			error : function(e) {
+
+			}
+		});
+	}, 100);
+};
+$('#tieuchichamsoc').change(function(){
+	
+	getKieuTieuChi();
+});
+function addDays(dateObj, numDays) {
+	   dateObj.setDate(dateObj.getDate() + numDays);
+	   return dateObj;
+};
+$(document).ready(function(){
+	var dateObj = new Date();
+	var month = dateObj.getUTCMonth() + 1;
+	var day = dateObj.getUTCDate();
+	var year = dateObj.getUTCFullYear();
+	var nextDay = addDays(dateObj , 7); // Cộng 7 ngày vào ngày hiện tại
+	 // Báo kết quả
+	$('#ngay').val(day+'/'+month+'/'+year);
+	$('#ngaycstiep').val(nextDay.getUTCDate()+'/'+ nextDay.getUTCMonth() + 1 +'/'+nextDay.getUTCFullYear());
+})
 
 

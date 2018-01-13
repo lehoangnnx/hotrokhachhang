@@ -1,5 +1,5 @@
 package bcc.springhibernate.model;
-// Generated Jan 10, 2018 6:48:04 PM by Hibernate Tools 5.1.5.Final
+// Generated Jan 13, 2018 1:49:35 PM by Hibernate Tools 5.1.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -25,260 +25,256 @@ import javax.persistence.TemporalType;
 public class Hoadon implements java.io.Serializable {
 
 	private Integer id;
-	private Khachhang khachhang;
-	private Nhanvien nhanvienByIdnhanvienlaphoadon;
-	private Nhanvien nhanvienByIdnhanvienban;
-	private Nhanvien nhanvienByIdnhanvienchamsoc;
-	private String sohoadon;
-	private String hinhthucthanhtoan;
-	private Date ngaylap;
-	private Date ngayxuat;
-	private Date ngaythanhtoan;
-	private Long tongtien;
-	private Long congno;
-	private Long tiendatra;
-	private String diachigiaohang;
-	private String sodienthoai;
-	private String trangthai;
-	private String ghichu;
-	private Set<Chitiethoadon> chitiethoadons = new HashSet<Chitiethoadon>(0);
-	private Set<Chitiethoadon> chitiethoadons_1 = new HashSet<Chitiethoadon>(0);
+    private Khachhang khachhang;
+    private Nhanvien nhanvienByIdnhanvienlaphoadon;
+    private Nhanvien nhanvienByIdnhanvienban;
+    private Nhanvien nhanvienByIdnhanviengiaohang;
+    private Nhanvien nhanvienByIdnhanvienchamsoc;
+    private String sohoadon;
+    private String hinhthucthanhtoan;
+    private Date ngaylap;
+    private Date ngayxuat;
+    private Date ngaythanhtoan;
+    private Long tongtien;
+    private Long congno;
+    private Long tiendatra;
+    private String diachigiaohang;
+    private String sodienthoai;
+    private String trangthai;
+    private String ghichu;
+    private Set<Chitiethoadon> chitiethoadons = new HashSet<Chitiethoadon>(0);
+    private Set<Chitiethoadon> chitiethoadons_1 = new HashSet<Chitiethoadon>(0);
 
-	public Hoadon() {
-	}
+   public Hoadon() {
+   }
 
-	public Hoadon(String sohoadon) {
-		this.sohoadon = sohoadon;
-	}
+	
+   public Hoadon(String sohoadon) {
+       this.sohoadon = sohoadon;
+   }
+   public Hoadon(Khachhang khachhang, Nhanvien nhanvienByIdnhanvienlaphoadon, Nhanvien nhanvienByIdnhanvienban, Nhanvien nhanvienByIdnhanviengiaohang, Nhanvien nhanvienByIdnhanvienchamsoc, String sohoadon, String hinhthucthanhtoan, Date ngaylap, Date ngayxuat, Date ngaythanhtoan, Long tongtien, Long congno, Long tiendatra, String diachigiaohang, String sodienthoai, String trangthai, String ghichu, Set<Chitiethoadon> chitiethoadons, Set<Chitiethoadon> chitiethoadons_1) {
+      this.khachhang = khachhang;
+      this.nhanvienByIdnhanvienlaphoadon = nhanvienByIdnhanvienlaphoadon;
+      this.nhanvienByIdnhanvienban = nhanvienByIdnhanvienban;
+      this.nhanvienByIdnhanviengiaohang = nhanvienByIdnhanviengiaohang;
+      this.nhanvienByIdnhanvienchamsoc = nhanvienByIdnhanvienchamsoc;
+      this.sohoadon = sohoadon;
+      this.hinhthucthanhtoan = hinhthucthanhtoan;
+      this.ngaylap = ngaylap;
+      this.ngayxuat = ngayxuat;
+      this.ngaythanhtoan = ngaythanhtoan;
+      this.tongtien = tongtien;
+      this.congno = congno;
+      this.tiendatra = tiendatra;
+      this.diachigiaohang = diachigiaohang;
+      this.sodienthoai = sodienthoai;
+      this.trangthai = trangthai;
+      this.ghichu = ghichu;
+      this.chitiethoadons = chitiethoadons;
+      this.chitiethoadons_1 = chitiethoadons_1;
+   }
+  
+    @Id @GeneratedValue(strategy=IDENTITY)
 
-	public Hoadon(Khachhang khachhang, Nhanvien nhanvienByIdnhanvienlaphoadon, Nhanvien nhanvienByIdnhanvienban,
-			Nhanvien nhanvienByIdnhanvienchamsoc, String sohoadon, String hinhthucthanhtoan, Date ngaylap,
-			Date ngayxuat, Date ngaythanhtoan, Long tongtien, Long congno, Long tiendatra, String diachigiaohang,
-			String sodienthoai, String trangthai, String ghichu, Set<Chitiethoadon> chitiethoadons,
-			Set<Chitiethoadon> chitiethoadons_1) {
-		this.khachhang = khachhang;
-		this.nhanvienByIdnhanvienlaphoadon = nhanvienByIdnhanvienlaphoadon;
-		this.nhanvienByIdnhanvienban = nhanvienByIdnhanvienban;
-		this.nhanvienByIdnhanvienchamsoc = nhanvienByIdnhanvienchamsoc;
-		this.sohoadon = sohoadon;
-		this.hinhthucthanhtoan = hinhthucthanhtoan;
-		this.ngaylap = ngaylap;
-		this.ngayxuat = ngayxuat;
-		this.ngaythanhtoan = ngaythanhtoan;
-		this.tongtien = tongtien;
-		this.congno = congno;
-		this.tiendatra = tiendatra;
-		this.diachigiaohang = diachigiaohang;
-		this.sodienthoai = sodienthoai;
-		this.trangthai = trangthai;
-		this.ghichu = ghichu;
-		this.chitiethoadons = chitiethoadons;
-		this.chitiethoadons_1 = chitiethoadons_1;
-	}
+   
+   @Column(name="id", unique=true, nullable=false)
+   public Integer getId() {
+       return this.id;
+   }
+   
+   public void setId(Integer id) {
+       this.id = id;
+   }
 
-	public Hoadon(Integer id, Khachhang khachhang, Nhanvien nhanvienByIdnhanvienlaphoadon,
-			Nhanvien nhanvienByIdnhanvienban, Nhanvien nhanvienByIdnhanvienchamsoc, String sohoadon,
-			String hinhthucthanhtoan, Date ngaylap, Date ngayxuat, Date ngaythanhtoan, Long tongtien, Long congno,
-			Long tiendatra, String diachigiaohang, String sodienthoai, String trangthai, String ghichu) {
-		super();
-		this.id = id;
-		this.khachhang = khachhang;
-		this.nhanvienByIdnhanvienlaphoadon = nhanvienByIdnhanvienlaphoadon;
-		this.nhanvienByIdnhanvienban = nhanvienByIdnhanvienban;
-		this.nhanvienByIdnhanvienchamsoc = nhanvienByIdnhanvienchamsoc;
-		this.sohoadon = sohoadon;
-		this.hinhthucthanhtoan = hinhthucthanhtoan;
-		this.ngaylap = ngaylap;
-		this.ngayxuat = ngayxuat;
-		this.ngaythanhtoan = ngaythanhtoan;
-		this.tongtien = tongtien;
-		this.congno = congno;
-		this.tiendatra = tiendatra;
-		this.diachigiaohang = diachigiaohang;
-		this.sodienthoai = sodienthoai;
-		this.trangthai = trangthai;
-		this.ghichu = ghichu;
-	}
+@ManyToOne(fetch=FetchType.LAZY)
+   @JoinColumn(name="idkhachhang")
+   public Khachhang getKhachhang() {
+       return this.khachhang;
+   }
+   
+   public void setKhachhang(Khachhang khachhang) {
+       this.khachhang = khachhang;
+   }
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
+@ManyToOne(fetch=FetchType.LAZY)
+   @JoinColumn(name="idnhanvienlaphoadon")
+   public Nhanvien getNhanvienByIdnhanvienlaphoadon() {
+       return this.nhanvienByIdnhanvienlaphoadon;
+   }
+   
+   public void setNhanvienByIdnhanvienlaphoadon(Nhanvien nhanvienByIdnhanvienlaphoadon) {
+       this.nhanvienByIdnhanvienlaphoadon = nhanvienByIdnhanvienlaphoadon;
+   }
 
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
+@ManyToOne(fetch=FetchType.LAZY)
+   @JoinColumn(name="idnhanvienban")
+   public Nhanvien getNhanvienByIdnhanvienban() {
+       return this.nhanvienByIdnhanvienban;
+   }
+   
+   public void setNhanvienByIdnhanvienban(Nhanvien nhanvienByIdnhanvienban) {
+       this.nhanvienByIdnhanvienban = nhanvienByIdnhanvienban;
+   }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+@ManyToOne(fetch=FetchType.LAZY)
+   @JoinColumn(name="idnhanviengiaohang")
+   public Nhanvien getNhanvienByIdnhanviengiaohang() {
+       return this.nhanvienByIdnhanviengiaohang;
+   }
+   
+   public void setNhanvienByIdnhanviengiaohang(Nhanvien nhanvienByIdnhanviengiaohang) {
+       this.nhanvienByIdnhanviengiaohang = nhanvienByIdnhanviengiaohang;
+   }
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idkhachhang")
-	public Khachhang getKhachhang() {
-		return this.khachhang;
-	}
+@ManyToOne(fetch=FetchType.LAZY)
+   @JoinColumn(name="idnhanvienchamsoc")
+   public Nhanvien getNhanvienByIdnhanvienchamsoc() {
+       return this.nhanvienByIdnhanvienchamsoc;
+   }
+   
+   public void setNhanvienByIdnhanvienchamsoc(Nhanvien nhanvienByIdnhanvienchamsoc) {
+       this.nhanvienByIdnhanvienchamsoc = nhanvienByIdnhanvienchamsoc;
+   }
 
-	public void setKhachhang(Khachhang khachhang) {
-		this.khachhang = khachhang;
-	}
+   
+   @Column(name="sohoadon", nullable=false, length=45)
+   public String getSohoadon() {
+       return this.sohoadon;
+   }
+   
+   public void setSohoadon(String sohoadon) {
+       this.sohoadon = sohoadon;
+   }
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idnhanvienlaphoadon")
-	public Nhanvien getNhanvienByIdnhanvienlaphoadon() {
-		return this.nhanvienByIdnhanvienlaphoadon;
-	}
+   
+   @Column(name="hinhthucthanhtoan", length=45)
+   public String getHinhthucthanhtoan() {
+       return this.hinhthucthanhtoan;
+   }
+   
+   public void setHinhthucthanhtoan(String hinhthucthanhtoan) {
+       this.hinhthucthanhtoan = hinhthucthanhtoan;
+   }
 
-	public void setNhanvienByIdnhanvienlaphoadon(Nhanvien nhanvienByIdnhanvienlaphoadon) {
-		this.nhanvienByIdnhanvienlaphoadon = nhanvienByIdnhanvienlaphoadon;
-	}
+   @Temporal(TemporalType.TIMESTAMP)
+   @Column(name="ngaylap", length=19)
+   public Date getNgaylap() {
+       return this.ngaylap;
+   }
+   
+   public void setNgaylap(Date ngaylap) {
+       this.ngaylap = ngaylap;
+   }
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idnhanvienban")
-	public Nhanvien getNhanvienByIdnhanvienban() {
-		return this.nhanvienByIdnhanvienban;
-	}
+   @Temporal(TemporalType.TIMESTAMP)
+   @Column(name="ngayxuat", length=19)
+   public Date getNgayxuat() {
+       return this.ngayxuat;
+   }
+   
+   public void setNgayxuat(Date ngayxuat) {
+       this.ngayxuat = ngayxuat;
+   }
 
-	public void setNhanvienByIdnhanvienban(Nhanvien nhanvienByIdnhanvienban) {
-		this.nhanvienByIdnhanvienban = nhanvienByIdnhanvienban;
-	}
+   @Temporal(TemporalType.TIMESTAMP)
+   @Column(name="ngaythanhtoan", length=19)
+   public Date getNgaythanhtoan() {
+       return this.ngaythanhtoan;
+   }
+   
+   public void setNgaythanhtoan(Date ngaythanhtoan) {
+       this.ngaythanhtoan = ngaythanhtoan;
+   }
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idnhanvienchamsoc")
-	public Nhanvien getNhanvienByIdnhanvienchamsoc() {
-		return this.nhanvienByIdnhanvienchamsoc;
-	}
+   
+   @Column(name="tongtien", precision=10, scale=0)
+   public Long getTongtien() {
+       return this.tongtien;
+   }
+   
+   public void setTongtien(Long tongtien) {
+       this.tongtien = tongtien;
+   }
 
-	public void setNhanvienByIdnhanvienchamsoc(Nhanvien nhanvienByIdnhanvienchamsoc) {
-		this.nhanvienByIdnhanvienchamsoc = nhanvienByIdnhanvienchamsoc;
-	}
+   
+   @Column(name="congno", precision=10, scale=0)
+   public Long getCongno() {
+       return this.congno;
+   }
+   
+   public void setCongno(Long congno) {
+       this.congno = congno;
+   }
 
-	@Column(name = "sohoadon", nullable = false, length = 45)
-	public String getSohoadon() {
-		return this.sohoadon;
-	}
+   
+   @Column(name="tiendatra", precision=10, scale=0)
+   public Long getTiendatra() {
+       return this.tiendatra;
+   }
+   
+   public void setTiendatra(Long tiendatra) {
+       this.tiendatra = tiendatra;
+   }
 
-	public void setSohoadon(String sohoadon) {
-		this.sohoadon = sohoadon;
-	}
+   
+   @Column(name="diachigiaohang", length=95)
+   public String getDiachigiaohang() {
+       return this.diachigiaohang;
+   }
+   
+   public void setDiachigiaohang(String diachigiaohang) {
+       this.diachigiaohang = diachigiaohang;
+   }
 
-	@Column(name = "hinhthucthanhtoan", length = 45)
-	public String getHinhthucthanhtoan() {
-		return this.hinhthucthanhtoan;
-	}
+   
+   @Column(name="sodienthoai", length=15)
+   public String getSodienthoai() {
+       return this.sodienthoai;
+   }
+   
+   public void setSodienthoai(String sodienthoai) {
+       this.sodienthoai = sodienthoai;
+   }
 
-	public void setHinhthucthanhtoan(String hinhthucthanhtoan) {
-		this.hinhthucthanhtoan = hinhthucthanhtoan;
-	}
+   
+   @Column(name="trangthai", length=45)
+   public String getTrangthai() {
+       return this.trangthai;
+   }
+   
+   public void setTrangthai(String trangthai) {
+       this.trangthai = trangthai;
+   }
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "ngaylap", length = 19)
-	public Date getNgaylap() {
-		return this.ngaylap;
-	}
+   
+   @Column(name="ghichu")
+   public String getGhichu() {
+       return this.ghichu;
+   }
+   
+   public void setGhichu(String ghichu) {
+       this.ghichu = ghichu;
+   }
 
-	public void setNgaylap(Date ngaylap) {
-		this.ngaylap = ngaylap;
-	}
+@OneToMany(fetch=FetchType.LAZY, mappedBy="hoadon")
+   public Set<Chitiethoadon> getChitiethoadons() {
+       return this.chitiethoadons;
+   }
+   
+   public void setChitiethoadons(Set<Chitiethoadon> chitiethoadons) {
+       this.chitiethoadons = chitiethoadons;
+   }
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "ngayxuat", length = 19)
-	public Date getNgayxuat() {
-		return this.ngayxuat;
-	}
+@OneToMany(fetch=FetchType.LAZY, mappedBy="hoadon")
+   public Set<Chitiethoadon> getChitiethoadons_1() {
+       return this.chitiethoadons_1;
+   }
+   
+   public void setChitiethoadons_1(Set<Chitiethoadon> chitiethoadons_1) {
+       this.chitiethoadons_1 = chitiethoadons_1;
+   }
 
-	public void setNgayxuat(Date ngayxuat) {
-		this.ngayxuat = ngayxuat;
-	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "ngaythanhtoan", length = 19)
-	public Date getNgaythanhtoan() {
-		return this.ngaythanhtoan;
-	}
 
-	public void setNgaythanhtoan(Date ngaythanhtoan) {
-		this.ngaythanhtoan = ngaythanhtoan;
-	}
-
-	@Column(name = "tongtien", precision = 10, scale = 0)
-	public Long getTongtien() {
-		return this.tongtien;
-	}
-
-	public void setTongtien(Long tongtien) {
-		this.tongtien = tongtien;
-	}
-
-	@Column(name = "congno", precision = 10, scale = 0)
-	public Long getCongno() {
-		return this.congno;
-	}
-
-	public void setCongno(Long congno) {
-		this.congno = congno;
-	}
-
-	@Column(name = "tiendatra", precision = 10, scale = 0)
-	public Long getTiendatra() {
-		return this.tiendatra;
-	}
-
-	public void setTiendatra(Long tiendatra) {
-		this.tiendatra = tiendatra;
-	}
-
-	@Column(name = "diachigiaohang", length = 95)
-	public String getDiachigiaohang() {
-		return this.diachigiaohang;
-	}
-
-	public void setDiachigiaohang(String diachigiaohang) {
-		this.diachigiaohang = diachigiaohang;
-	}
-
-	@Column(name = "sodienthoai", length = 15)
-	public String getSodienthoai() {
-		return this.sodienthoai;
-	}
-
-	public void setSodienthoai(String sodienthoai) {
-		this.sodienthoai = sodienthoai;
-	}
-
-	@Column(name = "trangthai", length = 45)
-	public String getTrangthai() {
-		return this.trangthai;
-	}
-
-	public void setTrangthai(String trangthai) {
-		this.trangthai = trangthai;
-	}
-
-	@Column(name = "ghichu")
-	public String getGhichu() {
-		return this.ghichu;
-	}
-
-	public void setGhichu(String ghichu) {
-		this.ghichu = ghichu;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hoadon")
-	public Set<Chitiethoadon> getChitiethoadons() {
-		return this.chitiethoadons;
-	}
-
-	public void setChitiethoadons(Set<Chitiethoadon> chitiethoadons) {
-		this.chitiethoadons = chitiethoadons;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hoadon")
-	public Set<Chitiethoadon> getChitiethoadons_1() {
-		return this.chitiethoadons_1;
-	}
-
-	public void setChitiethoadons_1(Set<Chitiethoadon> chitiethoadons_1) {
-		this.chitiethoadons_1 = chitiethoadons_1;
-	}
 
 }

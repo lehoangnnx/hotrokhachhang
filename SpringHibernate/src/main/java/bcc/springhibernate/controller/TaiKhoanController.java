@@ -1,6 +1,7 @@
 package bcc.springhibernate.controller;
 
 
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,15 +74,20 @@ public class TaiKhoanController {
     
     @PostMapping("/taikhoan")
     String themTaiKhoan(@ModelAttribute("taikhoan") Taikhoan taikhoan,
-    		@RequestParam("nhanvien") Integer nhanvien,@RequestParam("quyen") Integer quyen,
+    		@RequestParam("nhanvien") Integer nhanvien,@RequestParam("quyen") List<Integer> quyen,
     		RedirectAttributes redirectAttributes) {
     	try {
     		Nhanvien nhanVienById =  nhanVienService.findById(nhanvien);
-    		Quyen quyenById = quyenService.findById(quyen);
+    		HashSet<Quyen> hsquyen = new HashSet<>();
+    		
+    		for(Integer q : quyen) {
+    			hsquyen.add(quyenService.findById(q));
+    		}
+    		
     		taikhoan.setMatkhau(passwordEncoder.encode(taikhoan.getMatkhau()));
     		taikhoan.setTrangthai("active");
     		taikhoan.setNhanvien(nhanVienById);
-    		taikhoan.setQuyen(quyenById);
+    		taikhoan.setQuyens(hsquyen);
         	taikhoanService.saveOrUpdate(taikhoan);
         	redirectAttributes.addFlashAttribute("msg", "Thêm Thành Công");
 		} catch (Exception e) {
@@ -93,14 +99,18 @@ public class TaiKhoanController {
     	
     @PatchMapping("/taikhoan")
     String suaTaiKhoan(@ModelAttribute("taikhoan") Taikhoan taikhoan,
-    		@RequestParam("nhanvien") Integer nhanvien,@RequestParam("quyen") Integer quyen,
+    		@RequestParam("nhanvien") Integer nhanvien,@RequestParam("quyen") List<Integer> quyen,
     		RedirectAttributes redirectAttributes) {
     	try {
     		Nhanvien nhanVienById =  nhanVienService.findById(nhanvien);
-    		Quyen quyenById = quyenService.findById(quyen);
+    		HashSet<Quyen> hsquyen = new HashSet<>();
+    		
+    		for(Integer q : quyen) {
+    			hsquyen.add(quyenService.findById(q));
+    		}
     		taikhoan.setTrangthai("active");
     		taikhoan.setNhanvien(nhanVienById);
-    		taikhoan.setQuyen(quyenById);
+    		taikhoan.setQuyens(hsquyen);
         	taikhoanService.saveOrUpdate(taikhoan);
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {

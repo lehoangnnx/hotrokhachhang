@@ -70,7 +70,7 @@
 						<div class="form-group">
 							<label>Hóa Đơn</label> <select class="form-control select2"
 								name="hoadon" style="width: 100%;">
-
+								<option value="0" ${chamsoc.hoadonId == '0' ? 'selected' : '' }>Không</option>
 								<c:forEach var="hd" items="${listHoadon }">
 									<option ${chamsoc.hoadonId == hd.id ? 'selected' : '' }
 										value="${hd.id }">${hd.sohoadon}</option>
@@ -87,7 +87,7 @@
 							<div class="form-group col-md-8">
 								<select class="form-control select2" name="" id="tieuchichamsoc"
 									style="width: 100%;">
-
+									<option value="0" selected="selected">Không</option>
 									<c:forEach var="tccs" items="${listTieuchichamsoc }">
 										<option value="${tccs.id }">${tccs.tentieuchi}</option>
 									</c:forEach>
@@ -95,7 +95,7 @@
 								</select>
 							</div>
 							<div class="col-md-4 form-group">
-								<div class="input-group">
+								<div class="input-group" id="dkieutieuchi">
 									<input type="number" id="diem" class="form-control" value="0"
 										placeholder="Nhập Điểm"> <span class="input-group-btn">
 										<button id="btn-ttccsvctcs" type="button"
@@ -114,7 +114,7 @@
 									<tr>
 										<th>ID</th>
 										<th>Tên Tiêu Chí Chăm Soc</th>
-										<th>Điểm</th>
+										<th>Kiểu Tiêu Chí</th>
 
 										<th>Thao tác</th>
 									</tr>
@@ -129,10 +129,26 @@
 											<td><span id="tentieuchitccs${ctcs.tieuchichamsoc.id}">${ctcs.tieuchichamsoc.tentieuchi}</span></td>
 
 
-											<td><input name="diemtccs"
-												id="diemtccs${ctcs.tieuchichamsoc.id}" type="number"
-												value="${ctcs.diem}"></td>
+											<td><c:if
+													test="${ctcs.tieuchichamsoc.kieutieuchi == 'so' }">
+													<input hidden value="${ctcs.diem}" id="ikieutieuchitccs${ctcs.tieuchichamsoc.id}"
+														name="kieutieuchitccs">
+													<span id="kieutieuchitccs${ctcs.tieuchichamsoc.id}">
+														${ctcs.diem} </span>
+												</c:if> <c:if
+													test="${ctcs.tieuchichamsoc.kieutieuchi == 'cokhong' }">
+													<input hidden value="${ctcs.cokhong}" id="ikieutieuchitccs${ctcs.tieuchichamsoc.id}"
+														name="kieutieuchitccs">
+													<span id="kieutieuchitccs${ctcs.tieuchichamsoc.id}">
 
+														${ctcs.cokhong == 'true' ? 'Có' : 'Không'} </span>
+												</c:if> <c:if test="${ctcs.tieuchichamsoc.kieutieuchi == 'tien' }">
+													<input hidden value="${ctcs.tienchamsoc}" id="ikieutieuchitccs${ctcs.tieuchichamsoc.id}"
+														name="kieutieuchitccs">
+													<span id="kieutieuchitccs${ctcs.tieuchichamsoc.id}">
+
+														${ctcs.tienchamsoc}</span>
+												</c:if></td>
 											<td><a
 												onclick="Remove(this,${ctcs.tieuchichamsoc.id},${ctcs.id });"
 												href="javascript:void(0);"> <i style="color: red;"
@@ -144,7 +160,7 @@
 									<tr>
 										<th>ID</th>
 										<th>Tên Tiêu Chí Chăm Soc</th>
-										<th>Điểm</th>
+										<th>Kiểu Tiêu Chí</th>
 
 										<th>Thao tác</th>
 									</tr>

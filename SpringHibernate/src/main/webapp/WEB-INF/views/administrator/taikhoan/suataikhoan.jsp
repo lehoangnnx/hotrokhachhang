@@ -57,12 +57,12 @@
 
 								<c:forEach var="nv" items="${listNhanvien }">
 									<option ${nv.id == taikhoan.nhanvien.id ? 'selected' : '' }
-										value="${nv.id }">${nv.manhanvien}- ${nv.tennhanvien}</option>
+										value="${nv.id }">${nv.manhanvien}-${nv.tennhanvien}</option>
 								</c:forEach>
 
 							</select>
 						</div>
-						<div class="form-group">
+						<%-- <div class="form-group">
 							<label> Quyền</label> <select class="form-control select2"
 								name="quyen" style="width: 100%;">
 
@@ -71,6 +71,31 @@
 										value="${q.id }">${q.maquyen}- ${q.tenquyen}</option>
 								</c:forEach>
 
+							</select>
+						</div> --%>
+						<div class="form-group">
+							<label>Quyền</label> <select class="form-control select2"
+								multiple="multiple" data-placeholder="Select a State"
+								name="quyen" style="width: 100%;">
+								<c:forEach var="q" items="${listQuyen }">
+									
+								</c:forEach>
+								<c:forEach var="q" items="${listQuyen }">
+									<c:set var="found" value="fasle" />
+									<c:forEach var="tq" items="${taikhoan.quyens}">
+										<c:choose>
+											<c:when test="${q == tq }">
+												<c:set var="found" value="true" />
+												<option selected value="${q.id }">${q.maquyen}- ${q.tenquyen}</option>
+											</c:when>
+										</c:choose>
+									</c:forEach>
+									<c:choose>
+										<c:when test="${!found}">
+											<option value="${q.id }">${q.maquyen}- ${q.tenquyen}</option>
+										</c:when>
+									</c:choose>
+								</c:forEach>
 							</select>
 						</div>
 					</div>

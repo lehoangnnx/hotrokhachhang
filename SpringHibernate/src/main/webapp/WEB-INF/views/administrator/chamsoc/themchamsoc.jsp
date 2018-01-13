@@ -69,7 +69,7 @@
 						<div class="form-group">
 							<label>Hóa Đơn</label> <select class="form-control select2"
 								name="hoadon" style="width: 100%;">
-
+							<option value="0" selected="selected">Không</option>
 								<c:forEach var="hd" items="${listHoadon }">
 									<option value="${hd.id }">${hd.sohoadon}</option>
 								</c:forEach>
@@ -85,7 +85,7 @@
 							<div class="form-group col-md-8">
 								<select class="form-control select2" name="" id="tieuchichamsoc"
 									style="width: 100%;">
-
+										<option value="0" selected="selected">Không</option>
 									<c:forEach var="tccs" items="${listTieuchichamsoc }">
 										<option value="${tccs.id }">${tccs.tentieuchi}</option>
 									</c:forEach>
@@ -93,7 +93,7 @@
 								</select>
 							</div>
 							<div class="col-md-4 form-group">
-								<div class="input-group">
+								<div class="input-group" id="dkieutieuchi">
 									<input type="number" id="diem" class="form-control" value="0"
 										placeholder="Nhập Điểm"> <span class="input-group-btn">
 										<button id="btn-ttccsvctcs" type="button"
@@ -112,7 +112,7 @@
 									<tr>
 										<th>ID</th>
 										<th>Tên Tiêu Chí Chăm Soc</th>
-										<th>Điểm</th>
+										<th>Kiểu Tiêu Chí</th>
 
 										<th>Thao tác</th>
 									</tr>
@@ -124,7 +124,7 @@
 									<tr>
 										<th>ID</th>
 										<th>Tên Tiêu Chí Chăm Soc</th>
-										<th>Điểm</th>
+										<th>Kiểu Tiêu Chí</th>
 
 										<th>Thao tác</th>
 									</tr>
@@ -143,7 +143,7 @@
 								<div class="input-group-addon">
 									<i class="fa fa-calendar"></i>
 								</div>
-								<input name="ngay"
+								<input name="ngay" id="ngay"
 									value="<fmt:formatDate
                                                 pattern="dd-MM-yyyy" value="${chamsoc.ngay}"/>"
 									type="text" class="form-control"
@@ -172,7 +172,7 @@
 								<div class="input-group-addon">
 									<i class="fa fa-calendar"></i>
 								</div>
-								<input name="ngaycstiep"
+								<input name="ngaycstiep" id="ngaycstiep"
 									value="<fmt:formatDate
                                                 pattern="dd-MM-yyyy" value="${chamsoc.ngaycstiep}"/>"
 									type="text" class="form-control"

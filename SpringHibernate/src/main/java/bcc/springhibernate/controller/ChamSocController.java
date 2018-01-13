@@ -1,6 +1,5 @@
 package bcc.springhibernate.controller;
 
-
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
@@ -39,7 +38,6 @@ import bcc.springhibernate.service.TieuChiChamSocService;
 @RequestMapping("/admin")
 public class ChamSocController {
 
-	
 	@Autowired
 	TieuChiChamSocService tieuChiChamSocService;
 	@Autowired
@@ -54,149 +52,204 @@ public class ChamSocController {
 	TaikhoanService taikhoanService;
 	@Autowired
 	ChiTietChamSocService chiTietChamSocService;
-    @GetMapping("/chamsoc")
-    String pageDanhSachChamSoc(Model model){
-    	List<Chamsoc> listChamsoc = chamSocService.findByTrangthaiOrderByIdDesc("active");
-    	model.addAttribute("listChamsoc", listChamsoc);
-        return "danhsachchamsoc";
-    }
 
-    @GetMapping("/chamsoc/add")
-    String pageThemChamSoc(Model model ){
-    	List<Khachhang> listKhachhang = khachHangService.findByTrangthaiNotOrderByIdDesc("deleted");
+	@GetMapping("/chamsoc")
+	String pageDanhSachChamSoc(Model model) {
+		List<Chamsoc> listChamsoc = chamSocService.findByTrangthaiOrderByIdDesc("active");
+		model.addAttribute("listChamsoc", listChamsoc);
+		return "danhsachchamsoc";
+	}
+
+	@GetMapping("/chamsoc/add")
+	String pageThemChamSoc(Model model) {
+		List<Khachhang> listKhachhang = khachHangService.findByTrangthaiNotOrderByIdDesc("deleted");
 		List<Nhanvien> listNhanvien = nhanVienService.findByTrangthaiOrderByIdDesc("active");
 		List<Hoadon> listHoadon = hoaDonService.findByTrangthaiNotOrderByIdDesc("deleted");
 		List<Tieuchichamsoc> listTieuchichamsoc = tieuChiChamSocService.findByTrangthaiOrderByIdDesc("active");
-    	model.addAttribute("listTieuchichamsoc", listTieuchichamsoc);
+		model.addAttribute("listTieuchichamsoc", listTieuchichamsoc);
 		model.addAttribute("listHoadon", listHoadon);
 		model.addAttribute("listKhachhang", listKhachhang);
 		model.addAttribute("listNhanvien", listNhanvien);
-    		model.addAttribute("chamsoc", new Chamsoc());
-        return "themchamsoc";
-    }
-    @GetMapping("/chamsoc/{id}")
-    String pageSuaChamSoc(Model model, @PathVariable("id") Integer id ){
-    	
-    	Chamsoc chamsoc = chamSocService.findById(id);
-    	List<Chitietchamsoc> listChitietchamsoc = chiTietChamSocService.findByChamsoc(chamsoc);
-    	List<Khachhang> listKhachhang = khachHangService.findByTrangthaiNotOrderByIdDesc("deleted");
+		model.addAttribute("chamsoc", new Chamsoc());
+		return "themchamsoc";
+	}
+
+	@GetMapping("/chamsoc/{id}")
+	String pageSuaChamSoc(Model model, @PathVariable("id") Integer id) {
+
+		Chamsoc chamsoc = chamSocService.findById(id);
+		List<Chitietchamsoc> listChitietchamsoc = chiTietChamSocService.findByChamsoc(chamsoc);
+		List<Khachhang> listKhachhang = khachHangService.findByTrangthaiNotOrderByIdDesc("deleted");
 		List<Nhanvien> listNhanvien = nhanVienService.findByTrangthaiOrderByIdDesc("active");
 		List<Hoadon> listHoadon = hoaDonService.findByTrangthaiNotOrderByIdDesc("deleted");
 		List<Tieuchichamsoc> listTieuchichamsoc = tieuChiChamSocService.findByTrangthaiOrderByIdDesc("active");
-    	model.addAttribute("listTieuchichamsoc", listTieuchichamsoc);
+		model.addAttribute("listTieuchichamsoc", listTieuchichamsoc);
 		model.addAttribute("listHoadon", listHoadon);
 		model.addAttribute("listKhachhang", listKhachhang);
 		model.addAttribute("listNhanvien", listNhanvien);
-    		model.addAttribute("listChitietchamsoc", listChitietchamsoc);
-    		model.addAttribute("chamsoc", chamsoc);
-        return "suachamsoc";
-    }
-    
-    @PostMapping("/chamsoc")
-    String themChamSoc(@ModelAttribute("chamsoc") Chamsoc chamsoc,
-    		@RequestParam("nhanvienbanhang") Integer nhanvienbanhang,
-			@RequestParam("nhanviengiaohang") Integer nhanviengiaohang,
-			@RequestParam("khachhang") Integer khachhang,
-			
-			@RequestParam("ngay") Date ngay,
+		model.addAttribute("listChitietchamsoc", listChitietchamsoc);
+		model.addAttribute("chamsoc", chamsoc);
+		return "suachamsoc";
+	}
+
+	@PostMapping("/chamsoc")
+	String themChamSoc(@ModelAttribute("chamsoc") Chamsoc chamsoc,
+			@RequestParam("nhanvienbanhang") Integer nhanvienbanhang,
+			@RequestParam("nhanviengiaohang") Integer nhanviengiaohang, @RequestParam("khachhang") Integer khachhang,
+			@RequestParam("hoadon") Integer hoadon, @RequestParam("ngay") Date ngay,
 			@RequestParam("ngaycstiep") Date ngaycstiep,
-			@RequestParam("idtccs") List<Integer> idtccs,
-			@RequestParam("diemtccs") List<Integer> diemtccs,
-    		RedirectAttributes redirectAttributes,Principal principal) {
-    	try {
-    		
-    		
+			@RequestParam(value = "idtccs", defaultValue = "0") List<Integer> idtccs,
+			@RequestParam(value = "kieutieuchitccs", defaultValue = "") List<String> kieutieuchitccs,
+
+			RedirectAttributes redirectAttributes, Principal principal) {
+		try {
+
 			Taikhoan getTaiKhoanByUserName = taikhoanService.findByUsername(principal.getName());
 			Nhanvien getNhanVienChamSocById = getTaiKhoanByUserName.getNhanvien();
 
 			Khachhang getKhachHangById = khachHangService.findById(khachhang);
-    		
+
 			chamsoc.setNhanvienbanhang(nhanvienbanhang);
 			chamsoc.setNhanviengiaohang(nhanviengiaohang);
 			chamsoc.setNhanvienchamsoc(getNhanVienChamSocById.getId());
 			chamsoc.setKhachhang(getKhachHangById);
 			chamsoc.setNgay(ngay);
 			chamsoc.setNgaycstiep(ngaycstiep);
+			chamsoc.setHoadonId(hoadon);
 			chamsoc.setTrangthai("active");
 			chamSocService.saveOrUpdate(chamsoc);
-			
+
 			for (int i = 0; i < idtccs.size(); i++) {
-				Tieuchichamsoc tieuchichamsoc = tieuChiChamSocService.findById(idtccs.get(i));
-				Chitietchamsoc chitietchamsoc = new Chitietchamsoc(chamsoc, tieuchichamsoc, diemtccs.get(i),
-						"active", "");
-				chiTietChamSocService.saveOrUpdate(chitietchamsoc);
-				
+				if (idtccs.get(i) != 0) {
+					Tieuchichamsoc tieuchichamsoc = tieuChiChamSocService.findById(idtccs.get(i));
+					Chitietchamsoc chitietchamsoc = new Chitietchamsoc();
+					chitietchamsoc.setChamsoc(chamsoc);
+					chitietchamsoc.setTieuchichamsoc(tieuchichamsoc);
+					chitietchamsoc.setTrangthai("active");
+					if (tieuchichamsoc.getKieutieuchi().equals("so")) {
+						chitietchamsoc.setDiem(Integer.parseInt(kieutieuchitccs.get(i)));
+					} else if (tieuchichamsoc.getKieutieuchi().equals("cokhong")) {
+						System.out.println(kieutieuchitccs.get(i) + "-" + Boolean.parseBoolean(kieutieuchitccs.get(i)));
+						chitietchamsoc.setCokhong(Boolean.parseBoolean(kieutieuchitccs.get(i)));
+					} else if (tieuchichamsoc.getKieutieuchi().equals("tien")) {
+						Long tien = Long.parseLong(kieutieuchitccs.get(i));
+						chitietchamsoc.setTienchamsoc(tien);
+						getKhachHangById.setSotienchamsoc(getKhachHangById.getSotienchamsoc() - tien);
+						getKhachHangById.setSotiendachamsoc(getKhachHangById.getSotiendachamsoc() + tien);
+					}
+
+					chiTietChamSocService.saveOrUpdate(chitietchamsoc);
+					getKhachHangById.setSolanchamsoc(getKhachHangById.getSolanchamsoc() + 1);
+				}else {
+					getKhachHangById.setSolandamphan(getKhachHangById.getSolandamphan() + 1);
+				}
 			}
-        	redirectAttributes.addFlashAttribute("msg", "Thêm Thành Công");
+
+			
+			khachHangService.saveOrUpdate(getKhachHangById);
+			redirectAttributes.addFlashAttribute("msg", "Thêm Thành Công");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thất Bại");
 		}
-    	
-    	return "redirect:/admin/chamsoc";
-    }	
-    	
-    @PatchMapping("/chamsoc")
-    String suaChamSoc(@ModelAttribute("chamsoc") Chamsoc chamsoc,
-    		@RequestParam("nhanvienbanhang") Integer nhanvienbanhang,
-			@RequestParam("nhanviengiaohang") Integer nhanviengiaohang,
-			@RequestParam("khachhang") Integer khachhang,
-			
-			@RequestParam("ngay") Date ngay,
-			@RequestParam("ngaycstiep") Date ngaycstiep,
-			@RequestParam("idctcs") List<Integer> idctcs,
+
+		return "redirect:/admin/chamsoc";
+	}
+
+	@PatchMapping("/chamsoc")
+	String suaChamSoc(@ModelAttribute("chamsoc") Chamsoc chamsoc,
+			@RequestParam("nhanvienbanhang") Integer nhanvienbanhang,
+			@RequestParam("nhanviengiaohang") Integer nhanviengiaohang, @RequestParam("khachhang") Integer khachhang,
+			@RequestParam("hoadon") Integer hoadon, @RequestParam("ngay") Date ngay,
+			@RequestParam("ngaycstiep") Date ngaycstiep, @RequestParam("idctcs") List<Integer> idctcs,
 			@RequestParam("idtccs") List<Integer> idtccs,
-			@RequestParam("diemtccs") List<Integer> diemtccs,
-    		RedirectAttributes redirectAttributes,Principal principal) {
-    	try {
-    		
+			// @RequestParam("diemtccs") List<Integer> diemtccs,
+			@RequestParam(value = "kieutieuchitccs", defaultValue = "") List<String> kieutieuchitccs,
+			RedirectAttributes redirectAttributes, Principal principal) {
+		try {
+
 			Taikhoan getTaiKhoanByUserName = taikhoanService.findByUsername(principal.getName());
 			Nhanvien getNhanVienChamSocById = getTaiKhoanByUserName.getNhanvien();
 
 			Khachhang getKhachHangById = khachHangService.findById(khachhang);
-    		
+
 			chamsoc.setNhanvienbanhang(nhanvienbanhang);
 			chamsoc.setNhanviengiaohang(nhanviengiaohang);
 			chamsoc.setNhanvienchamsoc(getNhanVienChamSocById.getId());
 			chamsoc.setKhachhang(getKhachHangById);
 			chamsoc.setNgay(ngay);
 			chamsoc.setNgaycstiep(ngaycstiep);
+			chamsoc.setHoadonId(hoadon);
 			chamsoc.setTrangthai("active");
 			chamSocService.saveOrUpdate(chamsoc);
-			
+
 			for (int i = 0; i < idtccs.size(); i++) {
-				if(idctcs.get(i) == 0) {
+				if (idctcs.get(i) == 0) {
 					Tieuchichamsoc tieuchichamsoc = tieuChiChamSocService.findById(idtccs.get(i));
-					Chitietchamsoc chitietchamsoc = new Chitietchamsoc(chamsoc, tieuchichamsoc, diemtccs.get(i),
-							"active", "");
+					Chitietchamsoc chitietchamsoc = new Chitietchamsoc();
+					chitietchamsoc.setChamsoc(chamsoc);
+					chitietchamsoc.setTieuchichamsoc(tieuchichamsoc);
+					chitietchamsoc.setTrangthai("active");
+					if (tieuchichamsoc.getKieutieuchi().equals("so")) {
+						chitietchamsoc.setDiem(Integer.parseInt(kieutieuchitccs.get(i)));
+					} else if (tieuchichamsoc.getKieutieuchi().equals("cokhong")) {
+
+						chitietchamsoc.setCokhong(Boolean.parseBoolean(kieutieuchitccs.get(i)));
+					} else if (tieuchichamsoc.getKieutieuchi().equals("tien")) {
+						Long tien = Long.parseLong(kieutieuchitccs.get(i));
+						chitietchamsoc.setTienchamsoc(tien);
+						getKhachHangById.setSotienchamsoc(getKhachHangById.getSotienchamsoc() - tien);
+						getKhachHangById.setSotiendachamsoc(getKhachHangById.getSotiendachamsoc() + tien);
+
+					}
+
 					chiTietChamSocService.saveOrUpdate(chitietchamsoc);
-				}else {
-					
+					khachHangService.saveOrUpdate(getKhachHangById);
+				} else {
+					System.out.println(kieutieuchitccs);
 					Tieuchichamsoc tieuchichamsoc = tieuChiChamSocService.findById(idtccs.get(i));
-					Chitietchamsoc chitietchamsoc = new Chitietchamsoc(idctcs.get(i),chamsoc, tieuchichamsoc, diemtccs.get(i),
-							"active", "");
+					Chitietchamsoc chitietchamsoc = chiTietChamSocService.findById(idctcs.get(i));
+					chitietchamsoc.setChamsoc(chamsoc);
+					chitietchamsoc.setTieuchichamsoc(tieuchichamsoc);
+					chitietchamsoc.setTrangthai("active");
+					if (tieuchichamsoc.getKieutieuchi().equals("so")) {
+						chitietchamsoc.setDiem(Integer.parseInt(kieutieuchitccs.get(i)));
+					} else if (tieuchichamsoc.getKieutieuchi().equals("cokhong")) {
+
+						chitietchamsoc.setCokhong(Boolean.parseBoolean(kieutieuchitccs.get(i)));
+					} else if (tieuchichamsoc.getKieutieuchi().equals("tien")) {
+						Long tien = Long.parseLong(kieutieuchitccs.get(i));
+						Long tienchamsoccu, tiendachamsoccu;
+						tienchamsoccu = chitietchamsoc.getTienchamsoc() + getKhachHangById.getSotienchamsoc();
+						tiendachamsoccu = getKhachHangById.getSotiendachamsoc() - chitietchamsoc.getTienchamsoc();
+						chitietchamsoc.setTienchamsoc(tien);
+
+						getKhachHangById.setSotienchamsoc(tienchamsoccu - tien);
+						getKhachHangById.setSotiendachamsoc(tiendachamsoccu + tien);
+					}
+
 					chiTietChamSocService.saveOrUpdate(chitietchamsoc);
+					khachHangService.saveOrUpdate(getKhachHangById);
 				}
-				
-				
+
 			}
-        	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
+			redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
 		}
-    	
-    	return "redirect:/admin/chamsoc";
-    }	
-    @DeleteMapping("/chamsoc")
-    String xoaChamSoc(@RequestParam("arrayId") List<Integer> arrayId,
-    		RedirectAttributes redirectAttributes) {
-    	
-    	try {
+
+		return "redirect:/admin/chamsoc";
+	}
+
+	@DeleteMapping("/chamsoc")
+	String xoaChamSoc(@RequestParam("arrayId") List<Integer> arrayId, RedirectAttributes redirectAttributes) {
+
+		try {
 			arrayId.forEach(x -> {
 
-				Tieuchichamsoc tieuchichamsoc= tieuChiChamSocService.findById(x);
-				tieuchichamsoc.setTrangthai("deleted");
-	    		
-	    		tieuChiChamSocService.saveOrUpdate(tieuchichamsoc);
+				Chamsoc chamsoc = chamSocService.findById(x);
+				chamsoc.setTrangthai("deleted");
+
+				chamSocService.saveOrUpdate(chamsoc);
 
 			});
 
@@ -206,6 +259,6 @@ public class ChamSocController {
 			redirectAttributes.addFlashAttribute("msg", "Xóa Thất Bại");
 		}
 
-    	return "redirect:/admin/chamsoc";
-    }	
+		return "redirect:/admin/chamsoc";
+	}
 }

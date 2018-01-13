@@ -1,5 +1,5 @@
 package bcc.springhibernate.model;
-// Generated Jan 10, 2018 6:48:04 PM by Hibernate Tools 5.1.5.Final
+// Generated Jan 13, 2018 1:49:35 PM by Hibernate Tools 5.1.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,36 +25,31 @@ public class Taikhoan implements java.io.Serializable {
 
 	private Integer id;
 	private Nhanvien nhanvien;
-	private Quyen quyen;
 	private String username;
 	private String matkhau;
 	private String email;
 	private String thongtinkhac;
 	private String trangthai;
 	private Set<Quyen> quyens = new HashSet<Quyen>(0);
-	private Set<Quyen> quyens_1 = new HashSet<Quyen>(0);
 
 	public Taikhoan() {
 	}
 
-	public Taikhoan(Nhanvien nhanvien, Quyen quyen, String username, String matkhau) {
+	public Taikhoan(Nhanvien nhanvien, String username, String matkhau) {
 		this.nhanvien = nhanvien;
-		this.quyen = quyen;
 		this.username = username;
 		this.matkhau = matkhau;
 	}
 
-	public Taikhoan(Nhanvien nhanvien, Quyen quyen, String username, String matkhau, String email, String thongtinkhac,
-			String trangthai, Set<Quyen> quyens, Set<Quyen> quyens_1) {
+	public Taikhoan(Nhanvien nhanvien, String username, String matkhau, String email, String thongtinkhac,
+			String trangthai, Set<Quyen> quyens) {
 		this.nhanvien = nhanvien;
-		this.quyen = quyen;
 		this.username = username;
 		this.matkhau = matkhau;
 		this.email = email;
 		this.thongtinkhac = thongtinkhac;
 		this.trangthai = trangthai;
 		this.quyens = quyens;
-		this.quyens_1 = quyens_1;
 	}
 
 	@Id
@@ -77,16 +72,6 @@ public class Taikhoan implements java.io.Serializable {
 
 	public void setNhanvien(Nhanvien nhanvien) {
 		this.nhanvien = nhanvien;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "quyen_id", nullable = false)
-	public Quyen getQuyen() {
-		return this.quyen;
-	}
-
-	public void setQuyen(Quyen quyen) {
-		this.quyen = quyen;
 	}
 
 	@Column(name = "username", unique = true, nullable = false, length = 45)
@@ -144,18 +129,6 @@ public class Taikhoan implements java.io.Serializable {
 
 	public void setQuyens(Set<Quyen> quyens) {
 		this.quyens = quyens;
-	}
-
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "taikhoan_quyen", catalog = "hotrobanhang", joinColumns = {
-			@JoinColumn(name = "taikhoan_id", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "quyen_id", nullable = false, updatable = false) })
-	public Set<Quyen> getQuyens_1() {
-		return this.quyens_1;
-	}
-
-	public void setQuyens_1(Set<Quyen> quyens_1) {
-		this.quyens_1 = quyens_1;
 	}
 
 }

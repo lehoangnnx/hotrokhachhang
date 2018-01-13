@@ -43,18 +43,20 @@ public class TieuChiChamSocController {
     @GetMapping("/tieuchichamsoc/{id}")
     String pageSuaTieuChiChamSoc(Model model, @PathVariable("id") Integer id ){
     	Tieuchichamsoc tieuchichamsoc= tieuChiChamSocService.findById(id);
-    	System.out.println(tieuchichamsoc.getCokhong());
+    	
     		model.addAttribute("tieuchichamsoc", tieuchichamsoc);
         return "suatieuchichamsoc";
     }
     
     @PostMapping("/tieuchichamsoc")
     String themTieuChiChamSoc(@ModelAttribute("tieuchichamsoc") Tieuchichamsoc tieuchichamsoc,
-    		@RequestParam("cokhong") Boolean cokhong,
+    		@RequestParam("kieutieuchi") String kieutieuchi,
     		RedirectAttributes redirectAttributes) {
     	try {
+    		
+    		tieuchichamsoc.setKieutieuchi(kieutieuchi);
     		tieuchichamsoc.setTrangthai("active");
-    		tieuchichamsoc.setCokhong(cokhong);
+    		
     		tieuChiChamSocService.saveOrUpdate(tieuchichamsoc);
         	redirectAttributes.addFlashAttribute("msg", "Thêm Thành Công");
 		} catch (Exception e) {
@@ -66,11 +68,12 @@ public class TieuChiChamSocController {
     	
     @PatchMapping("/tieuchichamsoc")
     String suaTieuChiChamSoc(@ModelAttribute("tieuchichamsoc") Tieuchichamsoc tieuchichamsoc,
-    		@RequestParam("cokhong") Boolean cokhong,
+    		@RequestParam("kieutieuchi") String kieutieuchi,
     		RedirectAttributes redirectAttributes) {
     	try {
+    		tieuchichamsoc.setKieutieuchi(kieutieuchi);
     		tieuchichamsoc.setTrangthai("active");
-    		tieuchichamsoc.setCokhong(cokhong);
+    		
     		tieuChiChamSocService.saveOrUpdate(tieuchichamsoc);
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {

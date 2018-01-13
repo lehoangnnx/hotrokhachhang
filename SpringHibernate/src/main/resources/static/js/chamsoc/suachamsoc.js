@@ -120,19 +120,23 @@ function getTieuChiChamSocId() {
 			success : function(result) {
 				
 				
-				
 				var id = result.id;
 				var tentieuchi = result.tentieuchi;
-		    	var diem = parseInt($('#diem').val());
-		    	
+		    	var kieutieuchitccs = $('#kieutieuchitccs').val();
+		    	if(kieutieuchitccs == 'true'){
+		    		kieutieuchitccs = 'Có';
+		    	}
+		    	if(kieutieuchitccs == 'false'){
+		    		kieutieuchitccs = 'Không';
+		    	}
 		    	
 		    	
 		    	
 				
 			    	if($('#idtccs'+id).text() != ''){
-			    		var diemcu = parseInt($('#diemtccs'+id).val());
-			    		$('#diemtccs'+id).val(diem + diemcu);
 			    		
+			    		$('#kieutieuchitccs'+id).text(kieutieuchitccs);
+			    		$('#ikieutieuchitccs'+id).val($('#kieutieuchitccs').val());
 			    		
 			    	}else {
 			    		//Get the reference of the Table's TBODY element.
@@ -150,14 +154,15 @@ function getTieuChiChamSocId() {
 			    		
 				    	
 				    	cell = $(row.insertCell(-1));
-				    	cell.html('<input name="diemtccs" id="diemtccs'+id+'" type="number" value="'+diem+'" >');
+				    	cell.html('<input hidden value="'+$('#kieutieuchitccs').val()+'"id="ikieutieuchitccs'+id+'" name="kieutieuchitccs" ><span  id="kieutieuchitccs'+id+'"   >'+kieutieuchitccs+'</span>');
 				    	
 				    	
 				    	
 				    	cell = $(row.insertCell(-1));
-				    	cell.html('<a onclick="Remove(this,'+id+',0);" href="javascript:void(0);"> <i style="color: red;" class="fa fa-close" aria-hidden="true" title="Sửa"> </i></a>');
+				    	cell.html('<a onclick="Remove(this,'+id+');" href="javascript:void(0);"> <i style="color: red;" class="fa fa-close" aria-hidden="true" title="Sửa"> </i></a>');
 				    
 			    	}
+			    	
 			    	
 				
 			},
@@ -212,7 +217,7 @@ function Remove(button,id,idctcs) {
 };
 $('#btn-ttccsvctcs').click(function (){
 	
-	if($('#diem').val() > 0){
+/*	if($('#diem').val() > 0){
 		//$('.odd').remove();
 		$('#_diem-error').css("display", "none");
 		$('#_diem-error').text("");
@@ -223,9 +228,58 @@ $('#btn-ttccsvctcs').click(function (){
 		$('#_diem-error').text("* Vui Lòng Nhập Điểm");
 
 	}
-	
+	*/
 	
     
 });
+function getKieuTieuChi() {
+	clearTimeout(timeout);
+	timeout = setTimeout(function() {
+		var id = $('#tieuchichamsoc :selected').val();
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		$(document).ajaxSend(function(e, xhr, options) {
+			xhr.setRequestHeader(header, token);
+		});
+		
+		$.ajax({
 
+			type : "POST",
+			contentType : "application/json",
+			url : contextPath + "/admin/getkieutieuchi",
+			data: id,
+			success : function(result) {
+				var kieutieuchi = result.kieutieuchi;
+			    console.log(kieutieuchi);	
+			    if(kieutieuchi == 'so' || kieutieuchi == 'tien'  ){
+			    	var html = '<input type="number" id="kieutieuchitccs" class="form-control" value="0" ' +
+						 ' placeholder="Nhập Điểm"> <span class="input-group-btn"> ' +
+						' <button id="btn-ttccsvctcs" type="button" onclick="getTieuChiChamSocId();" '+
+							'class="btn btn-info btn-flat">Thêm</button>'+
+					'</span>';
+			    	$('#dkieutieuchi').html(html);
+			    }else {
+			    	var html = '<select class="form-control select2" name="" id="kieutieuchitccs"'+
+						'style="width: 100%;">'+
+				'	<option value="true" selected="selected">Có</option>'+		
+					'<option value="false">Không</option>'+
+				'	</select> <span class="input-group-btn">'+
+				'	<button id="btn-ttccsvctcs" type="button" onclick="getTieuChiChamSocId();"'+
+					'	class="btn btn-info btn-flat">Thêm</button>'+
+					'	</span>';
+		    	$('#dkieutieuchi').html(html);
+			    }
+			    	
+				
+			},
+			error : function(e) {
+
+			}
+		});
+	}, 100);
+};
+$('#tieuchichamsoc').change(function(){
+	
+	getKieuTieuChi();
+});
 

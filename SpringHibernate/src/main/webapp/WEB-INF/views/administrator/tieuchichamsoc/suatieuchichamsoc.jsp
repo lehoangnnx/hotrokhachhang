@@ -35,21 +35,20 @@
 								<label id="_tentieuchi-error" class="error" style="display: none;" ></label>
 						</div>
 						<div class="form-group">
-							<label for="diem">Điểm</label> <form:input path="diem"
-								type="number" class="form-control" 
-								placeholder="Điểm" />
-								
-						</div>
-						
-						<div class="form-group">
-							<label for="cokhong">Có / Không</label> <br> <label
-								class="lb-flat-red"> <input value="true" type="radio"
-								${tieuchichamsoc.cokhong == true ? 'checked' : '' }
-								name="cokhong" class="flat-red"> Có
-							</label> <label class="lb-flat-red"> <input value="false"
-							${tieuchichamsoc.cokhong == false ? 'checked' : '' }
-								type="radio" name="cokhong" class="flat-red" >
-								Không
+							<label for="kieutieuchi">Kiểu Tiêu Chí</label> <br> <label
+								class="lb-flat-red"> <input value="so" type="radio"
+								${tieuchichamsoc.kieutieuchi == 'so' ? 'checked' : '' }
+								name="kieutieuchi" class="flat-red" > Số 
+							</label>
+							<label
+								class="lb-flat-red"> <input value="cokhong" type="radio"
+								${tieuchichamsoc.kieutieuchi == 'cokhong' ? 'checked' : '' }
+								name="kieutieuchi" class="flat-red"> Có Không
+							</label>
+							<label
+								class="lb-flat-red"> <input value="tien" type="radio"
+								${tieuchichamsoc.kieutieuchi == 'tien' ? 'checked' : '' }
+								name="kieutieuchi" class="flat-red"> Tiền
 							</label>
 						</div>
 						

@@ -47,8 +47,10 @@ public class NhomKhachHangController {
     
     @PostMapping("/nhomkhachhang")
     String themLoaiKhachHang(@ModelAttribute("nhomkhachhang") Nhomkhachhang nhomkhachhang,
+    		
     		RedirectAttributes redirectAttributes) {
     	try {
+    		
     		nhomkhachhang.setTrangthai("active");
         	nhomKhachHangService.saveOrUpdate(nhomkhachhang);
         	redirectAttributes.addFlashAttribute("msg", "Thêm Thành Công");
@@ -61,8 +63,10 @@ public class NhomKhachHangController {
     	
     @PatchMapping("/nhomkhachhang")
     String suaLoaiKhachHang(@ModelAttribute("nhomkhachhang") Nhomkhachhang nhomkhachhang,
+    	
     		RedirectAttributes redirectAttributes) {
     	try {
+    		
     		nhomkhachhang.setTrangthai("active");
         	nhomKhachHangService.saveOrUpdate(nhomkhachhang);
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");

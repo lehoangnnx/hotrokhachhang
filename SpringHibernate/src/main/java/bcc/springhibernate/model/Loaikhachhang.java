@@ -1,5 +1,5 @@
 package bcc.springhibernate.model;
-// Generated Jan 10, 2018 6:48:04 PM by Hibernate Tools 5.1.5.Final
+// Generated Jan 13, 2018 1:49:35 PM by Hibernate Tools 5.1.5.Final
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,5 +1,5 @@
 package bcc.springhibernate.model;
-// Generated Jan 10, 2018 6:48:04 PM by Hibernate Tools 5.1.5.Final
+// Generated Jan 13, 2018 1:49:35 PM by Hibernate Tools 5.1.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -45,12 +45,11 @@ public class Nhanvien implements java.io.Serializable {
 	private Set<Hoadon> hoadonsForIdnhanvienlaphoadon_1 = new HashSet<Hoadon>(0);
 	private Set<Hoadon> hoadonsForIdnhanvienchamsoc = new HashSet<Hoadon>(0);
 	private Set<Hoadon> hoadonsForIdnhanvienchamsoc_1 = new HashSet<Hoadon>(0);
-	private Set<Taikhoan> taikhoans = new HashSet<Taikhoan>(0);
-	private Set<Taikhoan> taikhoans_1 = new HashSet<Taikhoan>(0);
 	private Set<Nhanvienkpi> nhanvienkpis = new HashSet<Nhanvienkpi>(0);
 	private Set<Luong> luongs = new HashSet<Luong>(0);
 	private Set<Nhanvienkpi> nhanvienkpis_1 = new HashSet<Nhanvienkpi>(0);
 	private Set<Luong> luongs_1 = new HashSet<Luong>(0);
+	private Set<Taikhoan> taikhoans = new HashSet<Taikhoan>(0);
 
 	public Nhanvien() {
 	}
@@ -65,8 +64,8 @@ public class Nhanvien implements java.io.Serializable {
 			String thongtinkhac, String ghichu, Set<Hoadon> hoadonsForIdnhanvienlaphoadon,
 			Set<Hoadon> hoadonsForIdnhanvienban, Set<Hoadon> hoadonsForIdnhanvienban_1,
 			Set<Hoadon> hoadonsForIdnhanvienlaphoadon_1, Set<Hoadon> hoadonsForIdnhanvienchamsoc,
-			Set<Hoadon> hoadonsForIdnhanvienchamsoc_1, Set<Taikhoan> taikhoans, Set<Taikhoan> taikhoans_1,
-			Set<Nhanvienkpi> nhanvienkpis, Set<Luong> luongs, Set<Nhanvienkpi> nhanvienkpis_1, Set<Luong> luongs_1) {
+			Set<Hoadon> hoadonsForIdnhanvienchamsoc_1, Set<Nhanvienkpi> nhanvienkpis, Set<Luong> luongs,
+			Set<Nhanvienkpi> nhanvienkpis_1, Set<Luong> luongs_1, Set<Taikhoan> taikhoans) {
 		this.bophan = bophan;
 		this.manhanvien = manhanvien;
 		this.tennhanvien = tennhanvien;
@@ -86,19 +85,17 @@ public class Nhanvien implements java.io.Serializable {
 		this.hoadonsForIdnhanvienlaphoadon_1 = hoadonsForIdnhanvienlaphoadon_1;
 		this.hoadonsForIdnhanvienchamsoc = hoadonsForIdnhanvienchamsoc;
 		this.hoadonsForIdnhanvienchamsoc_1 = hoadonsForIdnhanvienchamsoc_1;
-		this.taikhoans = taikhoans;
-		this.taikhoans_1 = taikhoans_1;
 		this.nhanvienkpis = nhanvienkpis;
 		this.luongs = luongs;
 		this.nhanvienkpis_1 = nhanvienkpis_1;
 		this.luongs_1 = luongs_1;
+		this.taikhoans = taikhoans;
 	}
 
-	public Nhanvien(Integer id, Bophan bophan, String manhanvien, String tennhanvien, String socmnd, Date ngaycap,
-			String noicap, String sodienthoai, String diachi, Date ngayvaolam, String trangthai, Integer loainhanvien,
+	public Nhanvien(Bophan bophan, String manhanvien, String tennhanvien, String socmnd, Date ngaycap, String noicap,
+			String sodienthoai, String diachi, Date ngayvaolam, String trangthai, Integer loainhanvien,
 			String thongtinkhac, String ghichu) {
 		super();
-		this.id = id;
 		this.bophan = bophan;
 		this.manhanvien = manhanvien;
 		this.tennhanvien = tennhanvien;
@@ -113,11 +110,12 @@ public class Nhanvien implements java.io.Serializable {
 		this.thongtinkhac = thongtinkhac;
 		this.ghichu = ghichu;
 	}
-	public Nhanvien(  Bophan bophan, String manhanvien, String tennhanvien, String socmnd, Date ngaycap,
-			String noicap, String sodienthoai, String diachi, Date ngayvaolam, String trangthai, Integer loainhanvien,
+
+	public Nhanvien(Integer id,Bophan bophan, String manhanvien, String tennhanvien, String socmnd, Date ngaycap, String noicap,
+			String sodienthoai, String diachi, Date ngayvaolam, String trangthai, Integer loainhanvien,
 			String thongtinkhac, String ghichu) {
 		super();
-		
+		this.id=id;
 		this.bophan = bophan;
 		this.manhanvien = manhanvien;
 		this.tennhanvien = tennhanvien;
@@ -320,24 +318,6 @@ public class Nhanvien implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "nhanvien")
-	public Set<Taikhoan> getTaikhoans() {
-		return this.taikhoans;
-	}
-
-	public void setTaikhoans(Set<Taikhoan> taikhoans) {
-		this.taikhoans = taikhoans;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "nhanvien")
-	public Set<Taikhoan> getTaikhoans_1() {
-		return this.taikhoans_1;
-	}
-
-	public void setTaikhoans_1(Set<Taikhoan> taikhoans_1) {
-		this.taikhoans_1 = taikhoans_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "nhanvien")
 	public Set<Nhanvienkpi> getNhanvienkpis() {
 		return this.nhanvienkpis;
 	}
@@ -371,6 +351,15 @@ public class Nhanvien implements java.io.Serializable {
 
 	public void setLuongs_1(Set<Luong> luongs_1) {
 		this.luongs_1 = luongs_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "nhanvien")
+	public Set<Taikhoan> getTaikhoans() {
+		return this.taikhoans;
+	}
+
+	public void setTaikhoans(Set<Taikhoan> taikhoans) {
+		this.taikhoans = taikhoans;
 	}
 
 }

@@ -1,5 +1,5 @@
 package bcc.springhibernate.model;
-// Generated Jan 10, 2018 6:48:04 PM by Hibernate Tools 5.1.5.Final
+// Generated Jan 13, 2018 1:49:35 PM by Hibernate Tools 5.1.5.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,27 +23,21 @@ public class Chitietchamsoc implements java.io.Serializable {
 	private Tieuchichamsoc tieuchichamsoc;
 	private Integer diem;
 	private String trangthai;
+	private Boolean cokhong;
+	private Long tienchamsoc;
 	private String mota;
 
 	public Chitietchamsoc() {
 	}
 
-	public Chitietchamsoc(Chamsoc chamsoc, Tieuchichamsoc tieuchichamsoc, Integer diem, String trangthai, String mota) {
+	public Chitietchamsoc(Chamsoc chamsoc, Tieuchichamsoc tieuchichamsoc, Integer diem, String trangthai,
+			Boolean cokhong, Long tienchamsoc, String mota) {
 		this.chamsoc = chamsoc;
 		this.tieuchichamsoc = tieuchichamsoc;
 		this.diem = diem;
 		this.trangthai = trangthai;
-		this.mota = mota;
-	}
-
-	public Chitietchamsoc(Integer id, Chamsoc chamsoc, Tieuchichamsoc tieuchichamsoc, Integer diem, String trangthai,
-			String mota) {
-		super();
-		this.id = id;
-		this.chamsoc = chamsoc;
-		this.tieuchichamsoc = tieuchichamsoc;
-		this.diem = diem;
-		this.trangthai = trangthai;
+		this.cokhong = cokhong;
+		this.tienchamsoc = tienchamsoc;
 		this.mota = mota;
 	}
 
@@ -95,6 +89,24 @@ public class Chitietchamsoc implements java.io.Serializable {
 
 	public void setTrangthai(String trangthai) {
 		this.trangthai = trangthai;
+	}
+
+	@Column(name = "cokhong")
+	public Boolean getCokhong() {
+		return this.cokhong;
+	}
+
+	public void setCokhong(Boolean cokhong) {
+		this.cokhong = cokhong;
+	}
+
+	@Column(name = "tienchamsoc", precision = 10, scale = 0)
+	public Long getTienchamsoc() {
+		return this.tienchamsoc;
+	}
+
+	public void setTienchamsoc(Long tienchamsoc) {
+		this.tienchamsoc = tienchamsoc;
 	}
 
 	@Column(name = "mota")

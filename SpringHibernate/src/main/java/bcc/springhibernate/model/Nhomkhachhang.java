@@ -1,5 +1,5 @@
 package bcc.springhibernate.model;
-// Generated Jan 10, 2018 6:48:04 PM by Hibernate Tools 5.1.5.Final
+// Generated Jan 13, 2018 1:49:35 PM by Hibernate Tools 5.1.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +24,9 @@ public class Nhomkhachhang implements java.io.Serializable {
 	private Integer diem;
 	private Double phantram;
 	private String trangthai;
+	private Integer sodiemtrentien;
+	private Double sotientrendiem;
+	private Double phantramtien;
 	private String mota;
 	private Set<Khachhang> khachhangs = new HashSet<Khachhang>(0);
 	private Set<Khachhang> khachhangs_1 = new HashSet<Khachhang>(0);
@@ -31,12 +34,16 @@ public class Nhomkhachhang implements java.io.Serializable {
 	public Nhomkhachhang() {
 	}
 
-	public Nhomkhachhang(String tennhom, Integer diem, Double phantram, String trangthai, String mota,
-			Set<Khachhang> khachhangs, Set<Khachhang> khachhangs_1) {
+	public Nhomkhachhang(String tennhom, Integer diem, Double phantram, String trangthai, Integer sodiemtrentien,
+			Double sotientrendiem, Double phantramtien, String mota, Set<Khachhang> khachhangs,
+			Set<Khachhang> khachhangs_1) {
 		this.tennhom = tennhom;
 		this.diem = diem;
 		this.phantram = phantram;
 		this.trangthai = trangthai;
+		this.sodiemtrentien = sodiemtrentien;
+		this.sotientrendiem = sotientrendiem;
+		this.phantramtien = phantramtien;
 		this.mota = mota;
 		this.khachhangs = khachhangs;
 		this.khachhangs_1 = khachhangs_1;
@@ -88,6 +95,33 @@ public class Nhomkhachhang implements java.io.Serializable {
 
 	public void setTrangthai(String trangthai) {
 		this.trangthai = trangthai;
+	}
+
+	@Column(name = "sodiemtrentien", precision = 22, scale = 0)
+	public Integer getSodiemtrentien() {
+		return this.sodiemtrentien;
+	}
+
+	public void setSodiemtrentien(Integer sodiemtrentien) {
+		this.sodiemtrentien = sodiemtrentien;
+	}
+
+	@Column(name = "sotientrendiem", precision = 22, scale = 0)
+	public Double getSotientrendiem() {
+		return this.sotientrendiem;
+	}
+
+	public void setSotientrendiem(Double sotientrendiem) {
+		this.sotientrendiem = sotientrendiem;
+	}
+
+	@Column(name = "phantramtien", precision = 22, scale = 0)
+	public Double getPhantramtien() {
+		return this.phantramtien;
+	}
+
+	public void setPhantramtien(Double phantramtien) {
+		this.phantramtien = phantramtien;
 	}
 
 	@Column(name = "mota", length = 95)

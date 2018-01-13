@@ -1,5 +1,5 @@
 package bcc.springhibernate.model;
-// Generated Jan 10, 2018 6:48:04 PM by Hibernate Tools 5.1.5.Final
+// Generated Jan 13, 2018 1:49:35 PM by Hibernate Tools 5.1.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,8 +22,7 @@ public class Tieuchichamsoc implements java.io.Serializable {
 	private Integer id;
 	private String tentieuchi;
 	private String mota;
-	private Integer diem;
-	private Boolean cokhong;
+	private String kieutieuchi;
 	private String trangthai;
 	private String khac;
 	private Set<Chitietchamsoc> chitietchamsocs = new HashSet<Chitietchamsoc>(0);
@@ -32,12 +31,11 @@ public class Tieuchichamsoc implements java.io.Serializable {
 	public Tieuchichamsoc() {
 	}
 
-	public Tieuchichamsoc(String tentieuchi, String mota, Integer diem, Boolean cokhong, String trangthai, String khac,
+	public Tieuchichamsoc(String tentieuchi, String mota, String kieutieuchi, String trangthai, String khac,
 			Set<Chitietchamsoc> chitietchamsocs, Set<Chitietchamsoc> chitietchamsocs_1) {
 		this.tentieuchi = tentieuchi;
 		this.mota = mota;
-		this.diem = diem;
-		this.cokhong = cokhong;
+		this.kieutieuchi = kieutieuchi;
 		this.trangthai = trangthai;
 		this.khac = khac;
 		this.chitietchamsocs = chitietchamsocs;
@@ -74,22 +72,13 @@ public class Tieuchichamsoc implements java.io.Serializable {
 		this.mota = mota;
 	}
 
-	@Column(name = "diem")
-	public Integer getDiem() {
-		return this.diem;
+	@Column(name = "kieutieuchi", length = 45)
+	public String getKieutieuchi() {
+		return this.kieutieuchi;
 	}
 
-	public void setDiem(Integer diem) {
-		this.diem = diem;
-	}
-
-	@Column(name = "cokhong")
-	public Boolean getCokhong() {
-		return this.cokhong;
-	}
-
-	public void setCokhong(Boolean cokhong) {
-		this.cokhong = cokhong;
+	public void setKieutieuchi(String kieutieuchi) {
+		this.kieutieuchi = kieutieuchi;
 	}
 
 	@Column(name = "trangthai", length = 45)

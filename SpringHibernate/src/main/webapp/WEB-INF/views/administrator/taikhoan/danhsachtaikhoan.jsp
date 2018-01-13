@@ -62,7 +62,11 @@
 			                  	<td>${tk.username }</td>
 			                  <td>${tk.email }</td>
 			                  <td>${tk.nhanvien.manhanvien }</td>
-			                  <td>${tk.quyen.tenquyen }</td>
+			                  <td>
+							<c:forEach var="tq" items="${tk.quyens }">
+							${tq.tenquyen } -
+							</c:forEach>
+							</td>
 			                  	<td>
 			                  		<a href="${contextPath }/admin/taikhoan/${tk.id}">
 			                  			<i style="color: blue;" class="fa fa-pencil fa-lg" aria-hidden="true" title="Sửa">

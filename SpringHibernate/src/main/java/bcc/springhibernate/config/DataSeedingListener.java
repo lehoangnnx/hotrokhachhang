@@ -50,7 +50,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 		}*/
 		
 		// Admin account
-		if (taikhoanRepository.findByUsername("admin1") == null) {
+		/*if (taikhoanRepository.findByUsername("admin1") == null) {
 			Taikhoan taikhoan = new Taikhoan();
 			taikhoan.setUsername("admin1");
 			taikhoan.setEmail("admin1@gmail.com");
@@ -62,7 +62,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 			taikhoan.setNhanvien(nhanvien);
 			taikhoanRepository.save(taikhoan);
 		}
-		
+		*/
 		/*// Member account
 		if (usersRepository.findByUserName("nguoidung") == null) {
 			Users user = new Users();

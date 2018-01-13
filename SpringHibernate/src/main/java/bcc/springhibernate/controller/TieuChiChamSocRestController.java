@@ -28,6 +28,24 @@ public class TieuChiChamSocRestController {
 			 tieuchichamsoc = tieuChiChamSocService.findById(id);
 			 tieuChiChamSocMap.put("id", tieuchichamsoc.getId());
 			 tieuChiChamSocMap.put("tentieuchi", tieuchichamsoc.getTentieuchi());
+			 tieuChiChamSocMap.put("kieutieuchi", tieuchichamsoc.getKieutieuchi());
+			 
+		} catch (Exception e) {
+			
+		}
+		return tieuChiChamSocMap;
+		
+	}
+	@PostMapping("/getkieutieuchi")
+	Map<String, Object> getKieuTieuChi(@RequestBody Integer id) {
+		
+		Tieuchichamsoc tieuchichamsoc= null;
+		Map<String, Object> tieuChiChamSocMap = new HashMap<String, Object>();
+		try {
+			 tieuchichamsoc = tieuChiChamSocService.findById(id);
+			 tieuChiChamSocMap.put("id", tieuchichamsoc.getId());
+			 tieuChiChamSocMap.put("tentieuchi", tieuchichamsoc.getTentieuchi());
+			 tieuChiChamSocMap.put("kieutieuchi", tieuchichamsoc.getKieutieuchi());
 			 
 		} catch (Exception e) {
 			

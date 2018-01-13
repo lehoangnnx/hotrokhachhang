@@ -53,6 +53,7 @@ public class HoaDonController {
 	String pageDanhSachHoaDon(Model model) {
 		List<Hoadon> listHoadon = hoaDonService.findByTrangthaiNotOrderByIdDesc("deleted");
 		model.addAttribute("listHoadon", listHoadon);
+		
 		return "danhsachhoadon";
 	}
 
@@ -88,6 +89,7 @@ public class HoaDonController {
 	}
 	@PostMapping("/hoadon")
 	String themHoaDon(@ModelAttribute("hoadon") Hoadon hoadon, @RequestParam("nhanvienbanhang") Integer nhanvienbanhang,
+			@RequestParam("nhanviengiaohang") Integer nhanviengiaohang,
 			@RequestParam("nhanvienchamsoc") Integer nhanvienchamsoc, @RequestParam("khachhang") Integer khachhang,
 			@RequestParam("hinhthucthanhtoan") String hinhthucthanhtoan, @RequestParam("ngaylap") Date ngaylap,
 			@RequestParam("ngayxuat") Date ngayxuat, @RequestParam("ngaythanhtoan") Date ngaythanhtoan,
@@ -100,7 +102,7 @@ public class HoaDonController {
 		try {
 			Nhanvien getNhanVienBanHangById = nhanVienService.findById(nhanvienbanhang);
 			Nhanvien getNhanVienChamSocById = nhanVienService.findById(nhanvienchamsoc);
-
+			Nhanvien getNhanVienGiaoHangById = nhanVienService.findById(nhanviengiaohang);
 			Taikhoan getTaiKhoanByUserName = taikhoanService.findByUsername(principal.getName());
 			Nhanvien getNhanVienLapHoaDon = getTaiKhoanByUserName.getNhanvien();
 
@@ -108,6 +110,7 @@ public class HoaDonController {
 
 			hoadon.setNhanvienByIdnhanvienban(getNhanVienBanHangById);
 			hoadon.setNhanvienByIdnhanvienchamsoc(getNhanVienChamSocById);
+			hoadon.setNhanvienByIdnhanviengiaohang(getNhanVienGiaoHangById);
 			hoadon.setNhanvienByIdnhanvienlaphoadon(getNhanVienLapHoaDon);
 			hoadon.setKhachhang(getKhachHangById);
 			hoadon.setHinhthucthanhtoan(hinhthucthanhtoan);
@@ -128,6 +131,19 @@ public class HoaDonController {
 				chiTietHoaDonService.saveOrUpdate(chitiethoadon);
 				
 			}
+			Double tientrendiem= getKhachHangById.getNhomkhachhang().getSotientrendiem();
+			
+			Integer diemtrentien = getKhachHangById.getNhomkhachhang().getSodiemtrentien();
+			
+			Double phantramtien = getKhachHangById.getNhomkhachhang().getPhantramtien();
+			
+			Long sotienchamsoc = (long)(getKhachHangById.getSotienchamsoc() + ((hoadon.getTongtien() * phantramtien ) / 100)) ;
+			
+			Integer diem = (int) (getKhachHangById.getDiem() + (hoadon.getTongtien() / tientrendiem) * diemtrentien);
+			
+			getKhachHangById.setSotienchamsoc(sotienchamsoc);
+			getKhachHangById.setDiem(diem);
+			khachHangService.saveOrUpdate(getKhachHangById);
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thành Công");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thất Bại");
@@ -139,6 +155,7 @@ public class HoaDonController {
 	
 	@PatchMapping("/hoadon")
 	String suaHoaDon(@ModelAttribute("hoadon") Hoadon hoadon, @RequestParam("nhanvienbanhang") Integer nhanvienbanhang,
+			@RequestParam("nhanviengiaohang") Integer nhanviengiaohang,
 			@RequestParam("nhanvienchamsoc") Integer nhanvienchamsoc, @RequestParam("khachhang") Integer khachhang,
 			@RequestParam("hinhthucthanhtoan") String hinhthucthanhtoan, @RequestParam("ngaylap") Date ngaylap,
 			@RequestParam("ngayxuat") Date ngayxuat, @RequestParam("ngaythanhtoan") Date ngaythanhtoan,
@@ -150,9 +167,10 @@ public class HoaDonController {
 			Principal principal) {
 
 		try {
+			Hoadon hoadoncu = hoaDonService.findById(hoadon.getId());
 			Nhanvien getNhanVienBanHangById = nhanVienService.findById(nhanvienbanhang);
 			Nhanvien getNhanVienChamSocById = nhanVienService.findById(nhanvienchamsoc);
-
+			Nhanvien getNhanVienGiaoHangById = nhanVienService.findById(nhanviengiaohang);
 			Taikhoan getTaiKhoanByUserName = taikhoanService.findByUsername(principal.getName());
 			Nhanvien getNhanVienLapHoaDon = getTaiKhoanByUserName.getNhanvien();
 
@@ -160,6 +178,7 @@ public class HoaDonController {
 
 			hoadon.setNhanvienByIdnhanvienban(getNhanVienBanHangById);
 			hoadon.setNhanvienByIdnhanvienchamsoc(getNhanVienChamSocById);
+			hoadon.setNhanvienByIdnhanviengiaohang(getNhanVienGiaoHangById);
 			hoadon.setNhanvienByIdnhanvienlaphoadon(getNhanVienLapHoaDon);
 			hoadon.setKhachhang(getKhachHangById);
 			hoadon.setHinhthucthanhtoan(hinhthucthanhtoan);
@@ -168,6 +187,25 @@ public class HoaDonController {
 			hoadon.setNgaythanhtoan(ngaythanhtoan);
 			hoadon.setSodienthoai(sodienthoai.replace("_", ""));
 			hoadon.setTrangthai(trangthai);
+			
+			
+			Double tientrendiem= getKhachHangById.getNhomkhachhang().getSotientrendiem();
+			Integer diemtrentien = getKhachHangById.getNhomkhachhang().getSodiemtrentien();
+			Double phantramtien = getKhachHangById.getNhomkhachhang().getPhantramtien();
+			
+			Double sotienchamsoccu =getKhachHangById.getSotienchamsoc() - ((hoadoncu.getTongtien() * phantramtien ) / 100) ;
+			System.out.println(sotienchamsoccu);
+			Double diemcu = getKhachHangById.getDiem() - (hoadoncu.getTongtien() / tientrendiem) * diemtrentien;
+			System.out.println(diemcu);
+			System.out.println(sotienchamsoccu + (hoadon.getTongtien() * phantramtien ) / 100);
+			Long sotienchamsoc =(long) (sotienchamsoccu + ((hoadon.getTongtien() * phantramtien ) / 100)) ;
+			System.out.println(sotienchamsoc);
+			Integer diem =(int) (diemcu +(hoadon.getTongtien() / tientrendiem) * diemtrentien);
+			System.out.println(diem);
+			getKhachHangById.setSotienchamsoc(sotienchamsoc);
+			getKhachHangById.setDiem(diem);
+			khachHangService.saveOrUpdate(getKhachHangById);
+			
 			hoaDonService.saveOrUpdate(hoadon);
 			
 			
@@ -190,6 +228,7 @@ public class HoaDonController {
 				
 				
 			}
+			
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");

@@ -57,6 +57,19 @@
 							</select>
 						</div>
 						<div class="form-group">
+							<label>Nhân Viên Giao Hàng</label> <select
+								class="form-control select2" name="nhanviengiaohang"
+								style="width: 100%;">
+
+								<c:forEach var="nv" items="${listNhanvien }">
+									<option
+										${hoadon.nhanvienByIdnhanvienchamsoc.id == nv.id ? 'selected' : '' }
+										value="${nv.id }">${nv.manhanvien}-${nv.tennhanvien }</option>
+								</c:forEach>
+
+							</select>
+						</div>
+						<div class="form-group">
 							<label>Khách Hàng</label> <select class="form-control select2"
 								name="khachhang" style="width: 100%;">
 

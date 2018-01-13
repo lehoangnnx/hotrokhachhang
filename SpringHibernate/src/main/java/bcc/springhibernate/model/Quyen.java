@@ -1,5 +1,5 @@
 package bcc.springhibernate.model;
-// Generated Jan 10, 2018 6:48:04 PM by Hibernate Tools 5.1.5.Final
+// Generated Jan 13, 2018 1:49:35 PM by Hibernate Tools 5.1.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -29,9 +28,6 @@ public class Quyen implements java.io.Serializable {
 	private String mota;
 	private String trangthai;
 	private Set<Taikhoan> taikhoans = new HashSet<Taikhoan>(0);
-	private Set<Taikhoan> taikhoans_1 = new HashSet<Taikhoan>(0);
-	private Set<Taikhoan> taikhoans_2 = new HashSet<Taikhoan>(0);
-	private Set<Taikhoan> taikhoans_3 = new HashSet<Taikhoan>(0);
 
 	public Quyen() {
 	}
@@ -40,16 +36,12 @@ public class Quyen implements java.io.Serializable {
 		this.maquyen = maquyen;
 	}
 
-	public Quyen(String maquyen, String tenquyen, String mota, String trangthai, Set<Taikhoan> taikhoans,
-			Set<Taikhoan> taikhoans_1, Set<Taikhoan> taikhoans_2, Set<Taikhoan> taikhoans_3) {
+	public Quyen(String maquyen, String tenquyen, String mota, String trangthai, Set<Taikhoan> taikhoans) {
 		this.maquyen = maquyen;
 		this.tenquyen = tenquyen;
 		this.mota = mota;
 		this.trangthai = trangthai;
 		this.taikhoans = taikhoans;
-		this.taikhoans_1 = taikhoans_1;
-		this.taikhoans_2 = taikhoans_2;
-		this.taikhoans_3 = taikhoans_3;
 	}
 
 	@Id
@@ -100,46 +92,16 @@ public class Quyen implements java.io.Serializable {
 		this.trangthai = trangthai;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "quyen")
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "taikhoan_quyen", catalog = "hotrobanhang", joinColumns = {
+			@JoinColumn(name = "quyen_id", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "taikhoan_id", nullable = false, updatable = false) })
 	public Set<Taikhoan> getTaikhoans() {
 		return this.taikhoans;
 	}
 
 	public void setTaikhoans(Set<Taikhoan> taikhoans) {
 		this.taikhoans = taikhoans;
-	}
-
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "taikhoan_quyen", catalog = "hotrobanhang", joinColumns = {
-			@JoinColumn(name = "quyen_id", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "taikhoan_id", nullable = false, updatable = false) })
-	public Set<Taikhoan> getTaikhoans_1() {
-		return this.taikhoans_1;
-	}
-
-	public void setTaikhoans_1(Set<Taikhoan> taikhoans_1) {
-		this.taikhoans_1 = taikhoans_1;
-	}
-
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "taikhoan_quyen", catalog = "hotrobanhang", joinColumns = {
-			@JoinColumn(name = "quyen_id", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "taikhoan_id", nullable = false, updatable = false) })
-	public Set<Taikhoan> getTaikhoans_2() {
-		return this.taikhoans_2;
-	}
-
-	public void setTaikhoans_2(Set<Taikhoan> taikhoans_2) {
-		this.taikhoans_2 = taikhoans_2;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "quyen")
-	public Set<Taikhoan> getTaikhoans_3() {
-		return this.taikhoans_3;
-	}
-
-	public void setTaikhoans_3(Set<Taikhoan> taikhoans_3) {
-		this.taikhoans_3 = taikhoans_3;
 	}
 
 }
