@@ -1,8 +1,8 @@
 $(document).ready(function() {
 	// Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
-	$("#formNhomKhachHang").validate({
+	$("#formLuong").validate({
 		rules : {
-			tennhom : {
+			luong : {
 				required : true,
 				normalizer : function(value) {
 
@@ -10,7 +10,7 @@ $(document).ready(function() {
 				}
 
 			},
-			diem : {
+			thuong : {
 				required : true,
 				
 				normalizer : function(value) {
@@ -19,7 +19,7 @@ $(document).ready(function() {
 				}
 
 			},
-			phantram : {
+			chietkhau : {
 				required : true,
 				
 				normalizer : function(value) {
@@ -27,33 +27,23 @@ $(document).ready(function() {
 					return $.trim(value);
 				}
 
-			},
-			mota : {
-				required : true,
-				normalizer : function(value) {
-
-					return $.trim(value);
-				}
 			}
 
 		},
 		messages : {
-			tennhom : {
-				required : "* Vui Lòng Nhập Tên Nhóm Khách Hàng"
+			luong : {
+				required : "* Vui Lòng Nhập Lương"
 				
 
 			},
-			diem : {
-				required : "* Vui Lòng Nhập Điểm"
+			thuong : {
+				required : "* Vui Lòng Nhập Thưởng"
 				
 
 			},
-			phantram : {
-				required : "* Vui Lòng Nhập Phần Trăm"
+			chietkhau : {
+				required : "* Vui Lòng Nhập Chiết Khấu"
 				
-			},
-			mota : {
-				required : "* Vui Lòng Nhập Mô Tả"
 			}
 
 		}
@@ -61,12 +51,17 @@ $(document).ready(function() {
 });
 
 var timeout = null;
-function kiemtratennhomkhachhang(){
+function kiemtraluong(){
 	clearTimeout(timeout);
 	timeout = setTimeout(function() {
-		var nhomkhachhang = {};
-		nhomkhachhang["tennhom"] = $('#tennhom').val().trim();
-		nhomkhachhang["id"] = $("#id").val().trim();
+		
+		var thang = $('#thang').val();
+		var nam = $('#nam').val();
+		
+		var id = $("#id").val().trim();
+		
+		
+		nhanvien=$('#nhanvien').val();
 		var token = $("meta[name='_csrf']").attr("content");
         var header = $("meta[name='_csrf_header']").attr("content");
         $(document).ajaxSend(function (e, xhr, options) {
@@ -76,16 +71,16 @@ function kiemtratennhomkhachhang(){
 		$.ajax({
 
 			type : "POST",
-			contentType : "application/json",
-			url : contextPath + "/admin/kiemtratennhomkhachhang",
-			data : JSON.stringify(nhomkhachhang),
+			//contentType : "application/json",
+			url : contextPath + "/admin/kiemtraluong",
+			data : {id,thang,nam,nhanvien},
 			// dataType: 'json',
 			// timeout: 600000,
 			success : function(result) {
-				console.log(result);
+				
 				if(result == "error"){
 					$('#error').css("display", "block");
-					$('#error').text("* Tên Nhóm Đã Tồn Tại");
+					$('#error').text("* Lương Của Nhân Viên Đã Tồn Tại");
 					$('#btn-submit').attr('type','button');
 				}else {
 					$('#error').css("display", "none");
@@ -100,15 +95,6 @@ function kiemtratennhomkhachhang(){
 		});
 	}, 100);
 };
-$('#tennhom').on('keyup keypress keydown', function(event){
-	
-	if($('#tennhom').val().trim() != ''){
-		
-		kiemtratennhomkhachhang();
-		
-	}else {
-		$('#error').css("display", "none");
-		$('#error').text("");
-	}
-	
-})
+$('#btn-submit').click(function(){
+	kiemtraluong();
+});

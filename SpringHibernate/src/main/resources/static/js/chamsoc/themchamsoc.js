@@ -1,8 +1,8 @@
 $(document).ready(function() {
 	// Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
-	$("#formHoaDon").validate({
+	$("#formChamSoc").validate({
 		rules : {
-			manhanvien : {
+			lan : {
 				required : true,
 				normalizer : function(value) {
 
@@ -10,7 +10,7 @@ $(document).ready(function() {
 				}
 
 			},
-			tennhanvien : {
+			noidung : {
 				required : true,
 				
 				normalizer : function(value) {
@@ -18,81 +18,19 @@ $(document).ready(function() {
 					return $.trim(value);
 				}
 
-			},
-			socmnd : {
-				required : true
-				
-			},
-			noicap : {
-				required : true,
-				normalizer : function(value) {
-
-					return $.trim(value);
-				}
-				
-			},
-			ngaycap : {
-				required : true
-				
-			},
-			diachi : {
-				required : true,
-				normalizer : function(value) {
-
-					return $.trim(value);
-				}
-				
-			},
-			
-			sodienthoai : {
-				required : true
-				
-			}
-			,
-			ngayvaolam : {
-				required : true
-				
 			}
 
 		},
 		messages : {
-			manhanvien : {
-				required : "* Vui Lòng Nhập Mã Nhân Viên"
+			lan : {
+				required : "* Vui Lòng Nhập Lần Chăm Sóc"
 				
 
 			},
-			tennhanvien : {
-				required : "* Vui Lòng Nhập Tên Nhân Viên"
+			noidung : {
+				required : "* Vui Lòng Nhập Nội Dung"
 				
 
-			},
-			socmnd : {
-				required : "* Vui Lòng Nhập Số CMND"
-				
-			},
-			noicap : {
-				required : "* Vui Lòng Nhập Nơi Cấp"
-				
-				
-			},
-			ngaycap : {
-				required : "* Vui Lòng Nhập Ngày Cấp"
-				
-			},
-			diachi : {
-				required : "* Vui Lòng Nhập Địa Chỉ"
-				
-				
-			},
-			
-			sodienthoai : {
-				required : "* Vui Lòng Nhập Số Điện Thoại"
-				
-			}
-			,
-			ngayvaolam : {
-				required : "* Vui Lòng Nhập Ngày Vào Làm"
-				
 			}
 
 		}
@@ -141,7 +79,7 @@ function getTieuChiChamSocId() {
 			    		
 			    	}else {
 			    		//Get the reference of the Table's TBODY element.
-						var tBody = $("#example1 > TBODY")[0];
+						var tBody = $("#tblctcs > TBODY")[0];
 						 
 					    //Add Row.
 					    row = tBody.insertRow(-1);
@@ -180,7 +118,7 @@ function Remove(button,id) {
     if (confirm("Bạn Muốn Xóa : " + tentieuchi)) {
 
         //Get the reference of the Table.
-        var table = $("#example1")[0];
+        var table = $("#tblctcs")[0];
 
         //Delete the Table row using it's Index.
         table.deleteRow(row[0].rowIndex);

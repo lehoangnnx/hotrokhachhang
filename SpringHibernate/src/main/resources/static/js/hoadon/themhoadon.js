@@ -2,98 +2,56 @@ $(document).ready(function() {
 	// Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
 	$("#formHoaDon").validate({
 		rules : {
-			manhanvien : {
-				required : true,
-				normalizer : function(value) {
-
-					return $.trim(value);
-				}
-
-			},
-			tennhanvien : {
-				required : true,
-				
-				normalizer : function(value) {
-
-					return $.trim(value);
-				}
-
-			},
-			socmnd : {
+			ngaylap : {
 				required : true
-				
 			},
-			noicap : {
-				required : true,
-				normalizer : function(value) {
-
-					return $.trim(value);
-				}
-				
-			},
-			ngaycap : {
-				required : true
-				
-			},
-			diachi : {
-				required : true,
-				normalizer : function(value) {
-
-					return $.trim(value);
-				}
-				
-			},
-			
-			sodienthoai : {
-				required : true
-				
-			}
-			,
-			ngayvaolam : {
-				required : true
-				
-			}
-
+            ngayxuat : {
+                required : true
+            },
+            ngaythanhtoan : {
+                required : true
+            },
+            tongtien : {
+                required : true
+            },
+            tiendatra: {
+                required : true
+            },
+            congno : {
+                required : true
+            },
+            diachigiaohang : {
+                required : true
+            },
+            sodienthoai : {
+                required : true
+            }
 		},
 		messages : {
-			manhanvien : {
-				required : "* Vui Lòng Nhập Mã Nhân Viên"
-				
-
-			},
-			tennhanvien : {
-				required : "* Vui Lòng Nhập Tên Nhân Viên"
-				
-
-			},
-			socmnd : {
-				required : "* Vui Lòng Nhập Số CMND"
-				
-			},
-			noicap : {
-				required : "* Vui Lòng Nhập Nơi Cấp"
-				
-				
-			},
-			ngaycap : {
-				required : "* Vui Lòng Nhập Ngày Cấp"
-				
-			},
-			diachi : {
-				required : "* Vui Lòng Nhập Địa Chỉ"
-				
-				
-			},
-			
-			sodienthoai : {
-				required : "* Vui Lòng Nhập Số Điện Thoại"
-				
-			}
-			,
-			ngayvaolam : {
-				required : "* Vui Lòng Nhập Ngày Vào Làm"
-				
-			}
+            ngaylap : {
+                required : '* Vui Lòng Nhập Ngày Lập'
+            },
+            ngayxuat : {
+                required : '* Vui Lòng Nhập Ngày Xuất'
+            },
+            ngaythanhtoan : {
+                required : '* Vui Lòng Nhập Ngày Thanh Toán'
+            },
+            tongtien : {
+                required : '* Vui Lòng Nhập Tổng Tiền'
+            },
+            tiendatra: {
+                required : '* Vui Lòng Tiền Đã Trả'
+            },
+            congno : {
+                required : '* Vui Lòng Nhập Công Nợ'
+            },
+            diachigiaohang : {
+                required : '* Vui Lòng Nhập Địa Chỉ Giao Hàng'
+            },
+            sodienthoai : {
+                required :'* Vui Lòng Nhập Số Điện Thoại'
+            }
 
 		}
 	});
@@ -138,7 +96,7 @@ function getHangHoaById() {
 			    		$('#thanhtienhh'+id).val(soluongmoi * giaban);
 			    	}else {
 			    		//Get the reference of the Table's TBODY element.
-						var tBody = $("#example1 > TBODY")[0];
+						var tBody = $("#tblcthd > TBODY")[0];
 						 
 					    //Add Row.
 					    row = tBody.insertRow(-1);
@@ -154,20 +112,21 @@ function getHangHoaById() {
 				    	cell.html('<span id="tenhanghh'+id+'">'+result.tenhang+'</span>');
 				    	
 				    	cell = $(row.insertCell(-1));
-				    	cell.html('<input name="giabanhh" id="giabanhh'+id+'" type="number" value="'+giaban+'" >');
+				    	cell.html('<input min="0" onchange="capnhatthanhtien('+id+');"   name="giabanhh" id="giabanhh'+id+'" type="number" value="'+giaban+'" >');
+
+				    	cell = $(row.insertCell(-1));
+				    	cell.html('<input min="0" onchange="capnhatthanhtien('+id+');"  name="soluonghh" id="soluonghh'+id+'" type="number" value="'+soluong+'" >');
 				    	
 				    	cell = $(row.insertCell(-1));
-				    	cell.html('<input name="soluonghh" id="soluonghh'+id+'" type="number" value="'+soluong+'" >');
-				    	
-				    	cell = $(row.insertCell(-1));
-				    	cell.html('<input name="thanhtienhh" id="thanhtienhh'+id+'" type="number" value="'+thanhtien+'" >');
+				    	cell.html('<input min="0" name="thanhtienhh" id="thanhtienhh'+id+'" type="number" value="'+thanhtien+'" >');
 				    	
 				    	cell = $(row.insertCell(-1));
 				    	cell.html('<a onclick="Remove(this,'+id+');" href="javascript:void(0);"> <i style="color: red;" class="fa fa-close" aria-hidden="true" title="Sửa"> </i></a>');
 				    
 			    	}
-			    	
-				
+                settongtien();
+                setcongno();
+
 			},
 			error : function(e) {
 
@@ -181,87 +140,37 @@ function Remove(button,id) {
     var tenhang = $('#tenhanghh'+id).text();
     var mahang = $('#mahanghh'+id).text();
     if (confirm("Bạn Muốn Xóa : " + mahang +' - '+ tenhang)) {
+        $('#tongtien').val(parseInt($('#tongtien').val()) - parseInt($('#thanhtienhh'+id).val()));
 
         //Get the reference of the Table.
-        var table = $("#example1")[0];
+        var table = $("#tblcthd")[0];
 
         //Delete the Table row using it's Index.
         table.deleteRow(row[0].rowIndex);
+
+        setcongno();
     }
 };
 $('#btn-thhvcthd').click(function (){
-	
+
 	if($('#soluong').val() > 0){
 		$('.odd').remove();
 		$('#_hanghoa-error').css("display", "none");
 		$('#_hanghoa-error').text("");
 		getHangHoaById();
+
 	}else {
-		
+
 		$('#_hanghoa-error').css("display", "block");
 		$('#_hanghoa-error').text("* Vui Lòng Nhập Số Lượng");
 
 	}
-	
-	
-    
-});
 
-function kiemtramanhanvien() {
-	clearTimeout(timeout);
-	timeout = setTimeout(function() {
-		var nhanvien = {};
-		nhanvien["manhanvien"] = $('#manhanvien').val().trim();
-		
-		nhanvien["id"] = $("#id").val().trim();
-		var token = $("meta[name='_csrf']").attr("content");
-		var header = $("meta[name='_csrf_header']").attr("content");
-		$(document).ajaxSend(function(e, xhr, options) {
-			xhr.setRequestHeader(header, token);
-		});
 
-		$.ajax({
-
-			type : "POST",
-			contentType : "application/json",
-			url : contextPath + "/admin/kiemtramanhanvien",
-			data : JSON.stringify(nhanvien),
-			// dataType: 'json',
-			// timeout: 600000,
-			success : function(result) {
-				console.log(result);
-				if (result == "error") {
-					$('#_manhanvien-error').css("display", "block");
-					$('#_manhanvien-error').text("* Mã Nhân Viên Đã Tồn Tại");
-
-					$('#btn-submit').attr('type', 'button');
-				} 
-
-				else {
-					$('#_manhanvien-error').css("display", "none");
-					$('#_manhanvien-error').text("");
-					$('#btn-submit').attr('type', 'submit');
-				}
-
-			},
-			error : function(e) {
-
-			}
-		});
-	}, 100);
-};
-$('#manhanvien').on('keyup keypress keydown', function(event) {
-
-	if ($('#manhanvien').val().trim() != '') {
-
-		kiemtramanhanvien();
-
-	} else {
-		$('#_manhanvien-error').css("display", "none");
-		$('#_manhanvien-error').text("");
-	}
 
 });
+
+
 
 $(document).ready(function(){
 	var dateObj = new Date();
@@ -274,4 +183,30 @@ $(document).ready(function(){
 	var newdate ='HD'+ year  + month + day  + minutes  + seconds  + milliseconds;
 	$('#sohoadon').val(newdate);
 });
+
+$('#tblcthd').change(function () {
+    settongtien();
+    setcongno();
+});
+function settongtien(){
+    var getthanhtienhh = document.getElementsByName('thanhtienhh');
+    var tongtien = 0;
+    for (var i = 0; i < getthanhtienhh.length; i++) {
+        tongtien += parseInt(getthanhtienhh.item(i).value);
+
+    }
+    $('#tongtien').val(tongtien);
+};
+function capnhatthanhtien(id){
+	var giaban = $('#giabanhh'+id).val();
+	var soluong = $('#soluonghh'+id).val();
+
+	$('#thanhtienhh'+id).val(parseFloat(giaban) * parseInt(soluong));
+}
+$('#formHoaDon').change(function () {
+    setcongno();
+});
+function setcongno() {
+    $('#congno').val(parseInt($('#tongtien').val()) - parseInt($('#tiendatra').val()));
+};
 

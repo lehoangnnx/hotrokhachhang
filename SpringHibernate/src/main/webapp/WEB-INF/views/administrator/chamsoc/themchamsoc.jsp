@@ -12,6 +12,21 @@
 	padding-right: 20px;
 }
 </style>
+<style>
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+</style>
 <section class="content">
 
 	<div class="row">
@@ -107,7 +122,7 @@
 							<label id="_diem-error" class="error" style="display: none;"></label>
 						</div>
 						<div class="box-body">
-							<table id="example1" class="table table-bordered table-striped">
+							<table border="1" style="overflow-x:auto;" id="tblctcs">
 								<thead>
 									<tr>
 										<th>ID</th>
@@ -154,13 +169,13 @@
 
 						<div class="form-group">
 							<label for="lan">Lần Chăm Sóc</label>
-							<form:input path="lan" type="number" class="form-control"
+							<form:input path="lan" type="number" class="form-control" min="0"
 								placeholder="Lần Chăm Sóc" />
 
 						</div>
 						<div class="form-group">
 							<label for="noidung">Nội Dung</label>
-							<form:input path="noidung" type="text" class="form-control"
+							<form:textarea path="noidung" type="text" class="form-control"
 								placeholder="Nội Dung" />
 
 						</div>

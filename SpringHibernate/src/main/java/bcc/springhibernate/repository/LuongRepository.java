@@ -16,4 +16,5 @@ public interface LuongRepository extends JpaRepository<Luong, Integer> {
 	List<Luong> findByTrangthaiNotOrderByIdDesc(String trangthai);
 	Luong findByNhanvien(Nhanvien nhanvien);
 	Luong findById(Integer id);
+	Luong findByNhanvienAndThangAndNam(Nhanvien nhanvien, String thang,String nam);
 }

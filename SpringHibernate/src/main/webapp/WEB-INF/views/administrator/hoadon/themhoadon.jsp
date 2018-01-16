@@ -12,6 +12,21 @@
 	padding-right: 20px;
 }
 </style>
+<style>
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+</style>
 <section class="content">
 
 	<div class="row">
@@ -98,7 +113,7 @@
 								<div class="input-group">
 									<input type="number" id="soluong" class="form-control" value="0" placeholder="Nhập Số Lượng"> <span
 										class="input-group-btn">
-										<button id="btn-thhvcthd" type="button" class="btn btn-info btn-flat">Thêm</button>
+										<button  id="btn-thhvcthd" type="button" class="btn btn-info btn-flat">Thêm</button>
 									</span>
 								</div>
 							</div>
@@ -108,7 +123,7 @@
 							<label id="_hanghoa-error" class="error" style="display: none;" ></label>
 						</div>
 						<div class="box-body">
-							<table id="example1" class="table table-bordered table-striped">
+							<table border="1" style="overflow-x:auto;" id="tblcthd" >
 								<thead>
 									<tr>
 									<th>ID Hàng Hóa</th>
@@ -200,20 +215,20 @@
 
 						<div class="form-group">
 							<label for="tongtien">Tổng Tiền</label>
-							<form:input path="tongtien" type="number" class="form-control"
+							<form:input min="0" path="tongtien" type="number" class="form-control" value="0"
 								placeholder="Tổng Tiền" />
 
 						</div>
 						<div class="form-group">
 							<label for="tiendatra">Tiền Đã Trả</label>
-							<form:input path="tiendatra" type="number" class="form-control"
+							<form:input path="tiendatra" type="number" class="form-control" min="0" value="0"
 								placeholder="Tiền Đã Trả" />
 
 						</div>
 
 						<div class="form-group">
 							<label for="congno">Công Nợ</label>
-							<form:input path="congno" type="number" class="form-control"
+							<form:input path="congno" type="number" class="form-control" min="0" value="0"
 								placeholder="Công Nợ" />
 
 						</div>

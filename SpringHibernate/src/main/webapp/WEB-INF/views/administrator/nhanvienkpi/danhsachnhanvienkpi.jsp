@@ -6,6 +6,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <input hidden="" id="msg" value="${msg }"></input>
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -49,8 +50,8 @@
 					<h3 class="box-title">Danh Sách Nhân Viên KPI</h3>
 				</div>
 				<!-- /.box-header -->
-				<div class="box-body">
-					<table id="example1" class="table table-bordered table-striped">
+				 <div class="box-body">
+					<table  id="example2" class="table table-bordered table-hover">
 						<thead>
 							<tr>
 								<th>Nhân Viên</th>

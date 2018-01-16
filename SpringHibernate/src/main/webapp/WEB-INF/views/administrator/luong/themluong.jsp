@@ -31,7 +31,7 @@
 						
 						
 						<div class="form-group">
-							<label>Nhân Viên</label> <select class="form-control select2"
+							<label>Nhân Viên</label> <select class="form-control select2" id="nhanvien"
 								name="nhanvien" style="width: 100%;">
 
 								<c:forEach var="nv" items="${listNhanvien }">
@@ -39,21 +39,22 @@
 								</c:forEach>
 
 							</select>
+							<label id="error" class="error" style="display: none;" ></label>
 						</div>
 						<div class="form-group">
-							<label for="luong">Lương</label> <form:input path="luong"
+							<label for="luong">Lương</label> <form:input path="luong" min="0"
 								type="number" class="form-control" 
 								placeholder="Lương" />
 								
 						</div>
 						<div class="form-group">
-							<label for="thuong">Thưởng</label> <form:input path="thuong"
+							<label for="thuong">Thưởng</label> <form:input path="thuong" min="0"
 								type="number" class="form-control"
 								placeholder="Thưởng" />
 								
 						</div>
 						<div class="form-group">
-							<label>Tháng</label> <select class="form-control select2"
+							<label>Tháng</label> <select class="form-control select2" id="thang"
 								name="thang" style="width: 100%;">
 								
 								<c:forEach var="i" begin="1" end="12">
@@ -63,7 +64,7 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label>Năm</label> <select class="form-control select2"
+							<label>Năm</label> <select class="form-control select2" id="nam"
 								name="nam" style="width: 100%;">
 
 								<c:forEach var="i" begin="1990" end="2030">
@@ -99,7 +100,7 @@
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 					<div class="box-footer">
-						<button id="btn-submit" type="submit" class="btn btn-primary">Xác Nhận</button>
+						<button id="btn-submit" type="button" class="btn btn-primary">Xác Nhận</button>
 					</div>
 				</form:form>
 			</div>

@@ -19,7 +19,7 @@
 				</div>
 				<!-- /.box-header -->
 				<!-- form start -->
-				<form:form role="form" id="formNhanVien"
+				<form:form role="form" id="formKhachHang"
 					action="${contextPath }/admin/khachhang" method="patch"
 					modelAttribute="khachhang">
 					<form:hidden path="id" />
@@ -56,7 +56,7 @@
 							<label for="makh">Mã Khách Hàng</label>
 							<form:input path="makh" type="text" class="form-control"
 								placeholder="Mã Khách Hàng" />
-							<label id="_makh-error" class="error" style="display: none;"></label>
+							<label id="error" class="error" style="display: none;"></label>
 						</div>
 
 						<div class="form-group">

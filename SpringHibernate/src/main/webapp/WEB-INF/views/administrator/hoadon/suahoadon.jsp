@@ -12,6 +12,21 @@
 	padding-right: 20px;
 }
 </style>
+<style>
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+</style>
 <section class="content">
 
 	<div class="row">
@@ -120,7 +135,7 @@
 							<label id="_hanghoa-error" class="error" style="display: none;"></label>
 						</div>
 						<div class="box-body">
-							<table id="example1" class="table table-bordered table-striped">
+							<table border="1" style="overflow-x:auto;" id="tblcthd">
 								<thead>
 									<tr>
 										<th>ID Hàng Hóa</th>
@@ -140,10 +155,12 @@
 												<span id="idhh${cthd.hanghoa.id }">${cthd.hanghoa.id }</span></td>
 											<td><span id="mahanghh${cthd.hanghoa.id }">${cthd.hanghoa.mahang }</span></td>
 											<td><span id="tenhanghh${cthd.hanghoa.id }">${cthd.hanghoa.tenhang }</span></td>
-											<td><input name="giabanhh"
+											<td><input name="giabanhh" min="0"
+												onchange="capnhatthanhtien(${cthd.hanghoa.id });"
 												id="giabanhh${cthd.hanghoa.id }" type="number"
 												value="${cthd.giaban }"></td>
-											<td><input name="soluonghh"
+											<td><input name="soluonghh" min="0"
+												onchange="capnhatthanhtien(${cthd.hanghoa.id });"
 												id="soluonghh${cthd.hanghoa.id }" type="number"
 												value="${cthd.soluong }"></td>
 											<td><input name="thanhtienhh"

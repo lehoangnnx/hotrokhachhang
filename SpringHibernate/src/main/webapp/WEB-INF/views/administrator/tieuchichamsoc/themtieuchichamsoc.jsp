@@ -20,7 +20,7 @@
 			<!-- general form elements -->
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">Thêm Nhóm Khách Hàng</h3>
+					<h3 class="box-title">Thêm Tiêu Chí Chăm Sóc</h3>
 				</div>
 				<!-- /.box-header -->
 				<!-- form start -->
@@ -32,7 +32,7 @@
 							<label for="tentieuchi">Tên Tiêu Chí</label> <form:input path="tentieuchi"
 								type="text" class="form-control" 
 								placeholder="Tên Tiêu Chí" />
-								<label id="_tentieuchi-error" class="error" style="display: none;" ></label>
+								<label id="error" class="error" style="display: none;" ></label>
 						</div>
 						
 						

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import bcc.springhibernate.model.Hanghoa;
+import bcc.springhibernate.model.Loaikhachhang;
 import bcc.springhibernate.model.Tieuchichamsoc;
 import bcc.springhibernate.service.TieuChiChamSocService;
 @RestController
@@ -52,5 +53,32 @@ public class TieuChiChamSocRestController {
 		}
 		return tieuChiChamSocMap;
 		
+	}
+	@PostMapping("/kiemtratentieuchi")
+	String kiemTraTenTieuChi(@RequestBody Tieuchichamsoc tieuchichamsoc
+			) {
+		
+		Tieuchichamsoc tieuchichamsocByTenTieuChi = null;
+		try {
+			tieuchichamsocByTenTieuChi =  tieuChiChamSocService.findByTentieuchi(tieuchichamsoc.getTentieuchi());
+			if (tieuchichamsoc.getId() == null) {
+				
+				if(tieuchichamsocByTenTieuChi == null) {
+					
+					return "success";
+				}
+			}else {
+				
+				if(tieuchichamsoc.getId() == tieuchichamsocByTenTieuChi.getId()) {
+					
+					return "success";
+					
+				}
+			}
+			
+		} catch (Exception e) {
+			return "error";
+		}
+		return "error";
 	}
 }

@@ -50,6 +50,12 @@ public class LuongServiceImpl implements LuongService {
 		
 		return luongRepository.findByTrangthaiNotOrderByIdDesc(trangthai);
 	}
+
+	@Override
+	public Luong findByNhanvienAndThangAndNam(Nhanvien nhanvien, String thang, String nam) {
+		
+		return luongRepository.findByNhanvienAndThangAndNam(nhanvien, thang, nam);
+	}
 	
 
 }

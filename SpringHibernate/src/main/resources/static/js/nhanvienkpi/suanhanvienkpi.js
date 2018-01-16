@@ -1,8 +1,8 @@
 $(document).ready(function() {
 	// Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
-	$("#formKpi").validate({
+	$("#formNhanVienKpi").validate({
 		rules : {
-			ten: {
+			so: {
 				required : true,
 				normalizer : function(value) {
 
@@ -10,50 +10,26 @@ $(document).ready(function() {
 				}
 
 			},
-			so : {
-				required : true,
-				
-				normalizer : function(value) {
-
-					return $.trim(value);
-				}
-
-			},
-			phantram : {
-				required : true,
-				
-				normalizer : function(value) {
-
-					return $.trim(value);
-				}
-
-			},
-			mota : {
+			ngayhoanthanh: {
 				required : true,
 				normalizer : function(value) {
 
 					return $.trim(value);
 				}
+
 			}
 
 		},
 		messages : {
-			ten : {
-				required : "* Vui Lòng Nhập Tên "
-				
-
-			},
 			so : {
 				required : "* Vui Lòng Nhập Số"
 				
 
 			},
-			phantram : {
-				required : "* Vui Lòng Nhập Phần Trăm"
+			ngayhoanthanh : {
+				required : "* Vui Lòng Nhập Ngày Hoàn Thành "
 				
-			},
-			mota : {
-				required : "* Vui Lòng Nhập Mô Tả"
+
 			}
 
 		}

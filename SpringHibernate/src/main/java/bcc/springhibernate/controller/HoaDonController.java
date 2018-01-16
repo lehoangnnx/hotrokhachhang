@@ -53,7 +53,7 @@ public class HoaDonController {
 	String pageDanhSachHoaDon(Model model) {
 		List<Hoadon> listHoadon = hoaDonService.findByTrangthaiNotOrderByIdDesc("deleted");
 		model.addAttribute("listHoadon", listHoadon);
-		
+
 		return "danhsachhoadon";
 	}
 
