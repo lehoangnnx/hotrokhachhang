@@ -42,7 +42,10 @@ public class KhachHangController {
 	@GetMapping("/khachhang")
 	String pageDanhSachKhachHangg(Model model) {
 		List<Khachhang> listKhachhang = khachHangService.findByTrangthaiOrderByIdDesc("active");
-
+		List<Loaikhachhang> listLoaikhachhang = loaiKhachHangService.findByTrangthaiOrderByIdDesc("active");
+		List<Nhomkhachhang> listNhomkhachhang = nhomKhachHangService.findByTrangthaiOrderByIdDesc("active");
+		model.addAttribute("listLoaikhachhang", listLoaikhachhang);
+		model.addAttribute("listNhomkhachhang", listNhomkhachhang);
 		model.addAttribute("listKhachhang", listKhachhang);
 
 		return "danhsachkhachhang";
@@ -147,5 +150,35 @@ public class KhachHangController {
 		}
 
 		return "redirect:/admin/khachhang";
+	}
+	
+	@GetMapping("/timkiemkhachhang")
+	String timKiemKhachHang(@RequestParam(value="loaikhachhang",defaultValue="0") Integer loaikhachhang,
+			@RequestParam(value="nhomkhachhang",defaultValue="0") Integer nhomkhachhang,
+			Model model) {
+		List<Khachhang> listKhachhang = null;
+		if(loaikhachhang != 0 && nhomkhachhang != 0 ) {
+			Loaikhachhang getLoaiKhachHangById = loaiKhachHangService.findById(loaikhachhang);
+			Nhomkhachhang getNhomKhachHangById = nhomKhachHangService.findById(nhomkhachhang);
+			listKhachhang = khachHangService.findByLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc
+					(getLoaiKhachHangById, getNhomKhachHangById, "active");
+		}else if(loaikhachhang != 0) {
+			Loaikhachhang getLoaiKhachHangById = loaiKhachHangService.findById(loaikhachhang);
+			 listKhachhang = khachHangService.findByLoaikhachhangAndTrangthaiOrderByIdDesc(getLoaiKhachHangById, "active");
+			
+		}else if (nhomkhachhang != 0 ) {
+			Nhomkhachhang getNhomKhachHangById = nhomKhachHangService.findById(nhomkhachhang);
+			 listKhachhang = khachHangService.findByNhomkhachhangAndTrangthaiOrderByIdDesc(getNhomKhachHangById, "active");
+		}else  {
+			 listKhachhang = khachHangService.findByTrangthaiOrderByIdDesc("active");
+		}
+		
+		
+		List<Loaikhachhang> listLoaikhachhang = loaiKhachHangService.findByTrangthaiOrderByIdDesc("active");
+		List<Nhomkhachhang> listNhomkhachhang = nhomKhachHangService.findByTrangthaiOrderByIdDesc("active");
+		model.addAttribute("listLoaikhachhang", listLoaikhachhang);
+		model.addAttribute("listNhomkhachhang", listNhomkhachhang);
+		model.addAttribute("listKhachhang", listKhachhang);
+		return "danhsachkhachhang";
 	}
 }
