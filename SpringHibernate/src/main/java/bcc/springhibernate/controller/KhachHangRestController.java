@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import bcc.springhibernate.model.Chamsoc;
 import bcc.springhibernate.model.Khachhang;
 import bcc.springhibernate.model.Loaikhachhang;
 import bcc.springhibernate.service.KhachHangService;
@@ -45,5 +47,21 @@ public class KhachHangRestController {
 			return "error";
 		}
 		return "error";
+	}
+	@PostMapping("/updatethongbaokhachhang")
+	String updateThongBaoKhachHang(@RequestParam("id") Integer id) {
+		
+		
+		try {
+			
+			Khachhang khachhang= khachHangService.findById(id);
+			
+			khachhang.setTrangthainhac("dasinhnhat");
+			khachHangService.saveOrUpdate(khachhang);
+			return "success";
+		} catch (Exception e) {
+			return "error";
+		}
+		
 	}
 }

@@ -49,7 +49,7 @@ public class Khachhang implements java.io.Serializable {
 	private Integer diem;
 	private Integer solanchamsoc;
 	private Integer solandamphan;
-	private Boolean trangthainhac;
+	private String trangthainhac;
 	private Integer diemtiemnang;
 	private String ghichu;
 	private Set<Chamsoc> chamsocs = new HashSet<Chamsoc>(0);
@@ -70,7 +70,7 @@ public class Khachhang implements java.io.Serializable {
 			Integer manganhnghe, String sotaikhoan, String diachi, String sodienthoai, String tendaidien,
 			String dienthoaidaidien, Date ngaysinhnhatndd, String tenphutrach, String dienthoaiphutrach,
 			Date ngaysinhphutrach, String sogpkd, Date ngaycap, String noicap, String trangthai, Long sotienchamsoc,
-			Long sotiendachamsoc, Integer diem, Integer solanchamsoc, Integer solandamphan, Boolean trangthainhac,
+			Long sotiendachamsoc, Integer diem, Integer solanchamsoc, Integer solandamphan, String trangthainhac,
 			Integer diemtiemnang, String ghichu, Set<Chamsoc> chamsocs, Set<Chamsoc> chamsocs_1, Set<Hoadon> hoadons,
 			Set<Hoadon> hoadons_1) {
 		this.loaikhachhang = loaikhachhang;
@@ -330,11 +330,11 @@ public class Khachhang implements java.io.Serializable {
 	}
 
 	@Column(name = "trangthainhac")
-	public Boolean getTrangthainhac() {
+	public String getTrangthainhac() {
 		return this.trangthainhac;
 	}
 
-	public void setTrangthainhac(Boolean trangthainhac) {
+	public void setTrangthainhac(String trangthainhac) {
 		this.trangthainhac = trangthainhac;
 	}
 

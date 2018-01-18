@@ -116,7 +116,7 @@ public class ChamSocController {
 			chamsoc.setNgay(ngay);
 			chamsoc.setNgaycstiep(ngaycstiep);
 			chamsoc.setHoadonId(hoadon);
-			chamsoc.setTrangthai("active");
+			chamsoc.setTrangthai("dachamsoc");
 			chamSocService.saveOrUpdate(chamsoc);
 
 			for (int i = 0; i < idtccs.size(); i++) {
@@ -179,7 +179,7 @@ public class ChamSocController {
 			chamsoc.setNgay(ngay);
 			chamsoc.setNgaycstiep(ngaycstiep);
 			chamsoc.setHoadonId(hoadon);
-			chamsoc.setTrangthai("active");
+			chamsoc.setTrangthai("dachamsoc");
 			chamSocService.saveOrUpdate(chamsoc);
 
 			for (int i = 0; i < idtccs.size(); i++) {

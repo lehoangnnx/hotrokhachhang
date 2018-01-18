@@ -1,5 +1,13 @@
 <%@ page pageEncoding="UTF-8"%>
- <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <!-- Header Navbar -->
 <nav class="navbar navbar-static-top" role="navigation">
 	<!-- Sidebar toggle button-->
@@ -24,86 +32,17 @@
 								<!-- start message --> <a href="#">
 									<div class="pull-left">
 										<!-- User Image -->
-										<img src="${contextPath }/images/avatar.png" class="img-circle"
-											alt="User Image">
+										<img src="${contextPath }/images/avatar.png"
+											class="img-circle" alt="User Image">
 									</div> <!-- Message title and timestamp -->
 									<h4>
 										Support Team <small><i class="fa fa-clock-o"></i> 5
 											mins</small>
 									</h4> <!-- The message -->
-									<p>Why not buy a new awesome theme?</p>
+									<p>Why not buy a new awesome theme? Why not buy a new awesome theme Why not buy a new awesome theme</p>
 							</a>
 							</li>
-							<li>
-								<!-- start message --> <a href="#">
-									<div class="pull-left">
-										<!-- User Image -->
-										<img src="${contextPath }/images/avatar.png" class="img-circle"
-											alt="User Image">
-									</div> <!-- Message title and timestamp -->
-									<h4>
-										Support Team <small><i class="fa fa-clock-o"></i> 5
-											mins</small>
-									</h4> <!-- The message -->
-									<p>Why not buy a new awesome theme?</p>
-							</a>
-							</li>
-							<li>
-								<!-- start message --> <a href="#">
-									<div class="pull-left">
-										<!-- User Image -->
-										<img src="${contextPath }/images/avatar.png" class="img-circle"
-											alt="User Image">
-									</div> <!-- Message title and timestamp -->
-									<h4>
-										Support Team <small><i class="fa fa-clock-o"></i> 5
-											mins</small>
-									</h4> <!-- The message -->
-									<p>Why not buy a new awesome theme?</p>
-							</a>
-							</li>
-							<li>
-								<!-- start message --> <a href="#">
-									<div class="pull-left">
-										<!-- User Image -->
-										<img src="${contextPath }/images/avatar.png" class="img-circle"
-											alt="User Image">
-									</div> <!-- Message title and timestamp -->
-									<h4>
-										Support Team <small><i class="fa fa-clock-o"></i> 5
-											mins</small>
-									</h4> <!-- The message -->
-									<p>Why not buy a new awesome theme?</p>
-							</a>
-							</li>
-							<li>
-								<!-- start message --> <a href="#">
-									<div class="pull-left">
-										<!-- User Image -->
-										<img src="${contextPath }/images/avatar.png" class="img-circle"
-											alt="User Image">
-									</div> <!-- Message title and timestamp -->
-									<h4>
-										Support Team <small><i class="fa fa-clock-o"></i> 5
-											mins</small>
-									</h4> <!-- The message -->
-									<p>Why not buy a new awesome theme?</p>
-							</a>
-							</li>
-							<li>
-								<!-- start message --> <a href="#">
-									<div class="pull-left">
-										<!-- User Image -->
-										<img src="${contextPath }/images/avatar.png" class="img-circle"
-											alt="User Image">
-									</div> <!-- Message title and timestamp -->
-									<h4>
-										Support Team <small><i class="fa fa-clock-o"></i> 5
-											mins</small>
-									</h4> <!-- The message -->
-									<p>Why not buy a new awesome theme?</p>
-							</a>
-							</li>
+
 							<!-- end message -->
 						</ul> <!-- /.menu -->
 					</li>
@@ -116,18 +55,23 @@
 			<li class="dropdown notifications-menu">
 				<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
 				data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span
-					class="label label-warning">10</span>
+					class="label label-warning">${fn:length(listChamSoc) }</span>
 			</a>
 				<ul class="dropdown-menu">
-					<li class="header">You have 10 notifications</li>
+					<li class="header">Bạn Có ${fn:length(listChamSoc) } Thông Báo</li>
 					<li>
 						<!-- Inner Menu: contains the notifications -->
 						<ul class="menu">
-							<li>
-								<!-- start notification --> <a href="#"> <i
-									class="fa fa-users text-aqua"></i> 5 new members joined today
-							</a>
-							</li>
+							<c:forEach var="cs" items="${listChamSoc }">
+								<li>
+									<!-- start notification --> <a
+									onclick="updateThongBaoChamSoc(${cs.id });"
+									 href="javacript:void(0);"> <i
+										class="fa fa-users text-aqua"></i> Còn ${cs.ngaycstiep } Ngày Nữa Tới Lần Chăm Sóc <br>
+										Tiếp Theo Của ${cs.id }
+								</a>
+								</li>
+							</c:forEach>
 							<!-- end notification -->
 						</ul>
 					</li>
@@ -138,28 +82,24 @@
 			<li class="dropdown tasks-menu">
 				<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle"
 				data-toggle="dropdown"> <i class="fa fa-flag-o"></i> <span
-					class="label label-danger">9</span>
+					class="label label-danger">${fn:length(listKhachHang) }</span>
 			</a>
 				<ul class="dropdown-menu">
-					<li class="header">You have 9 tasks</li>
+					<li class="header">Bạn Có ${fn:length(listKhachHang) } Thông
+						Báo</li>
 					<li>
 						<!-- Inner menu: contains the tasks -->
 						<ul class="menu">
-							<li>
-								<!-- Task item --> <a href="#"> <!-- Task title and progress text -->
-									<h3>
-										Design some buttons <small class="pull-right">20%</small>
-									</h3> <!-- The progress bar -->
-									<div class="progress xs">
-										<!-- Change the css width attribute to simulate progress -->
-										<div class="progress-bar progress-bar-aqua" style="width: 20%"
-											role="progressbar" aria-valuenow="20" aria-valuemin="0"
-											aria-valuemax="100">
-											<span class="sr-only">20% Complete</span>
-										</div>
-									</div>
-							</a>
-							</li>
+							<c:forEach var="lkh" items="${listKhachHang }">
+								<li>
+									<!-- start notification --> <a
+									onclick="updateThongBaoKhachHang(${lkh.id });"
+									 href="javascript:void(0);"> <i
+										class="fa fa-users text-aqua"></i> Còn ${lkh.ngaysinhnhat }
+										nữa là sinh nhật của ${lkh.makh }
+								</a>
+								</li>
+							</c:forEach>
 							<!-- end task item -->
 						</ul>
 					</li>
@@ -176,8 +116,9 @@
 			</a>
 				<ul class="dropdown-menu">
 					<!-- The user image in the menu -->
-					<li class="user-header"><img src="${contextPath }/images/avatar.png"
-						class="img-circle" alt="User Image">
+					<li class="user-header"><img
+						src="${contextPath }/images/avatar.png" class="img-circle"
+						alt="User Image">
 
 						<p>
 							Alexander Pierce - Web Developer <small>Member since Nov.

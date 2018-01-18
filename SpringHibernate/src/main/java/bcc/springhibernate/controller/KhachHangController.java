@@ -90,7 +90,7 @@ public class KhachHangController {
 			khachhang.setNgaysinhphutrach(ngaysinhphutrach);
 			khachhang.setNgaycap(ngaycap);
 			khachhang.setTrangthai("active");
-			khachhang.setTrangthainhac(false);
+			khachhang.setTrangthainhac("chosinhnhat");
 			khachHangService.saveOrUpdate(khachhang);
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thành Công");
 		} catch (Exception e) {
@@ -119,7 +119,7 @@ public class KhachHangController {
 			khachhang.setNgaysinhphutrach(ngaysinhphutrach);
 			khachhang.setNgaycap(ngaycap);
 			khachhang.setTrangthai("active");
-			khachhang.setTrangthainhac(false);
+			khachhang.setTrangthainhac("chosinhnhat");
 			khachHangService.saveOrUpdate(khachhang);
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {
