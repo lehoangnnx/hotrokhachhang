@@ -1,4 +1,10 @@
 <%@ page pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!-- sidebar: style can be found in sidebar.less -->
 <section class="sidebar">
@@ -35,7 +41,7 @@
 		<li class="header">HEADER</li>
 		<!-- Optionally, you can add icons to the links -->
 
-		<li><a href="${contextPath }/admin/hoadon"><i class="fa fa-link"></i> <span>Hóa Đơn</span></a></li>
+		<li><a href="${contextPath }/admin/hoadon?trangthai=dathanhtoan"><i class="fa fa-link"></i> <span>Hóa Đơn</span></a></li>
 		<li class="treeview"><a href="#"><i class="fa fa-link"></i> <span>Chăm Sóc</span> <span class="pull-right-container"> <i
 					class="fa fa-angle-left pull-right"></i>
 			</span> </a>

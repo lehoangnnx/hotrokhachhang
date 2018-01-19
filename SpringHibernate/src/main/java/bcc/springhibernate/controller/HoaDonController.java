@@ -50,8 +50,9 @@ public class HoaDonController {
 	@Autowired
 	ChiTietHoaDonService chiTietHoaDonService;
 	@GetMapping("/hoadon")
-	String pageDanhSachHoaDon(Model model) {
-		List<Hoadon> listHoadon = hoaDonService.findByTrangthaiNotOrderByIdDesc("deleted");
+	String pageDanhSachHoaDon(@RequestParam(value="trangthai", defaultValue="dathanhtoan") String trangthai,
+			Model model) {
+		List<Hoadon> listHoadon = hoaDonService.findByTrangthaiOrderByIdDesc(trangthai);
 		model.addAttribute("listHoadon", listHoadon);
 
 		return "danhsachhoadon";

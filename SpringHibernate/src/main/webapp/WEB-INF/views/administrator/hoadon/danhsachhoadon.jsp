@@ -27,17 +27,17 @@
       	
 		        <div class="col-xs-12">
 		          <ul class="nav nav-tabs">
-					<li class="tablinks ${param.status == 'active' ? 'active' : '' }">
-					<a href="${contextPath }/admin/roles?status=active"   >Đã Kích Hoạt</a>
+					<li class="tablinks ${param.trangthai == 'dathanhtoan' ? 'active' : '' }">
+					<a href="${contextPath }/admin/hoadon?trangthai=dathanhtoan"   >Đã Thanh Toán</a>
 					</li>
-					<li class="tablinks ${param.status == 'inactive' ? 'active' : '' }" >
-					<a href="${contextPath }/admin/roles?status=inactive">Chưa Kích Hoạt</a>
+					<li class="tablinks ${param.trangthai == 'chuathanhtoan' ? 'active' : '' }" >
+					<a href="${contextPath }/admin/hoadon?trangthai=chuathanhtoan">Chưa Thanh Toán</a>
 					</li>
-					<li class="tablinks ${param.status == 'draft' ? 'active' : '' }">
-					<a href="${contextPath }/admin/roles?status=draft" >Nháp</a>
+					<li class="tablinks ${param.trangthai == 'dangno' ? 'active' : '' }">
+					<a href="${contextPath }/admin/hoadon?trangthai=dangno" >Đang Nợ</a>
 					</li>
-					<li class="tablinks ${param.status == 'deleted' ? 'active' : '' }">
-					<a href="${contextPath }/admin/roles?status=deleted"  >Đã Xóa</a>
+					<li class="tablinks ${param.trangthai == 'deleted' ? 'active' : '' }">
+					<a href="${contextPath }/admin/hoadon?trangthai=deleted"  >Đã Xóa</a>
 					</li>
 				</ul>
 		          <div class="box">
