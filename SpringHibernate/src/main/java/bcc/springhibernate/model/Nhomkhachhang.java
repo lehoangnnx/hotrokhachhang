@@ -1,5 +1,5 @@
 package bcc.springhibernate.model;
-// Generated Jan 13, 2018 1:49:35 PM by Hibernate Tools 5.1.5.Final
+// Generated Jan 20, 2018 8:57:07 AM by Hibernate Tools 5.1.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -97,7 +97,7 @@ public class Nhomkhachhang implements java.io.Serializable {
 		this.trangthai = trangthai;
 	}
 
-	@Column(name = "sodiemtrentien", precision = 22, scale = 0)
+	@Column(name = "sodiemtrentien")
 	public Integer getSodiemtrentien() {
 		return this.sodiemtrentien;
 	}

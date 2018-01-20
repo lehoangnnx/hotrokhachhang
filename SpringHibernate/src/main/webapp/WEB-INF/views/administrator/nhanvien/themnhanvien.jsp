@@ -127,6 +127,19 @@
 						</div>
 
 						<div class="form-group">
+							<label for="luong">Lương</label>
+							<form:input path="luong" min="0" type="number"
+								class="form-control" placeholder="Lương" />
+
+						</div>
+						<div class="form-group">
+							<label for="chietkhau">Chiết Khấu</label>
+							<form:input path="chietkhau" type="number" class="form-control"
+								placeholder="Chiết Khấu" />
+
+						</div>
+						
+						<div class="form-group">
 							<label for="thongtinkhac">Thông Tin Khác</label>
 							<form:input path="thongtinkhac" type="text" class="form-control"
 								placeholder="Thông Tin Khác" />

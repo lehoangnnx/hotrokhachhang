@@ -18,17 +18,8 @@ $(document).ready(function() {
 					return $.trim(value);
 				}
 
-			},
-			chietkhau : {
-				required : true,
-				
-				normalizer : function(value) {
-
-					return $.trim(value);
-				}
-
 			}
-
+			
 		},
 		messages : {
 			luong : {
@@ -40,10 +31,6 @@ $(document).ready(function() {
 				required : "* Vui Lòng Nhập Thưởng"
 				
 
-			},
-			chietkhau : {
-				required : "* Vui Lòng Nhập Chiết Khấu"
-				
 			}
 
 		}

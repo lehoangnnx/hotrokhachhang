@@ -79,12 +79,7 @@
 
 							</select>
 						</div>
-						<div class="form-group">
-							<label for="chietkhau">Chiết Khấu</label> <form:input path="chietkhau"
-								type="number" class="form-control"
-								placeholder="Chiết Khấu" />
-								
-						</div>
+						
 						<div class="form-group">
 							<label for="trangthai">Trạng Thái</label> <br> <label
 								class="lb-flat-red"> <input value="datraluong" type="radio"

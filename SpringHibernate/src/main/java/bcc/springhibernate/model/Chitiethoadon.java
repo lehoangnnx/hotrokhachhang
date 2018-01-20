@@ -1,5 +1,5 @@
 package bcc.springhibernate.model;
-// Generated Jan 13, 2018 1:49:35 PM by Hibernate Tools 5.1.5.Final
+// Generated Jan 20, 2018 8:57:07 AM by Hibernate Tools 5.1.5.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,9 +35,11 @@ public class Chitiethoadon implements java.io.Serializable {
 		this.hanghoa = hanghoa;
 		this.hoadon = hoadon;
 	}
-
-	public Chitiethoadon(Hanghoa hanghoa, Hoadon hoadon, Long dongia, Integer soluong, Long giaban, Long thanhtien,
-			String trangthai, String ghichu) {
+	
+	public Chitiethoadon(Integer id, Hanghoa hanghoa, Hoadon hoadon, Long dongia, Integer soluong, Long giaban,
+			Long thanhtien, String trangthai, String ghichu) {
+		super();
+		this.id = id;
 		this.hanghoa = hanghoa;
 		this.hoadon = hoadon;
 		this.dongia = dongia;
@@ -48,10 +50,8 @@ public class Chitiethoadon implements java.io.Serializable {
 		this.ghichu = ghichu;
 	}
 
-	public Chitiethoadon(Integer id, Hanghoa hanghoa, Hoadon hoadon, Long dongia, Integer soluong, Long giaban,
-			Long thanhtien, String trangthai, String ghichu) {
-		super();
-		this.id = id;
+	public Chitiethoadon(Hanghoa hanghoa, Hoadon hoadon, Long dongia, Integer soluong, Long giaban, Long thanhtien,
+			String trangthai, String ghichu) {
 		this.hanghoa = hanghoa;
 		this.hoadon = hoadon;
 		this.dongia = dongia;

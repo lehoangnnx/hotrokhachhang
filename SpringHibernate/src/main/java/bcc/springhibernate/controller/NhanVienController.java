@@ -81,24 +81,26 @@ public class NhanVienController {
    
 	
     @PostMapping("/nhanvien")
-    String themNhanVien(@RequestParam("manhanvien") String manhanvien,
-    		@RequestParam("tennhanvien") String tennhanvien,
+    String themNhanVien(@ModelAttribute("nhanvien") Nhanvien nhanvien, 
+    		
     		@RequestParam("socmnd") String socmnd,
     		@RequestParam("ngaycap") Date ngaycap,
-    		@RequestParam("noicap") String noicap,
+    		
     		@RequestParam("sodienthoai") String sodienthoai,
-    		@RequestParam("diachi") String diachi,
+    		
     		@RequestParam("ngayvaolam") Date ngayvaolam,
-    		@RequestParam(value="trangthai", defaultValue="active" ) String trangthai,
-    		@RequestParam("loainhanvien") Integer loainhanvien,
-    		@RequestParam("thongtinkhac") String thongtinkhac,
-    		@RequestParam("ghichu") String ghichu,
+    		
     		@RequestParam("bophan") Integer bophan,
     		RedirectAttributes redirectAttributes) {
     	try {
     		
     		Bophan bophanById = boPhanService.findById(bophan);
-    		Nhanvien nhanvien = new Nhanvien(bophanById, manhanvien, tennhanvien, socmnd, ngaycap, noicap, sodienthoai.replace("_", ""), diachi, ngayvaolam, trangthai, loainhanvien, thongtinkhac, ghichu);
+    		nhanvien.setSocmnd(socmnd);
+    		nhanvien.setNgaycap(ngaycap);
+    		nhanvien.setSodienthoai(sodienthoai);
+    		nhanvien.setNgayvaolam(ngayvaolam);
+    		nhanvien.setBophan(bophanById);
+    		nhanvien.setTrangthai("active");
     		nhanVienService.saveOrUpdate(nhanvien);
         	redirectAttributes.addFlashAttribute("msg", "Thêm Thành Công");
 		} catch (Exception e) {
@@ -109,25 +111,26 @@ public class NhanVienController {
     }	
     	
     @PatchMapping("/nhanvien")
-    String suaNhanVien(@RequestParam("id") Integer id,
-    		@RequestParam("manhanvien") String manhanvien,
-    		@RequestParam("tennhanvien") String tennhanvien,
+    String suaNhanVien(@ModelAttribute("nhanvien") Nhanvien nhanvien, 
+    		
     		@RequestParam("socmnd") String socmnd,
     		@RequestParam("ngaycap") Date ngaycap,
-    		@RequestParam("noicap") String noicap,
+    		
     		@RequestParam("sodienthoai") String sodienthoai,
-    		@RequestParam("diachi") String diachi,
+    		
     		@RequestParam("ngayvaolam") Date ngayvaolam,
-    		@RequestParam(value="trangthai", defaultValue="active" ) String trangthai,
-    		@RequestParam("loainhanvien") Integer loainhanvien,
-    		@RequestParam("thongtinkhac") String thongtinkhac,
-    		@RequestParam("ghichu") String ghichu,
+    		
     		@RequestParam("bophan") Integer bophan,
     		RedirectAttributes redirectAttributes) {
     	try {
     		
     		Bophan bophanById = boPhanService.findById(bophan);
-    		Nhanvien nhanvien = new Nhanvien(id,bophanById, manhanvien, tennhanvien, socmnd, ngaycap, noicap, sodienthoai.replace("_", ""), diachi, ngayvaolam, trangthai, loainhanvien, thongtinkhac, ghichu);
+    		nhanvien.setSocmnd(socmnd);
+    		nhanvien.setNgaycap(ngaycap);
+    		nhanvien.setSodienthoai(sodienthoai);
+    		nhanvien.setNgayvaolam(ngayvaolam);
+    		nhanvien.setBophan(bophanById);
+    		nhanvien.setTrangthai("active");
     		nhanVienService.saveOrUpdate(nhanvien);
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {

@@ -1,5 +1,5 @@
 package bcc.springhibernate.model;
-// Generated Jan 13, 2018 1:49:35 PM by Hibernate Tools 5.1.5.Final
+// Generated Jan 20, 2018 8:57:07 AM by Hibernate Tools 5.1.5.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +22,6 @@ public class Luong implements java.io.Serializable {
 	private Nhanvien nhanvien;
 	private Long luong;
 	private Long thuong;
-	private Double chietkhau;
 	private String thang;
 	private String nam;
 	private String trangthai;
@@ -31,12 +30,11 @@ public class Luong implements java.io.Serializable {
 	public Luong() {
 	}
 
-	public Luong(Nhanvien nhanvien, Long luong, Long thuong, Double chietkhau, String thang, String nam,
-			String trangthai, String ghichu) {
+	public Luong(Nhanvien nhanvien, Long luong, Long thuong, String thang, String nam, String trangthai,
+			String ghichu) {
 		this.nhanvien = nhanvien;
 		this.luong = luong;
 		this.thuong = thuong;
-		this.chietkhau = chietkhau;
 		this.thang = thang;
 		this.nam = nam;
 		this.trangthai = trangthai;
@@ -81,15 +79,6 @@ public class Luong implements java.io.Serializable {
 
 	public void setThuong(Long thuong) {
 		this.thuong = thuong;
-	}
-
-	@Column(name = "chietkhau", precision = 22, scale = 0)
-	public Double getChietkhau() {
-		return this.chietkhau;
-	}
-
-	public void setChietkhau(Double chietkhau) {
-		this.chietkhau = chietkhau;
 	}
 
 	@Column(name = "thang", length = 2)

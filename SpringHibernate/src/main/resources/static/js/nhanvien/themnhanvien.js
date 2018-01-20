@@ -52,6 +52,23 @@ $(document).ready(function() {
 			ngayvaolam : {
 				required : true
 				
+			},
+			luong : {
+				required : true,
+				normalizer : function(value) {
+
+					return $.trim(value);
+				}
+				
+			},
+			
+			chietkhau : {
+				required : true,
+				normalizer : function(value) {
+
+					return $.trim(value);
+				}
+				
 			}
 
 		},
@@ -92,6 +109,16 @@ $(document).ready(function() {
 			,
 			ngayvaolam : {
 				required : "* Vui Lòng Nhập Ngày Vào Làm"
+				
+			}
+			,
+			luong : {
+				required : "* Vui Lòng Nhập Lương"
+				
+			}
+			,
+			chietkhau : {
+				required : "* Vui Lòng Nhập Chiết Khấu"
 				
 			}
 

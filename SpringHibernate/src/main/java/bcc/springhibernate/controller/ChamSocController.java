@@ -55,7 +55,7 @@ public class ChamSocController {
 
 	@GetMapping("/chamsoc")
 	String pageDanhSachChamSoc(Model model) {
-		List<Chamsoc> listChamsoc = chamSocService.findByTrangthaiOrderByIdDesc("active");
+		List<Chamsoc> listChamsoc = chamSocService.findByTrangthaiNotOrderByIdDesc("deleted");
 		model.addAttribute("listChamsoc", listChamsoc);
 		return "danhsachchamsoc";
 	}
