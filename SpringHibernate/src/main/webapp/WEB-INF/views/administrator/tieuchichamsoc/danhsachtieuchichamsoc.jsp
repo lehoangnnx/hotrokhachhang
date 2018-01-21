@@ -11,13 +11,14 @@
     <section class="content-header">
       <h1>
         Tiêu Chí Chăm Sóc
-        <small><a href="${contextPath }/admin/roles?status=active">Danh Sách Tiêu Chí Chăm Sóc</a></small>
-        <small><a class="btn btn-success" href="${contextPath }/admin/tieuchichamsoc/add">Thêm mới</a></small>
+        <%-- <small><a href="${contextPath }/admin/roles?status=active">Danh Sách Tiêu Chí Chăm Sóc</a></small>
+        <small><a class="btn btn-success" href="${contextPath }/admin/tieuchichamsoc/add">Thêm mới</a></small> --%>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="${contextPath }/"><i class="fa fa-dashboard"></i> Home</a></li>
+      <a class="btn btn-success" href="${contextPath }/admin/tieuchichamsoc/add">Thêm mới</a>
+        <%-- <li><a href="${contextPath }/"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="${contextPath }/roles">Quyền</a></li>
-        <li class="active">Quản lý quyền</li>
+        <li class="active">Quản lý quyền</li> --%>
       </ol>
     </section>
 
@@ -27,17 +28,12 @@
       	
 		        <div class="col-xs-12">
 		          <ul class="nav nav-tabs">
-					<li class="tablinks ${param.status == 'active' ? 'active' : '' }">
-					<a href="${contextPath }/admin/roles?status=active"   >Đã Kích Hoạt</a>
+					<li class="tablinks ${param.trangthai == 'active' ? 'active' : '' }">
+					<a href="${contextPath }/admin/tieuchichamsoc?trangthai=active"   >Đã Kích Hoạt</a>
 					</li>
-					<li class="tablinks ${param.status == 'inactive' ? 'active' : '' }" >
-					<a href="${contextPath }/admin/roles?status=inactive">Chưa Kích Hoạt</a>
-					</li>
-					<li class="tablinks ${param.status == 'draft' ? 'active' : '' }">
-					<a href="${contextPath }/admin/roles?status=draft" >Nháp</a>
-					</li>
-					<li class="tablinks ${param.status == 'deleted' ? 'active' : '' }">
-					<a href="${contextPath }/admin/roles?status=deleted"  >Đã Xóa</a>
+
+					<li class="tablinks ${param.trangthai == 'deleted' ? 'active' : '' }">
+					<a href="${contextPath }/admin/tieuchichamsoc?trangthai=deleted"  >Đã Xóa</a>
 					</li>
 				</ul>
 		          <div class="box">
@@ -50,8 +46,8 @@
 		                <thead>
 		                <tr>
 		                  <th>Tên Tiêu Chí</th>
-		                  
-		                  
+		                  <th>Kiểu Tiêu Chí</th>
+		                  <th>Mô Tả</th>
 		                  <th>Thao tác</th>
 		                </tr>
 		                </thead>
@@ -59,7 +55,8 @@
 		                <c:forEach var="tccs" items="${listTieuchichamsoc }" >
 		                	<tr>
 			                  	<td>${tccs.tentieuchi }</td>
-			                  	
+			                  	<td>${tccs.kieutieuchi }</td>
+			                  	<td>${tccs.mota }</td>
 			                  	
 			                  	<td>
 			                  		<a href="${contextPath }/admin/tieuchichamsoc/${tccs.id}">
@@ -75,9 +72,9 @@
 		                </tbody>
 		                <tfoot>
 		                <tr>
-		                   <th>Tên Tiêu Chí</th>
-		                  
-		                  
+		                  <th>Tên Tiêu Chí</th>
+		                  <th>Kiểu Tiêu Chí</th>
+		                  <th>Mô Tả</th>
 		                  <th>Thao tác</th>
 		                </tr>
 		                </tfoot>

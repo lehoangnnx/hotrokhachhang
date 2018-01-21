@@ -11,13 +11,14 @@
     <section class="content-header">
       <h1>
        Lương
-        <small><a href="${contextPath }/admin/roles?status=active">Danh Sách Lương</a></small>
-        <small><a class="btn btn-success" href="${contextPath }/admin/luong/add">Thêm mới</a></small>
+        <%-- <small><a href="${contextPath }/admin/roles?status=active">Danh Sách Lương</a></small>
+        <small><a class="btn btn-success" href="${contextPath }/admin/luong/add">Thêm mới</a></small> --%>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="${contextPath }/"><i class="fa fa-dashboard"></i> Home</a></li>
+      <a class="btn btn-success" href="${contextPath }/admin/luong/add">Thêm mới</a>
+        <%-- <li><a href="${contextPath }/"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="${contextPath }/roles">Quyền</a></li>
-        <li class="active">Quản lý quyền</li>
+        <li class="active">Quản lý quyền</li> --%>
       </ol>
     </section>
 
@@ -27,17 +28,13 @@
       	
 		        <div class="col-xs-12">
 		          <ul class="nav nav-tabs">
-					<li class="tablinks ${param.status == 'active' ? 'active' : '' }">
-					<a href="${contextPath }/admin/roles?status=active"   >Đã Kích Hoạt</a>
+					<li class="tablinks ${param.trangthai == 'active' ? 'active' : '' }">
+					<a href="${contextPath }/admin/luong?trangthai=active"   >Đã Kích Hoạt</a>
 					</li>
-					<li class="tablinks ${param.status == 'inactive' ? 'active' : '' }" >
-					<a href="${contextPath }/admin/roles?status=inactive">Chưa Kích Hoạt</a>
-					</li>
-					<li class="tablinks ${param.status == 'draft' ? 'active' : '' }">
-					<a href="${contextPath }/admin/roles?status=draft" >Nháp</a>
-					</li>
-					<li class="tablinks ${param.status == 'deleted' ? 'active' : '' }">
-					<a href="${contextPath }/admin/roles?status=deleted"  >Đã Xóa</a>
+
+
+					<li class="tablinks ${param.trangthai == 'deleted' ? 'active' : '' }">
+					<a href="${contextPath }/admin/luong?trangthai=deleted"  >Đã Xóa</a>
 					</li>
 				</ul>
 		          <div class="box">
@@ -51,8 +48,8 @@
 		                <tr>
 		                <th>Nhân Viên</th>
 		                  <th>Lương</th>
-		                   
-		                  
+		                   <th>Thưởng</th>
+		                  <th>Tháng/Năm</th>
 		                  <th>Thao tác</th>
 		                </tr>
 		                </thead>
@@ -61,7 +58,8 @@
 		                	<tr>
 		                		<td>${l.nhanvien.tennhanvien}</td>
 			                  	<td>${l.luong}</td>
-			                  	
+			                  	<td>${l.thuong}</td>
+			                  	<td>${l.thang}/${l.nam }</td>
 			                  	<td>
 			                  		<a href="${contextPath }/admin/luong/${l.id}">
 			                  			<i style="color: blue;" class="fa fa-pencil fa-lg" aria-hidden="true" title="Sửa">
@@ -78,7 +76,8 @@
 		                <tr>
 		                 <th>Nhân Viên</th>
 		                  <th>Lương</th>
-		                  
+		                  <th>Thưởng</th>
+		                  <th>Ngày/Tháng</th>
 		                  <th>Thao tác</th>
 		                </tr>
 		                </tfoot>

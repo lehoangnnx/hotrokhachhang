@@ -51,8 +51,9 @@ public class NhanVienController {
 	PasswordEncoder passwordEncoder;
 	
     @GetMapping("/nhanvien")
-    String pageDanhSachNhanVien(Model model){
-    	List<Nhanvien> listNhanvien= nhanVienService.findByTrangthaiOrderByIdDesc("active");
+    String pageDanhSachNhanVien(@RequestParam(value="trangthai",defaultValue = "active") String trangthai,
+								Model model){
+    	List<Nhanvien> listNhanvien= nhanVienService.findByTrangthaiOrderByIdDesc(trangthai);
     	model.addAttribute("listNhanvien", listNhanvien);
         return "danhsachnhanvien";
     }

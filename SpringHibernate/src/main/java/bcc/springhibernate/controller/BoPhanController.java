@@ -32,8 +32,8 @@ public class BoPhanController {
 	BoPhanService  boPhanService;
 	
     @GetMapping("/bophan")
-    String pageDanhSachBoPhan(Model model){
-    	List<Bophan> listBophan = boPhanService.findByTrangthaiOrderByIdDesc("active");
+    String pageDanhSachBoPhan(@RequestParam(value="trangthai",defaultValue = "active") String trangthai , Model model){
+    	List<Bophan> listBophan = boPhanService.findByTrangthaiOrderByIdDesc(trangthai);
     	model.addAttribute("listBophan", listBophan);
         return "danhsachbophan";
     }

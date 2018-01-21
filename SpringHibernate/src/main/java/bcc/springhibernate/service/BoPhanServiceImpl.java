@@ -3,6 +3,7 @@ package bcc.springhibernate.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import bcc.springhibernate.model.Bophan;
@@ -43,6 +44,12 @@ public class BoPhanServiceImpl implements BoPhanService {
 	public Bophan findById(Integer id) {
 		
 		return boPhanRepository.findById(id);
+	}
+
+	@Override
+	public List<Bophan> findByTrangthaiOrderByIdDesc(String trangthai, Pageable pageable) {
+		
+		return boPhanRepository.findByTrangthaiOrderByIdDesc(trangthai, pageable);
 	}
 	
 

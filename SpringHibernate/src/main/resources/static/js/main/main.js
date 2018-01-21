@@ -21,8 +21,8 @@ function updateThongBaoChamSoc(id){
 			// timeout: 600000,
 			success : function(result) {
 				
-				if(result == "success"){
-					window.location=contextPath+"/admin/chamsoc/"+id;
+				if(result != "error"){
+					window.location=contextPath+"/admin/chamsoc/"+result;
 				}
 
 			},

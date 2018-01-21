@@ -14,18 +14,20 @@
 </style>
 <style>
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-    border: 1px solid #ddd;
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+	border: 1px solid #ddd;
 }
 
 th, td {
-    text-align: left;
-    padding: 8px;
+	text-align: left;
+	padding: 8px;
 }
 
-tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(even) {
+	background-color: #f2f2f2
+}
 </style>
 <section class="content">
 
@@ -71,10 +73,10 @@ tr:nth-child(even){background-color: #f2f2f2}
 						</div>
 						<div class="form-group">
 							<label>Khách Hàng</label> <select class="form-control select2"
-								name="khachhang" style="width: 100%;">
-
+								id="khachhang" name="khachhang" style="width: 100%;">
+	
 								<c:forEach var="kh" items="${listKhachhang }">
-									<option value="${kh.id }">${kh.makh}- ${kh.ten }</option>
+									<option value="${kh.id }">${kh.makh}-${kh.ten }</option>
 								</c:forEach>
 
 							</select>
@@ -84,7 +86,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 						<div class="form-group">
 							<label>Hóa Đơn</label> <select class="form-control select2"
 								name="hoadon" style="width: 100%;">
-							<option value="0" selected="selected">Không</option>
+								<option value="0" selected="selected">Không</option>
 								<c:forEach var="hd" items="${listHoadon }">
 									<option value="${hd.id }">${hd.sohoadon}</option>
 								</c:forEach>
@@ -100,7 +102,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 							<div class="form-group col-md-8">
 								<select class="form-control select2" name="" id="tieuchichamsoc"
 									style="width: 100%;">
-										<option value="0" selected="selected">Không</option>
+									<option value="0" selected="selected">Không</option>
 									<c:forEach var="tccs" items="${listTieuchichamsoc }">
 										<option value="${tccs.id }">${tccs.tentieuchi}</option>
 									</c:forEach>
@@ -122,7 +124,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 							<label id="_diem-error" class="error" style="display: none;"></label>
 						</div>
 						<div class="box-body">
-							<table border="1" style="overflow-x:auto;" id="tblctcs">
+							<table border="1" style="overflow-x: auto;" id="tblctcs">
 								<thead>
 									<tr>
 										<th>ID</th>
@@ -148,9 +150,6 @@ tr:nth-child(even){background-color: #f2f2f2}
 						</div>
 
 
-
-
-
 						<div class="form-group">
 							<label>Ngày</label>
 
@@ -166,10 +165,16 @@ tr:nth-child(even){background-color: #f2f2f2}
 							</div>
 							<label id="ngay-error" class="error" for="ngay"></label>
 						</div>
+						<div class="form-group">
+							<label  style="margin-right: 60px;">Số
+								Lần Đã Chăm Sóc : <span id="spsolanchamsoc">${listKhachhang[0].solanchamsoc }</span>
+							</label> <label>Số Lần Đã Đàm Phán : <span id="spsolandamphan">${listKhachhang[0].solandamphan }</span></label>
 
+						</div>
 						<div class="form-group">
 							<label for="lan">Lần Chăm Sóc</label>
 							<form:input path="lan" type="number" class="form-control" min="0"
+								value="${listKhachhang[0].solanchamsoc + listKhachhang[0].solandamphan }"
 								placeholder="Lần Chăm Sóc" />
 
 						</div>

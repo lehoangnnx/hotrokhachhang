@@ -27,8 +27,9 @@ public class NhomHangController {
 	NhomHangService  nhomHangService;
 	
     @GetMapping("/nhomhang")
-    String pageDanhSachNhomHang(Model model){
-    	List<Nhomhang> listNhomhang = nhomHangService.findByTrangthaiOrderByIdDesc("active");
+    String pageDanhSachNhomHang(@RequestParam(value="trangthai",defaultValue = "active") String trangthai,
+								Model model){
+    	List<Nhomhang> listNhomhang = nhomHangService.findByTrangthaiOrderByIdDesc(trangthai);
     	model.addAttribute("listNhomhang", listNhomhang);
         return "danhsachnhomhang";
     }

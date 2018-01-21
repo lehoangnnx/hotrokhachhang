@@ -6,6 +6,7 @@ import java.util.List;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -40,14 +41,54 @@ public class KhachHangController {
 	KhachHangService khachHangService;
 
 	@GetMapping("/khachhang")
-	String pageDanhSachKhachHangg(Model model) {
-		List<Khachhang> listKhachhang = khachHangService.findByTrangthaiOrderByIdDesc("active");
+	String pageDanhSachKhachHangg(@RequestParam(value = "trangthai", defaultValue = "active") String trangthai,
+			@RequestParam(value = "limit", defaultValue = "100") Integer limit,
+			@RequestParam(value = "page", defaultValue = "1") Integer page,
+			@RequestParam(value = "loaikhachhang", defaultValue = "0") Integer loaikhachhang,
+			@RequestParam(value = "nhomkhachhang", defaultValue = "0") Integer nhomkhachhang, Model model) {
+
+		List<Khachhang> listKhachhang = null;
+
+		int pageCount = 0;
+
+		if (loaikhachhang != 0 && nhomkhachhang != 0) {
+			Loaikhachhang getLoaiKhachHangById = loaiKhachHangService.findById(loaikhachhang);
+			Nhomkhachhang getNhomKhachHangById = nhomKhachHangService.findById(nhomkhachhang);
+
+			int sizeListKhachHang = khachHangService.findByLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc(
+					getLoaiKhachHangById, getNhomKhachHangById, trangthai).size();
+
+			pageCount = (sizeListKhachHang / limit + (sizeListKhachHang % limit > 0 ? 1 : 0));
+
+			listKhachhang = khachHangService.findByLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc(
+					getLoaiKhachHangById, getNhomKhachHangById, trangthai, new PageRequest(page - 1, limit));
+		} else if (loaikhachhang != 0) {
+			Loaikhachhang getLoaiKhachHangById = loaiKhachHangService.findById(loaikhachhang);
+			int sizeListKhachHang = khachHangService
+					.findByLoaikhachhangAndTrangthaiOrderByIdDesc(getLoaiKhachHangById, trangthai).size();
+			pageCount = (sizeListKhachHang / limit + (sizeListKhachHang % limit > 0 ? 1 : 0));
+			listKhachhang = khachHangService.findByLoaikhachhangAndTrangthaiOrderByIdDesc(getLoaiKhachHangById,
+					trangthai, new PageRequest(page - 1, limit));
+		} else if (nhomkhachhang != 0) {
+			Nhomkhachhang getNhomKhachHangById = nhomKhachHangService.findById(nhomkhachhang);
+			int sizeListKhachHang = khachHangService
+					.findByNhomkhachhangAndTrangthaiOrderByIdDesc(getNhomKhachHangById, trangthai).size();
+			pageCount = (sizeListKhachHang / limit + (sizeListKhachHang % limit > 0 ? 1 : 0));
+			listKhachhang = khachHangService.findByNhomkhachhangAndTrangthaiOrderByIdDesc(getNhomKhachHangById,
+					trangthai, new PageRequest(page - 1, limit));
+		} else {
+			int sizeListKhachHang = khachHangService.findByTrangthaiOrderByIdDesc(trangthai).size();
+			pageCount = (sizeListKhachHang / limit + (sizeListKhachHang % limit > 0 ? 1 : 0));
+			listKhachhang = khachHangService.findByTrangthaiOrderByIdDesc(trangthai, new PageRequest(page - 1, limit));
+		}
 		List<Loaikhachhang> listLoaikhachhang = loaiKhachHangService.findByTrangthaiOrderByIdDesc("active");
 		List<Nhomkhachhang> listNhomkhachhang = nhomKhachHangService.findByTrangthaiOrderByIdDesc("active");
 		model.addAttribute("listLoaikhachhang", listLoaikhachhang);
 		model.addAttribute("listNhomkhachhang", listNhomkhachhang);
 		model.addAttribute("listKhachhang", listKhachhang);
-
+		System.out.println(pageCount);
+		model.addAttribute("currentpage", page);
+		model.addAttribute("pagecount", pageCount);
 		return "danhsachkhachhang";
 	}
 
@@ -132,7 +173,13 @@ public class KhachHangController {
 	}
 
 	@DeleteMapping("/khachhang")
-	String xoaKhachHang(@RequestParam("arrayId") List<Integer> arrayId, RedirectAttributes redirectAttributes) {
+	String xoaKhachHang(
+			@RequestParam(value = "trangthai", defaultValue = "active") String trangthai,
+			@RequestParam(value = "limit", defaultValue = "100") Integer limit,
+			@RequestParam(value = "page", defaultValue = "1") Integer page,
+			@RequestParam(value = "loaikhachhang", defaultValue = "0") Integer loaikhachhang,
+			@RequestParam(value = "nhomkhachhang", defaultValue = "0") Integer nhomkhachhang,
+			@RequestParam("arrayId") List<Integer> arrayId, RedirectAttributes redirectAttributes) {
 
 		try {
 			arrayId.forEach(x -> {
@@ -149,36 +196,59 @@ public class KhachHangController {
 			redirectAttributes.addFlashAttribute("msg", "Xóa Thất Bại");
 		}
 
-		return "redirect:/admin/khachhang";
+		return "redirect:/admin/khachhang?trangthai="+trangthai+"&loaikhachhang="+loaikhachhang+""
+				+ "&nhomkhachhang="+nhomkhachhang+"&limit="+limit+"&page="+page+"";
 	}
-	
+
 	@GetMapping("/timkiemkhachhang")
-	String timKiemKhachHang(@RequestParam(value="loaikhachhang",defaultValue="0") Integer loaikhachhang,
-			@RequestParam(value="nhomkhachhang",defaultValue="0") Integer nhomkhachhang,
-			Model model) {
+	String timKiemKhachHang(@RequestParam(value = "trangthai", defaultValue = "chochamsoc") String trangthai,
+			@RequestParam(value = "limit", defaultValue = "100") Integer limit,
+			@RequestParam(value = "page", defaultValue = "1") Integer page,
+			@RequestParam(value = "loaikhachhang", defaultValue = "0") Integer loaikhachhang,
+			@RequestParam(value = "nhomkhachhang", defaultValue = "0") Integer nhomkhachhang, Model model) {
 		List<Khachhang> listKhachhang = null;
-		if(loaikhachhang != 0 && nhomkhachhang != 0 ) {
+
+		int pageCount = 0;
+
+		if (loaikhachhang != 0 && nhomkhachhang != 0) {
 			Loaikhachhang getLoaiKhachHangById = loaiKhachHangService.findById(loaikhachhang);
 			Nhomkhachhang getNhomKhachHangById = nhomKhachHangService.findById(nhomkhachhang);
-			listKhachhang = khachHangService.findByLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc
-					(getLoaiKhachHangById, getNhomKhachHangById, "active");
-		}else if(loaikhachhang != 0) {
+
+			int sizeListKhachHang = khachHangService.findByLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc(
+					getLoaiKhachHangById, getNhomKhachHangById, trangthai).size();
+
+			pageCount = (sizeListKhachHang / limit + sizeListKhachHang % limit > 0 ? 1 : 0);
+
+			listKhachhang = khachHangService.findByLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc(
+					getLoaiKhachHangById, getNhomKhachHangById, trangthai, new PageRequest(page - 1, limit));
+		} else if (loaikhachhang != 0) {
 			Loaikhachhang getLoaiKhachHangById = loaiKhachHangService.findById(loaikhachhang);
-			 listKhachhang = khachHangService.findByLoaikhachhangAndTrangthaiOrderByIdDesc(getLoaiKhachHangById, "active");
-			
-		}else if (nhomkhachhang != 0 ) {
+			int sizeListKhachHang = khachHangService
+					.findByLoaikhachhangAndTrangthaiOrderByIdDesc(getLoaiKhachHangById, trangthai).size();
+			pageCount = (sizeListKhachHang / limit + sizeListKhachHang % limit > 0 ? 1 : 0);
+			listKhachhang = khachHangService.findByLoaikhachhangAndTrangthaiOrderByIdDesc(getLoaiKhachHangById,
+					trangthai, new PageRequest(page - 1, limit));
+		} else if (nhomkhachhang != 0) {
 			Nhomkhachhang getNhomKhachHangById = nhomKhachHangService.findById(nhomkhachhang);
-			 listKhachhang = khachHangService.findByNhomkhachhangAndTrangthaiOrderByIdDesc(getNhomKhachHangById, "active");
-		}else  {
-			 listKhachhang = khachHangService.findByTrangthaiOrderByIdDesc("active");
+			int sizeListKhachHang = khachHangService
+					.findByNhomkhachhangAndTrangthaiOrderByIdDesc(getNhomKhachHangById, trangthai).size();
+			pageCount = (sizeListKhachHang / limit + sizeListKhachHang % limit > 0 ? 1 : 0);
+			listKhachhang = khachHangService.findByNhomkhachhangAndTrangthaiOrderByIdDesc(getNhomKhachHangById,
+					trangthai, new PageRequest(page - 1, limit));
+		} else {
+			int sizeListKhachHang = khachHangService.findByTrangthaiOrderByIdDesc(trangthai).size();
+			pageCount = (sizeListKhachHang / limit + sizeListKhachHang % limit > 0 ? 1 : 0);
+			listKhachhang = khachHangService.findByTrangthaiOrderByIdDesc(trangthai, new PageRequest(page - 1, limit));
 		}
-		
-		
+
 		List<Loaikhachhang> listLoaikhachhang = loaiKhachHangService.findByTrangthaiOrderByIdDesc("active");
 		List<Nhomkhachhang> listNhomkhachhang = nhomKhachHangService.findByTrangthaiOrderByIdDesc("active");
 		model.addAttribute("listLoaikhachhang", listLoaikhachhang);
 		model.addAttribute("listNhomkhachhang", listNhomkhachhang);
 		model.addAttribute("listKhachhang", listKhachhang);
+
+		model.addAttribute("currentpage", page);
+		model.addAttribute("pagecount", pageCount);
 		return "danhsachkhachhang";
 	}
 }

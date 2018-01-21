@@ -39,8 +39,9 @@ public class NhanVienKpiController {
 	@Autowired
 	KpiService	kpiService; 
     @GetMapping("/nhanvienkpi")
-    String pageDanhSachNhanVienKpi(Model model){
-    	List<Nhanvienkpi> listNhanvienkpi = nhanVienKpiService.findByTrangthaiNotOrderByIdDesc("deleted");
+    String pageDanhSachNhanVienKpi(@RequestParam(value="trangthai",defaultValue = "active") String trangthai,
+								   Model model){
+    	List<Nhanvienkpi> listNhanvienkpi = nhanVienKpiService.findByTrangthaiOrderByIdDesc(trangthai);
     	model.addAttribute("listNhanvienkpi", listNhanvienkpi);
         return "danhsachnhanvienkpi";
     }

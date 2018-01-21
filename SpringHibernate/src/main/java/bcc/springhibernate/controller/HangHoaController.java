@@ -30,8 +30,8 @@ public class HangHoaController {
 	@Autowired
 	NhomHangService nhomHangService;
     @GetMapping("/hanghoa")
-    String pageDanhSachHangHoa(Model model){
-    	List<Hanghoa> listHanghoa = hangHoaService.findByTrangthaiOrderByIdDesc("active");
+    String pageDanhSachHangHoa(@RequestParam(value="trangthai",defaultValue = "active") String trangthai,Model model){
+    	List<Hanghoa> listHanghoa = hangHoaService.findByTrangthaiOrderByIdDesc(trangthai);
     	model.addAttribute("listHanghoa", listHanghoa);
         return "danhsachhanghoa";
     }

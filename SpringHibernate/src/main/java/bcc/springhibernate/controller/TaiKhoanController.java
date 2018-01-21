@@ -44,8 +44,9 @@ public class TaiKhoanController {
 	PasswordEncoder passwordEncoder;
 	
     @GetMapping("/taikhoan")
-    String pageDanhSachTaiKhoan(Model model){
-    	List<Taikhoan> listTaikhoan= taikhoanService.findByTrangthaiOrderByIdDesc("active");
+    String pageDanhSachTaiKhoan(@RequestParam(value="trangthai",defaultValue = "active") String trangthai,
+								Model model){
+    	List<Taikhoan> listTaikhoan= taikhoanService.findByTrangthaiOrderByIdDesc(trangthai);
     	model.addAttribute("listTaikhoan", listTaikhoan);
         return "danhsachtaikhoan";
     }

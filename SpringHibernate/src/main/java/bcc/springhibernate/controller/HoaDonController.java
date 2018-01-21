@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -51,10 +52,16 @@ public class HoaDonController {
 	ChiTietHoaDonService chiTietHoaDonService;
 	@GetMapping("/hoadon")
 	String pageDanhSachHoaDon(@RequestParam(value="trangthai", defaultValue="dathanhtoan") String trangthai,
+			@RequestParam(value="limit", defaultValue="100") Integer limit, 
+			@RequestParam(value="page", defaultValue="1") Integer page,
 			Model model) {
-		List<Hoadon> listHoadon = hoaDonService.findByTrangthaiOrderByIdDesc(trangthai);
+		int pageCount = (hoaDonService.findByTrangthaiOrderByIdDesc(trangthai).size()) / limit 
+				+ (hoaDonService.findByTrangthaiOrderByIdDesc(trangthai).size() % limit > 0 ? 1 : 0);	
+		List<Hoadon> listHoadon = hoaDonService.
+				findByTrangthaiOrderByIdDesc(trangthai, new PageRequest(page - 1, limit));
 		model.addAttribute("listHoadon", listHoadon);
-
+		 model.addAttribute("currentpage", page);
+         model.addAttribute("pagecount", pageCount);
 		return "danhsachhoadon";
 	}
 
@@ -240,7 +247,10 @@ public class HoaDonController {
 	}
 	
 	@DeleteMapping("/hoadon")
-    String xoaHoaDon(@RequestParam("arrayId") List<Integer> arrayId,
+    String xoaHoaDon(@RequestParam(value="trangthai", defaultValue="dathanhtoan") String trangthai,
+    				@RequestParam(value="limit", defaultValue="100") Integer limit, 
+    				@RequestParam(value="page", defaultValue="1") Integer page,
+    				@RequestParam("arrayId") List<Integer> arrayId,
     		RedirectAttributes redirectAttributes) {
     	
     	try {
@@ -258,6 +268,6 @@ public class HoaDonController {
 			redirectAttributes.addFlashAttribute("msg", "Xóa Thất Bại");
 		}
 
-    	return "redirect:/admin/hoadon";
+    	return "redirect:/admin/hoadon?trangthai="+trangthai+"&limit="+limit+"&page="+page+"";
     }
 }

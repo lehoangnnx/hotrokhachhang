@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -54,9 +55,19 @@ public class ChamSocController {
 	ChiTietChamSocService chiTietChamSocService;
 
 	@GetMapping("/chamsoc")
-	String pageDanhSachChamSoc(Model model) {
-		List<Chamsoc> listChamsoc = chamSocService.findByTrangthaiNotOrderByIdDesc("deleted");
+	String pageDanhSachChamSoc(@RequestParam(value="trangthai", defaultValue="chochamsoc") String trangthai,
+			@RequestParam(value="limit", defaultValue="100") Integer limit, 
+			@RequestParam(value="page", defaultValue="1") Integer page,
+			Model model) {
+		int sizeListChamSoc = chamSocService.findByTrangthaiOrderByIdDesc(trangthai).size();
+		int pageCount = (sizeListChamSoc / limit 
+				+ (sizeListChamSoc % limit > 0 ? 1 : 0));
+		List<Chamsoc> listChamsoc = chamSocService
+				.findByTrangthaiOrderByIdDesc(trangthai, new PageRequest(page - 1, limit));
 		model.addAttribute("listChamsoc", listChamsoc);
+		System.out.println(pageCount);
+		 model.addAttribute("currentpage", page);
+         model.addAttribute("pagecount", pageCount);
 		return "danhsachchamsoc";
 	}
 
@@ -241,7 +252,10 @@ public class ChamSocController {
 	}
 
 	@DeleteMapping("/chamsoc")
-	String xoaChamSoc(@RequestParam("arrayId") List<Integer> arrayId, RedirectAttributes redirectAttributes) {
+	String xoaChamSoc(@RequestParam(value="trangthai", defaultValue="chochamsoc") String trangthai,
+			@RequestParam(value="limit", defaultValue="100") Integer limit, 
+			@RequestParam(value="page", defaultValue="1") Integer page,
+			@RequestParam("arrayId") List<Integer> arrayId, RedirectAttributes redirectAttributes) {
 
 		try {
 			arrayId.forEach(x -> {
@@ -259,6 +273,6 @@ public class ChamSocController {
 			redirectAttributes.addFlashAttribute("msg", "Xóa Thất Bại");
 		}
 
-		return "redirect:/admin/chamsoc";
+		return "redirect:/admin/chamsoc?trangthai="+trangthai+"&limit="+limit+"&page="+page+"";
 	}
 }

@@ -2,6 +2,8 @@ package bcc.springhibernate.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+
 import bcc.springhibernate.model.Khachhang;
 import bcc.springhibernate.model.Loaikhachhang;
 import bcc.springhibernate.model.Nhomkhachhang;
@@ -20,4 +22,11 @@ public interface KhachHangService {
 	
 	List<Khachhang> findByLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc(Loaikhachhang loaikhachhang,
 			Nhomkhachhang nhomkhachhang ,String trangthai);
+	
+	List<Khachhang> findByTrangthaiOrderByIdDesc(String trangthai, Pageable pageable);
+	List<Khachhang> findByNhomkhachhangAndTrangthaiOrderByIdDesc(Nhomkhachhang nhomkhachhang ,String trangthai, Pageable pageable);
+	List<Khachhang> findByLoaikhachhangAndTrangthaiOrderByIdDesc(Loaikhachhang loaikhachhang,String trangthai, Pageable pageable);
+	
+	List<Khachhang> findByLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc(Loaikhachhang loaikhachhang,
+			Nhomkhachhang nhomkhachhang ,String trangthai, Pageable pageable);
 }

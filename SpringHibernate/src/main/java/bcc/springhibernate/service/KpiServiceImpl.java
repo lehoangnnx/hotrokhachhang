@@ -3,6 +3,7 @@ package bcc.springhibernate.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import bcc.springhibernate.model.Kpi;
@@ -30,6 +31,11 @@ public class KpiServiceImpl implements KpiService {
 	public List<Kpi> findByTrangthaiOrderByIdDesc(String trangthai) {
 		
 		return kpiRepository.findByTrangthaiOrderByIdDesc(trangthai);
+	}
+
+	@Override
+	public List<Kpi> findByTrangthaiOrderByIdDesc(String trangthai, Pageable pageable) {
+		return kpiRepository.findByTrangthaiOrderByIdDesc(trangthai,pageable);
 	}
 
 	@Override

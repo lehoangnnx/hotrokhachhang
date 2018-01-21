@@ -12,6 +12,7 @@ public interface LoaiKhachHangRepository extends JpaRepository<Loaikhachhang, In
 
 	List<Loaikhachhang> findAll();
 	List<Loaikhachhang> findByTrangthaiOrderByIdDesc(String trangthai);
+
 	Loaikhachhang findByTenloai(String tenloai);
 	Loaikhachhang findById(Integer id);
 }

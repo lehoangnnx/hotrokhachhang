@@ -63,7 +63,7 @@ public class MainController {
 					&& kh.getTrangthainhac().equals("dasinhnhat")) {
 				kh.setTrangthainhac("chosinhnhat");
 				khachHangService.saveOrUpdate(kh);
-			} else if (monthdd == monthn && (dayconlaidd <= 7) && kh.getTrangthainhac().equals("chosinhnhat")) {
+			} else if (monthdd == monthn && (dayconlaidd <= 7) && (dayconlaidd >= 0) && kh.getTrangthainhac().equals("chosinhnhat")) {
 
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("ngaysinhnhat", dayconlaidd);
@@ -75,12 +75,13 @@ public class MainController {
 					&& kh.getTrangthainhac().equals("dasinhnhat")) {
 				kh.setTrangthainhac("chosinhnhat");
 				khachHangService.saveOrUpdate(kh);
-			} else if (monthpt == monthn && (dayconlaipt <= 7) && kh.getTrangthainhac().equals("chosinhnhat")) {
+			} else if (monthpt == monthn && (dayconlaipt <= 7) && (dayconlaipt >= 0) && kh.getTrangthainhac().equals("chosinhnhat")) {
 
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("ngaysinhnhat", dayconlaipt);
 				map.put("id", kh.getId());
 				map.put("makh", kh.getMakh());
+				map.put("ten", kh.getTen());
 				listKhachHang.add(map);
 			}
 		}
@@ -100,11 +101,14 @@ public class MainController {
 					&& cs.getTrangthai().equals("dachamsoc")) {
 				cs.setTrangthai("chochamsoc");
 				chamSocService.saveOrUpdate(cs);
-			} else if (year == yearn && month == monthn && (dayconlai <= 7) && cs.getTrangthai().equals("chochamsoc")) {
+			} else if (year == yearn && month == monthn && (dayconlai <= 7)
+					&& (dayconlai >= 0) && cs.getTrangthai().equals("chochamsoc")) {
 
 				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("ngaycstiep", dayconlai);
+				
 				map.put("id", cs.getId());
+				map.put("ngaycstiep", dayconlai);
+				map.put("khachhang", cs.getKhachhang().getTen());
 
 				listChamSoc.add(map);
 			}

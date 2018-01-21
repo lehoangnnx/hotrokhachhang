@@ -3,6 +3,7 @@ package bcc.springhibernate.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import bcc.springhibernate.model.Khachhang;
@@ -68,6 +69,33 @@ public class KhachHangServiceImpl implements KhachHangService {
 			Nhomkhachhang nhomkhachhang, String trangthai) {
 		
 		return khachHangRepository.findByLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc(loaikhachhang,nhomkhachhang,trangthai);
+	}
+
+	@Override
+	public List<Khachhang> findByTrangthaiOrderByIdDesc(String trangthai, Pageable pageable) {
+		
+		return khachHangRepository.findByTrangthaiOrderByIdDesc(trangthai, pageable);
+	}
+
+	@Override
+	public List<Khachhang> findByNhomkhachhangAndTrangthaiOrderByIdDesc(Nhomkhachhang nhomkhachhang, String trangthai,
+			Pageable pageable) {
+		
+		return khachHangRepository.findByNhomkhachhangAndTrangthaiOrderByIdDesc(nhomkhachhang, trangthai, pageable);
+	}
+
+	@Override
+	public List<Khachhang> findByLoaikhachhangAndTrangthaiOrderByIdDesc(Loaikhachhang loaikhachhang, String trangthai,
+			Pageable pageable) {
+		
+		return khachHangRepository.findByLoaikhachhangAndTrangthaiOrderByIdDesc(loaikhachhang, trangthai, pageable);
+	}
+
+	@Override
+	public List<Khachhang> findByLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc(Loaikhachhang loaikhachhang,
+			Nhomkhachhang nhomkhachhang, String trangthai, Pageable pageable) {
+		
+		return khachHangRepository.findByLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc(loaikhachhang, nhomkhachhang, trangthai, pageable);
 	}
 
 }

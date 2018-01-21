@@ -31,8 +31,9 @@ public class LoaiKhachHangController {
 	LoaiKhachHangService  loaiKhachHangService;
 	
     @GetMapping("/loaikhachhang")
-    String pageDanhSachLoaiKhachHangg(Model model){
-    	List<Loaikhachhang> listLoaiKhachHang = loaiKhachHangService.findByTrangthaiOrderByIdDesc("active");
+    String pageDanhSachLoaiKhachHangg(@RequestParam(value="trangthai",defaultValue = "active") String trangthai,
+									  Model model){
+    	List<Loaikhachhang> listLoaiKhachHang = loaiKhachHangService.findByTrangthaiOrderByIdDesc(trangthai);
     	model.addAttribute("listLoaiKhachHang", listLoaiKhachHang);
         return "danhsachloaikhachhang";
     }

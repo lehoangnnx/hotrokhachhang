@@ -11,13 +11,14 @@
     <section class="content-header">
       <h1>
         Loại Khách Hàng
-        <small><a href="${contextPath }/admin/roles?status=active">Danh Sách Loại Khách Hàng</a></small>
-        <small><a class="btn btn-success" href="${contextPath }/admin/loaikhachhang/add">Thêm mới</a></small>
+        <%-- <small><a href="${contextPath }/admin/roles?status=active">Danh Sách Loại Khách Hàng</a></small>
+        <small><a class="btn btn-success" href="${contextPath }/admin/loaikhachhang/add">Thêm mới</a></small> --%>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="${contextPath }/"><i class="fa fa-dashboard"></i> Home</a></li>
+      <a class="btn btn-success" href="${contextPath }/admin/loaikhachhang/add">Thêm mới</a>
+       <%--  <li><a href="${contextPath }/"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="${contextPath }/roles">Quyền</a></li>
-        <li class="active">Quản lý quyền</li>
+        <li class="active">Quản lý quyền</li> --%>
       </ol>
     </section>
 
@@ -27,17 +28,12 @@
       	
 		        <div class="col-xs-12">
 		          <ul class="nav nav-tabs">
-					<li class="tablinks ${param.status == 'active' ? 'active' : '' }">
-					<a href="${contextPath }/admin/roles?status=active"   >Đã Kích Hoạt</a>
+					<li class="tablinks ${param.trangthai == 'active' ? 'active' : '' }">
+					<a href="${contextPath }/admin/loaikhachhang?trangthai=active"   >Đã Kích Hoạt</a>
 					</li>
-					<li class="tablinks ${param.status == 'inactive' ? 'active' : '' }" >
-					<a href="${contextPath }/admin/roles?status=inactive">Chưa Kích Hoạt</a>
-					</li>
-					<li class="tablinks ${param.status == 'draft' ? 'active' : '' }">
-					<a href="${contextPath }/admin/roles?status=draft" >Nháp</a>
-					</li>
-					<li class="tablinks ${param.status == 'deleted' ? 'active' : '' }">
-					<a href="${contextPath }/admin/roles?status=deleted"  >Đã Xóa</a>
+
+					<li class="tablinks ${param.trangthai == 'deleted' ? 'active' : '' }">
+					<a href="${contextPath }/admin/loaikhachhang?trangthai=deleted"  >Đã Xóa</a>
 					</li>
 				</ul>
 		          <div class="box">

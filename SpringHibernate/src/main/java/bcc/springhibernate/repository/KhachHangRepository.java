@@ -2,6 +2,7 @@ package bcc.springhibernate.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +17,7 @@ public interface KhachHangRepository extends JpaRepository<Khachhang, Integer> {
 	
 	List<Khachhang> findAll();
 	List<Khachhang> findByTrangthaiOrderByIdDesc(String trangthai);
+	
 	List<Khachhang> findByTrangthaiNotOrderByIdDesc(String trangthai);
 	
 	List<Khachhang> findByNhomkhachhangAndTrangthaiOrderByIdDesc(Nhomkhachhang nhomkhachhang ,String trangthai);
@@ -24,4 +26,10 @@ public interface KhachHangRepository extends JpaRepository<Khachhang, Integer> {
 	List<Khachhang> findByLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc(Loaikhachhang loaikhachhang,
 			Nhomkhachhang nhomkhachhang ,String trangthai);
 	
+	List<Khachhang> findByTrangthaiOrderByIdDesc(String trangthai, Pageable pageable);
+	List<Khachhang> findByNhomkhachhangAndTrangthaiOrderByIdDesc(Nhomkhachhang nhomkhachhang ,String trangthai, Pageable pageable);
+	List<Khachhang> findByLoaikhachhangAndTrangthaiOrderByIdDesc(Loaikhachhang loaikhachhang,String trangthai, Pageable pageable);
+	
+	List<Khachhang> findByLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc(Loaikhachhang loaikhachhang,
+			Nhomkhachhang nhomkhachhang ,String trangthai, Pageable pageable);
 }

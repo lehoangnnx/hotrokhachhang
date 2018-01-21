@@ -29,8 +29,9 @@ public class TieuChiChamSocController {
 	@Autowired
 	TieuChiChamSocService tieuChiChamSocService;
     @GetMapping("/tieuchichamsoc")
-    String pageDanhSachTieuChiChamSoc(Model model){
-    	List<Tieuchichamsoc> listTieuchichamsoc = tieuChiChamSocService.findByTrangthaiOrderByIdDesc("active");
+    String pageDanhSachTieuChiChamSoc(@RequestParam(value="trangthai",defaultValue = "active") String trangthai,
+									  Model model){
+    	List<Tieuchichamsoc> listTieuchichamsoc = tieuChiChamSocService.findByTrangthaiOrderByIdDesc(trangthai);
     	model.addAttribute("listTieuchichamsoc", listTieuchichamsoc);
         return "danhsachtieuchichamsoc";
     }

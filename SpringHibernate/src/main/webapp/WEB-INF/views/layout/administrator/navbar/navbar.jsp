@@ -39,7 +39,8 @@
 										Support Team <small><i class="fa fa-clock-o"></i> 5
 											mins</small>
 									</h4> <!-- The message -->
-									<p>Why not buy a new awesome theme? Why not buy a new awesome theme Why not buy a new awesome theme</p>
+									<p>Why not buy a new awesome theme? Why not buy a new
+										awesome theme Why not buy a new awesome theme</p>
 							</a>
 							</li>
 
@@ -66,9 +67,18 @@
 								<li>
 									<!-- start notification --> <a
 									onclick="updateThongBaoChamSoc(${cs.id });"
-									 href="javacript:void(0);"> <i
-										class="fa fa-users text-aqua"></i> Còn ${cs.ngaycstiep } Ngày Nữa Tới Lần Chăm Sóc <br>
-										Tiếp Theo Của ${cs.id }
+									href="javacript:void(0);"> <i class="fa fa-users text-aqua"></i>
+										<c:choose>
+											<c:when test="${cs.ngaycstiep == 0}">
+												<b>Hôm Nay</b> Là Lần Chăm Sóc <br>
+											Tiếp Theo Của <b>${cs.khachhang }</b>
+											</c:when>
+											<c:otherwise>
+											Còn <b>${cs.ngaycstiep }</b> Ngày Nữa Tới Lần Chăm Sóc <br>
+											Tiếp Theo Của <b>${cs.khachhang }</b>
+											</c:otherwise>
+										</c:choose>
+
 								</a>
 								</li>
 							</c:forEach>
@@ -79,7 +89,7 @@
 				</ul>
 			</li>
 			<!-- Tasks Menu -->
-			<li class="dropdown tasks-menu">
+			<li class="dropdown notifications-menu">
 				<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle"
 				data-toggle="dropdown"> <i class="fa fa-flag-o"></i> <span
 					class="label label-danger">${fn:length(listKhachHang) }</span>
@@ -94,9 +104,17 @@
 								<li>
 									<!-- start notification --> <a
 									onclick="updateThongBaoKhachHang(${lkh.id });"
-									 href="javascript:void(0);"> <i
-										class="fa fa-users text-aqua"></i> Còn ${lkh.ngaysinhnhat }
-										nữa là sinh nhật của ${lkh.makh }
+									href="javascript:void(0);"> <i class="fa fa-user text-red"></i>
+										<c:choose>
+											<c:when test="${lkh.ngaysinhnhat == 0}">
+												 <b>Hôm Nay</b> Là Sinh Nhật Của <br>
+										<b>${lkh.makh } - ${lkh.ten }</b>
+											</c:when>
+											<c:otherwise>
+											Còn <b>${lkh.ngaysinhnhat }</b> Ngày Nữa Là Sinh Nhật Của <br>
+												<b>${lkh.makh } - ${lkh.ten }</b>
+											</c:otherwise>
+										</c:choose>
 								</a>
 								</li>
 							</c:forEach>

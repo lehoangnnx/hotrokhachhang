@@ -10,16 +10,19 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>
-		Khách Hàng <small><a
+		Khách Hàng
+		<%-- <small><a
 			href="${contextPath }/admin/roles?status=active">Danh Sách Khách
 				Hàng</a></small> <small><a class="btn btn-success"
-			href="${contextPath }/admin/khachhang/add">Thêm mới</a></small>
+			href="${contextPath }/admin/khachhang/add">Thêm mới</a></small> --%>
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="${contextPath }/"><i class="fa fa-dashboard"></i>
+		<a class="btn btn-success" href="${contextPath }/admin/khachhang/add">Thêm
+			mới</a>
+		<%-- <li><a href="${contextPath }/"><i class="fa fa-dashboard"></i>
 				Home</a></li>
 		<li><a href="${contextPath }/roles">Quyền</a></li>
-		<li class="active">Quản lý quyền</li>
+		<li class="active">Quản lý quyền</li> --%>
 	</ol>
 </section>
 
@@ -29,19 +32,17 @@
 
 		<div class="col-xs-12">
 			<ul class="nav nav-tabs">
-				<li class="tablinks ${param.status == 'active' ? 'active' : '' }">
-					<a href="${contextPath }/admin/roles?status=active">Đã Kích
-						Hoạt</a>
+				<li class="tablinks ${param.trangthai == 'active' ? 'active' : '' }">
+					<a
+					href="${contextPath }/admin/khachhang?trangthai=active&loaikhachhang=0&nhomkhachhang=0&limit=100&page=1">Đã
+						Kích Hoạt</a>
 				</li>
-				<li class="tablinks ${param.status == 'inactive' ? 'active' : '' }">
-					<a href="${contextPath }/admin/roles?status=inactive">Chưa Kích
-						Hoạt</a>
-				</li>
-				<li class="tablinks ${param.status == 'draft' ? 'active' : '' }">
-					<a href="${contextPath }/admin/roles?status=draft">Nháp</a>
-				</li>
-				<li class="tablinks ${param.status == 'deleted' ? 'active' : '' }">
-					<a href="${contextPath }/admin/roles?status=deleted">Đã Xóa</a>
+
+				<li
+					class="tablinks ${param.trangthai == 'deleted' ? 'active' : '' }">
+					<a
+					href="${contextPath }/admin/khachhang?trangthai=deleted&loaikhachhang=0&nhomkhachhang=0&limit=100&page=1">Đã
+						Xóa</a>
 				</li>
 			</ul>
 			<div class="box">
@@ -49,8 +50,10 @@
 					<h3 class="box-title">Danh Sách Khách Hàng</h3>
 				</div>
 				<div class="box-header">
-					<form action="${contextPath }/admin/timkiemkhachhang" method="get">
-						<div class="form-group col-md-4">
+					<form:form action="${contextPath }/admin/khachhang" method="get">
+						<input hidden name="trangthai" value="${param.trangthai }">
+
+						<div class="form-group col-md-5">
 							<label>Loại Khách Hàng</label> <select
 								class="form-control select2" name="loaikhachhang"
 								style="width: 100%;">
@@ -63,7 +66,7 @@
 
 							</select>
 						</div>
-						<div class="form-group col-md-4">
+						<div class="form-group col-md-5">
 							<label>Nhóm Khách Hàng</label> <select
 								class="form-control select2" name="nhomkhachhang"
 								style="width: 100%;">
@@ -76,11 +79,13 @@
 
 							</select>
 						</div>
+						<input hidden name="limit" value="100">
+						<input hidden name="page" value="1">
 						<div class="col-md-2">
 							<button style="margin-top: 25px;" type="submit"
 								class="btn btn-block btn-success btn-flat">Tìm Kiếm</button>
 						</div>
-					</form>
+					</form:form>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -127,7 +132,56 @@
 			<!-- /.box -->
 		</div>
 		<!-- /.col -->
+		<!-- Phan trang -->
+		<div class="text-center">
+			<ul class="pagination ">
+				<c:choose>
+					<c:when test="${currentpage > 1  }">
+						<li class="page-item"><a class="page-link"
+							href="${contextPath }/admin/khachhang?trangthai=${param.trangthai }&loaikhachhang=${param.loaikhachhang }&nhomkhachhang=${param.nhomkhachhang }&limit=${param.limit }&page=${currentpage -1 }">Previous</a></li>
 
+					</c:when>
+					<c:otherwise>
+						<li class="page-item disabled"><a class="page-link"
+							href="javascript:void(0);">Previous</a></li>
+
+					</c:otherwise>
+
+				</c:choose>
+
+				<c:forEach begin="${(currentpage - 3) > 0 ? currentpage - 3 : 1 }"
+					end="${currentpage + 3 < pagecount ? currentpage + 3 : pagecount }"
+					varStatus="status">
+					<c:choose>
+						<c:when test="${status.index == currentpage }">
+							<li class="page-item active"><a class="page-link">${status.index }</a></li>
+
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link"
+								href="${contextPath }/admin/khachhang?trangthai=${param.trangthai }&loaikhachhang=${param.loaikhachhang }&nhomkhachhang=${param.nhomkhachhang }&limit=${param.limit }&page=${status.index }">${status.index }</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+
+				<c:choose>
+					<c:when test="${currentpage < pagecount }">
+						<li class="page-item"><a class="page-link"
+							href="${contextPath }/admin/khachhang?trangthai=${param.trangthai }&loaikhachhang=${param.loaikhachhang }&nhomkhachhang=${param.nhomkhachhang }&limit=${param.limit }&page=${currentpage + 1 }">Next</a></li>
+
+					</c:when>
+					<c:otherwise>
+						<li class="page-item disabled"><a class="page-link"
+							href="javascript:void(0);">Next</a></li>
+
+
+					</c:otherwise>
+
+				</c:choose>
+
+			</ul>
+		</div>
+		<!-- END PHÂN TRANG -->
 	</div>
 	<!-- /.row -->
 </section>

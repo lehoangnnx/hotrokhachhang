@@ -70,7 +70,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 							</select>
 						</div>
 						<div class="form-group">
-							<label>Khách Hàng</label> <select class="form-control select2"
+							<label>Khách Hàng</label> <select class="form-control select2" id="khachhang"
 								name="khachhang" style="width: 100%;">
 
 								<c:forEach var="kh" items="${listKhachhang }">
@@ -201,7 +201,12 @@ tr:nth-child(even){background-color: #f2f2f2}
 							</div>
 							<label id="ngay-error" class="error" for="ngay"></label>
 						</div>
+						<div class="form-group">
+							<label  style="margin-right: 60px;">Số
+								Lần Đã Chăm Sóc : <span id="spsolanchamsoc">${chamsoc.khachhang.solanchamsoc }</span>
+							</label> <label>Số Lần Đã Đàm Phán : <span id="spsolandamphan">${chamsoc.khachhang.solandamphan }</span></label>
 
+						</div>
 						<div class="form-group">
 							<label for="lan">Lần Chăm Sóc</label>
 							<form:input path="lan" type="number" class="form-control" min="0"

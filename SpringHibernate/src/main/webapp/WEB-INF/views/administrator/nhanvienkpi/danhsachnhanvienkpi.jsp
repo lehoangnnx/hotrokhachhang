@@ -11,16 +11,17 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>
-		Nhân Viên KPI <small><a
+		Nhân Viên KPI<%--  <small><a
 			href="${contextPath }/admin/roles?status=active">Danh Sách Nhân
 				Viên KPI</a></small> <small><a class="btn btn-success"
-			href="${contextPath }/admin/nhanvienkpi/add">Thêm mới</a></small>
+			href="${contextPath }/admin/nhanvienkpi/add">Thêm mới</a></small> --%>
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="${contextPath }/"><i class="fa fa-dashboard"></i>
+	<a class="btn btn-success" href="${contextPath }/admin/nhanvienkpi/add">Thêm mới</a>
+		<%-- <li><a href="${contextPath }/"><i class="fa fa-dashboard"></i>
 				Home</a></li>
 		<li><a href="${contextPath }/roles">Quyền</a></li>
-		<li class="active">Quản lý quyền</li>
+		<li class="active">Quản lý quyền</li> --%>
 	</ol>
 </section>
 
@@ -30,19 +31,17 @@
 
 		<div class="col-xs-12">
 			<ul class="nav nav-tabs">
-				<li class="tablinks ${param.status == 'active' ? 'active' : '' }">
-					<a href="${contextPath }/admin/roles?status=active">Đã Kích
+				<li class="tablinks ${param.trangthai == 'active' ? 'active' : '' }">
+					<a href="${contextPath }/admin/nhanvienkpi?trangthai=active">Đã Kích
 						Hoạt</a>
 				</li>
-				<li class="tablinks ${param.status == 'inactive' ? 'active' : '' }">
-					<a href="${contextPath }/admin/roles?status=inactive">Chưa Kích
+				<li class="tablinks ${param.trangthai == 'inactive' ? 'active' : '' }">
+					<a href="${contextPath }/admin/nhanvienkpi?trangthai=inactive">Chưa Kích
 						Hoạt</a>
 				</li>
-				<li class="tablinks ${param.status == 'draft' ? 'active' : '' }">
-					<a href="${contextPath }/admin/roles?status=draft">Nháp</a>
-				</li>
-				<li class="tablinks ${param.status == 'deleted' ? 'active' : '' }">
-					<a href="${contextPath }/admin/roles?status=deleted">Đã Xóa</a>
+
+				<li class="tablinks ${param.trangthai == 'deleted' ? 'active' : '' }">
+					<a href="${contextPath }/admin/nhanvienkpi?trangthai=deleted">Đã Xóa</a>
 				</li>
 			</ul>
 			<div class="box">
@@ -73,8 +72,8 @@
 										${nvkpi.nhanvien.tennhanvien}</td>
 									<td>${nvkpi.kpi.ten}</td>
 									<td>${nvkpi.so}</td>
-									<td>${nvkpi.ngaydangky}</td>
-									<td>${nvkpi.ngayhoanthanh}</td>
+									<td><fmt:formatDate pattern="dd-MM-yyyy" value="${nvkpi.ngaydangky}"/></td>
+									<td><fmt:formatDate pattern="dd-MM-yyyy" value="${nvkpi.ngayhoanthanh}"/></td>
 									<td>${nvkpi.trangthai}</td>
 									<td>${nvkpi.mucdohoanthanh}</td>
 									<td>${nvkpi.mota}</td>

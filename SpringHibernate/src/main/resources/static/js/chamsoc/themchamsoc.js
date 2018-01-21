@@ -205,6 +205,40 @@ $(document).ready(function(){
 	 // Báo kết quả
 	$('#ngay').val(day+'/'+month+'/'+year);
 	$('#ngaycstiep').val(nextDay.getUTCDate()+'/'+ nextDay.getUTCMonth() + 1 +'/'+nextDay.getUTCFullYear());
-})
+});
+
+function getSoLanChamSocVaDamPhanKhachHang() {
+	clearTimeout(timeout);
+	timeout = setTimeout(function() {
+		var id = $('#khachhang :selected').val();
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		$(document).ajaxSend(function(e, xhr, options) {
+			xhr.setRequestHeader(header, token);
+		});
+		
+		$.ajax({
+
+			type : "POST",
+			contentType : "application/json",
+			url : contextPath + "/admin/getsolanchamsocvadamphankhachhang",
+			data: id ,
+			success : function(result) {
+				
+				$('#spsolanchamsoc').text(result.solanchamsoc);
+				$('#spsolandamphan').text(result.solandamphan);
+			    $('#lan').val(parseInt(result.solanchamsoc) + parseInt(result.solandamphan) + 1);
+				
+			},
+			error : function(e) {
+
+			}
+		});
+	}, 100);
+};
+$('#khachhang').change(function(){
+
+	getSoLanChamSocVaDamPhanKhachHang();
+});
 
 

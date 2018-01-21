@@ -30,8 +30,9 @@ public class KpiController {
 	KpiService kpiService;
 	
     @GetMapping("/kpi")
-    String pageDanhSachKpi(Model model){
-    	List<Kpi> listKpi = kpiService.findByTrangthaiOrderByIdDesc("active");
+    String pageDanhSachKpi(@RequestParam(value="trangthai",defaultValue = "active") String trangthai,
+						   Model model){
+    	List<Kpi> listKpi = kpiService.findByTrangthaiOrderByIdDesc(trangthai);
     	model.addAttribute("listKpi", listKpi);
         return "danhsachkpi";
     }

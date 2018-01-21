@@ -3,6 +3,7 @@ package bcc.springhibernate.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import bcc.springhibernate.model.Hoadon;
@@ -48,6 +49,12 @@ public class HoaDonServiceImpl implements HoaDonService {
 	public Hoadon findById(Integer id) {
 	
 		return hoaDonRepository.findById(id);
+	}
+
+	@Override
+	public List<Hoadon> findByTrangthaiOrderByIdDesc(String trangthai, Pageable pageable) {
+		
+		return hoaDonRepository.findByTrangthaiOrderByIdDesc(trangthai,pageable);
 	}
 
 }

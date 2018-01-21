@@ -37,8 +37,9 @@ public class LuongController {
 	NhanVienService nhanVienService;
 
 	@GetMapping("/luong")
-	String pageDanhSachLuong(Model model) {
-		List<Luong> listLuong = LuongService.findByTrangthaiNotOrderByIdDesc("deleted");
+	String pageDanhSachLuong(@RequestParam(value="trangthai",defaultValue = "active") String trangthai,
+			Model model) {
+		List<Luong> listLuong = LuongService.findByTrangthaiOrderByIdDesc(trangthai);
 		model.addAttribute("listLuong", listLuong);
 		return "danhsachluong";
 	}

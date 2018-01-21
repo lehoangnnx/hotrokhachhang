@@ -2,6 +2,7 @@ package bcc.springhibernate.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +14,7 @@ import bcc.springhibernate.model.Nhomkhachhang;
 public interface HangHoaRepository extends JpaRepository<Hanghoa, Integer> {
 	List<Hanghoa> findAll();
 	List<Hanghoa> findByTrangthaiOrderByIdDesc(String trangthai);
+	List<Hanghoa> findByTrangthaiOrderByIdDesc(String trangthai, Pageable pageable);
 	Hanghoa findByMahang(String mahang);
 	Hanghoa findById(Integer id);
 }

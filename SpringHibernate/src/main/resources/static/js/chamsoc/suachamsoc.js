@@ -221,3 +221,37 @@ $('#tieuchichamsoc').change(function(){
 	getKieuTieuChi();
 });
 
+
+function getSoLanChamSocVaDamPhanKhachHang() {
+    clearTimeout(timeout);
+    timeout = setTimeout(function() {
+        var id = $('#khachhang :selected').val();
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        $(document).ajaxSend(function(e, xhr, options) {
+            xhr.setRequestHeader(header, token);
+        });
+
+        $.ajax({
+
+            type : "POST",
+            contentType : "application/json",
+            url : contextPath + "/admin/getsolanchamsocvadamphankhachhang",
+            data: id ,
+            success : function(result) {
+
+                $('#spsolanchamsoc').text(result.solanchamsoc);
+                $('#spsolandamphan').text(result.solandamphan);
+                $('#lan').val(parseInt(result.solanchamsoc) + parseInt(result.solandamphan));
+
+            },
+            error : function(e) {
+
+            }
+        });
+    }, 100);
+};
+$('#khachhang').change(function(){
+
+    getSoLanChamSocVaDamPhanKhachHang();
+});

@@ -3,6 +3,7 @@ package bcc.springhibernate.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import bcc.springhibernate.model.Chamsoc;
@@ -44,6 +45,12 @@ public class ChamSocServiceImpl implements ChamSocService {
 	public Chamsoc findById(Integer id) {
 		
 		return chamSocRepository.findById(id);
+	}
+
+	@Override
+	public List<Chamsoc> findByTrangthaiOrderByIdDesc(String trangthai, Pageable pageable) {
+		
+		return chamSocRepository.findByTrangthaiOrderByIdDesc(trangthai, pageable);
 	}
 	
 	

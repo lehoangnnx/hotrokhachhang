@@ -29,8 +29,9 @@ public class QuyenController {
 	QuyenService  quyenService;
 	
     @GetMapping("/quyen")
-    String pageDanhSachQuyen(Model model){
-    	List<Quyen> listQuyen = quyenService.findByTrangthaiOrderByIdDesc("active");
+    String pageDanhSachQuyen(@RequestParam(value="trangthai",defaultValue = "active") String trangthai,
+							 Model model){
+    	List<Quyen> listQuyen = quyenService.findByTrangthaiOrderByIdDesc(trangthai);
     	model.addAttribute("listQuyen", listQuyen);
         return "danhsachquyen";
     }

@@ -1,5 +1,8 @@
 package bcc.springhibernate.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -63,5 +66,21 @@ public class KhachHangRestController {
 			return "error";
 		}
 		
+	}
+	
+	@PostMapping("/getsolanchamsocvadamphankhachhang")
+	Map<String, Object> getsolanchamsocvadamphankhachhang(@RequestBody Integer id) {
+		
+		Map<String, Object> khachHangMap = new HashMap<String, Object>();
+		try {
+			
+			Khachhang khachhang= khachHangService.findById(id);
+			khachHangMap.put("solanchamsoc",khachhang.getSolanchamsoc());
+			
+			khachHangMap.put("solandamphan",khachhang.getSolandamphan());
+		} catch (Exception e) {
+			
+		}
+		return khachHangMap;
 	}
 }
