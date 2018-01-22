@@ -41,7 +41,8 @@
 		<li class="header">Quản Lý	</li>
 		<!-- Optionally, you can add icons to the links -->
 		<li><a href="${contextPath }/admin"><i class="fa fa-link"></i> <span>Trang Chủ</span></a></li>
-
+		<li><a href="${contextPath }/admin/thongke"><i class="fa fa-link"></i> <span>Thống Kê</span></a></li>
+		<li><a href="${contextPath }/admin/feedback?trangthai=active"><i class="fa fa-link"></i> <span>Feedback</span></a></li>
 		<li><a href="${contextPath }/admin/hoadon?trangthai=dathanhtoan&limit=100&page=1"><i class="fa fa-link"></i> <span>Hóa Đơn</span></a></li>
 		<li class="treeview"><a href="#"><i class="fa fa-link"></i> <span>Chăm Sóc</span> <span class="pull-right-container"> <i
 					class="fa fa-angle-left pull-right"></i>

@@ -64,3 +64,4 @@ function updateThongBaoKhachHang(id){
 		});
 	}, 100);
 };
+

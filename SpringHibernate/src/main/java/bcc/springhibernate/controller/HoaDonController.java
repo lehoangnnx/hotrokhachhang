@@ -2,6 +2,7 @@ package bcc.springhibernate.controller;
 
 import java.math.BigDecimal;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -99,8 +100,8 @@ public class HoaDonController {
 	String themHoaDon(@ModelAttribute("hoadon") Hoadon hoadon, @RequestParam("nhanvienbanhang") Integer nhanvienbanhang,
 			@RequestParam("nhanviengiaohang") Integer nhanviengiaohang,
 			@RequestParam("nhanvienchamsoc") Integer nhanvienchamsoc, @RequestParam("khachhang") Integer khachhang,
-			@RequestParam("hinhthucthanhtoan") String hinhthucthanhtoan, @RequestParam("ngaylap") Date ngaylap,
-			@RequestParam("ngayxuat") Date ngayxuat, @RequestParam("ngaythanhtoan") Date ngaythanhtoan,
+			@RequestParam("hinhthucthanhtoan") String hinhthucthanhtoan, @RequestParam("ngaylap") String ngaylap,
+			@RequestParam("ngayxuat") String ngayxuat, @RequestParam("ngaythanhtoan") String ngaythanhtoan,
 			@RequestParam("sodienthoai") String sodienthoai, @RequestParam("trangthai") String trangthai,
 			@RequestParam("idhh") List<Integer> idhh, @RequestParam("soluonghh") List<Integer> soluonghh,
 			@RequestParam("giabanhh") List<Long> giabanhh,
@@ -108,6 +109,8 @@ public class HoaDonController {
 			Principal principal) {
 
 		try {
+			
+			SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 			Nhanvien getNhanVienBanHangById = nhanVienService.findById(nhanvienbanhang);
 			Nhanvien getNhanVienChamSocById = nhanVienService.findById(nhanvienchamsoc);
 			Nhanvien getNhanVienGiaoHangById = nhanVienService.findById(nhanviengiaohang);
@@ -122,9 +125,9 @@ public class HoaDonController {
 			hoadon.setNhanvienByIdnhanvienlaphoadon(getNhanVienLapHoaDon);
 			hoadon.setKhachhang(getKhachHangById);
 			hoadon.setHinhthucthanhtoan(hinhthucthanhtoan);
-			hoadon.setNgaylap(ngaylap);
-			hoadon.setNgayxuat(ngayxuat);
-			hoadon.setNgaythanhtoan(ngaythanhtoan);
+			hoadon.setNgaylap(df.parse(ngaylap));
+			hoadon.setNgayxuat(df.parse(ngayxuat));
+			hoadon.setNgaythanhtoan(df.parse(ngaythanhtoan));
 			hoadon.setSodienthoai(sodienthoai.replace("_", ""));
 			hoadon.setTrangthai(trangthai);
 			hoaDonService.saveOrUpdate(hoadon);
@@ -165,16 +168,19 @@ public class HoaDonController {
 	String suaHoaDon(@ModelAttribute("hoadon") Hoadon hoadon, @RequestParam("nhanvienbanhang") Integer nhanvienbanhang,
 			@RequestParam("nhanviengiaohang") Integer nhanviengiaohang,
 			@RequestParam("nhanvienchamsoc") Integer nhanvienchamsoc, @RequestParam("khachhang") Integer khachhang,
-			@RequestParam("hinhthucthanhtoan") String hinhthucthanhtoan, @RequestParam("ngaylap") Date ngaylap,
-			@RequestParam("ngayxuat") Date ngayxuat, @RequestParam("ngaythanhtoan") Date ngaythanhtoan,
+			@RequestParam("hinhthucthanhtoan") String hinhthucthanhtoan, @RequestParam("ngaylap") String ngaylap,
+			
+			@RequestParam("ngayxuat") String ngayxuat, @RequestParam("ngaythanhtoan") String ngaythanhtoan,
 			@RequestParam("sodienthoai") String sodienthoai, @RequestParam("trangthai") String trangthai,
 			@RequestParam("idcthd") List<Integer> idcthd,
 			@RequestParam("idhh") List<Integer> idhh, @RequestParam("soluonghh") List<Integer> soluonghh,
 			@RequestParam("giabanhh") List<Long> giabanhh,
 			@RequestParam("thanhtienhh") List<Long> thanhtienhh, RedirectAttributes redirectAttributes,
 			Principal principal) {
-
+		
 		try {
+			
+			SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 			Hoadon hoadoncu = hoaDonService.findById(hoadon.getId());
 			Nhanvien getNhanVienBanHangById = nhanVienService.findById(nhanvienbanhang);
 			Nhanvien getNhanVienChamSocById = nhanVienService.findById(nhanvienchamsoc);
@@ -190,9 +196,9 @@ public class HoaDonController {
 			hoadon.setNhanvienByIdnhanvienlaphoadon(getNhanVienLapHoaDon);
 			hoadon.setKhachhang(getKhachHangById);
 			hoadon.setHinhthucthanhtoan(hinhthucthanhtoan);
-			hoadon.setNgaylap(ngaylap);
-			hoadon.setNgayxuat(ngayxuat);
-			hoadon.setNgaythanhtoan(ngaythanhtoan);
+			hoadon.setNgaylap(df.parse(ngaylap));
+			hoadon.setNgayxuat(df.parse(ngayxuat));
+			hoadon.setNgaythanhtoan(df.parse(ngaythanhtoan));
 			hoadon.setSodienthoai(sodienthoai.replace("_", ""));
 			hoadon.setTrangthai(trangthai);
 			

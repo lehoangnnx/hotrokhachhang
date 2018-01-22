@@ -85,21 +85,21 @@ public class NhanVienController {
     String themNhanVien(@ModelAttribute("nhanvien") Nhanvien nhanvien, 
     		
     		@RequestParam("socmnd") String socmnd,
-    		@RequestParam("ngaycap") Date ngaycap,
+    		@RequestParam("ngaycap") String ngaycap,
     		
     		@RequestParam("sodienthoai") String sodienthoai,
     		
-    		@RequestParam("ngayvaolam") Date ngayvaolam,
+    		@RequestParam("ngayvaolam") String ngayvaolam,
     		
     		@RequestParam("bophan") Integer bophan,
     		RedirectAttributes redirectAttributes) {
     	try {
-    		
+    		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
     		Bophan bophanById = boPhanService.findById(bophan);
     		nhanvien.setSocmnd(socmnd);
-    		nhanvien.setNgaycap(ngaycap);
+    		nhanvien.setNgaycap(df.parse(ngaycap));
     		nhanvien.setSodienthoai(sodienthoai);
-    		nhanvien.setNgayvaolam(ngayvaolam);
+    		nhanvien.setNgayvaolam(df.parse(ngayvaolam));
     		nhanvien.setBophan(bophanById);
     		nhanvien.setTrangthai("active");
     		nhanVienService.saveOrUpdate(nhanvien);
@@ -115,21 +115,21 @@ public class NhanVienController {
     String suaNhanVien(@ModelAttribute("nhanvien") Nhanvien nhanvien, 
     		
     		@RequestParam("socmnd") String socmnd,
-    		@RequestParam("ngaycap") Date ngaycap,
+    		@RequestParam("ngaycap") String ngaycap,
     		
     		@RequestParam("sodienthoai") String sodienthoai,
     		
-    		@RequestParam("ngayvaolam") Date ngayvaolam,
+    		@RequestParam("ngayvaolam") String ngayvaolam,
     		
     		@RequestParam("bophan") Integer bophan,
     		RedirectAttributes redirectAttributes) {
     	try {
-    		
+    		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
     		Bophan bophanById = boPhanService.findById(bophan);
     		nhanvien.setSocmnd(socmnd);
-    		nhanvien.setNgaycap(ngaycap);
+    		nhanvien.setNgaycap(df.parse(ngaycap));
     		nhanvien.setSodienthoai(sodienthoai);
-    		nhanvien.setNgayvaolam(ngayvaolam);
+    		nhanvien.setNgayvaolam(df.parse(ngayvaolam));
     		nhanvien.setBophan(bophanById);
     		nhanvien.setTrangthai("active");
     		nhanVienService.saveOrUpdate(nhanvien);

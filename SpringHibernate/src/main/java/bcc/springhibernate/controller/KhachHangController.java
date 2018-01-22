@@ -1,5 +1,6 @@
 package bcc.springhibernate.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -117,22 +118,22 @@ public class KhachHangController {
 	String themKhachHang(@ModelAttribute("khachhang") Khachhang khachhang,
 			@RequestParam("loaikhachhang") Integer loaikhachhang, @RequestParam("nhomkhachhang") Integer nhomkhachhang,
 			@RequestParam("sodienthoai") String sodienthoai, @RequestParam("dienthoaidaidien") String dienthoaidaidien,
-			@RequestParam("ngaysinhnhatndd") Date ngaysinhnhatndd,
+			@RequestParam("ngaysinhnhatndd") String ngaysinhnhatndd,
 			@RequestParam("dienthoaiphutrach") String dienthoaiphutrach,
-			@RequestParam("ngaysinhphutrach") Date ngaysinhphutrach, @RequestParam("ngaycap") Date ngaycap,
+			@RequestParam("ngaysinhphutrach") String ngaysinhphutrach, @RequestParam("ngaycap") String ngaycap,
 			RedirectAttributes redirectAttributes) {
 		try {
-
+			SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 			Loaikhachhang getLoaiKhachHangById = loaiKhachHangService.findById(loaikhachhang);
 			Nhomkhachhang getNhomKhachHangById = nhomKhachHangService.findById(nhomkhachhang);
 			khachhang.setLoaikhachhang(getLoaiKhachHangById);
 			khachhang.setNhomkhachhang(getNhomKhachHangById);
 			khachhang.setSodienthoai(sodienthoai);
 			khachhang.setDienthoaidaidien(dienthoaidaidien);
-			khachhang.setNgaysinhnhatndd(ngaysinhnhatndd);
+			khachhang.setNgaysinhnhatndd(df.parse(ngaysinhnhatndd));
 			khachhang.setDienthoaiphutrach(dienthoaiphutrach);
-			khachhang.setNgaysinhphutrach(ngaysinhphutrach);
-			khachhang.setNgaycap(ngaycap);
+			khachhang.setNgaysinhphutrach(df.parse(ngaysinhphutrach));
+			khachhang.setNgaycap(df.parse(ngaycap));
 			khachhang.setTrangthai("active");
 			khachhang.setTrangthainhac("chosinhnhat");
 			khachHangService.saveOrUpdate(khachhang);
@@ -147,21 +148,22 @@ public class KhachHangController {
 	String suaKhachHang(@ModelAttribute("khachhang") Khachhang khachhang,
 			@RequestParam("loaikhachhang") Integer loaikhachhang, @RequestParam("nhomkhachhang") Integer nhomkhachhang,
 			@RequestParam("sodienthoai") String sodienthoai, @RequestParam("dienthoaidaidien") String dienthoaidaidien,
-			@RequestParam("ngaysinhnhatndd") Date ngaysinhnhatndd,
+			@RequestParam("ngaysinhnhatndd") String ngaysinhnhatndd,
 			@RequestParam("dienthoaiphutrach") String dienthoaiphutrach,
-			@RequestParam("ngaysinhphutrach") Date ngaysinhphutrach, @RequestParam("ngaycap") Date ngaycap,
+			@RequestParam("ngaysinhphutrach") String ngaysinhphutrach, @RequestParam("ngaycap") String ngaycap,
 			RedirectAttributes redirectAttributes) {
 		try {
+			SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 			Loaikhachhang getLoaiKhachHangById = loaiKhachHangService.findById(loaikhachhang);
 			Nhomkhachhang getNhomKhachHangById = nhomKhachHangService.findById(nhomkhachhang);
 			khachhang.setLoaikhachhang(getLoaiKhachHangById);
 			khachhang.setNhomkhachhang(getNhomKhachHangById);
 			khachhang.setSodienthoai(sodienthoai);
 			khachhang.setDienthoaidaidien(dienthoaidaidien);
-			khachhang.setNgaysinhnhatndd(ngaysinhnhatndd);
+			khachhang.setNgaysinhnhatndd(df.parse(ngaysinhnhatndd));
 			khachhang.setDienthoaiphutrach(dienthoaiphutrach);
-			khachhang.setNgaysinhphutrach(ngaysinhphutrach);
-			khachhang.setNgaycap(ngaycap);
+			khachhang.setNgaysinhphutrach(df.parse(ngaysinhphutrach));
+			khachhang.setNgaycap(df.parse(ngaycap));
 			khachhang.setTrangthai("active");
 			khachhang.setTrangthainhac("chosinhnhat");
 			khachHangService.saveOrUpdate(khachhang);

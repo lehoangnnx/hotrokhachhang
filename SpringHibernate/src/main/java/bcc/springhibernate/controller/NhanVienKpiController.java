@@ -1,6 +1,7 @@
 package bcc.springhibernate.controller;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -71,10 +72,10 @@ public class NhanVienKpiController {
     @PostMapping("/nhanvienkpi")
     String themNhanVienKpi(@ModelAttribute("nhanvienkpi") Nhanvienkpi nhanvienkpi,
     		@RequestParam("nhanvien") Integer nhanvien,@RequestParam("kpi") Integer kpi,
-    		@RequestParam("ngayhoanthanh") Date ngayhoanthanh,
+    		@RequestParam("ngayhoanthanh") String ngayhoanthanh,
     		RedirectAttributes redirectAttributes) {
     	try {
-    		
+    		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
     		Nhanvien nhanVienById = nhanVienService.findById(nhanvien);
     		Kpi kpiById = kpiService.findById(kpi);
     		
@@ -82,7 +83,7 @@ public class NhanVienKpiController {
     		nhanvienkpi.setNhanvien(nhanVienById);
     		nhanvienkpi.setKpi(kpiById);
     		nhanvienkpi.setNgaydangky(new Date());
-    		nhanvienkpi.setNgayhoanthanh(ngayhoanthanh);
+    		nhanvienkpi.setNgayhoanthanh(df.parse(ngayhoanthanh));
     		
         	nhanVienKpiService.saveOrUpdate(nhanvienkpi);
         	redirectAttributes.addFlashAttribute("msg", "Thêm Thành Công");
@@ -96,9 +97,10 @@ public class NhanVienKpiController {
     @PatchMapping("/nhanvienkpi")
     String suaNhanVienKpi(@ModelAttribute("nhanvienkpi") Nhanvienkpi nhanvienkpi,
     		@RequestParam("nhanvien") Integer nhanvien,@RequestParam("kpi") Integer kpi,
-    		@RequestParam("ngayhoanthanh") Date ngayhoanthanh,
+    		@RequestParam("ngayhoanthanh") String ngayhoanthanh,
     		RedirectAttributes redirectAttributes) {
     	try {
+    		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
     		Nhanvien nhanVienById = nhanVienService.findById(nhanvien);
     		Kpi kpiById = kpiService.findById(kpi);
     		
@@ -106,7 +108,7 @@ public class NhanVienKpiController {
     		nhanvienkpi.setNhanvien(nhanVienById);
     		nhanvienkpi.setKpi(kpiById);
     		nhanvienkpi.setNgaydangky(new Date());
-    		nhanvienkpi.setNgayhoanthanh(ngayhoanthanh);
+    		nhanvienkpi.setNgayhoanthanh(df.parse(ngayhoanthanh));
     		
         	nhanVienKpiService.saveOrUpdate(nhanvienkpi);
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");

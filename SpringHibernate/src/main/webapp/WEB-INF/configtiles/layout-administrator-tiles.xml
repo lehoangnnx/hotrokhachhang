@@ -479,8 +479,47 @@
 	</definition>
 	
 	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- Trang Thống Kê -->
+	<definition name="thongke" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/thongke/thongke.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/thongke/footertag/thongke-footertag.jsp" />
+	</definition>
+	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
 	
 	
+		
+	
+	
+	
+	<!-- Trang Danh Sách Feedback -->
+	<definition name="danhsachfeedback" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/feedback/danhsachfeedback.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/feedback/footertag/feedback-footertag.jsp" />
+	</definition>
+	<!-- Trang Thêm  Feedback-->
+	<definition name="themfeedback" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/feedback/themfeedback.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/feedback/footertag/themfeedback-footertag.jsp" />
+	</definition>
+	<!-- Trang Sửa  Feedback-->
+	<definition name="suafeedback" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/feedback/suafeedback.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/feedback/footertag/suafeedback-footertag.jsp" />
+	</definition>
+	
+	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- Trang Lỗi -->
 	<definition name="403" template="/WEB-INF/views/administrator/403.jsp">
 

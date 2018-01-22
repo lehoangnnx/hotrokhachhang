@@ -10,14 +10,15 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>
-		Nhóm Hàng <%-- <small><a
+		Feedback
+		<%-- <small><a
 			href="${contextPath }/admin/roles?status=active">Danh Sách Nhóm
 				Hàng</a></small> <small><a class="btn btn-success"
 			href="${contextPath }/admin/nhomhang/add">Thêm mới</a></small> --%>
 	</h1>
 	<ol class="breadcrumb">
-	<a class="btn btn-success"
-			href="${contextPath }/admin/nhomhang/add">Thêm mới</a>
+		<a class="btn btn-success" href="${contextPath }/admin/feedback/add">Thêm
+			mới</a>
 		<%-- <li><a href="${contextPath }/"><i class="fa fa-dashboard"></i>
 				Home</a></li>
 		<li><a href="${contextPath }/roles">Quyền</a></li>
@@ -32,57 +33,44 @@
 		<div class="col-xs-12">
 			<ul class="nav nav-tabs">
 				<li class="tablinks ${param.trangthai == 'active' ? 'active' : '' }">
-					<a href="${contextPath }/admin/nhomhang?trangthai=active">Đã Kích
-						Hoạt</a>
+					<a href="${contextPath }/admin/feedback?trangthai=active">Đã
+						Kích Hoạt</a>
 				</li>
 
-				<li class="tablinks ${param.trangthai == 'deleted' ? 'active' : '' }">
-					<a href="${contextPath }/admin/nhomhang?trangthai=deleted">Đã Xóa</a>
+				<li
+					class="tablinks ${param.trangthai == 'deleted' ? 'active' : '' }">
+					<a href="${contextPath }/admin/feedback?trangthai=deleted">Đã
+						Xóa</a>
 				</li>
 			</ul>
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Danh Sách Nhóm Hàng</h3>
+					<h3 class="box-title">Danh Sách Feedback</h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
 					<table id="example2" class="table table-bordered table-hover">
 						<thead>
 							<tr>
-								<th>Mã Nhóm Hàng</th>
-								<th>Mã Nhóm Cha</th>
-								<th>Tên Nhóm</th>
-								<th>Mô Tả</th>
+								<th>Feedback Nhân Viên</th>
+								<th>Feedback Hàng Hóa</th>
+								<th>Khách Hàng Feedback</th>
+								<th>Ngày</th>
 								<th>Thao tác</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="nh" items="${listNhomhang }">
+							<c:forEach var="fb" items="${listFeedback }">
 								<tr>
-									<td>${nh.manhom }</td>
-									<c:choose>
-										<c:when test="${nh.manhomcha == 0  }">
-											<td>Không Có</td>
-										</c:when>
-										<c:otherwise>
-											<c:forEach var="nhc" items="${listNhomhang }">
-												<c:if test="${nhc.id == nh.manhomcha  }">
-													<td>${nhc.manhom }</td>
-												</c:if>
-
-
-											</c:forEach>
-										</c:otherwise>
-									</c:choose>
-
-
-									<td>${nh.tennhom }</td>
-									<td>${nh.mota }</td>
-
-									<td><a href="${contextPath }/admin/nhomhang/${nh.id}">
+									<td>${fb.nhanvienId }</td>
+									<td>${fb.hanghoaId }</td>
+									<td>${fb.khachhangId }</td>
+										<td><fmt:formatDate pattern="dd-MM-yyyy"
+									value="${fb.ngaytao }" /></td>
+									<td><a href="${contextPath }/admin/feedback/${fb.id}">
 											<i style="color: blue;" class="fa fa-pencil fa-lg"
 											aria-hidden="true" title="Sửa"> </i>
-									</a> <a onclick="deleteOne(${nh.id});" href="#" data-toggle="modal"
+									</a> <a onclick="deleteOne(${fb.id});" href="#" data-toggle="modal"
 										data-target="#myModal" style="color: red; margin-left: 10px;">
 											<i class="fa fa-trash-o fa-lg" aria-hidden="true" title="Xóa"></i>
 									</a></td>
@@ -91,10 +79,10 @@
 						</tbody>
 						<tfoot>
 							<tr>
-								<th>Mã Nhóm Hàng</th>
-								<th>Mã Nhóm Cha</th>
-								<th>Tên Nhóm</th>
-								<th>Mô Tả</th>
+								<th>Feedback Nhân Viên</th>
+								<th>Feedback Hàng Hóa</th>
+								<th>Khách Hàng Feedback</th>
+								<th>Ngày</th>
 								<th>Thao tác</th>
 							</tr>
 						</tfoot>

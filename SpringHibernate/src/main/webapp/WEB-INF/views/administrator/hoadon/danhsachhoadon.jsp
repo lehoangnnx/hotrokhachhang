@@ -57,6 +57,13 @@
 						<thead>
 							<tr>
 								<th>Số Hóa Đơn</th>
+								<th>Khách Hàng</th>
+								<th>Nhân Viên Bán Hàng</th>
+								<th>Tổng Tiền</th>
+								<th>Đã Trả</th>
+								<th>Đang Nợ</th>
+								<th>Hình Thức Thanh Toán</th>
+								<th>Ngày Lập</th>
 								<th>Trạng Thái</th>
 								<th>Thao Tác</th>
 							</tr>
@@ -65,6 +72,14 @@
 							<c:forEach var="hd" items="${listHoadon }">
 								<tr>
 									<td>${hd.sohoadon }</td>
+									<td>${hd.khachhang.makh } - ${hd.khachhang.ten }</td>
+									<td>${hd.nhanvienByIdnhanvienban.manhanvien } - ${hd.nhanvienByIdnhanvienban.tennhanvien }</td>
+									<td>${hd.tongtien }</td>
+									<td>${hd.tiendatra }</td>
+									<td>${hd.congno }</td>
+									<td>${hd.hinhthucthanhtoan }</td>
+									<td><fmt:formatDate pattern="dd-MM-yyyy"
+											value="${hd.ngaylap }" /></td>
 									<td>${hd.trangthai }</td>
 									<td><a href="${contextPath }/admin/hoadon/${hd.id}"> <i
 											style="color: blue;" class="fa fa-pencil fa-lg"
@@ -79,6 +94,13 @@
 						<tfoot>
 							<tr>
 								<th>Số Hóa Đơn</th>
+								<th>Khách Hàng</th>
+								<th>Nhân Viên Bán Hàng</th>
+								<th>Tổng Tiền</th>
+								<th>Đã Trả</th>
+								<th>Đang Nợ</th>
+								<th>Hình Thức Thanh Toán</th>
+								<th>Ngày Lập</th>
 								<th>Trạng Thái</th>
 								<th>Thao Tác</th>
 							</tr>

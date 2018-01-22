@@ -18,103 +18,124 @@ import javax.persistence.TemporalType;
 @Table(name = "feedback", catalog = "hotrobanhang")
 public class Feedback implements java.io.Serializable {
 
-	private Integer id;
-	private Integer hanghoaId;
-	private Integer nhanvienId;
-	private Integer nhavientaoId;
-	private String noidung;
-	private Date ngaytao;
-	private String trangthai;
-	private String ghichu;
+	 private Integer id;
+     private Integer hanghoaId;
+     private Integer nhanvienId;
+     private Integer nhavientaoId;
+     private Integer khachhangId;
+     private String noidung;
+     private Date ngaytao;
+     private String trangthai;
+     private String ghichu;
 
-	public Feedback() {
-	}
+    public Feedback() {
+    }
 
-	public Feedback(Integer hanghoaId, Integer nhanvienId, Integer nhavientaoId, String noidung, Date ngaytao,
-			String trangthai, String ghichu) {
-		this.hanghoaId = hanghoaId;
-		this.nhanvienId = nhanvienId;
-		this.nhavientaoId = nhavientaoId;
-		this.noidung = noidung;
-		this.ngaytao = ngaytao;
-		this.trangthai = trangthai;
-		this.ghichu = ghichu;
-	}
+    public Feedback(Integer hanghoaId, Integer nhanvienId, Integer nhavientaoId, Integer khachhangId, String noidung, Date ngaytao, String trangthai, String ghichu) {
+       this.hanghoaId = hanghoaId;
+       this.nhanvienId = nhanvienId;
+       this.nhavientaoId = nhavientaoId;
+       this.khachhangId = khachhangId;
+       this.noidung = noidung;
+       this.ngaytao = ngaytao;
+       this.trangthai = trangthai;
+       this.ghichu = ghichu;
+    }
+   
+     @Id @GeneratedValue(strategy=IDENTITY)
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
+    
+    @Column(name="id", unique=true, nullable=false)
+    public Integer getId() {
+        return this.id;
+    }
+    
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
+    
+    @Column(name="hanghoa_id")
+    public Integer getHanghoaId() {
+        return this.hanghoaId;
+    }
+    
+    public void setHanghoaId(Integer hanghoaId) {
+        this.hanghoaId = hanghoaId;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    
+    @Column(name="nhanvien_id")
+    public Integer getNhanvienId() {
+        return this.nhanvienId;
+    }
+    
+    public void setNhanvienId(Integer nhanvienId) {
+        this.nhanvienId = nhanvienId;
+    }
 
-	@Column(name = "hanghoa_id")
-	public Integer getHanghoaId() {
-		return this.hanghoaId;
-	}
+    
+    @Column(name="nhavientao_id")
+    public Integer getNhavientaoId() {
+        return this.nhavientaoId;
+    }
+    
+    public void setNhavientaoId(Integer nhavientaoId) {
+        this.nhavientaoId = nhavientaoId;
+    }
 
-	public void setHanghoaId(Integer hanghoaId) {
-		this.hanghoaId = hanghoaId;
-	}
+    
+    @Column(name="khachhang_id")
+    public Integer getKhachhangId() {
+        return this.khachhangId;
+    }
+    
+    public void setKhachhangId(Integer khachhangId) {
+        this.khachhangId = khachhangId;
+    }
 
-	@Column(name = "nhanvien_id")
-	public Integer getNhanvienId() {
-		return this.nhanvienId;
-	}
+    
+    @Column(name="noidung")
+    public String getNoidung() {
+        return this.noidung;
+    }
+    
+    public void setNoidung(String noidung) {
+        this.noidung = noidung;
+    }
 
-	public void setNhanvienId(Integer nhanvienId) {
-		this.nhanvienId = nhanvienId;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="ngaytao", length=19)
+    public Date getNgaytao() {
+        return this.ngaytao;
+    }
+    
+    public void setNgaytao(Date ngaytao) {
+        this.ngaytao = ngaytao;
+    }
 
-	@Column(name = "nhavientao_id")
-	public Integer getNhavientaoId() {
-		return this.nhavientaoId;
-	}
+    
+    @Column(name="trangthai", length=45)
+    public String getTrangthai() {
+        return this.trangthai;
+    }
+    
+    public void setTrangthai(String trangthai) {
+        this.trangthai = trangthai;
+    }
 
-	public void setNhavientaoId(Integer nhavientaoId) {
-		this.nhavientaoId = nhavientaoId;
-	}
+    
+    @Column(name="ghichu")
+    public String getGhichu() {
+        return this.ghichu;
+    }
+    
+    public void setGhichu(String ghichu) {
+        this.ghichu = ghichu;
+    }
 
-	@Column(name = "noidung")
-	public String getNoidung() {
-		return this.noidung;
-	}
 
-	public void setNoidung(String noidung) {
-		this.noidung = noidung;
-	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "ngaytao", length = 19)
-	public Date getNgaytao() {
-		return this.ngaytao;
-	}
 
-	public void setNgaytao(Date ngaytao) {
-		this.ngaytao = ngaytao;
-	}
-
-	@Column(name = "trangthai", length = 45)
-	public String getTrangthai() {
-		return this.trangthai;
-	}
-
-	public void setTrangthai(String trangthai) {
-		this.trangthai = trangthai;
-	}
-
-	@Column(name = "ghichu")
-	public String getGhichu() {
-		return this.ghichu;
-	}
-
-	public void setGhichu(String ghichu) {
-		this.ghichu = ghichu;
-	}
 
 }

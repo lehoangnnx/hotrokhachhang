@@ -1,6 +1,7 @@
 package bcc.springhibernate.controller;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -107,14 +108,14 @@ public class ChamSocController {
 	String themChamSoc(@ModelAttribute("chamsoc") Chamsoc chamsoc,
 			@RequestParam("nhanvienbanhang") Integer nhanvienbanhang,
 			@RequestParam("nhanviengiaohang") Integer nhanviengiaohang, @RequestParam("khachhang") Integer khachhang,
-			@RequestParam("hoadon") Integer hoadon, @RequestParam("ngay") Date ngay,
-			@RequestParam("ngaycstiep") Date ngaycstiep,
+			@RequestParam("hoadon") Integer hoadon, @RequestParam("ngay") String ngay,
+			@RequestParam("ngaycstiep") String ngaycstiep,
 			@RequestParam(value = "idtccs", defaultValue = "0") List<Integer> idtccs,
 			@RequestParam(value = "kieutieuchitccs", defaultValue = "") List<String> kieutieuchitccs,
 
 			RedirectAttributes redirectAttributes, Principal principal) {
 		try {
-
+			SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 			Taikhoan getTaiKhoanByUserName = taikhoanService.findByUsername(principal.getName());
 			Nhanvien getNhanVienChamSocById = getTaiKhoanByUserName.getNhanvien();
 
@@ -124,8 +125,8 @@ public class ChamSocController {
 			chamsoc.setNhanviengiaohang(nhanviengiaohang);
 			chamsoc.setNhanvienchamsoc(getNhanVienChamSocById.getId());
 			chamsoc.setKhachhang(getKhachHangById);
-			chamsoc.setNgay(ngay);
-			chamsoc.setNgaycstiep(ngaycstiep);
+			chamsoc.setNgay(df.parse(ngay));
+			chamsoc.setNgaycstiep(df.parse(ngaycstiep));
 			chamsoc.setHoadonId(hoadon);
 			chamsoc.setTrangthai("dachamsoc");
 			chamSocService.saveOrUpdate(chamsoc);
@@ -170,14 +171,14 @@ public class ChamSocController {
 	String suaChamSoc(@ModelAttribute("chamsoc") Chamsoc chamsoc,
 			@RequestParam("nhanvienbanhang") Integer nhanvienbanhang,
 			@RequestParam("nhanviengiaohang") Integer nhanviengiaohang, @RequestParam("khachhang") Integer khachhang,
-			@RequestParam("hoadon") Integer hoadon, @RequestParam("ngay") Date ngay,
-			@RequestParam("ngaycstiep") Date ngaycstiep, @RequestParam("idctcs") List<Integer> idctcs,
+			@RequestParam("hoadon") Integer hoadon, @RequestParam("ngay") String ngay,
+			@RequestParam("ngaycstiep") String ngaycstiep, @RequestParam("idctcs") List<Integer> idctcs,
 			@RequestParam("idtccs") List<Integer> idtccs,
 			// @RequestParam("diemtccs") List<Integer> diemtccs,
 			@RequestParam(value = "kieutieuchitccs", defaultValue = "") List<String> kieutieuchitccs,
 			RedirectAttributes redirectAttributes, Principal principal) {
 		try {
-
+			SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 			Taikhoan getTaiKhoanByUserName = taikhoanService.findByUsername(principal.getName());
 			Nhanvien getNhanVienChamSocById = getTaiKhoanByUserName.getNhanvien();
 
@@ -187,8 +188,8 @@ public class ChamSocController {
 			chamsoc.setNhanviengiaohang(nhanviengiaohang);
 			chamsoc.setNhanvienchamsoc(getNhanVienChamSocById.getId());
 			chamsoc.setKhachhang(getKhachHangById);
-			chamsoc.setNgay(ngay);
-			chamsoc.setNgaycstiep(ngaycstiep);
+			chamsoc.setNgay(df.parse(ngay));
+			chamsoc.setNgaycstiep(df.parse(ngaycstiep));
 			chamsoc.setHoadonId(hoadon);
 			chamsoc.setTrangthai("dachamsoc");
 			chamSocService.saveOrUpdate(chamsoc);
