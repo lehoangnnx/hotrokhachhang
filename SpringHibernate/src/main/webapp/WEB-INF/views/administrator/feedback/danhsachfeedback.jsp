@@ -62,11 +62,42 @@
 						<tbody>
 							<c:forEach var="fb" items="${listFeedback }">
 								<tr>
-									<td>${fb.nhanvienId }</td>
-									<td>${fb.hanghoaId }</td>
-									<td>${fb.khachhangId }</td>
-										<td><fmt:formatDate pattern="dd-MM-yyyy"
-									value="${fb.ngaytao }" /></td>
+									<c:choose>
+										<c:when test="${fb.nhanvienId == 0 }">
+											<td>Không</td>
+										</c:when>
+										<c:otherwise>
+											<c:forEach var="nv" items="${listNhanvien }">
+												<c:if test="${fb.nhanvienId == nv.id }">
+													<td>${nv.manhanvien }- ${nv.tennhanvien }</td>
+												</c:if>
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
+
+									<c:choose>
+										<c:when test="${fb.hanghoaId == 0 }">
+											<td>Không</td>
+										</c:when>
+										<c:otherwise>
+											<c:forEach var="hh" items="${listHanghoa }">
+												<c:if test="${fb.hanghoaId == hh.id }">
+													<td>${hh.mahang}- ${hh.tenhang}</td>
+												</c:if>
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
+
+
+									<c:forEach var="kh" items="${listKhachhang }">
+										<c:if test="${fb.khachhangId == kh.id }">
+											<td>${kh.makh}- ${kh.ten}</td>
+										</c:if>
+									</c:forEach>
+
+
+									<td><fmt:formatDate pattern="dd-MM-yyyy"
+											value="${fb.ngaytao }" /></td>
 									<td><a href="${contextPath }/admin/feedback/${fb.id}">
 											<i style="color: blue;" class="fa fa-pencil fa-lg"
 											aria-hidden="true" title="Sửa"> </i>

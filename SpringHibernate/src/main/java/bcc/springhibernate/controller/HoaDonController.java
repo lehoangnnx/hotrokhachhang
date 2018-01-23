@@ -26,12 +26,14 @@ import bcc.springhibernate.model.Chitiethoadon;
 import bcc.springhibernate.model.Hanghoa;
 import bcc.springhibernate.model.Hoadon;
 import bcc.springhibernate.model.Khachhang;
+import bcc.springhibernate.model.Luong;
 import bcc.springhibernate.model.Nhanvien;
 import bcc.springhibernate.model.Taikhoan;
 import bcc.springhibernate.service.ChiTietHoaDonService;
 import bcc.springhibernate.service.HangHoaService;
 import bcc.springhibernate.service.HoaDonService;
 import bcc.springhibernate.service.KhachHangService;
+import bcc.springhibernate.service.LuongService;
 import bcc.springhibernate.service.NhanVienService;
 import bcc.springhibernate.service.TaikhoanService;
 
@@ -51,6 +53,8 @@ public class HoaDonController {
 	TaikhoanService taikhoanService;
 	@Autowired
 	ChiTietHoaDonService chiTietHoaDonService;
+	@Autowired
+	LuongService luongService;
 	@GetMapping("/hoadon")
 	String pageDanhSachHoaDon(@RequestParam(value="trangthai", defaultValue="dathanhtoan") String trangthai,
 			@RequestParam(value="limit", defaultValue="100") Integer limit, 
@@ -155,6 +159,20 @@ public class HoaDonController {
 			getKhachHangById.setSotienchamsoc(sotienchamsoc);
 			getKhachHangById.setDiem(diem);
 			khachHangService.saveOrUpdate(getKhachHangById);
+			
+			String splitngaylap[] = ngaylap.split("/");
+			Luong luong = luongService.findByNhanvienAndThangAndNam(getNhanVienBanHangById, splitngaylap[1], splitngaylap[2]);
+			Long thuong = (long) ((hoadon.getTongtien() * getNhanVienBanHangById.getChietkhau()) / 100) ;
+			if(luong == null) {
+				
+				Luong newluong = new Luong(getNhanVienBanHangById,
+						getNhanVienBanHangById.getLuong(), thuong , splitngaylap[1], splitngaylap[2], "active", "");
+				luongService.saveOrUpdate(newluong);
+				
+			}else {
+				luong.setThuong(luong.getThuong() + thuong);
+				luongService.saveOrUpdate(luong);
+			}
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thành Công");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thất Bại");
@@ -220,6 +238,23 @@ public class HoaDonController {
 			getKhachHangById.setDiem(diem);
 			khachHangService.saveOrUpdate(getKhachHangById);
 			
+			
+			
+			String splitngaylap[] = ngaylap.split("/");
+			Luong luong = luongService.findByNhanvienAndThangAndNam(getNhanVienBanHangById, splitngaylap[1], splitngaylap[2]);
+			System.out.println(luong.getThuong());
+			System.out.println( (hoadoncu.getTongtien() * getNhanVienBanHangById.getChietkhau()) / 100);
+			Long thuongcu = (long) (luong.getThuong() - 
+					(hoadoncu.getTongtien() * getNhanVienBanHangById.getChietkhau()) / 100) ;
+			System.out.println(thuongcu);
+			Long thuong = (long) ((hoadon.getTongtien() * getNhanVienBanHangById.getChietkhau()) / 100) ;
+			System.out.println(thuong);
+			
+			luong.setThuong(thuongcu + thuong);
+			luongService.saveOrUpdate(luong);
+			
+			
+			
 			hoaDonService.saveOrUpdate(hoadon);
 			
 			
@@ -242,6 +277,7 @@ public class HoaDonController {
 				
 				
 			}
+			
 			
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {

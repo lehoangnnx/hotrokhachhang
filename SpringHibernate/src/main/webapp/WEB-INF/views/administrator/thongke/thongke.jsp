@@ -8,7 +8,7 @@
 <section class="content">
 	<!-- Small boxes (Stat box) -->
 	<div class="row">
-		<div class="col-lg-3 col-xs-6">
+		<%-- <div class="col-lg-3 col-xs-6">
 			<!-- small box -->
 			<div class="small-box bg-aqua">
 				<div class="inner">
@@ -72,7 +72,7 @@
 				<a href="#" class="small-box-footer">More info <i
 					class="fa fa-arrow-circle-right"></i></a>
 			</div>
-		</div>
+		</div> --%>
 
 
 		<!-- ./col -->
@@ -117,18 +117,18 @@
 							</div>
 						</div>
 						<div class="col-md-4">
-						<div class="form-group">
-							<label>Nhân Viên Bán Hàng</label> <select class="form-control select2"
-								name="nhanvienbanhang" style="width: 100%;">
+							<div class="form-group">
+								<label>Nhân Viên Bán Hàng</label> <select
+									class="form-control select2" name="nhanvienbanhang"
+									style="width: 100%;">
 									<option value="0">Không</option>
-								<c:forEach var="nv" items="${listNhanvien }">
-									<option
-									${param.nhanvienbanhang == nv.id ? 'selected' : '' }
-									 value="${nv.id }">${nv.manhanvien} - ${nv.tennhanvien }</option>
-								</c:forEach>
+									<c:forEach var="nv" items="${listNhanvien }">
+										<option ${param.nhanvienbanhang == nv.id ? 'selected' : '' }
+											value="${nv.id }">${nv.manhanvien}-${nv.tennhanvien }</option>
+									</c:forEach>
 
-							</select>
-						</div>
+								</select>
+							</div>
 						</div>
 						<div class="col-md-12">
 							<button style="margin-top: 25px;" type="submit" id="btn-submit"
@@ -149,24 +149,83 @@
 					<c:set var="congno" value="${congno + hd.congno }" />
 				</c:forEach>
 				<div class="box-body">
-					<div class="col-md-4">
-						<div class="form-group">
-							<label for="congno">Tổng Tiện : 
-							<span><fmt:formatNumber type="number" pattern="###,###" value="${tongtien }" /></span> &#8363;</label>
+					<div class="col-md-12 margin" style="border-bottom: 1px solid;">
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>Tổng Hóa Đơn : <span>${fn:length(listHoadon) }</span>
+								</label>
 
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<c:set var="hddtt" value="0" />
+								<c:forEach var="hd" items="${listHoadon }">
+									<c:if test="${hd.trangthai == 'dathanhtoan' }">
+										<c:set var="hddtt" value="${hddtt + 1 }" />
+									</c:if>
+
+								</c:forEach>
+								<label>Hóa Đơn Đã Thanh Toán : <span>${hddtt }</span>
+								</label>
+
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<c:set var="hdctt" value="0" />
+								<c:forEach var="hd" items="${listHoadon }">
+									<c:if test="${hd.trangthai == 'chuathanhtoan' }">
+										<c:set var="hdctt" value="${hdctt + 1 }" />
+									</c:if>
+
+								</c:forEach>
+								<label>Hóa Đơn Chưa Thanh Toán : <span>${hdctt }</span>
+								</label>
+
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<c:set var="hddn" value="0" />
+								<c:forEach var="hd" items="${listHoadon }">
+									<c:if test="${hd.trangthai == 'dangno' }">
+										<c:set var="hddn" value="${hddn + 1 }" />
+									</c:if>
+
+								</c:forEach>
+								<label>Hóa Đơn Đang Nợ : <span>${hddn }</span>
+								</label>
+
+							</div>
 						</div>
 					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label for="congno">Tiền Đã Trả : 
-							<span><fmt:formatNumber type="number" pattern="###,###" value="${tiendatra }" /></span> &#8363;</label>
+					<div class="col-md-12">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="congno">Tổng Tiện : <span><fmt:formatNumber
+											type="number" pattern="###,###" value="${tongtien }" /></span>
+									&#8363;
+								</label>
 
+							</div>
 						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label for="congno">Đang Nợ : 
-							<span><fmt:formatNumber type="number" pattern="###,###" value="${congno }" /></span> &#8363;</label>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="congno">Tiền Đã Trả : <span><fmt:formatNumber
+											type="number" pattern="###,###" value="${tiendatra }" /></span>
+									&#8363;
+								</label>
+
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="congno">Đang Nợ : <span><fmt:formatNumber
+											type="number" pattern="###,###" value="${congno }" /></span>
+									&#8363;
+								</label>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -226,9 +285,12 @@
 							<td>${hd.khachhang.makh }-${hd.khachhang.ten }</td>
 							<td>${hd.nhanvienByIdnhanvienban.manhanvien }-
 								${hd.nhanvienByIdnhanvienban.tennhanvien }</td>
-							<td>${hd.tongtien }</td>
-							<td>${hd.tiendatra }</td>
-							<td>${hd.congno }</td>
+							<td><fmt:formatNumber
+											type="number" pattern="###,###" value="${hd.tongtien }" /> &#8363;</td>
+									<td><fmt:formatNumber
+											type="number" pattern="###,###" value="${hd.tiendatra }" /> &#8363;</td>
+									<td><fmt:formatNumber
+											type="number" pattern="###,###" value="${hd.congno }" /> &#8363;</td>
 							<td>${hd.hinhthucthanhtoan }</td>
 							<td><fmt:formatDate pattern="dd-MM-yyyy"
 									value="${hd.ngaylap }" /></td>

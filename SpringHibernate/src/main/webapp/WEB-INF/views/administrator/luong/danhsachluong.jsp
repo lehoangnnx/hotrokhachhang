@@ -57,8 +57,10 @@
 		                <c:forEach var="l" items="${listLuong }" >
 		                	<tr>
 		                		<td>${l.nhanvien.tennhanvien}</td>
-			                  	<td>${l.luong}</td>
-			                  	<td>${l.thuong}</td>
+			                  	<td><fmt:formatNumber
+											type="number" pattern="###,###" value="${l.luong }" /> &#8363;</td>
+			                  	<td><fmt:formatNumber
+											type="number" pattern="###,###" value="${l.thuong }" /> &#8363;</td>
 			                  	<td>${l.thang}/${l.nam }</td>
 			                  	<td>
 			                  		<a href="${contextPath }/admin/luong/${l.id}">

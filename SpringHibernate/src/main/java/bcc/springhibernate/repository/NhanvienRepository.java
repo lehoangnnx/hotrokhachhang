@@ -14,4 +14,5 @@ public interface NhanvienRepository extends JpaRepository<Nhanvien, Integer> {
     Nhanvien findByManhanvien(String manhanvien);
     List<Nhanvien> findAll();
    List<Nhanvien> findByTrangthaiOrderByIdDesc(String trangthai);
+   List<Nhanvien> findByTrangthaiNotOrderByIdDesc(String trangthai);
 }

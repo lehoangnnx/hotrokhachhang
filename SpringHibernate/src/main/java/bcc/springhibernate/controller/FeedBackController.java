@@ -49,6 +49,13 @@ public class FeedBackController {
     String pageDanhSachFeedBack(@RequestParam(value="trangthai",defaultValue = "active") String trangthai,
 								Model model){
     	List<Feedback> listFeedback = feedBackService.findByTrangthaiOrderByIdDesc(trangthai);
+    	List<Nhanvien> listNhanvien = nhanVienService.findByTrangthaiOrderByIdDesc("active");
+    	List<Khachhang> listKhachhang = khachHangService.findByTrangthaiOrderByIdDesc("active");
+    	List<Hanghoa> listHanghoa = hangHoaService.findByTrangthaiOrderByIdDesc("active");
+    	
+    	model.addAttribute("listNhanvien", listNhanvien);
+    	model.addAttribute("listKhachhang", listKhachhang);
+    	model.addAttribute("listHanghoa", listHanghoa);
     	model.addAttribute("listFeedback", listFeedback);
         return "danhsachfeedback";
     }

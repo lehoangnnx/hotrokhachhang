@@ -42,4 +42,10 @@ NhanvienRepository nhanvienRepository;
 		
 		return nhanvienRepository.findByManhanvien(manhanvien);
 	}
+
+	@Override
+	public List<Nhanvien> findByTrangthaiNotOrderByIdDesc(String trangthai) {
+		
+		return nhanvienRepository.findByTrangthaiNotOrderByIdDesc(trangthai);
+	}
 }

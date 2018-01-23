@@ -209,4 +209,14 @@ $('#formHoaDon').change(function () {
 function setcongno() {
     $('#congno').val(parseInt($('#tongtien').val()) - parseInt($('#tiendatra').val()));
 };
-
+$(document).ready(function(){
+	var dateObj = new Date();
+	var month = dateObj.getUTCMonth() + 1;
+	var day = dateObj.getUTCDate();
+	var year = dateObj.getUTCFullYear();
+	
+	$('#ngaylap').val(day+'/'+month+'/'+year);
+	$('#ngayxuat').val(day+'/'+month+'/'+year);
+	$('#ngaythanhtoan').val(day+'/'+month+'/'+year);
+	
+});

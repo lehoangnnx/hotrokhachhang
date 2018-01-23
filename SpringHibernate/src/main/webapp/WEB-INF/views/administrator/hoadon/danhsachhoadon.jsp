@@ -74,9 +74,12 @@
 									<td>${hd.sohoadon }</td>
 									<td>${hd.khachhang.makh } - ${hd.khachhang.ten }</td>
 									<td>${hd.nhanvienByIdnhanvienban.manhanvien } - ${hd.nhanvienByIdnhanvienban.tennhanvien }</td>
-									<td>${hd.tongtien }</td>
-									<td>${hd.tiendatra }</td>
-									<td>${hd.congno }</td>
+									<td><fmt:formatNumber
+											type="number" pattern="###,###" value="${hd.tongtien }" /> &#8363;</td>
+									<td><fmt:formatNumber
+											type="number" pattern="###,###" value="${hd.tiendatra }" /> &#8363;</td>
+									<td><fmt:formatNumber
+											type="number" pattern="###,###" value="${hd.congno }" /> &#8363;</td>
 									<td>${hd.hinhthucthanhtoan }</td>
 									<td><fmt:formatDate pattern="dd-MM-yyyy"
 											value="${hd.ngaylap }" /></td>

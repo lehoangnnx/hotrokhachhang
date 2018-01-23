@@ -137,3 +137,21 @@
 
 
 <script src="${contextPath }/js/main/main.js"></script>
+
+<script>
+$(".sidebar-menu>li").each(function() {
+	
+    var navItem = $(this);
+    var url = location.href;
+    
+    var param = "";
+    if( url.indexOf("?") != -1){
+        param = url.substr(url.indexOf("?"));
+    }
+    
+    if (navItem.find("a").attr("href") == location.pathname+param) {
+      navItem.addClass("active");
+    }
+});
+
+</script>

@@ -173,7 +173,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 								<div class="input-group-addon">
 									<i class="fa fa-calendar"></i>
 								</div>
-								<input name="ngaylap"
+								<input name="ngaylap" id="ngaylap"
 									value="<fmt:formatDate
                                                 pattern="dd-MM-yyyy" value="${hoadon.ngaylap}"/>"
 									type="text" class="form-control"
@@ -188,7 +188,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 								<div class="input-group-addon">
 									<i class="fa fa-calendar"></i>
 								</div>
-								<input name="ngayxuat"
+								<input name="ngayxuat" id="ngayxuat"
 									value="<fmt:formatDate
                                                 pattern="dd-MM-yyyy" value="${hoadon.ngayxuat}"/>"
 									type="text" class="form-control"
@@ -204,7 +204,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 								<div class="input-group-addon">
 									<i class="fa fa-calendar"></i>
 								</div>
-								<input name="ngaythanhtoan"
+								<input name="ngaythanhtoan" id="ngaythanhtoan"
 									value="<fmt:formatDate
                                                 pattern="dd-MM-yyyy" value="${hoadon.ngaythanhtoan}"/>"
 									type="text" class="form-control"
