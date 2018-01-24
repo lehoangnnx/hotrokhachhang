@@ -31,10 +31,12 @@ import bcc.springhibernate.model.Chamsoc;
 import bcc.springhibernate.model.Hoadon;
 import bcc.springhibernate.model.Khachhang;
 import bcc.springhibernate.model.Nhanvien;
+import bcc.springhibernate.model.Nhanvienkpi;
 import bcc.springhibernate.model.Taikhoan;
 import bcc.springhibernate.service.ChamSocService;
 import bcc.springhibernate.service.HoaDonService;
 import bcc.springhibernate.service.KhachHangService;
+import bcc.springhibernate.service.NhanVienKpiService;
 import bcc.springhibernate.service.NhanVienService;
 import bcc.springhibernate.service.TaikhoanService;
 
@@ -51,6 +53,8 @@ public class MainController {
 	ChamSocService chamSocService;
 	@Autowired
 	HoaDonService hoaDonService;
+	@Autowired
+	NhanVienKpiService nhanVienKpiService;
 
 	@ModelAttribute("taikhoan")
 	// Lưu Session Thông tin người dùng đăng nhập
@@ -74,7 +78,7 @@ public class MainController {
 		List<Chamsoc> chamsocs = chamSocService.findByTrangthaiNotOrderByIdDesc("deleted");
 		List<Nhanvien> nhanviens = NhanVienService.findByTrangthaiNotOrderByIdDesc("deleted");
 		List<Hoadon> hoadons = hoaDonService.findByTrangthaiNotOrderByIdDesc("deleted");
-
+		List<Nhanvienkpi> nhanvienkpis = nhanVienKpiService.findByTrangthaiOrderByIdDesc("inactive");
 		model.addAttribute("khachhangs", khachhangs);
 		model.addAttribute("chamsocs", chamsocs);
 		model.addAttribute("nhanviens", nhanviens);
@@ -82,6 +86,8 @@ public class MainController {
 		List<Map<String, Object>> listChamSoc = new ArrayList<Map<String, Object>>();
 
 		List<Map<String, Object>> listKhachHang = new ArrayList<Map<String, Object>>();
+		
+		List<Map<String, Object>> listNhanVienKpi = new ArrayList<Map<String, Object>>();
 		for (Khachhang kh : khachhangs) {
 			Date date = new Date();
 			int daydd = kh.getNgaysinhnhatndd().getDate();
@@ -149,12 +155,26 @@ public class MainController {
 				listChamSoc.add(map);
 			}
 		}
+		
+		
+		for(Nhanvienkpi nvk : nhanvienkpis) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("id", nvk.getId());
+			map.put("ngaydangky", nvk.getNgaydangky());
+			map.put("manhanvien", nvk.getNhanvien().getManhanvien());
+			map.put("tennhanvien", nvk.getNhanvien().getTennhanvien());
+			map.put("tenkpi", nvk.getKpi().getTen());
+			listNhanVienKpi.add(map);
+		}
+		
 		listChamSoc.sort(Comparator.comparing(s -> (int) s.get("ngaycstiep")));
 		listKhachHang.sort(Comparator.comparing(s -> (int) s.get("ngaysinhnhat")));
-
+		listNhanVienKpi.sort(Comparator.comparing(s -> (Date) s.get("ngaydangky")));
+		
+		
 		model.addAttribute("listChamSoc", listChamSoc);
 		model.addAttribute("listKhachHang", listKhachHang);
-
+		model.addAttribute("listNhanVienKpi", listNhanVienKpi);
 		return "index";
 	}
 
@@ -163,14 +183,16 @@ public class MainController {
 
 		return "login";
 	}
-	@GetMapping(value="/logout")
-	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
-	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    if (auth != null){    
-	        new SecurityContextLogoutHandler().logout(request, response, auth);
-	    }
-	    return "redirect:/login?logout";
+
+	@GetMapping(value = "/logout")
+	public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null) {
+			new SecurityContextLogoutHandler().logout(request, response, auth);
+		}
+		return "redirect:/login?logout";
 	}
+
 	@GetMapping(value = { "403" })
 	public String page403(Model model) {
 
