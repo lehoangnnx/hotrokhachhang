@@ -8,6 +8,7 @@ package bcc.springhibernate.config;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 
 import bcc.springhibernate.model.Nhanvien;
 import bcc.springhibernate.model.Quyen;
@@ -50,19 +51,26 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 		}*/
 		
 		// Admin account
-		/*if (taikhoanRepository.findByUsername("admin1") == null) {
+		if (taikhoanRepository.findByUsername("admin") == null) {
 			Taikhoan taikhoan = new Taikhoan();
-			taikhoan.setUsername("admin1");
+			taikhoan.setUsername("admin");
 			taikhoan.setEmail("admin1@gmail.com");
 			taikhoan.setMatkhau(passwordEncoder.encode("123456"));
 			taikhoan.setThongtinkhac("123");
-			Quyen quyen = quyenRepository.findById(1);
+			
 			Nhanvien nhanvien =nhanvienRepository.findById(1);
-			taikhoan.setQuyen(quyen);
+			
+			HashSet<Quyen> hashSet = new HashSet<>();
+			
+			List<Quyen> quyens = quyenRepository.findAll();
+			quyens.forEach(x -> {
+				hashSet.add(x);
+			});
+			taikhoan.setQuyens(hashSet);
 			taikhoan.setNhanvien(nhanvien);
 			taikhoanRepository.save(taikhoan);
 		}
-		*/
+		
 		/*// Member account
 		if (usersRepository.findByUserName("nguoidung") == null) {
 			Users user = new Users();
