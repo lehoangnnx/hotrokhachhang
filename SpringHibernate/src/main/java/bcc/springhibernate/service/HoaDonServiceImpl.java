@@ -111,4 +111,11 @@ public class HoaDonServiceImpl implements HoaDonService {
 		return hoaDonRepository.findByTrangthaiChuaThanhToan(trangthai, pageable);
 	}
 
+	@Override
+	public List<Hoadon> findByNhanvienByIdnhanvienbanAndTrangthaiNotAndNgaylapBetweenOrderByIdDesc(Nhanvien nhanvien,
+			String trangthai, Date d1, Date d2) {
+		
+		return hoaDonRepository.findByNhanvienByIdnhanvienbanAndTrangthaiNotAndNgaylapBetweenOrderByIdDesc(nhanvien, trangthai, d1, d2);
+	}
+
 }

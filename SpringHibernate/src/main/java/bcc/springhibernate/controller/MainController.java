@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
@@ -86,45 +88,50 @@ public class MainController {
 		List<Map<String, Object>> listChamSoc = new ArrayList<Map<String, Object>>();
 
 		List<Map<String, Object>> listKhachHang = new ArrayList<Map<String, Object>>();
-		
+
 		List<Map<String, Object>> listNhanVienKpi = new ArrayList<Map<String, Object>>();
 		for (Khachhang kh : khachhangs) {
 			Date date = new Date();
-			int daydd = kh.getNgaysinhnhatndd().getDate();
-			int monthdd = kh.getNgaysinhnhatndd().getMonth();
-			int daypt = kh.getNgaysinhphutrach().getDate();
-			int monthpt = kh.getNgaysinhphutrach().getMonth();
 			int dayn = date.getDate();
 			int monthn = date.getMonth();
+			if (kh.getNgaysinhnhatndd() != null) {
+				int daydd = kh.getNgaysinhnhatndd().getDate();
+				int monthdd = kh.getNgaysinhnhatndd().getMonth();
+				int dayconlaidd = daydd - dayn;
+				if (monthdd == monthn && (dayconlaidd <= 14) && (dayconlaidd > 7)
+						&& kh.getTrangthainhac().equals("dasinhnhat")) {
+					kh.setTrangthainhac("chosinhnhat");
+					khachHangService.saveOrUpdate(kh);
+				} else if (monthdd == monthn && (dayconlaidd <= 7) && (dayconlaidd >= 0)
+						&& kh.getTrangthainhac().equals("chosinhnhat")) {
 
-			int dayconlaidd = daydd - dayn;
-			int dayconlaipt = daypt - dayn;
-			if (monthdd == monthn && (dayconlaidd <= 14) && (dayconlaidd > 7)
-					&& kh.getTrangthainhac().equals("dasinhnhat")) {
-				kh.setTrangthainhac("chosinhnhat");
-				khachHangService.saveOrUpdate(kh);
-			} else if (monthdd == monthn && (dayconlaidd <= 7) && (dayconlaidd >= 0)
-					&& kh.getTrangthainhac().equals("chosinhnhat")) {
-
-				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("ngaysinhnhat", dayconlaidd);
-				map.put("id", kh.getId());
-				map.put("makh", kh.getMakh());
-				listKhachHang.add(map);
+					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("ngaysinhnhat", dayconlaidd);
+					map.put("id", kh.getId());
+					map.put("makh", kh.getMakh());
+					listKhachHang.add(map);
+				}
 			}
-			if (monthpt == monthn && (dayconlaipt <= 14) && (dayconlaipt > 7)
-					&& kh.getTrangthainhac().equals("dasinhnhat")) {
-				kh.setTrangthainhac("chosinhnhat");
-				khachHangService.saveOrUpdate(kh);
-			} else if (monthpt == monthn && (dayconlaipt <= 7) && (dayconlaipt >= 0)
-					&& kh.getTrangthainhac().equals("chosinhnhat")) {
+			if (kh.getNgaysinhphutrach() != null) {
+				int daypt = kh.getNgaysinhphutrach().getDate();
+				int monthpt = kh.getNgaysinhphutrach().getMonth();
 
-				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("ngaysinhnhat", dayconlaipt);
-				map.put("id", kh.getId());
-				map.put("makh", kh.getMakh());
-				map.put("ten", kh.getTen());
-				listKhachHang.add(map);
+				int dayconlaipt = daypt - dayn;
+
+				if (monthpt == monthn && (dayconlaipt <= 14) && (dayconlaipt > 7)
+						&& kh.getTrangthainhac().equals("dasinhnhat")) {
+					kh.setTrangthainhac("chosinhnhat");
+					khachHangService.saveOrUpdate(kh);
+				} else if (monthpt == monthn && (dayconlaipt <= 7) && (dayconlaipt >= 0)
+						&& kh.getTrangthainhac().equals("chosinhnhat")) {
+
+					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("ngaysinhnhat", dayconlaipt);
+					map.put("id", kh.getId());
+					map.put("makh", kh.getMakh());
+					map.put("ten", kh.getTen());
+					listKhachHang.add(map);
+				}
 			}
 		}
 
@@ -155,9 +162,8 @@ public class MainController {
 				listChamSoc.add(map);
 			}
 		}
-		
-		
-		for(Nhanvienkpi nvk : nhanvienkpis) {
+
+		for (Nhanvienkpi nvk : nhanvienkpis) {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("id", nvk.getId());
 			map.put("ngaydangky", nvk.getNgaydangky());
@@ -166,12 +172,11 @@ public class MainController {
 			map.put("tenkpi", nvk.getKpi().getTen());
 			listNhanVienKpi.add(map);
 		}
-		
+
 		listChamSoc.sort(Comparator.comparing(s -> (int) s.get("ngaycstiep")));
 		listKhachHang.sort(Comparator.comparing(s -> (int) s.get("ngaysinhnhat")));
 		listNhanVienKpi.sort(Comparator.comparing(s -> (Date) s.get("ngaydangky")));
-		
-		
+		Collections.reverse(listNhanVienKpi);
 		model.addAttribute("listChamSoc", listChamSoc);
 		model.addAttribute("listKhachHang", listKhachHang);
 		model.addAttribute("listNhanVienKpi", listNhanVienKpi);

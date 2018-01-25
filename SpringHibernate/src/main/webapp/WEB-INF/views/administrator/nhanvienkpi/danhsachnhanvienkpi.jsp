@@ -11,13 +11,15 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>
-		Nhân Viên KPI<%--  <small><a
+		Nhân Viên KPI
+		<%--  <small><a
 			href="${contextPath }/admin/roles?status=active">Danh Sách Nhân
 				Viên KPI</a></small> <small><a class="btn btn-success"
 			href="${contextPath }/admin/nhanvienkpi/add">Thêm mới</a></small> --%>
 	</h1>
 	<ol class="breadcrumb">
-	<a class="btn btn-success" href="${contextPath }/admin/nhanvienkpi/add">Thêm mới</a>
+		<a class="btn btn-success"
+			href="${contextPath }/admin/nhanvienkpi/add">Thêm mới</a>
 		<%-- <li><a href="${contextPath }/"><i class="fa fa-dashboard"></i>
 				Home</a></li>
 		<li><a href="${contextPath }/roles">Quyền</a></li>
@@ -32,16 +34,19 @@
 		<div class="col-xs-12">
 			<ul class="nav nav-tabs">
 				<li class="tablinks ${param.trangthai == 'active' ? 'active' : '' }">
-					<a href="${contextPath }/admin/nhanvienkpi?trangthai=active">Đã Kích
-						Hoạt</a>
+					<a href="${contextPath }/admin/nhanvienkpi?trangthai=active">Đã
+						Kích Hoạt</a>
 				</li>
-				<li class="tablinks ${param.trangthai == 'inactive' ? 'active' : '' }">
-					<a href="${contextPath }/admin/nhanvienkpi?trangthai=inactive">Chưa Kích
-						Hoạt</a>
+				<li
+					class="tablinks ${param.trangthai == 'inactive' ? 'active' : '' }">
+					<a href="${contextPath }/admin/nhanvienkpi?trangthai=inactive">Chưa
+						Kích Hoạt</a>
 				</li>
 
-				<li class="tablinks ${param.trangthai == 'deleted' ? 'active' : '' }">
-					<a href="${contextPath }/admin/nhanvienkpi?trangthai=deleted">Đã Xóa</a>
+				<li
+					class="tablinks ${param.trangthai == 'deleted' ? 'active' : '' }">
+					<a href="${contextPath }/admin/nhanvienkpi?trangthai=deleted">Đã
+						Xóa</a>
 				</li>
 			</ul>
 			<div class="box">
@@ -49,8 +54,8 @@
 					<h3 class="box-title">Danh Sách Nhân Viên KPI</h3>
 				</div>
 				<!-- /.box-header -->
-				 <div class="box-body">
-					<table  id="example2" class="table table-bordered table-hover">
+				<div class="box-body">
+					<table id="example2" class="table table-bordered table-hover">
 						<thead>
 							<tr>
 								<th>Nhân Viên</th>
@@ -72,8 +77,10 @@
 										${nvkpi.nhanvien.tennhanvien}</td>
 									<td>${nvkpi.kpi.ten}</td>
 									<td>${nvkpi.so}</td>
-									<td><fmt:formatDate pattern="dd-MM-yyyy" value="${nvkpi.ngaydangky}"/></td>
-									<td><fmt:formatDate pattern="dd-MM-yyyy" value="${nvkpi.ngayhoanthanh}"/></td>
+									<td><fmt:formatDate pattern="dd-MM-yyyy"
+											value="${nvkpi.ngaydangky}" /></td>
+									<td><fmt:formatDate pattern="dd-MM-yyyy"
+											value="${nvkpi.ngayhoanthanh}" /></td>
 									<td>${nvkpi.trangthai}</td>
 									<td>${nvkpi.mucdohoanthanh}</td>
 									<td>${nvkpi.mota}</td>
@@ -81,11 +88,12 @@
 										href="${contextPath }/admin/nhanvienkpi/${nvkpi.id}"> <i
 											style="color: blue;" class="fa fa-pencil fa-lg"
 											aria-hidden="true" title="Sửa"> </i>
-									</a> <a onclick="deleteOne(${nvkpi.id});" href="#"
-										data-toggle="modal" data-target="#myModal"
-										style="color: red; margin-left: 10px;"> <i
-											class="fa fa-trash-o fa-lg" aria-hidden="true" title="Xóa"></i></a>
-									</td>
+									</a> <c:if test="${nvkpi.trangthai != 'deleted' }">
+											<a onclick="deleteOne(${nvkpi.id});" href="#"
+												data-toggle="modal" data-target="#myModal"
+												style="color: red; margin-left: 10px;"> <i
+												class="fa fa-trash-o fa-lg" aria-hidden="true" title="Xóa"></i></a>
+										</c:if></td>
 								</tr>
 							</c:forEach>
 						</tbody>

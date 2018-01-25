@@ -30,14 +30,14 @@
 								<label id="error" class="error" style="display: none;" ></label>
 						</div>
 						<div class="form-group">
-							<label for="so">Số</label> <form:input path="so"
+							<label for="so">Số</label> <form:input path="so" min="0" 
 								type="number" class="form-control" 
 								placeholder="Số" />
 								
 						</div>
 						<div class="form-group">
 							<label for="phantram">Phần Trắm</label> <form:input path="phantram"
-								type="number" class="form-control"
+								type="number" class="form-control" min="0" 
 								placeholder="Phần Trăm" />
 								
 						</div>

@@ -82,10 +82,14 @@
 									<td><a href="${contextPath }/admin/nhomhang/${nh.id}">
 											<i style="color: blue;" class="fa fa-pencil fa-lg"
 											aria-hidden="true" title="Sửa"> </i>
-									</a> <a onclick="deleteOne(${nh.id});" href="#" data-toggle="modal"
+									</a>
+									<c:if test="${nh.trangthai != 'deleted' }">
+									 <a onclick="deleteOne(${nh.id});" href="#" data-toggle="modal"
 										data-target="#myModal" style="color: red; margin-left: 10px;">
 											<i class="fa fa-trash-o fa-lg" aria-hidden="true" title="Xóa"></i>
-									</a></td>
+									</a>
+									</c:if>
+									</td>
 								</tr>
 							</c:forEach>
 						</tbody>

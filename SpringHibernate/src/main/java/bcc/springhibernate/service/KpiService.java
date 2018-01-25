@@ -9,6 +9,7 @@ public interface KpiService {
 	void saveOrUpdate(Kpi kpi);
 	List<Kpi> findAll();
 	List<Kpi> findByTrangthaiOrderByIdDesc(String trangthai);
+	List<Kpi> findByTrangthaiNotOrderByIdDesc(String trangthai);
 	List<Kpi> findByTrangthaiOrderByIdDesc(String trangthai, Pageable pageable);
 	Kpi findByTen(String ten);
 	Kpi findById(Integer id);

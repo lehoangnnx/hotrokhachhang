@@ -32,9 +32,9 @@
 								<li>
 									<!-- start notification --> <a
 									href="${contextPath }/admin/nhanvienkpi/${nvk.id}"> <i class="fa fa-users text-aqua"></i>
-										Ngày <fmt:formatDate pattern="dd-MM-yyyy"
-									value="${nvk.ngaydangky }" />  Nhân Viên <br> ${nvk.manhanvien } - ${nvk.tennhanvien }
-										Đăng Ký KPT ${nvk.tenkpi }
+										Ngày <b><fmt:formatDate pattern="dd-MM-yyyy"
+									value="${nvk.ngaydangky }" /></b>  Nhân Viên <br> ${nvk.manhanvien } - ${nvk.tennhanvien }
+										Đăng Ký KPI <br> <b>${nvk.tenkpi }</b>
 
 								</a>
 								</li>
@@ -154,7 +154,7 @@
 					<!-- Menu Footer-->
 					<li class="user-footer">
 						<div class="pull-left">
-							<a href="#" class="btn btn-default btn-flat">Thông Tin</a>
+							<a href="${contextPath }/admin/thongtin" class="btn btn-default btn-flat">Thông Tin</a>
 						</div>
 						<div class="pull-right">
 							<a href="${contextPath }/logout" class="btn btn-default btn-flat">Đăng Xuất</a>

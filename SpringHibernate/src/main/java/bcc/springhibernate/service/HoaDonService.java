@@ -31,4 +31,7 @@ public interface HoaDonService {
 	
 	List<Hoadon> findByTrangthaiChuaThanhToan(String trangthai);
 	List<Hoadon> findByTrangthaiChuaThanhToan(String trangthai,Pageable pageable);
+	
+	List<Hoadon> findByNhanvienByIdnhanvienbanAndTrangthaiNotAndNgaylapBetweenOrderByIdDesc
+	(Nhanvien nhanvien,String trangthai, Date d1, Date d2);
 }

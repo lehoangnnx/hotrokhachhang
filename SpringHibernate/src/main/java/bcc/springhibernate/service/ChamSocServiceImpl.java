@@ -1,5 +1,6 @@
 package bcc.springhibernate.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,13 @@ public class ChamSocServiceImpl implements ChamSocService {
 	public List<Chamsoc> findByTrangthaiOrderByIdDesc(String trangthai, Pageable pageable) {
 		
 		return chamSocRepository.findByTrangthaiOrderByIdDesc(trangthai, pageable);
+	}
+
+	@Override
+	public List<Chamsoc> findByNhanvienchamsocAndTrangthaiNotAndNgayBetweenOrderByIdDesc(Integer nhanvien,
+			String trangthai, Date d1, Date d2) {
+		
+		return chamSocRepository.findByNhanvienchamsocAndTrangthaiNotAndNgayBetweenOrderByIdDesc(nhanvien, trangthai, d1, d2);
 	}
 	
 	

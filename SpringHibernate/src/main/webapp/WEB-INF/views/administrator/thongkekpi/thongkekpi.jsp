@@ -76,55 +76,22 @@
 
 
 		<!-- ./col -->
-		<form:form id="formThongKe" action="${contextPath }/admin/thongke"
+		<form:form id="formThongKe" action="${contextPath }/admin/thongkekpi"
 			method="get">
 			<div class="col-md-12">
 				<div class="box box-primary">
 
 					<div class="box-body">
-						<div class="col-md-4">
+						
+						<div class="col-md-12">
 							<div class="form-group">
-								<label>Từ Ngày</label>
-
-								<div class="input-group">
-									<div class="input-group-addon">
-										<i class="fa fa-calendar"></i>
-									</div>
-									<input name="tungay" id="tungay" onchange="checkNgay();"
-										value="<fmt:formatDate value="${tungay }"
-                                                pattern="dd-MM-yyyy" />"
-										type="text" class="form-control"
-										data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="">
-								</div>
-								<label id="tungay-error" class="error" for="tungay"></label>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="form-group">
-								<label>Đến Ngày</label>
-
-								<div class="input-group">
-									<div class="input-group-addon">
-										<i class="fa fa-calendar"></i>
-									</div>
-									<input name="denngay" id="denngay" onchange="checkNgay();"
-										value="<fmt:formatDate
-                                                pattern="dd-MM-yyyy" value="${denngay }"/>"
-										type="text" class="form-control"
-										data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="">
-								</div>
-								<label id="denngay-error" class="error" for="denngay"></label>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="form-group">
-								<label>Nhân Viên Bán Hàng</label> <select
-									class="form-control select2" name="nhanvienbanhang"
+								<label>KPI</label> <select
+									class="form-control select2" name="kpi"
 									style="width: 100%;">
-									<option value="0">Không</option>
-									<c:forEach var="nv" items="${listNhanvien }">
-										<option ${param.nhanvienbanhang == nv.id ? 'selected' : '' }
-											value="${nv.id }">${nv.manhanvien}-${nv.tennhanvien }</option>
+									
+									<c:forEach var="k" items="${listKpi }">
+										<option ${param.kpi == k.id ? 'selected' : '' }
+											value="${k.id }">${k.ten }</option>
 									</c:forEach>
 
 								</select>
@@ -138,7 +105,7 @@
 				</div>
 			</div>
 		</form:form>
-		<div class="col-md-12">
+		<%-- <div class="col-md-12">
 			<div class="box box-primary">
 				<c:set var="tongtien" value="0" />
 				<c:set var="tiendatra" value="0" />
@@ -185,7 +152,7 @@
 
 							</div>
 						</div>
-						
+
 					</div>
 					<div class="col-md-12">
 						<div class="col-md-4">
@@ -218,7 +185,7 @@
 				</div>
 			</div>
 		</div>
-
+ --%>
 	</div>
 	<%-- <ul class="nav nav-tabs">
 		<li
@@ -246,72 +213,75 @@
 	</ul> --%>
 	<div class="box">
 		<div class="box-header">
-			<h3 class="box-title">Thống Kê Hóa Đơn</h3>
+			<h3 class="box-title">
+				Thống Kê Nhân Viên KPI Theo KPI : <b>${listNhanvienkpi[0].kpi.ten }</b>
+			</h3>
 		</div>
 		<!-- /.box-header -->
+		
 		<div class="box-body">
 			<table id="example2" class="table table-bordered table-hover">
-						<thead>
-							<tr>
-								<th>Số Hóa Đơn</th>
-								<th>Khách Hàng</th>
-								<th>Nhân Viên Bán Hàng</th>
-								<th>Tổng Tiền</th>
-								<th>Đã Trả</th>
+				<thead>
+					<tr>
+						<th>Nhân Viên</th>
+						<th>Số Chỉ Tiêu Đăng Ký</th>
+						<th>Chỉ Tiêu Hiện Tại</th>
+						<th>Chỉ Tiêu KPI</th>
+						<th>Ngày Đăng Ký</th>
+						<th>Ngày Hoàn Thành</th>
+						<th>Trạng Thái</th>
+						<th>Thao Tác</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="nvk" items="${listNhanvienkpi }">
 
-								<th>Ngày Lập</th>
-								<th>Trạng Thái</th>
-								<th>Thao Tác</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="hd" items="${listHoadon }">
-								<tr>
-									<td>${hd.sohoadon }</td>
-									<td>${hd.khachhang.makh }- ${hd.khachhang.ten }</td>
-									<td>${hd.nhanvienByIdnhanvienban.manhanvien }-
-										${hd.nhanvienByIdnhanvienban.tennhanvien }</td>
-									<td><fmt:formatNumber type="number" pattern="###,###"
-											value="${hd.tongtien }" /> &#8363;</td>
-									<td><fmt:formatNumber type="number" pattern="###,###"
-											value="${hd.tiendatra }" /> &#8363;</td>
-
-									<td><fmt:formatDate pattern="dd-MM-yyyy"
-											value="${hd.ngaylap }" /></td>
-
-									<c:if test="${hd.trangthai == 'dagiaohang' }">
-										<td>Đã Giao Hàng</td>
-									</c:if>
-									<c:if test="${hd.trangthai == 'chuagiaohang' }">
-										<td>Chưa Giao Hàng</td>
-									</c:if>
-									<c:if test="${hd.trangthai == 'deleted' }">
-										<td>Đã Xóa</td>
-									</c:if>
-									<td><a href="${contextPath }/admin/hoadon/${hd.id}"> <i
-											style="color: blue;" class="fa fa-pencil fa-lg"
-											aria-hidden="true" title="Sửa"> </i>
-									</a> <%-- <a onclick="deleteOne(${hd.id});" href="#" data-toggle="modal"
-										data-target="#myModal" style="color: red; margin-left: 10px;">
-											<i class="fa fa-trash-o fa-lg" aria-hidden="true" title="Xóa"></i>
-									</a> --%></td>
-								</tr>
+						<tr>
+							<td>${nvk.nhanvien.manhanvien }-${nvk.nhanvien.tennhanvien }</td>
+							<td>${nvk.so }</td>
+							<td>
+							<c:forEach var="lm" items="${listMap }">
+								<c:if test="${lm.idnvkpi == nvk.id }">
+									<span>Tổng Tiền : ${lm.tongtien}</span><br>
+									<span>Tổng Lần Chăm Sóc : ${lm.tongsolanchamsoc }</span>
+								</c:if>
 							</c:forEach>
-						</tbody>
-						<tfoot>
-							<tr>
-								<th>Số Hóa Đơn</th>
-								<th>Khách Hàng</th>
-								<th>Nhân Viên Bán Hàng</th>
-								<th>Tổng Tiền</th>
-								<th>Đã Trả</th>
-								
-								<th>Ngày Lập</th>
-								<th>Trạng Thái</th>
-								<th>Thao Tác</th>
-							</tr>
-						</tfoot>
-					</table>
+							</td>
+							<td>
+							<span>Số : ${nvk.kpi.so }</span> <br>
+							<span>Phần Trắm : ${nvk.kpi.phantram }</span>
+							</td>
+							<td><fmt:formatDate pattern="dd-MM-yyyy"
+									value="${nvk.ngaydangky }" /></td>
+							<td><fmt:formatDate pattern="dd-MM-yyyy"
+									value="${nvk.ngayhoanthanh }" /></td>
+							
+							<c:if test="${nvk.trangthai == 'active' }">
+							<td>Đã Kích Hoạt</td>
+							</c:if>
+							<c:if test="${nvk.trangthai == 'inactive' }">
+							<td>Chưa Kích Hoạt</td>
+							</c:if>
+							<td><a href="${contextPath }/admin/hoadon/${hd.id}"> <i
+									style="color: blue;" class="fa fa-pencil fa-lg"
+									aria-hidden="true" title="Sửa"> </i>
+							</a> </td>
+						</tr>
+					</c:forEach>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th>Số Hóa Đơn</th>
+						<th>Số Chỉ Tiêu Đăng Ký</th>
+						<th>Chỉ Tiêu Hiện Tại</th>
+						<th>Chỉ Tiêu KPI</th>
+						<th>Ngày Đăng Ký</th>
+						<th>Ngày Hoàn Thành</th>
+						<th>Trạng Thái</th>
+						<th>Thao Tác</th>
+					</tr>
+				</tfoot>
+			</table>
 		</div>
 
 

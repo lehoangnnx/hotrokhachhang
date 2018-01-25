@@ -1,5 +1,6 @@
 package bcc.springhibernate.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
@@ -15,4 +16,7 @@ public interface ChamSocService {
 	List<Chamsoc> findByTrangthaiNotOrderByIdDesc(String trangthai);
 	
 	Chamsoc findById(Integer id);
+	
+	List<Chamsoc> findByNhanvienchamsocAndTrangthaiNotAndNgayBetweenOrderByIdDesc
+	(Integer nhanvien,String trangthai, Date d1, Date d2);
 }

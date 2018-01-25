@@ -53,7 +53,7 @@
 						</div>
 						<div class="form-group">
 							<label for="so">Số</label>
-							<form:input path="so" type="number" class="form-control"
+							<form:input path="so" type="number" class="form-control" min="0" 
 								placeholder="Số" />
 						</div>
 						<div class="form-group">
@@ -75,7 +75,7 @@
 
 						<div class="form-group">
 							<label for="mucdohoanthanh">Mức Độ Hoàn Thành</label>
-							<form:input path="mucdohoanthanh" type="number"
+							<form:input path="mucdohoanthanh" type="number" min="0" 
 								class="form-control" placeholder="Mức Độ Hoàn Thành" />
 
 						</div>

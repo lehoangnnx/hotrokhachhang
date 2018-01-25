@@ -100,10 +100,14 @@
 									<td><a href="${contextPath }/admin/hoadon/${hd.id}"> <i
 											style="color: blue;" class="fa fa-pencil fa-lg"
 											aria-hidden="true" title="Sửa"> </i>
-									</a> <a onclick="deleteOne(${hd.id});" href="#" data-toggle="modal"
+									</a> 
+									<c:if test="${hd.trangthai != 'deleted' }">
+									<a onclick="deleteOne(${hd.id});" href="#" data-toggle="modal"
 										data-target="#myModal" style="color: red; margin-left: 10px;">
 											<i class="fa fa-trash-o fa-lg" aria-hidden="true" title="Xóa"></i>
-									</a></td>
+									</a>
+									</c:if>
+									</td>
 								</tr>
 							</c:forEach>
 						</tbody>

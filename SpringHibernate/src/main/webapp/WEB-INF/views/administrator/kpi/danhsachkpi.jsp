@@ -66,14 +66,18 @@
 									<td><a href="${contextPath }/admin/kpi/${kpi.id}"> <i
 											style="color: blue;" class="fa fa-pencil fa-lg"
 											aria-hidden="true" title="Sửa"> </i>
-									</a> <a onclick="deleteOne(${kpi.id});" href="#"
+									</a> 
+									<c:if test="${kpi.trangthai != 'deleted' }">
+									<a onclick="deleteOne(${kpi.id});" href="#"
 										data-toggle="modal" data-target="#myModal"
 										style="color: red; margin-left: 10px;"> <i
 											class="fa fa-trash-o fa-lg" aria-hidden="true" title="Xóa"></i></a>
 										<a href="${contextPath }/admin/thongkekpi?kpi=${kpi.id}"> <i
 											style="color: green; margin-left: 10px;" class="fa fa-building-o"
 											aria-hidden="true" title="Thống Kê KPI"> </i>
-									</a></td>
+									</a>
+									</c:if>
+									</td>
 								</tr>
 							</c:forEach>
 						</tbody>

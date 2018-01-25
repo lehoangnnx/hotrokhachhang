@@ -45,4 +45,7 @@ public interface HoaDonRepository extends JpaRepository<Hoadon, Integer> {
 	List<Hoadon> findByTrangthaiChuaThanhToan(String trangthai);
 	@Query("select hd from Hoadon hd where hd.tongtien > hd.tiendatra and hd.congno > 0 and trangthai <> ?1")
 	List<Hoadon> findByTrangthaiChuaThanhToan(String trangthai,Pageable pageable);
+	
+	List<Hoadon> findByNhanvienByIdnhanvienbanAndTrangthaiNotAndNgaylapBetweenOrderByIdDesc
+	(Nhanvien nhanvien,String trangthai, Date d1, Date d2);
 }

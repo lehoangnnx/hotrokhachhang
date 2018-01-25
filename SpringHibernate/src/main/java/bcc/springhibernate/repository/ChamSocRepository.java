@@ -1,5 +1,6 @@
 package bcc.springhibernate.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import bcc.springhibernate.model.Chamsoc;
 import bcc.springhibernate.model.Hoadon;
+import bcc.springhibernate.model.Nhanvien;
 
 @Repository
 public interface ChamSocRepository extends JpaRepository<Chamsoc, Integer> {
@@ -18,4 +20,6 @@ public interface ChamSocRepository extends JpaRepository<Chamsoc, Integer> {
 	
 	Chamsoc findById(Integer id);
 	
+	List<Chamsoc> findByNhanvienchamsocAndTrangthaiNotAndNgayBetweenOrderByIdDesc
+	(Integer nhanvien,String trangthai, Date d1, Date d2);
 }

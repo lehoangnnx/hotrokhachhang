@@ -489,7 +489,15 @@
 	</definition>
 	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
 	
-	
+	<!-- Trang Thống Kê KPI -->
+	<definition name="thongkekpi" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/thongkekpi/thongkekpi.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/thongkekpi/footertag/thongkekpi-footertag.jsp" />
+	</definition>
+	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
 		
 	
 	
@@ -520,6 +528,19 @@
 	</definition>
 	
 	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
+	
+	
+	<!-- Trang Thông Tin-->
+	<definition name="thongtin" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/thongtin/thongtin.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/thongtin/footertag/thongtin-footertag.jsp" />
+	</definition>
+	
+	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
+	
 	<!-- Trang Lỗi -->
 	<definition name="403" template="/WEB-INF/views/administrator/403.jsp">
 

@@ -31,13 +31,13 @@
 						</div>
 						<div class="form-group">
 							<label for="so">Số</label> <form:input path="so"
-								type="number" class="form-control" 
+								type="number" class="form-control"  min="0" value="0"
 								placeholder="Số" />
 								
 						</div>
 						<div class="form-group">
 							<label for="phantram">Phần Trắm</label> <form:input path="phantram"
-								type="number" class="form-control"
+								type="number" class="form-control" min="0" value="0"
 								placeholder="Phần Trăm" />
 								
 						</div>

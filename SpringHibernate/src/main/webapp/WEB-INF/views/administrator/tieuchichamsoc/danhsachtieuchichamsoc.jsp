@@ -63,9 +63,11 @@
 			                  			<i style="color: blue;" class="fa fa-pencil fa-lg" aria-hidden="true" title="Sửa">
 			                  			</i>
 			                  		</a> 
+			                  		<c:if test="${tccs.trangthai != 'deleted' }">
 			                  		<a onclick="deleteOne(${tccs.id});" href="#" data-toggle="modal" data-target="#myModal"
 										style="color: red; margin-left: 10px;"> 
 										<i class="fa fa-trash-o fa-lg" aria-hidden="true" title="Xóa"></i></a>
+										</c:if>
 								</td>
 			                </tr>
 		                </c:forEach>

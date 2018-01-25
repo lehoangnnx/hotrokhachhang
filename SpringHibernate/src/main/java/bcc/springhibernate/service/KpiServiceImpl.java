@@ -49,6 +49,12 @@ public class KpiServiceImpl implements KpiService {
 		
 		return kpiRepository.findById(id);
 	}
+
+	@Override
+	public List<Kpi> findByTrangthaiNotOrderByIdDesc(String trangthai) {
+		
+		return kpiRepository.findByTrangthaiNotOrderByIdDesc(trangthai);
+	}
 	
 
 }
