@@ -262,11 +262,11 @@
 
 						<div class="form-group">
 							<label for="uutien">Ưu Tiên</label> <br> <label
-								class="lb-flat-red"> <input value="true" type="radio"
-								${khachhang.uutien == true ? 'checked' : '' }
+								class="lb-flat-red"> <input value="co" type="radio"
+								${khachhang.uutien == 'co' ? 'checked' : '' }
 								name="uutien" class="flat-red" > Có
-							</label> <label class="lb-flat-red"> <input value="false"
-							${khachhang.uutien == true ? 'checked' : '' }
+							</label> <label class="lb-flat-red"> <input value="khong"
+							${khachhang.uutien == 'khong' ? 'checked' : '' }
 								type="radio" name="uutien" class="flat-red"> Không
 							</label>
 						</div>

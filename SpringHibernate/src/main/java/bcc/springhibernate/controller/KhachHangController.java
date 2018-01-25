@@ -142,6 +142,7 @@ public class KhachHangController {
 			@RequestParam(value="solanchamsoc", defaultValue="0") Integer solanchamsoc,
 			@RequestParam(value="solandamphan", defaultValue="0") Integer solandamphan,
 			@RequestParam(value="diemtiemnang", defaultValue="0") Integer diemtiemnang,
+			@RequestParam(value="uutien", defaultValue="khong") String uutien,
 			@RequestParam(value="ghichu", defaultValue="null") String ghichu,
 			RedirectAttributes redirectAttributes) {
 		try {
@@ -207,6 +208,7 @@ public class KhachHangController {
 			if(!ghichu.equals("null")) {
 				khachhang.setGhichu(ghichu);
 			}
+			khachhang.setUutien(uutien);
 			khachhang.setTrangthai("active");
 			khachhang.setTrangthainhac("chosinhnhat");
 			khachHangService.saveOrUpdate(khachhang);
@@ -221,6 +223,7 @@ public class KhachHangController {
 
 	@PatchMapping("/khachhang")
 	String suaKhachHang(//@ModelAttribute("khachhang") Khachhang khachhang,
+			@RequestParam("id") Integer id,
 			@RequestParam(value="loaikhachhang") Integer loaikhachhang, @RequestParam("nhomkhachhang") Integer nhomkhachhang,
 			@RequestParam(value="makh", defaultValue="null") String makh,
 			@RequestParam(value="ten", defaultValue="null") String ten,
@@ -243,13 +246,14 @@ public class KhachHangController {
 			@RequestParam(value="solanchamsoc", defaultValue="0") Integer solanchamsoc,
 			@RequestParam(value="solandamphan", defaultValue="0") Integer solandamphan,
 			@RequestParam(value="diemtiemnang", defaultValue="0") Integer diemtiemnang,
+			@RequestParam(value="uutien", defaultValue="khong") String uutien,
 			@RequestParam(value="ghichu", defaultValue="null") String ghichu,
 			RedirectAttributes redirectAttributes) {
 		try {
 			SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 			Loaikhachhang getLoaiKhachHangById = loaiKhachHangService.findById(loaikhachhang);
 			Nhomkhachhang getNhomKhachHangById = nhomKhachHangService.findById(nhomkhachhang);
-			Khachhang khachhang = new Khachhang();
+			Khachhang khachhang = khachHangService.findById(id);
 			khachhang.setLoaikhachhang(getLoaiKhachHangById);
 			khachhang.setNhomkhachhang(getNhomKhachHangById);
 			khachhang.setMakh(makh);
@@ -307,6 +311,7 @@ public class KhachHangController {
 			if(!ghichu.equals("null")) {
 				khachhang.setGhichu(ghichu);
 			}
+			khachhang.setUutien(uutien);
 			khachhang.setTrangthai("active");
 			khachhang.setTrangthainhac("chosinhnhat");
 			khachHangService.saveOrUpdate(khachhang);

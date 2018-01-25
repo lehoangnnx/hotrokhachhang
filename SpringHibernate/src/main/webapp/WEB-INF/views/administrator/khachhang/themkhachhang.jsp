@@ -254,10 +254,10 @@
 
 						<div class="form-group">
 							<label for="uutien">Ưu Tiên</label> <br>
-							<label class="lb-flat-red"> <input value="true"
+							<label class="lb-flat-red"> <input value="co"
 								type="radio" name="uutien" class="flat-red" checked>
 								Có
-							</label> <label class="lb-flat-red"> <input value="false"
+							</label> <label class="lb-flat-red"> <input value="khong"
 								type="radio" name="uutien" class="flat-red">
 								Không
 							</label>
