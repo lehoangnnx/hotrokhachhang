@@ -14,18 +14,20 @@
 </style>
 <style>
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-    border: 1px solid #ddd;
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+	border: 1px solid #ddd;
 }
 
 th, td {
-    text-align: left;
-    padding: 8px;
+	text-align: left;
+	padding: 8px;
 }
 
-tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(even) {
+	background-color: #f2f2f2
+}
 </style>
 <section class="content">
 
@@ -135,7 +137,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 							<label id="_hanghoa-error" class="error" style="display: none;"></label>
 						</div>
 						<div class="box-body">
-							<table border="1" style="overflow-x:auto;" id="tblcthd">
+							<table border="1" style="overflow-x: auto;" id="tblcthd">
 								<thead>
 									<tr>
 										<th>ID Hàng Hóa</th>
@@ -301,19 +303,18 @@ tr:nth-child(even){background-color: #f2f2f2}
 
 						<div class="form-group">
 							<label for="trangthai">Trạng Thái</label> <br> <label
-								class="lb-flat-red"> <input value="dathanhtoan"
-								${hoadon.trangthai == 'dathanhtoan' ? 'checked' : '' }
-								type="radio" name="trangthai" class="flat-red"> Đã Thanh
-								Toán
-							</label> <label class="lb-flat-red"> <input value="chuathanhtoan"
+								class="lb-flat-red"> <input value="dagiaohang"
+								${hoadon.trangthai == 'dagiaohang' ? 'checked' : '' }
+								type="radio" name="trangthai" class="flat-red"> Đã Giao
+								Hàng
+							</label> <label class="lb-flat-red"> <input value="chuagiaohang"
 								type="radio"
-								${hoadon.trangthai == 'chuathanhtoan' ? 'checked' : '' }
-								name="trangthai" class="flat-red"> Chưa Thanh Toán
-							</label> <label class="lb-flat-red"> <input value="dangno"
-								${hoadon.trangthai == 'dangno' ? 'checked' : '' } type="radio"
-								name="trangthai" class="flat-red"> Đang Nợ
+								${hoadon.trangthai == 'chuagiaohang' ? 'checked' : '' }
+								name="trangthai" class="flat-red"> Chưa Giao Hàng
 							</label>
 						</div>
+
+
 
 
 						<div class="form-group">

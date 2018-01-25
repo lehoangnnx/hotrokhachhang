@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import bcc.springhibernate.model.Hoadon;
@@ -34,4 +35,14 @@ public interface HoaDonRepository extends JpaRepository<Hoadon, Integer> {
 
 	List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaylapBetweenOrderByIdDesc(String trangthai,
 			Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2);
+	
+	@Query("select hd from Hoadon hd where hd.tongtien = hd.tiendatra and hd.congno = 0 and trangthai <> ?1")
+	List<Hoadon> findByTrangthaiDaThanhToan(String trangthai);
+	@Query("select hd from Hoadon hd where hd.tongtien = hd.tiendatra and hd.congno = 0 and trangthai <> ?1")
+	List<Hoadon> findByTrangthaiDaThanhToan(String trangthai,Pageable pageable);
+	
+	@Query("select hd from Hoadon hd where hd.tongtien > hd.tiendatra and hd.congno > 0 and trangthai <> ?1")
+	List<Hoadon> findByTrangthaiChuaThanhToan(String trangthai);
+	@Query("select hd from Hoadon hd where hd.tongtien > hd.tiendatra and hd.congno > 0 and trangthai <> ?1")
+	List<Hoadon> findByTrangthaiChuaThanhToan(String trangthai,Pageable pageable);
 }

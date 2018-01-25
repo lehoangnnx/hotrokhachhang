@@ -6,6 +6,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <input hidden="" id="msg" value="${msg }"></input>
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -92,6 +93,7 @@
 					<table id="example2" class="table table-bordered table-hover">
 						<thead>
 							<tr>
+								<th>Ưu Tiên</th>
 								<th>Mã Khách Hàng</th>
 								<th>Tên Khách Hàng</th>
 								<th>Loại Khách Hàng</th>
@@ -100,8 +102,26 @@
 							</tr>
 						</thead>
 						<tbody>
+
 							<c:forEach var="kh" items="${listKhachhang }">
 								<tr>
+									<td>
+										<div class="btn-group" data-toggle="buttons">
+											<label id="lbloption1${kh.id }" class="btn  btn-xs
+											${kh.uutien == 'co' ? 'btn-success active' : 'btn-default' }
+											"> <input 
+												onchange="onUuTien(${kh.id });"
+												type="radio" name="options" id="option1${kh.id }" value="1" /> <span
+												class="glyphicon glyphicon-ok"></span>
+											</label> <label id="lbloption2${kh.id }" class="btn  btn-xs
+											${kh.uutien == 'khong' ? 'btn-danger active' : 'btn-default' }
+											"> <input
+											onchange="offUuTien(${kh.id });"
+												type="radio" name="options" id="option2${kh.id }" value="0" /> <span
+												class="glyphicon glyphicon-remove"></span>
+											</label>
+										</div>
+									</td>
 									<td>${kh.makh }</td>
 									<td>${kh.ten }</td>
 									<td>${kh.loaikhachhang.tenloai }</td>
@@ -112,12 +132,17 @@
 									</a> <a onclick="deleteOne(${kh.id});" href="#" data-toggle="modal"
 										data-target="#myModal" style="color: red; margin-left: 10px;">
 											<i class="fa fa-trash-o fa-lg" aria-hidden="true" title="Xóa"></i>
+									</a> <a href="${contextPath }/admin/chamsoc/add?khachhang=${kh.id}">
+											<i style="color: green; margin-left: 10px;"
+											class="fa fa-commenting-o" aria-hidden="true"
+											title="Chăm Sóc"> </i>
 									</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
 						<tfoot>
 							<tr>
+								<th>Ưu Tiên</th>
 								<th>Mã Khách Hàng</th>
 								<th>Tên Khách Hàng</th>
 								<th>Loại Khách Hàng</th>

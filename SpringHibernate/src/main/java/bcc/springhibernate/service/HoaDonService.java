@@ -25,4 +25,10 @@ public interface HoaDonService {
 
 	List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaylapBetweenOrderByIdDesc(String trangthai,
 			Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2);
+	
+	List<Hoadon> findByTrangthaiDaThanhToan(String trangthai);
+	List<Hoadon> findByTrangthaiDaThanhToan(String trangthai,Pageable pageable);
+	
+	List<Hoadon> findByTrangthaiChuaThanhToan(String trangthai);
+	List<Hoadon> findByTrangthaiChuaThanhToan(String trangthai,Pageable pageable);
 }

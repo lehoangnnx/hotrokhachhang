@@ -111,7 +111,7 @@
 						Viên</a></li>
 				<li><a href="${contextPath }/admin/bophan?trangthai=active">Bộ
 						Phận</a></li>
-				<li><a href="${contextPath }/admin/luong?trangthai=active">Lương</a></li>
+				<li><a href="${contextPath }/admin/luong?trangthai=datraluong">Lương</a></li>
 			</ul></li>
 		<li class="treeview"><a href="#"><i class="fa fa-link"></i> <span>KPI</span>
 				<span class="pull-right-container"> <i

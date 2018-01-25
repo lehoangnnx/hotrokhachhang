@@ -87,4 +87,28 @@ public class HoaDonServiceImpl implements HoaDonService {
 				nhanvienByIdnhanvienban, d1, d2);
 	}
 
+	@Override
+	public List<Hoadon> findByTrangthaiDaThanhToan(String trangthai) {
+		
+		return hoaDonRepository.findByTrangthaiDaThanhToan(trangthai);
+	}
+
+	@Override
+	public List<Hoadon> findByTrangthaiChuaThanhToan(String trangthai) {
+		
+		return hoaDonRepository.findByTrangthaiChuaThanhToan(trangthai);
+	}
+
+	@Override
+	public List<Hoadon> findByTrangthaiDaThanhToan(String trangthai, Pageable pageable) {
+		
+		return hoaDonRepository.findByTrangthaiDaThanhToan(trangthai, pageable);
+	}
+
+	@Override
+	public List<Hoadon> findByTrangthaiChuaThanhToan(String trangthai, Pageable pageable) {
+		
+		return hoaDonRepository.findByTrangthaiChuaThanhToan(trangthai, pageable);
+	}
+
 }

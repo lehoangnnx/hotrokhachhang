@@ -150,18 +150,18 @@
 				</c:forEach>
 				<div class="box-body">
 					<div class="col-md-12 margin" style="border-bottom: 1px solid;">
-						<div class="col-md-3">
+						<div class="col-md-4">
 							<div class="form-group">
 								<label>Tổng Hóa Đơn : <span>${fn:length(listHoadon) }</span>
 								</label>
 
 							</div>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-4">
 							<div class="form-group">
 								<c:set var="hddtt" value="0" />
 								<c:forEach var="hd" items="${listHoadon }">
-									<c:if test="${hd.trangthai == 'dathanhtoan' }">
+									<c:if test="${hd.tongtien == hd.tiendatra && hd.congno == 0 }">
 										<c:set var="hddtt" value="${hddtt + 1 }" />
 									</c:if>
 
@@ -171,11 +171,11 @@
 
 							</div>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-4">
 							<div class="form-group">
 								<c:set var="hdctt" value="0" />
 								<c:forEach var="hd" items="${listHoadon }">
-									<c:if test="${hd.trangthai == 'chuathanhtoan' }">
+									<c:if test="${hd.tongtien > hd.tiendatra && hd.congno > 0 }">
 										<c:set var="hdctt" value="${hdctt + 1 }" />
 									</c:if>
 
@@ -185,20 +185,7 @@
 
 							</div>
 						</div>
-						<div class="col-md-3">
-							<div class="form-group">
-								<c:set var="hddn" value="0" />
-								<c:forEach var="hd" items="${listHoadon }">
-									<c:if test="${hd.trangthai == 'dangno' }">
-										<c:set var="hddn" value="${hddn + 1 }" />
-									</c:if>
-
-								</c:forEach>
-								<label>Hóa Đơn Đang Nợ : <span>${hddn }</span>
-								</label>
-
-							</div>
-						</div>
+						
 					</div>
 					<div class="col-md-12">
 						<div class="col-md-4">
@@ -264,62 +251,67 @@
 		<!-- /.box-header -->
 		<div class="box-body">
 			<table id="example2" class="table table-bordered table-hover">
-				<thead>
-					<tr>
-						<th>Số Hóa Đơn</th>
-						<th>Khách Hàng</th>
-						<th>Nhân Viên Bán Hàng</th>
-						<th>Tổng Tiền</th>
-						<th>Đã Trả</th>
-						<th>Đang Nợ</th>
-						<th>Hình Thức Thanh Toán</th>
-						<th>Ngày Lập</th>
-						<th>Trạng Thái</th>
-						<th>Thao Tác</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="hd" items="${listHoadon }">
-						<tr>
-							<td>${hd.sohoadon }</td>
-							<td>${hd.khachhang.makh }-${hd.khachhang.ten }</td>
-							<td>${hd.nhanvienByIdnhanvienban.manhanvien }-
-								${hd.nhanvienByIdnhanvienban.tennhanvien }</td>
-							<td><fmt:formatNumber
-											type="number" pattern="###,###" value="${hd.tongtien }" /> &#8363;</td>
-									<td><fmt:formatNumber
-											type="number" pattern="###,###" value="${hd.tiendatra }" /> &#8363;</td>
-									<td><fmt:formatNumber
-											type="number" pattern="###,###" value="${hd.congno }" /> &#8363;</td>
-							<td>${hd.hinhthucthanhtoan }</td>
-							<td><fmt:formatDate pattern="dd-MM-yyyy"
-									value="${hd.ngaylap }" /></td>
-							<td>${hd.trangthai }</td>
-							<td><a href="${contextPath }/admin/hoadon/${hd.id}"> <i
-									style="color: blue;" class="fa fa-pencil fa-lg"
-									aria-hidden="true" title="Sửa"> </i>
-							</a> <a onclick="deleteOne(${hd.id});" href="#" data-toggle="modal"
-								data-target="#myModal" style="color: red; margin-left: 10px;">
-									<i class="fa fa-trash-o fa-lg" aria-hidden="true" title="Xóa"></i>
-							</a></td>
-						</tr>
-					</c:forEach>
-				</tbody>
-				<tfoot>
-					<tr>
-						<th>Số Hóa Đơn</th>
-						<th>Khách Hàng</th>
-						<th>Nhân Viên Bán Hàng</th>
-						<th>Tổng Tiền</th>
-						<th>Đã Trả</th>
-						<th>Đang Nợ</th>
-						<th>Hình Thức Thanh Toán</th>
-						<th>Ngày Lập</th>
-						<th>Trạng Thái</th>
-						<th>Thao Tác</th>
-					</tr>
-				</tfoot>
-			</table>
+						<thead>
+							<tr>
+								<th>Số Hóa Đơn</th>
+								<th>Khách Hàng</th>
+								<th>Nhân Viên Bán Hàng</th>
+								<th>Tổng Tiền</th>
+								<th>Đã Trả</th>
+
+								<th>Ngày Lập</th>
+								<th>Trạng Thái</th>
+								<th>Thao Tác</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="hd" items="${listHoadon }">
+								<tr>
+									<td>${hd.sohoadon }</td>
+									<td>${hd.khachhang.makh }- ${hd.khachhang.ten }</td>
+									<td>${hd.nhanvienByIdnhanvienban.manhanvien }-
+										${hd.nhanvienByIdnhanvienban.tennhanvien }</td>
+									<td><fmt:formatNumber type="number" pattern="###,###"
+											value="${hd.tongtien }" /> &#8363;</td>
+									<td><fmt:formatNumber type="number" pattern="###,###"
+											value="${hd.tiendatra }" /> &#8363;</td>
+
+									<td><fmt:formatDate pattern="dd-MM-yyyy"
+											value="${hd.ngaylap }" /></td>
+
+									<c:if test="${hd.trangthai == 'dagiaohang' }">
+										<td>Đã Giao Hàng</td>
+									</c:if>
+									<c:if test="${hd.trangthai == 'chuagiaohang' }">
+										<td>Chưa Giao Hàng</td>
+									</c:if>
+									<c:if test="${hd.trangthai == 'deleted' }">
+										<td>Đã Xóa</td>
+									</c:if>
+									<td><a href="${contextPath }/admin/hoadon/${hd.id}"> <i
+											style="color: blue;" class="fa fa-pencil fa-lg"
+											aria-hidden="true" title="Sửa"> </i>
+									</a> <a onclick="deleteOne(${hd.id});" href="#" data-toggle="modal"
+										data-target="#myModal" style="color: red; margin-left: 10px;">
+											<i class="fa fa-trash-o fa-lg" aria-hidden="true" title="Xóa"></i>
+									</a></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+						<tfoot>
+							<tr>
+								<th>Số Hóa Đơn</th>
+								<th>Khách Hàng</th>
+								<th>Nhân Viên Bán Hàng</th>
+								<th>Tổng Tiền</th>
+								<th>Đã Trả</th>
+								
+								<th>Ngày Lập</th>
+								<th>Trạng Thái</th>
+								<th>Thao Tác</th>
+							</tr>
+						</tfoot>
+					</table>
 		</div>
 
 

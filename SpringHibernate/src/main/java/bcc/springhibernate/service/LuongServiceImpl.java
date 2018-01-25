@@ -52,9 +52,9 @@ public class LuongServiceImpl implements LuongService {
 	}
 
 	@Override
-	public Luong findByNhanvienAndThangAndNam(Nhanvien nhanvien, String thang, String nam) {
+	public Luong findOneByNhanvienAndThangAndNam(Nhanvien nhanvien, String thang, String nam) {
 		
-		return luongRepository.findByNhanvienAndThangAndNam(nhanvien, thang, nam);
+		return luongRepository.findOneByNhanvienAndThangAndNam(nhanvien, thang, nam);
 	}
 	
 

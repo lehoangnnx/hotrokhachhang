@@ -73,7 +73,8 @@ public class ChamSocController {
 	}
 
 	@GetMapping("/chamsoc/add")
-	String pageThemChamSoc(Model model) {
+	String pageThemChamSoc(@RequestParam(value="khachhang", defaultValue="0") Integer idkhachhang , Model model) {
+		Khachhang khachhang = khachHangService.findById(idkhachhang);
 		List<Khachhang> listKhachhang = khachHangService.findByTrangthaiNotOrderByIdDesc("deleted");
 		List<Nhanvien> listNhanvien = nhanVienService.findByTrangthaiOrderByIdDesc("active");
 		List<Hoadon> listHoadon = hoaDonService.findByTrangthaiNotOrderByIdDesc("deleted");
@@ -82,6 +83,14 @@ public class ChamSocController {
 		model.addAttribute("listHoadon", listHoadon);
 		model.addAttribute("listKhachhang", listKhachhang);
 		model.addAttribute("listNhanvien", listNhanvien);
+		if(idkhachhang != 0) {
+		model.addAttribute("solanchamsoc", khachhang.getSolanchamsoc());
+		model.addAttribute("solandamphan", khachhang.getSolandamphan());
+		}else {
+			
+			model.addAttribute("solanchamsoc", listKhachhang.get(0).getSolanchamsoc());
+			model.addAttribute("solandamphan", listKhachhang.get(0).getSolandamphan());
+		}
 		model.addAttribute("chamsoc", new Chamsoc());
 		return "themchamsoc";
 	}
@@ -263,7 +272,27 @@ public class ChamSocController {
 
 				Chamsoc chamsoc = chamSocService.findById(x);
 				chamsoc.setTrangthai("deleted");
-
+				if(!chamsoc.getChitietchamsocs().isEmpty()) {
+					Khachhang khachhang = chamsoc.getKhachhang();
+					khachhang.setSolanchamsoc(khachhang.getSolanchamsoc() - 1);
+					for (Chitietchamsoc ctcs : chamsoc.getChitietchamsocs()) {
+						if(ctcs.getTieuchichamsoc().getKieutieuchi().equals("tien")) {
+							Long tienchamsoc = ctcs.getTienchamsoc();
+							khachhang.setSotienchamsoc(khachhang.getSotienchamsoc() + tienchamsoc);
+							khachhang.setSotiendachamsoc(khachhang.getSotiendachamsoc() - tienchamsoc);
+						}
+						
+						ctcs.setTrangthai("deleted");
+						chiTietChamSocService.saveOrUpdate(ctcs);
+						
+					}
+					khachHangService.saveOrUpdate(khachhang);
+					
+				}else {
+					Khachhang khachhang = chamsoc.getKhachhang();
+					khachhang.setSolandamphan(khachhang.getSolandamphan() - 1);
+					khachHangService.saveOrUpdate(khachhang);
+				}
 				chamSocService.saveOrUpdate(chamsoc);
 
 			});

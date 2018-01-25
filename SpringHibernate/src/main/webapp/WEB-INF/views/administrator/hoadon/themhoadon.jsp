@@ -262,14 +262,10 @@ tr:nth-child(even){background-color: #f2f2f2}
 
 						<div class="form-group">
 							<label for="trangthai">Trạng Thái</label> <br> <label
-								class="lb-flat-red"> <input value="dathanhtoan"
-								type="radio" name="trangthai" class="flat-red"> Đã Thanh
-								Toán
-							</label> <label class="lb-flat-red"> <input value="chuathanhtoan"
-								type="radio" name="trangthai" class="flat-red" checked>
-								Chưa Thanh Toán
-							</label> <label class="lb-flat-red"> <input value="dangno"
-								type="radio" name="trangthai" class="flat-red"> Đang Nợ
+								class="lb-flat-red"> <input value="dagiaohang"
+								type="radio" name="trangthai" class="flat-red"> Đã Giao Hàng
+							</label>  <label class="lb-flat-red"> <input value="chuagiaohang"
+								type="radio" name="trangthai" class="flat-red" checked="checked"> Chưa Giao Hàng
 							</label>
 						</div>
 

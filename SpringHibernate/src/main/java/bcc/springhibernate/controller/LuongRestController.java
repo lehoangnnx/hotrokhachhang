@@ -23,25 +23,36 @@ public class LuongRestController {
 	@Autowired
 	LuongService luongService;
 	@Autowired
-	NhanVienService nhanVienService; 
+	NhanVienService nhanVienService;
+
 	@PostMapping("/kiemtraluong")
-	String kiemTraLuong( @RequestParam("thang") String thang,  @RequestParam("nam") String nam,
-			@RequestParam(value="id",defaultValue="0") Integer id,@RequestParam("nhanvien") Integer nhanvien
-			) {
+	String kiemTraLuong(@RequestParam("thang") String thang, @RequestParam("nam") String nam,
+			@RequestParam(value = "id", defaultValue = "0") Integer id, @RequestParam("nhanvien") Integer nhanvien) {
 		Luong luong = null;
 		try {
+			System.out.println(thang + "-" + nam + "-" + id + "-" + nhanvien);
 			Nhanvien nhanVienById = nhanVienService.findById(nhanvien);
-			 luong = luongService.findByNhanvienAndThangAndNam(nhanVienById, thang, nam);
-			if(id == 0) {
-				if(luong == null) {
+			System.out.println(nhanVienById.getTennhanvien());
+			luong = luongService.findOneByNhanvienAndThangAndNam(nhanVienById, thang, nam);
+
+			if (id == 0) {
+				if (luong == null) {
+					System.out.println(1);
 					return "success";
 				}
-			}else {
-				if(id == luong.getId()) {
+			} else {
+				if (luong != null) {
+					if (id == luong.getId()) {
+						System.out.println(2);
+						return "success";
+					}
+				}else {
 					return "success";
 				}
 			}
 		} catch (Exception e) {
+			System.out.println(3 + e.getMessage());
+			e.printStackTrace();
 			return "error";
 		}
 		return "error";

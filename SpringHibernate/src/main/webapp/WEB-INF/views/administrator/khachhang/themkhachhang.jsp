@@ -6,7 +6,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
+<style>
+.lb-flat-red {
+	padding-left: 10px;
+	padding-right: 20px;
+}
+</style>
 <section class="content">
 
 	<div class="row">
@@ -125,8 +130,6 @@
 									<i class="fa fa-calendar"></i>
 								</div>
 								<input name="ngaysinhnhatndd"
-									value="<fmt:formatDate
-                                                pattern="dd-MM-yyyy" value="${khachhang.ngaysinhnhatndd}"/>"
 									type="text" class="form-control"
 									data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="">
 							</div>
@@ -165,8 +168,6 @@
 									<i class="fa fa-calendar"></i>
 								</div>
 								<input name="ngaysinhphutrach"
-									value="<fmt:formatDate
-                                                pattern="dd-MM-yyyy" value="${khachhang.ngaysinhphutrach}"/>"
 									type="text" class="form-control"
 									data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="">
 							</div>
@@ -208,14 +209,14 @@
 
 						<div class="form-group">
 							<label for="sotienchamsoc">Số Tiền Chăm Sóc</label>
-							<form:input path="sotienchamsoc" type="number"
+							<form:input path="sotienchamsoc" type="number" min="0" value="0"
 								class="form-control" placeholder="Số Tiền Chăm Sóc" />
 							<label id="_sotienchamsoc-error" class="error"
 								style="display: none;"></label>
 						</div>
 						<div class="form-group">
 							<label for="sotiendachamsoc">Số Tiền Đã Chăm Sóc</label>
-							<form:input path="sotiendachamsoc" type="number"
+							<form:input path="sotiendachamsoc" type="number" min="0" value="0"
 								class="form-control" placeholder="Số Đã Tiền Chăm Sóc" />
 							<label id="_sotiendachamsoc-error" class="error"
 								style="display: none;"></label>
@@ -223,21 +224,21 @@
 
 						<div class="form-group">
 							<label for="diem">Điểm</label>
-							<form:input path="diem" type="number" class="form-control"
+							<form:input path="diem" type="number" class="form-control" min="0" value="0"
 								placeholder="Điểm" />
 							<label id="_diem-error" class="error" style="display: none;"></label>
 						</div>
 
 						<div class="form-group">
 							<label for="solanchamsoc">Số Lần Chăm Sóc</label>
-							<form:input path="solanchamsoc" type="number"
+							<form:input path="solanchamsoc" type="number" min="0" value="0"
 								class="form-control" placeholder="Số Lần Chăm Sóc" />
 							<label id="_solanchamsoc-error" class="error"
 								style="display: none;"></label>
 						</div>
 						<div class="form-group">
 							<label for="solandamphan">Số Lần Đàm Phán</label>
-							<form:input path="solandamphan" type="number"
+							<form:input path="solandamphan" type="number" min="0" value="0"
 								class="form-control" placeholder="Số Lần Đàm Phán" />
 							<label id="_solandamphan-error" class="error"
 								style="display: none;"></label>
@@ -245,10 +246,21 @@
 
 						<div class="form-group">
 							<label for="diemtiemnang">Điểm Tiềm Năng</label>
-							<form:input path="diemtiemnang" type="number"
+							<form:input path="diemtiemnang" type="number" min="0" value="0"
 								class="form-control" placeholder="Điểm Tiềm Năng" />
 							<label id="_diemtiemnang-error" class="error"
 								style="display: none;"></label>
+						</div>
+
+						<div class="form-group">
+							<label for="uutien">Ưu Tiên</label> <br>
+							<label class="lb-flat-red"> <input value="true"
+								type="radio" name="uutien" class="flat-red" checked>
+								Có
+							</label> <label class="lb-flat-red"> <input value="false"
+								type="radio" name="uutien" class="flat-red">
+								Không
+							</label>
 						</div>
 
 

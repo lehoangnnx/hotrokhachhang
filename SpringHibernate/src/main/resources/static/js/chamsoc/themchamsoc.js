@@ -202,9 +202,10 @@ $(document).ready(function(){
 	var day = dateObj.getUTCDate();
 	var year = dateObj.getUTCFullYear();
 	var nextDay = addDays(dateObj , 7); // Cộng 7 ngày vào ngày hiện tại
+	
 	 // Báo kết quả
 	$('#ngay').val(day+'/'+month+'/'+year);
-	$('#ngaycstiep').val(nextDay.getUTCDate()+'/'+ nextDay.getUTCMonth() + 1 +'/'+nextDay.getUTCFullYear());
+	$('#ngaycstiep').val(nextDay.getUTCDate()+'/'+ (nextDay.getUTCMonth() + 1) +'/'+nextDay.getUTCFullYear());
 });
 
 function getSoLanChamSocVaDamPhanKhachHang() {

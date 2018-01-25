@@ -83,4 +83,20 @@ public class KhachHangRestController {
 		}
 		return khachHangMap;
 	}
+	@PostMapping("/updateuutienkhachhang")
+	String updateuutienkhachhang(@RequestParam("id") Integer id, @RequestParam("uutien") String uutien) {
+		
+		
+		try {
+			
+			Khachhang khachhang= khachHangService.findById(id);
+			
+			khachhang.setUutien(uutien);
+			khachHangService.saveOrUpdate(khachhang);
+			return uutien.toString();
+		} catch (Exception e) {
+			return "error";
+		}
+		
+	}
 }

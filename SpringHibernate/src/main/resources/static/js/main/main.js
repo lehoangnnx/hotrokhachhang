@@ -20,7 +20,7 @@ function updateThongBaoChamSoc(id){
 			// dataType: 'json',
 			// timeout: 600000,
 			success : function(result) {
-				
+				console.log(result);
 				if(result != "error"){
 					window.location=contextPath+"/admin/chamsoc/"+result;
 				}

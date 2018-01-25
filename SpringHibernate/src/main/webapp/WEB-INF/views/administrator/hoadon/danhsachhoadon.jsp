@@ -31,20 +31,26 @@
 			<ul class="nav nav-tabs">
 				<li
 					class="tablinks ${param.trangthai == 'dathanhtoan' ? 'active' : '' }">
-					<a href="${contextPath }/admin/hoadon?trangthai=dathanhtoan&limit=100&page=1">Đã
+					<a
+					href="${contextPath }/admin/hoadon?trangthai=dathanhtoan&limit=100&page=1">Đã
 						Thanh Toán</a>
 				</li>
 				<li
 					class="tablinks ${param.trangthai == 'chuathanhtoan' ? 'active' : '' }">
-					<a href="${contextPath }/admin/hoadon?trangthai=chuathanhtoan&limit=100&page=1">Chưa
+					<a
+					href="${contextPath }/admin/hoadon?trangthai=chuathanhtoan&limit=100&page=1">Chưa
 						Thanh Toán</a>
 				</li>
-				<li class="tablinks ${param.trangthai == 'dangno' ? 'active' : '' }">
-					<a href="${contextPath }/admin/hoadon?trangthai=dangno&limit=100&page=1">Đang Nợ</a>
-				</li>
+				<%-- <li class="tablinks ${param.trangthai == 'dangno' ? 'active' : '' }">
+					<a
+					href="${contextPath }/admin/hoadon?trangthai=dangno&limit=100&page=1">Đang
+						Nợ</a>
+				</li> --%>
 				<li
 					class="tablinks ${param.trangthai == 'deleted' ? 'active' : '' }">
-					<a href="${contextPath }/admin/hoadon?trangthai=deleted&limit=100&page=1">Đã Xóa</a>
+					<a
+					href="${contextPath }/admin/hoadon?trangthai=deleted&limit=100&page=1">Đã
+						Xóa</a>
 				</li>
 			</ul>
 			<div class="box">
@@ -61,8 +67,7 @@
 								<th>Nhân Viên Bán Hàng</th>
 								<th>Tổng Tiền</th>
 								<th>Đã Trả</th>
-								<th>Đang Nợ</th>
-								<th>Hình Thức Thanh Toán</th>
+
 								<th>Ngày Lập</th>
 								<th>Trạng Thái</th>
 								<th>Thao Tác</th>
@@ -72,18 +77,26 @@
 							<c:forEach var="hd" items="${listHoadon }">
 								<tr>
 									<td>${hd.sohoadon }</td>
-									<td>${hd.khachhang.makh } - ${hd.khachhang.ten }</td>
-									<td>${hd.nhanvienByIdnhanvienban.manhanvien } - ${hd.nhanvienByIdnhanvienban.tennhanvien }</td>
-									<td><fmt:formatNumber
-											type="number" pattern="###,###" value="${hd.tongtien }" /> &#8363;</td>
-									<td><fmt:formatNumber
-											type="number" pattern="###,###" value="${hd.tiendatra }" /> &#8363;</td>
-									<td><fmt:formatNumber
-											type="number" pattern="###,###" value="${hd.congno }" /> &#8363;</td>
-									<td>${hd.hinhthucthanhtoan }</td>
+									<td>${hd.khachhang.makh }- ${hd.khachhang.ten }</td>
+									<td>${hd.nhanvienByIdnhanvienban.manhanvien }-
+										${hd.nhanvienByIdnhanvienban.tennhanvien }</td>
+									<td><fmt:formatNumber type="number" pattern="###,###"
+											value="${hd.tongtien }" /> &#8363;</td>
+									<td><fmt:formatNumber type="number" pattern="###,###"
+											value="${hd.tiendatra }" /> &#8363;</td>
+
 									<td><fmt:formatDate pattern="dd-MM-yyyy"
 											value="${hd.ngaylap }" /></td>
-									<td>${hd.trangthai }</td>
+
+									<c:if test="${hd.trangthai == 'dagiaohang' }">
+										<td>Đã Giao Hàng</td>
+									</c:if>
+									<c:if test="${hd.trangthai == 'chuagiaohang' }">
+										<td>Chưa Giao Hàng</td>
+									</c:if>
+									<c:if test="${hd.trangthai == 'deleted' }">
+										<td>Đã Xóa</td>
+									</c:if>
 									<td><a href="${contextPath }/admin/hoadon/${hd.id}"> <i
 											style="color: blue;" class="fa fa-pencil fa-lg"
 											aria-hidden="true" title="Sửa"> </i>
@@ -101,8 +114,7 @@
 								<th>Nhân Viên Bán Hàng</th>
 								<th>Tổng Tiền</th>
 								<th>Đã Trả</th>
-								<th>Đang Nợ</th>
-								<th>Hình Thức Thanh Toán</th>
+								
 								<th>Ngày Lập</th>
 								<th>Trạng Thái</th>
 								<th>Thao Tác</th>

@@ -25,44 +25,47 @@
 				<!-- /.box-header -->
 				<!-- form start -->
 				<form:form role="form" id="formLuong"
-					action="${contextPath }/admin/luong" method="patch" modelAttribute="luong">
-					<form:hidden path="id"/>
+					action="${contextPath }/admin/luong" method="patch"
+					modelAttribute="luong">
+					<form:hidden path="id" />
 					<div class="box-body">
-						
-						
+
+
 						<div class="form-group">
-							<label>Nhân Viên</label> <select class="form-control select2" id="nhanvien"
-								name="nhanvien" style="width: 100%;">
+							<label>Nhân Viên</label> <select class="form-control select2"
+								id="nhanvien" name="nhanvien" style="width: 100%;">
 
 								<c:forEach var="nv" items="${listNhanvien }">
-									<option
-									${luong.nhanvien.id == nv.id ? 'selected' : '' }
-									 value="${nv.id }">${nv.manhanvien} - ${nv.tennhanvien }</option>
+									<option ${luong.nhanvien.id == nv.id ? 'selected' : '' }
+										value="${nv.id }">${nv.manhanvien}-${nv.tennhanvien }</option>
 								</c:forEach>
 
-							</select>
-							<label id="error" class="error" style="display: none;" ></label>
+							</select> <label id="error" class="error" style="display: none;"></label>
 						</div>
 						<div class="form-group">
-							<label for="luong">Lương</label> <form:input path="luong" min="0" 
-								type="number" class="form-control" 
-								placeholder="Lương" />
-								
+							<label for="luong">Lương</label>
+							<form:input path="luong" min="0" type="number"
+								class="form-control" placeholder="Lương" />
+
 						</div>
 						<div class="form-group">
-							<label for="thuong">Thưởng</label> <form:input path="thuong" min="0"
-								type="number" class="form-control"
-								placeholder="Thưởng" />
-								
+							<label for="thuong">Thưởng</label>
+							<form:input path="thuong" min="0" type="number"
+								class="form-control" placeholder="Thưởng" />
+
 						</div>
 						<div class="form-group">
-							<label>Tháng</label> <select class="form-control select2" id="thang"
-								name="thang" style="width: 100%;">
-								
-								<c:forEach var="i" begin="1" end="12">
-									<option
-									${luong.thang == i ? 'selected' : '' }
-									 value="${i }">Tháng - ${i}</option>
+							<label>Tháng</label> <select class="form-control select2"
+								id="thang" name="thang" style="width: 100%;">
+
+								<c:forEach var="i" begin="01" end="12">
+
+									<option ${luong.thang == i ? 'selected' : '' }
+										value="<fmt:formatNumber value="${i}" type="number"
+											minIntegerDigits="2" />">Tháng -
+										<fmt:formatNumber value="${i}" type="number"
+											minIntegerDigits="2" />
+									</option>
 								</c:forEach>
 
 							</select>
@@ -72,28 +75,28 @@
 								name="nam" style="width: 100%;">
 
 								<c:forEach var="i" begin="1990" end="2030">
-									<option
-									${luong.nam == i ? 'selected' : '' }
-									 value="${i }">Năm - ${i}</option>
+									<option ${luong.nam == i ? 'selected' : '' } value="${i }">Năm
+										- ${i}</option>
 								</c:forEach>
 
 							</select>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="trangthai">Trạng Thái</label> <br> <label
-								class="lb-flat-red"> <input value="datraluong" type="radio"
+								class="lb-flat-red"> <input value="datraluong"
+								type="radio"
 								${luong.trangthai == 'datraluong' ? 'checked' : '' }
 								name="trangthai" class="flat-red"> Đã Trả Lương
 							</label> <label class="lb-flat-red"> <input value="chuatraluong"
 								${luong.trangthai == 'chuatraluong' ? 'checked' : '' }
-								type="radio" name="trangthai" class="flat-red" >
-								Chưa Trả Lương
+								type="radio" name="trangthai" class="flat-red"> Chưa Trả
+								Lương
 							</label>
 						</div>
 						<div class="form-group">
-							<label for="ghichu">Ghi Chú</label> <form:input path="ghichu" type="text"
-								class="form-control"
+							<label for="ghichu">Ghi Chú</label>
+							<form:input path="ghichu" type="text" class="form-control"
 								placeholder="Ghi Chú" />
 						</div>
 
@@ -103,7 +106,8 @@
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 					<div class="box-footer">
-						<button id="btn-submit" type="submit" class="btn btn-primary">Xác Nhận</button>
+						<button id="btn-submit" type="submit" class="btn btn-primary">Xác
+							Nhận</button>
 					</div>
 				</form:form>
 			</div>

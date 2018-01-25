@@ -42,13 +42,13 @@ function kiemtraluong(){
 	clearTimeout(timeout);
 	timeout = setTimeout(function() {
 		
-		var thang = $('#thang').val();
-		var nam = $('#nam').val();
+		var thang = $('#thang :selected').val();
+		var nam = $('#nam :selected').val();
 		
 		var id = $("#id").val().trim();
 		
 		
-		nhanvien=$('#nhanvien').val();
+		nhanvien=$('#nhanvien :selected').val();
 		var token = $("meta[name='_csrf']").attr("content");
         var header = $("meta[name='_csrf_header']").attr("content");
         $(document).ajaxSend(function (e, xhr, options) {
@@ -82,6 +82,6 @@ function kiemtraluong(){
 		});
 	}, 100);
 };
-$('#btn-submit').click(function(){
+$('#formLuong').change(function(){
 	kiemtraluong();
 });

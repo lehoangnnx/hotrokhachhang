@@ -128,13 +128,13 @@
 
 						<div class="form-group">
 							<label for="luong">Lương</label>
-							<form:input path="luong" min="0" type="number"
+							<form:input path="luong" min="0" type="number" value="0"
 								class="form-control" placeholder="Lương" />
 
 						</div>
 						<div class="form-group">
 							<label for="chietkhau">Chiết Khấu</label>
-							<form:input path="chietkhau" type="number" class="form-control"
+							<form:input path="chietkhau" type="number" class="form-control" value="0"
 								placeholder="Chiết Khấu" />
 
 						</div>

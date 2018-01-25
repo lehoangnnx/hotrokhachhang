@@ -76,7 +76,9 @@ tr:nth-child(even) {
 								id="khachhang" name="khachhang" style="width: 100%;">
 	
 								<c:forEach var="kh" items="${listKhachhang }">
-									<option value="${kh.id }">${kh.makh}-${kh.ten }</option>
+									<option
+									${kh.id == param.khachhang ? 'selected' : '' }
+									 value="${kh.id }">${kh.makh}-${kh.ten }</option>
 								</c:forEach>
 
 							</select>
@@ -167,14 +169,14 @@ tr:nth-child(even) {
 						</div>
 						<div class="form-group">
 							<label  style="margin-right: 60px;">Số
-								Lần Đã Chăm Sóc : <span id="spsolanchamsoc">${listKhachhang[0].solanchamsoc }</span>
-							</label> <label>Số Lần Đã Đàm Phán : <span id="spsolandamphan">${listKhachhang[0].solandamphan }</span></label>
+								Lần Đã Chăm Sóc : <span id="spsolanchamsoc">${solanchamsoc }</span>
+							</label> <label>Số Lần Đã Đàm Phán : <span id="spsolandamphan">${solandamphan }</span></label>
 
 						</div>
 						<div class="form-group">
 							<label for="lan">Lần Chăm Sóc</label>
 							<form:input path="lan" type="number" class="form-control" min="0"
-								value="${listKhachhang[0].solanchamsoc + listKhachhang[0].solandamphan }"
+								value="${solanchamsoc + solandamphan + 1}"
 								placeholder="Lần Chăm Sóc" />
 
 						</div>

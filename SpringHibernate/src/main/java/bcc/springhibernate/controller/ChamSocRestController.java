@@ -28,7 +28,7 @@ public class ChamSocRestController {
 		
 		
 		try {
-			
+			System.out.println(id);
 			Chamsoc chamsoc = chamSocService.findById(id);
 
 			Taikhoan getTaiKhoanByUserName = taikhoanService.findByUsername(principal.getName());
