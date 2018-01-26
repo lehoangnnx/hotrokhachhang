@@ -65,7 +65,7 @@ public class HangHoaController {
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thất Bại");
 		}
     	
-    	return "redirect:/admin/hanghoa";
+    	return "redirect:/admin/hanghoa?trangthai=active";
     }	
     	
     @PatchMapping("/hanghoa")
@@ -81,7 +81,7 @@ public class HangHoaController {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
 		}
     	
-    	return "redirect:/admin/hanghoa";
+    	return "redirect:/admin/hanghoa?trangthai=active";
     }	
     @DeleteMapping("/hanghoa")
     String xoaHangHoa(@RequestParam("arrayId") List<Integer> arrayId,
@@ -102,6 +102,6 @@ public class HangHoaController {
 			redirectAttributes.addFlashAttribute("msg", "Xóa Thất Bại");
 		}
 
-    	return "redirect:/admin/hanghoa";
+    	return "redirect:/admin/hanghoa?trangthai=active";
     }	
 }

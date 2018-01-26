@@ -69,9 +69,12 @@ public class MainController {
 	}
 
 	@RequestMapping("/")
-	public String index(Model model) {
-
-		return "login";
+	public String index(Principal principal,Model model) {
+		if (principal != null) {
+			
+			return "redirect:/admin";
+		}
+		return "redirect:/login";
 	}
 
 	@RequestMapping("/admin")

@@ -91,7 +91,7 @@ public class NhanVienKpiController {
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thất Bại");
 		}
     	
-    	return "redirect:/admin/nhanvienkpi";
+    	return "redirect:/admin/nhanvienkpi?trangthai=active";
     }	
     	
     @PatchMapping("/nhanvienkpi")
@@ -116,7 +116,7 @@ public class NhanVienKpiController {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
 		}
     	
-    	return "redirect:/admin/nhanvienkpi";
+    	return "redirect:/admin/nhanvienkpi?trangthai=active";
     }	
     @DeleteMapping("/nhanvienkpi")
     String xoaNhanVienKpi(@RequestParam("arrayId") List<Integer> arrayId,
@@ -137,6 +137,6 @@ public class NhanVienKpiController {
 			redirectAttributes.addFlashAttribute("msg", "Xóa Thất Bại");
 		}
 
-    	return "redirect:/admin/nhanvienkpi";
+    	return "redirect:/admin/nhanvienkpi?trangthai=active";
     }	
 }

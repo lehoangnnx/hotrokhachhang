@@ -173,7 +173,7 @@ public class ChamSocController {
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thất Bại");
 		}
 
-		return "redirect:/admin/chamsoc";
+		return "redirect:/admin/chamsoc?trangthai=chochamsoc&limit=100&page=1";
 	}
 
 	@PatchMapping("/chamsoc")
@@ -258,7 +258,7 @@ public class ChamSocController {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
 		}
 
-		return "redirect:/admin/chamsoc";
+		return "redirect:/admin/chamsoc?trangthai=chochamsoc&limit=100&page=1";
 	}
 
 	@DeleteMapping("/chamsoc")
@@ -303,6 +303,6 @@ public class ChamSocController {
 			redirectAttributes.addFlashAttribute("msg", "Xóa Thất Bại");
 		}
 
-		return "redirect:/admin/chamsoc?trangthai="+trangthai+"&limit="+limit+"&page="+page+"";
+		return "redirect:/admin/chamsoc?trangthai=chochamsoc&limit=100&page=1";
 	}
 }

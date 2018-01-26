@@ -18,14 +18,14 @@ $(document).ready(function() {
 					return $.trim(value);
 				}
 
-			},
+			}/*,
 			matkhau : {
 				required : true,
 				normalizer : function(value) {
 
 					return $.trim(value);
 				}
-			}
+			}*/
 
 		},
 		messages : {
@@ -37,11 +37,11 @@ $(document).ready(function() {
 				required : "* Vui Lòng Nhập Email",
 				email : "* Vui Lòng Nhập Đúng Email"
 
-			},
+			}/*,
 
 			matkhau : {
 				required : "* Vui Lòng Nhập Mật Khẩu"
-			}
+			}*/
 
 		}
 	});

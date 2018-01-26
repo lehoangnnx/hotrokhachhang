@@ -118,7 +118,8 @@
 									<td>${luong.thang }/${luong.nam }</td>
 									<td><fmt:formatNumber type="number" pattern="###,###"
 											value="${luong.luong }" /> &#8363;</td>
-									<td>${luong.thuong }%</td>
+									<td><fmt:formatNumber type="number" pattern="###,###"
+											value="${luong.thuong }" /> &#8363;</td>
 
 									<td><fmt:formatNumber type="number" pattern="###,###"
 											value="${luong.luong + luong.thuong }" /> &#8363;</td>
@@ -165,11 +166,15 @@
 						<table class="table">
 							<tr>
 								<th style="width: 50%">Mật Khẩu Mới : </th>
-								<td><input type="password" class="form-control" placeholder="Mật Khẩu Mới" /></td>
+								<td><input id="pwd" type="password" class="form-control" placeholder="Mật Khẩu Mới" /></td>
 							</tr>
 							<tr>
 								<th>Nhập Lại Mật Khẩu Mới : </th>
-								<td><input type="password" class="form-control" placeholder="Nhập Lại Mật Khẩu Mới" /></td>
+								<td><input id="rpwd" type="password" class="form-control" 
+								placeholder="Nhập Lại Mật Khẩu Mới" />
+								
+								</td>
+								
 							</tr>
 							
 						</table>
@@ -182,8 +187,8 @@
 			<!-- this row will not appear when printing -->
 			<div class="row no-print">
 				<div class="col-xs-12">
-					
-					<button type="button" class="btn btn-success pull-right">
+					<label id="error" class="error" ></label>
+					<button type="button" id="btn-doimatkhau" class="btn btn-success pull-right">
 					 Đổi Mật Khẩu
 					</button>
 					

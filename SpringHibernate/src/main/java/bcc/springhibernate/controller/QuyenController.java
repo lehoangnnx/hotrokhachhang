@@ -62,7 +62,7 @@ public class QuyenController {
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thất Bại");
 		}
     	
-    	return "redirect:/admin/quyen";
+    	return "redirect:/admin/quyen?trangthai=active";
     }	
     	
     @PatchMapping("/quyen")
@@ -76,7 +76,7 @@ public class QuyenController {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
 		}
     	
-    	return "redirect:/admin/quyen";
+    	return "redirect:/admin/quyen?trangthai=active";
     }	
     @DeleteMapping("/quyen")
     String xoaQuyen(@RequestParam("arrayId") List<Integer> arrayId,
@@ -97,6 +97,6 @@ public class QuyenController {
 			redirectAttributes.addFlashAttribute("msg", "Xóa Thất Bại");
 		}
 
-    	return "redirect:/admin/quyen";
+    	return "redirect:/admin/quyen?trangthai=active";
     }	
 }

@@ -60,7 +60,7 @@ public class KpiController {
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thất Bại");
 		}
     	
-    	return "redirect:/admin/kpi";
+    	return "redirect:/admin/kpi?trangthai=active";
     }	
     	
     @PatchMapping("/kpi")
@@ -74,7 +74,7 @@ public class KpiController {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
 		}
     	
-    	return "redirect:/admin/kpi";
+    	return "redirect:/admin/kpi?trangthai=active";
     }	
     @DeleteMapping("/kpi")
     String xoaKpi(@RequestParam("arrayId") List<Integer> arrayId,
@@ -95,6 +95,6 @@ public class KpiController {
 			redirectAttributes.addFlashAttribute("msg", "Xóa Thất Bại");
 		}
 
-    	return "redirect:/admin/kpi";
+    	return "redirect:/admin/kpi?trangthai=active";
     }	
 }

@@ -80,7 +80,7 @@ tr:nth-child(even) {
 
 								<c:forEach var="nv" items="${listNhanvien }">
 									<option
-										${hoadon.nhanvienByIdnhanvienchamsoc.id == nv.id ? 'selected' : '' }
+										${hoadon.nhanvienByIdnhanviengiaohang.id == nv.id ? 'selected' : '' }
 										value="${nv.id }">${nv.manhanvien}-${nv.tennhanvien }</option>
 								</c:forEach>
 
@@ -120,6 +120,7 @@ tr:nth-child(even) {
 									</c:forEach>
 
 								</select>
+								<label id="_hanghoa-error" class="error" style="display: none;"></label>
 							</div>
 							<div class="col-md-4 form-group">
 								<div class="input-group">

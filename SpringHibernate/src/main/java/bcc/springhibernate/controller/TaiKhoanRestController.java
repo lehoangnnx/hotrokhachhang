@@ -1,11 +1,15 @@
 package bcc.springhibernate.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import bcc.springhibernate.model.Loaikhachhang;
@@ -25,7 +29,8 @@ public class TaiKhoanRestController {
 
 	@Autowired
 	TaikhoanService taikhoanService;
-	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	@PostMapping("/kiemtrausernamevaemailtaikhoan")
 	String kiemTraUserNameVaEmailtaiKhoan(@RequestBody Taikhoan taikhoan
 			) {
@@ -106,5 +111,20 @@ public class TaiKhoanRestController {
 			return "error";
 		}
 		return "error";
+	}
+	@PostMapping("/thaydoimatkhautaikhoan")
+	String thaydoimatkhautaikhoan(@RequestParam("matkhau") String matkhau,Principal principal
+			) {
+		try {
+			Taikhoan taikhoan = taikhoanService.findByUsername(principal.getName());
+			taikhoan.setMatkhau(passwordEncoder.encode(matkhau));
+			taikhoanService.saveOrUpdate(taikhoan);
+			return "success";
+		} catch (Exception e) {
+			return "error";
+		}
+		
+		
+		
 	}
 }

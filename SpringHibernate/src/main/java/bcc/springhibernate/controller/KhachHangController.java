@@ -1,4 +1,4 @@
-package bcc.springhibernate.controller;
+	package bcc.springhibernate.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
@@ -218,7 +218,7 @@ public class KhachHangController {
 			e.printStackTrace();
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thất Bại");
 		}
-		return "redirect:/admin/khachhang";
+		return "redirect:/admin/khachhang?trangthai=active&loaikhachhang=0&nhomkhachhang=0&limit=100&page=1";
 	}
 
 	@PatchMapping("/khachhang")
@@ -319,7 +319,7 @@ public class KhachHangController {
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
 		}
-		return "redirect:/admin/khachhang";
+		return "redirect:/admin/khachhang?trangthai=active&loaikhachhang=0&nhomkhachhang=0&limit=100&page=1";
 	}
 
 	@DeleteMapping("/khachhang")
@@ -346,11 +346,10 @@ public class KhachHangController {
 			redirectAttributes.addFlashAttribute("msg", "Xóa Thất Bại");
 		}
 
-		return "redirect:/admin/khachhang?trangthai="+trangthai+"&loaikhachhang="+loaikhachhang+""
-				+ "&nhomkhachhang="+nhomkhachhang+"&limit="+limit+"&page="+page+"";
+		return "redirect:/admin/khachhang?trangthai=active&loaikhachhang=0&nhomkhachhang=0&limit=100&page=1";
 	}
 
-	@GetMapping("/timkiemkhachhang")
+	/*@GetMapping("/timkiemkhachhang")
 	String timKiemKhachHang(@RequestParam(value = "trangthai", defaultValue = "chochamsoc") String trangthai,
 			@RequestParam(value = "limit", defaultValue = "100") Integer limit,
 			@RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -400,5 +399,5 @@ public class KhachHangController {
 		model.addAttribute("currentpage", page);
 		model.addAttribute("pagecount", pageCount);
 		return "danhsachkhachhang";
-	}
+	}*/
 }

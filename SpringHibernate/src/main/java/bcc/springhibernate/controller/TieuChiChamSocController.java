@@ -64,7 +64,7 @@ public class TieuChiChamSocController {
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thất Bại");
 		}
     	
-    	return "redirect:/admin/tieuchichamsoc";
+    	return "redirect:/admin/tieuchichamsoc?trangthai=active";
     }	
     	
     @PatchMapping("/tieuchichamsoc")
@@ -81,7 +81,7 @@ public class TieuChiChamSocController {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
 		}
     	
-    	return "redirect:/admin/tieuchichamsoc";
+    	return "redirect:/admin/tieuchichamsoc?trangthai=active";
     }	
     @DeleteMapping("/tieuchichamsoc")
     String xoaTieuChiChamSoc(@RequestParam("arrayId") List<Integer> arrayId,
@@ -103,6 +103,6 @@ public class TieuChiChamSocController {
 			redirectAttributes.addFlashAttribute("msg", "Xóa Thất Bại");
 		}
 
-    	return "redirect:/admin/tieuchichamsoc";
+    	return "redirect:/admin/tieuchichamsoc?trangthai=active";
     }	
 }

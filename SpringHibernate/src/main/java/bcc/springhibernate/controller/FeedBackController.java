@@ -107,7 +107,7 @@ public class FeedBackController {
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thất Bại");
 		}
     	
-    	return "redirect:/admin/feedback";
+    	return "redirect:/admin/feedback?trangthai=active";
     }	
     	
     @PatchMapping("/feedback")
@@ -131,7 +131,7 @@ public class FeedBackController {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
 		}
     	
-    	return "redirect:/admin/feedback";
+    	return "redirect:/admin/feedback?trangthai=active";
     }	
     @DeleteMapping("/feedback")
     String xoaFeedBack(@RequestParam("arrayId") List<Integer> arrayId,
@@ -152,6 +152,6 @@ public class FeedBackController {
 			redirectAttributes.addFlashAttribute("msg", "Xóa Thất Bại");
 		}
 
-    	return "redirect:/admin/feedback";
+    	return "redirect:/admin/feedback?trangthai=active";
     }	
 }

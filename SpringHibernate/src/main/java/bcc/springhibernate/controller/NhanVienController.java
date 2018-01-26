@@ -108,7 +108,7 @@ public class NhanVienController {
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thất Bại");
 		}
     	//return "redirect:/admin/nhanvien/add";
-    	return "redirect:/admin/nhanvien";
+    	return "redirect:/admin/nhanvien?trangthai=active";
     }	
     	
     @PatchMapping("/nhanvien")
@@ -138,7 +138,7 @@ public class NhanVienController {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
 		}
     	
-    	return "redirect:/admin/nhanvien";
+    	return "redirect:/admin/nhanvien?trangthai=active";
     }	
     @DeleteMapping("/nhanvien")
     String xoaNhanVien(@RequestParam("arrayId") List<Integer> arrayId,
@@ -159,6 +159,6 @@ public class NhanVienController {
 			redirectAttributes.addFlashAttribute("msg", "Xóa Thất Bại");
 		}
 
-    	return "redirect:/admin/nhanvien";
+    	return "redirect:/admin/nhanvien?trangthai=active";
     }	
 }

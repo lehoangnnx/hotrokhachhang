@@ -60,7 +60,7 @@ public class BoPhanController {
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thất Bại");
 		}
-    	return "redirect:/admin/bophan";
+    	return "redirect:/admin/bophan?trangthai=active";
     }	
     	
     @PatchMapping("/bophan")
@@ -72,7 +72,7 @@ public class BoPhanController {
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
 		}	
-    	return "redirect:/admin/bophan";
+    	return "redirect:/admin/bophan?trangthai=active";
     }	
     @DeleteMapping("/bophan")
     String xoaBoPhan(@RequestParam("arrayId") List<Integer> arrayId,
@@ -93,6 +93,6 @@ public class BoPhanController {
 			redirectAttributes.addFlashAttribute("msg", "Xóa Thất Bại");
 		}
 
-    	return "redirect:/admin/bophan";
+    	return "redirect:/admin/bophan?trangthai=active";
     }	
 }

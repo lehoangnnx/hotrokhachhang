@@ -59,7 +59,7 @@ public class NhomKhachHangController {
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thất Bại");
 		}
     	
-    	return "redirect:/admin/nhomkhachhang";
+    	return "redirect:/admin/nhomkhachhang?trangthai=active";
     }	
     	
     @PatchMapping("/nhomkhachhang")
@@ -75,7 +75,7 @@ public class NhomKhachHangController {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
 		}
     	
-    	return "redirect:/admin/nhomkhachhang";
+    	return "redirect:/admin/nhomkhachhang?trangthai=active";
     }	
     @DeleteMapping("/nhomkhachhang")
     String xoaLoaiKhachHang(@RequestParam("arrayId") List<Integer> arrayId,
@@ -96,6 +96,6 @@ public class NhomKhachHangController {
 			redirectAttributes.addFlashAttribute("msg", "Xóa Thất Bại");
 		}
 
-    	return "redirect:/admin/nhomkhachhang";
+    	return "redirect:/admin/nhomkhachhang?trangthai=active";
     }	
 }

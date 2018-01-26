@@ -108,6 +108,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 									</c:forEach>
 
 								</select>
+								<label id="_hanghoa-error" class="error" style="display: none;"></label>
 							</div>
 							<div class="col-md-4 form-group">
 								<div class="input-group">
@@ -282,7 +283,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 					<div class="box-footer">
-						<button id="btn-submit" type="submit" class="btn btn-primary">Xác
+						<button id="btn-submit" type="button" class="btn btn-primary">Xác
 							Nhận</button>
 					</div>
 				</form:form>

@@ -76,7 +76,7 @@ public class LuongController {
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thất Bại");
 		}
-		return "redirect:/admin/luong";
+		return "redirect:/admin/luong?trangthai=datraluong";
 	}
 
 	@PatchMapping("/luong")
@@ -94,7 +94,7 @@ public class LuongController {
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
 		}
-		return "redirect:/admin/luong";
+		return "redirect:/admin/luong?trangthai=datraluong";
 	}
 
 	@DeleteMapping("/luong")
@@ -115,6 +115,6 @@ public class LuongController {
 			redirectAttributes.addFlashAttribute("msg", "Xóa Thất Bại");
 		}
 
-		return "redirect:/admin/luong";
+		return "redirect:/admin/luong?trangthai=datraluong";
 	}
 }

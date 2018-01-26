@@ -69,7 +69,7 @@ public class TaiKhoanController {
 		
 		model.addAttribute("listNhanvien", listNhanvien);
 		model.addAttribute("listQuyen", listQuyen);
-    		model.addAttribute("taikhoan", taikhoan);
+    	model.addAttribute("taikhoan", taikhoan);
         return "suataikhoan";
     }
     
@@ -95,11 +95,12 @@ public class TaiKhoanController {
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thất Bại");
 		}
     	
-    	return "redirect:/admin/taikhoan";
+    	return "redirect:/admin/taikhoan?trangthai=active";
     }	
     	
     @PatchMapping("/taikhoan")
     String suaTaiKhoan(@ModelAttribute("taikhoan") Taikhoan taikhoan,
+    		@RequestParam(value="matkhau",defaultValue="null") String matkhau,
     		@RequestParam("nhanvien") Integer nhanvien,@RequestParam("quyen") List<Integer> quyen,
     		RedirectAttributes redirectAttributes) {
     	try {
@@ -108,6 +109,10 @@ public class TaiKhoanController {
     		
     		for(Integer q : quyen) {
     			hsquyen.add(quyenService.findById(q));
+    		}
+    		
+    		if(!matkhau.equals("null")) {
+    			taikhoan.setMatkhau(passwordEncoder.encode(matkhau));
     		}
     		taikhoan.setTrangthai("active");
     		taikhoan.setNhanvien(nhanVienById);
@@ -118,7 +123,7 @@ public class TaiKhoanController {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
 		}
     	
-    	return "redirect:/admin/taikhoan";
+    	return "redirect:/admin/taikhoan?trangthai=active";
     }	
     @DeleteMapping("/taikhoan")
     String xoaTaiKhoan(@RequestParam("arrayId") List<Integer> arrayId,
@@ -139,6 +144,6 @@ public class TaiKhoanController {
 			redirectAttributes.addFlashAttribute("msg", "Xóa Thất Bại");
 		}
 
-    	return "redirect:/admin/taikhoan";
+    	return "redirect:/admin/taikhoan?trangthai=active";
     }	
 }

@@ -205,6 +205,7 @@ function capnhatthanhtien(id){
 }
 $('#formHoaDon').change(function () {
     setcongno();
+   
 });
 function setcongno() {
     $('#congno').val(parseInt($('#tongtien').val()) - parseInt($('#tiendatra').val()));
@@ -220,3 +221,20 @@ $(document).ready(function(){
 	$('#ngaythanhtoan').val(day+'/'+month+'/'+year);
 	
 });
+$('#btn-submit').click(function(){
+	 var tbody = $("#tblcthd tbody");
+
+	    if (tbody.children().length == 0) {
+	    	$('#soluong').focus();
+	    	$('#btn-submit').attr('type', 'button');
+	    	$('#_hanghoa-error').css("display", "block");
+			$('#_hanghoa-error').text("* Vui Lòng Chọn Hàng Hóa");
+	    }else {
+	    	$('#_hanghoa-error').css("display", "none");
+			$('#_hanghoa-error').text("");
+	    	$('#btn-submit').attr('type', 'submit');
+	    }
+})
+	
+	
+

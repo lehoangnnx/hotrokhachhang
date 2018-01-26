@@ -41,7 +41,7 @@
 						</div>
 						<div class="form-group">
 							<label for="matkhau">Mật Khẩu</label>
-							<form:input path="matkhau" type="password" class="form-control"
+							<input  type="password" class="form-control" name="matkhau"
 								placeholder="Mật Khẩu" />
 
 						</div>
