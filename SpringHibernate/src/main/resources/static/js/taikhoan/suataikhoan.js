@@ -26,7 +26,10 @@ $(document).ready(function() {
 					return $.trim(value);
 				}
 			}*/
-
+			, 
+			quyen: {
+				required : true
+			}
 		},
 		messages : {
 			username : {
@@ -42,7 +45,10 @@ $(document).ready(function() {
 			matkhau : {
 				required : "* Vui Lòng Nhập Mật Khẩu"
 			}*/
-
+			, 
+			quyen: {
+				required :  "* Vui Lòng Chọn Quyền"
+			}
 		}
 	});
 });

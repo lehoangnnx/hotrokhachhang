@@ -152,7 +152,9 @@
 								name="bophan" style="width: 100%;">
 
 								<c:forEach var="bp" items="${listBophan }">
-									<option value="${bp.id }">${bp.tenbophan}</option>
+									<option
+									${nhanvien.bophan.id == bp.id ? 'selected' : '' }
+									 value="${bp.id }">${bp.tenbophan}</option>
 								</c:forEach>
 
 							</select>

@@ -29,46 +29,49 @@ public class HangHoaRestController {
 
 	@Autowired
 	HangHoaService hangHoaService;
-	
+
 	@PostMapping("/gethanghoabyid")
 	Map<String, Object> getHangHoa(@RequestBody Integer id) {
-		
+
 		Hanghoa hanghoa = null;
 		Map<String, Object> hangHoaMap = new HashMap<String, Object>();
 		try {
-			 hanghoa = hangHoaService.findById(id);
-			 hangHoaMap.put("id", hanghoa.getId());
-			 hangHoaMap.put("mahang", hanghoa.getMahang());
-			 hangHoaMap.put("tenhang", hanghoa.getTenhang());
-			 hangHoaMap.put("giaban", hanghoa.getGiaban());
+			hanghoa = hangHoaService.findById(id);
+			hangHoaMap.put("id", hanghoa.getId());
+			hangHoaMap.put("mahang", hanghoa.getMahang());
+			hangHoaMap.put("tenhang", hanghoa.getTenhang());
+			hangHoaMap.put("giaban", hanghoa.getGiaban());
 		} catch (Exception e) {
-			
+
 		}
 		return hangHoaMap;
-		
+
 	}
+
 	@PostMapping("/kiemtramahang")
-	String kiemTraTenNhomKhachHang(@RequestBody Hanghoa hanghoa
-			) {
-		
+	String kiemTraTenNhomKhachHang(@RequestBody Hanghoa hanghoa) {
+
 		Hanghoa hangHoaByMaHang = null;
 		try {
-			hangHoaByMaHang =  hangHoaService.findByMahang(hanghoa.getMahang());
+			hangHoaByMaHang = hangHoaService.findByMahang(hanghoa.getMahang());
 			if (hanghoa.getId() == null) {
-				
-				if(hangHoaByMaHang == null) {
-					
+
+				if (hangHoaByMaHang == null) {
+
 					return "success";
 				}
-			}else {
-				
-				if(hanghoa.getId() == hangHoaByMaHang.getId()) {
-					
+			} else {
+				if (hangHoaByMaHang != null) {
+					if (hanghoa.getId() == hangHoaByMaHang.getId()) {
+
+						return "success";
+
+					}
+				} else {
 					return "success";
-					
 				}
 			}
-			
+
 		} catch (Exception e) {
 			return "error";
 		}

@@ -21,28 +21,31 @@ public class NhomHangRestController {
 
 	@Autowired
 	NhomHangService nhomHangService;
+
 	@PostMapping("/kiemtramanhomhang")
-	String kiemTraTenNhomKhachHang(@RequestBody Nhomhang nhomhang
-			) {
-		
+	String kiemTraTenNhomKhachHang(@RequestBody Nhomhang nhomhang) {
+
 		Nhomhang nhomhangByMaNhom = null;
 		try {
-			nhomhangByMaNhom =  nhomHangService.findByManhom(nhomhang.getManhom());
+			nhomhangByMaNhom = nhomHangService.findByManhom(nhomhang.getManhom());
 			if (nhomhang.getId() == null) {
-				
-				if(nhomhangByMaNhom == null) {
-					
+
+				if (nhomhangByMaNhom == null) {
+
 					return "success";
 				}
-			}else {
-				
-				if(nhomhang.getId() == nhomhangByMaNhom.getId()) {
-					
+			} else {
+				if (nhomhangByMaNhom != null) {
+					if (nhomhang.getId() == nhomhangByMaNhom.getId()) {
+
+						return "success";
+
+					}
+				} else {
 					return "success";
-					
 				}
 			}
-			
+
 		} catch (Exception e) {
 			return "error";
 		}

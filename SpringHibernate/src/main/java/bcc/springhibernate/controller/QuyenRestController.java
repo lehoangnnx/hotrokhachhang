@@ -23,29 +23,31 @@ public class QuyenRestController {
 
 	@Autowired
 	QuyenService quyenService;
-	
+
 	@PostMapping("/kiemtramaquyen")
-	String kiemTraMaQuyen(@RequestBody Quyen quyen
-			) {
-		
-		Quyen quyenByMaQuyen= null;
+	String kiemTraMaQuyen(@RequestBody Quyen quyen) {
+
+		Quyen quyenByMaQuyen = null;
 		try {
-			quyenByMaQuyen =  quyenService.findByMaquyen(quyen.getMaquyen());
+			quyenByMaQuyen = quyenService.findByMaquyen(quyen.getMaquyen());
 			if (quyen.getId() == null) {
-				
-				if(quyenByMaQuyen == null) {
-					
+
+				if (quyenByMaQuyen == null) {
+
 					return "success";
 				}
-			}else {
-				
-				if(quyen.getId() == quyenByMaQuyen.getId()) {
-					
+			} else {
+				if (quyenByMaQuyen != null) {
+					if (quyen.getId() == quyenByMaQuyen.getId()) {
+
+						return "success";
+
+					}
+				} else {
 					return "success";
-					
 				}
 			}
-			
+
 		} catch (Exception e) {
 			return "error";
 		}

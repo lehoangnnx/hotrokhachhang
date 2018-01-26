@@ -32,6 +32,7 @@ public class NhanVienRestController {
 		
 		Nhanvien nhanVienByMaNhanVien= null;
 		try {
+			System.out.println(nhanvien.getManhanvien());
 			nhanVienByMaNhanVien =  nhanVienService.findByManhanvien(nhanvien.getManhanvien());
 			if (nhanvien.getId() == null) {
 				
@@ -40,15 +41,21 @@ public class NhanVienRestController {
 					return "success";
 				}
 			}else {
+				if(nhanVienByMaNhanVien != null) {
+					System.out.println("XOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo");
+					if(nhanvien.getId() == nhanVienByMaNhanVien.getId()) {
+						
+						return "success";
+						
+					}
 				
-				if(nhanvien.getId() == nhanVienByMaNhanVien.getId()) {
-					
+				}else {
 					return "success";
-					
 				}
 			}
 			
 		} catch (Exception e) {
+			e.printStackTrace();
 			return "error";
 		}
 		return "error";

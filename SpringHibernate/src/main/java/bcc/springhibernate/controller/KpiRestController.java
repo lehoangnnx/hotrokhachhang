@@ -21,28 +21,33 @@ public class KpiRestController {
 
 	@Autowired
 	KpiService kpiService;
+
 	@PostMapping("/kiemtratenkpi")
-	String kiemTraTenKpi(@RequestBody Kpi kpi
-			) {
-		
-		Kpi kpiByTen= null;
+	String kiemTraTenKpi(@RequestBody Kpi kpi) {
+
+		Kpi kpiByTen = null;
 		try {
-			kpiByTen =  kpiService.findByTen(kpi.getTen());
+			kpiByTen = kpiService.findByTen(kpi.getTen());
 			if (kpi.getId() == null) {
-				
-				if(kpiByTen == null) {
-					
+
+				if (kpiByTen == null) {
+
 					return "success";
 				}
-			}else {
-				
-				if(kpi.getId() == kpiByTen.getId()) {
-					
+			} else {
+				if (kpiByTen != null) {
+					if (kpi.getId() == kpiByTen.getId()) {
+
+						return "success";
+
+					}
+				} else {
+
 					return "success";
-					
+
 				}
 			}
-			
+
 		} catch (Exception e) {
 			return "error";
 		}

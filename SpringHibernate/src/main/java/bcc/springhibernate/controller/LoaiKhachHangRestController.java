@@ -17,28 +17,31 @@ public class LoaiKhachHangRestController {
 
 	@Autowired
 	LoaiKhachHangService loaiKhachHangService;
+
 	@PostMapping("/kiemtratenloaikhachhang")
-	String kiemTraTenLoaiKhachHang(@RequestBody Loaikhachhang loaikhachhang
-			) {
+	String kiemTraTenLoaiKhachHang(@RequestBody Loaikhachhang loaikhachhang) {
 		System.out.println(loaikhachhang.getId());
 		Loaikhachhang loaikhachhangByTenLoai = null;
 		try {
-			loaikhachhangByTenLoai =  loaiKhachHangService.findByTenloai(loaikhachhang.getTenloai());
+			loaikhachhangByTenLoai = loaiKhachHangService.findByTenloai(loaikhachhang.getTenloai());
 			if (loaikhachhang.getId() == null) {
 				System.out.println(1);
-				if(loaikhachhangByTenLoai == null) {
-					System.out.println(1-1);
+				if (loaikhachhangByTenLoai == null) {
+					System.out.println(1 - 1);
 					return "success";
 				}
-			}else {
-				System.out.println(2);
-				if(loaikhachhang.getId() == loaikhachhangByTenLoai.getId()) {
-					System.out.println(2-2);
+			} else {
+				if (loaikhachhangByTenLoai != null) {
+					if (loaikhachhang.getId() == loaikhachhangByTenLoai.getId()) {
+						System.out.println(2 - 2);
+						return "success";
+
+					}
+				} else {
 					return "success";
-					
 				}
 			}
-			
+
 		} catch (Exception e) {
 			return "error";
 		}

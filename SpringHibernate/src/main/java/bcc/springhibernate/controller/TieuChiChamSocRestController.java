@@ -13,69 +13,74 @@ import bcc.springhibernate.model.Hanghoa;
 import bcc.springhibernate.model.Loaikhachhang;
 import bcc.springhibernate.model.Tieuchichamsoc;
 import bcc.springhibernate.service.TieuChiChamSocService;
+
 @RestController
 @RequestMapping("/admin")
 public class TieuChiChamSocRestController {
 
 	@Autowired
 	TieuChiChamSocService tieuChiChamSocService;
-	
+
 	@PostMapping("/gettieuchichamsocid")
 	Map<String, Object> getTieuChiChamSoc(@RequestBody Integer id) {
-		
-		Tieuchichamsoc tieuchichamsoc= null;
+
+		Tieuchichamsoc tieuchichamsoc = null;
 		Map<String, Object> tieuChiChamSocMap = new HashMap<String, Object>();
 		try {
-			 tieuchichamsoc = tieuChiChamSocService.findById(id);
-			 tieuChiChamSocMap.put("id", tieuchichamsoc.getId());
-			 tieuChiChamSocMap.put("tentieuchi", tieuchichamsoc.getTentieuchi());
-			 tieuChiChamSocMap.put("kieutieuchi", tieuchichamsoc.getKieutieuchi());
-			 
+			tieuchichamsoc = tieuChiChamSocService.findById(id);
+			tieuChiChamSocMap.put("id", tieuchichamsoc.getId());
+			tieuChiChamSocMap.put("tentieuchi", tieuchichamsoc.getTentieuchi());
+			tieuChiChamSocMap.put("kieutieuchi", tieuchichamsoc.getKieutieuchi());
+
 		} catch (Exception e) {
-			
+
 		}
 		return tieuChiChamSocMap;
-		
+
 	}
+
 	@PostMapping("/getkieutieuchi")
 	Map<String, Object> getKieuTieuChi(@RequestBody Integer id) {
-		
-		Tieuchichamsoc tieuchichamsoc= null;
+
+		Tieuchichamsoc tieuchichamsoc = null;
 		Map<String, Object> tieuChiChamSocMap = new HashMap<String, Object>();
 		try {
-			 tieuchichamsoc = tieuChiChamSocService.findById(id);
-			 tieuChiChamSocMap.put("id", tieuchichamsoc.getId());
-			 tieuChiChamSocMap.put("tentieuchi", tieuchichamsoc.getTentieuchi());
-			 tieuChiChamSocMap.put("kieutieuchi", tieuchichamsoc.getKieutieuchi());
-			 
+			tieuchichamsoc = tieuChiChamSocService.findById(id);
+			tieuChiChamSocMap.put("id", tieuchichamsoc.getId());
+			tieuChiChamSocMap.put("tentieuchi", tieuchichamsoc.getTentieuchi());
+			tieuChiChamSocMap.put("kieutieuchi", tieuchichamsoc.getKieutieuchi());
+
 		} catch (Exception e) {
-			
+
 		}
 		return tieuChiChamSocMap;
-		
+
 	}
+
 	@PostMapping("/kiemtratentieuchi")
-	String kiemTraTenTieuChi(@RequestBody Tieuchichamsoc tieuchichamsoc
-			) {
-		
+	String kiemTraTenTieuChi(@RequestBody Tieuchichamsoc tieuchichamsoc) {
+
 		Tieuchichamsoc tieuchichamsocByTenTieuChi = null;
 		try {
-			tieuchichamsocByTenTieuChi =  tieuChiChamSocService.findByTentieuchi(tieuchichamsoc.getTentieuchi());
+			tieuchichamsocByTenTieuChi = tieuChiChamSocService.findByTentieuchi(tieuchichamsoc.getTentieuchi());
 			if (tieuchichamsoc.getId() == null) {
-				
-				if(tieuchichamsocByTenTieuChi == null) {
-					
+
+				if (tieuchichamsocByTenTieuChi == null) {
+
 					return "success";
 				}
-			}else {
-				
-				if(tieuchichamsoc.getId() == tieuchichamsocByTenTieuChi.getId()) {
-					
+			} else {
+				if (tieuchichamsocByTenTieuChi != null) {
+					if (tieuchichamsoc.getId() == tieuchichamsocByTenTieuChi.getId()) {
+
+						return "success";
+
+					}
+				} else {
 					return "success";
-					
 				}
 			}
-			
+
 		} catch (Exception e) {
 			return "error";
 		}

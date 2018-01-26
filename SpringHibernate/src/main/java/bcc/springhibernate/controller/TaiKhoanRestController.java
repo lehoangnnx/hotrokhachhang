@@ -31,90 +31,93 @@ public class TaiKhoanRestController {
 	TaikhoanService taikhoanService;
 	@Autowired
 	PasswordEncoder passwordEncoder;
+
 	@PostMapping("/kiemtrausernamevaemailtaikhoan")
-	String kiemTraUserNameVaEmailtaiKhoan(@RequestBody Taikhoan taikhoan
-			) {
-		
-		Taikhoan taiKhoanByUserName= null;
-		Taikhoan taiKhoanByEmail= null;
+	String kiemTraUserNameVaEmailtaiKhoan(@RequestBody Taikhoan taikhoan) {
+
+		Taikhoan taiKhoanByUserName = null;
+		Taikhoan taiKhoanByEmail = null;
 		try {
-			taiKhoanByUserName =  taikhoanService.findByUsername(taikhoan.getUsername());
-			taiKhoanByEmail =  taikhoanService.findByEmail(taikhoan.getEmail());
+			taiKhoanByUserName = taikhoanService.findByUsername(taikhoan.getUsername());
+			taiKhoanByEmail = taikhoanService.findByEmail(taikhoan.getEmail());
 			System.out.println(taikhoan.getEmail());
 			if (taikhoan.getId() == null) {
 				System.out.println("101010010110");
-				if(taiKhoanByUserName != null && taiKhoanByEmail != null) {
+				if (taiKhoanByUserName != null && taiKhoanByEmail != null) {
 					System.out.println(1);
 					return "error";
-				}else if(taiKhoanByUserName != null) {
+				} else if (taiKhoanByUserName != null) {
 					System.out.println(2);
 					return "errorusername";
-					
-				}else if(taiKhoanByEmail != null) {
+
+				} else if (taiKhoanByEmail != null) {
 					System.out.println(3);
 					return "erroremail";
-					
-				}else {
-					
+
+				} else {
+
 					return "success";
 				}
-			}else {
+			} else {
 				System.out.println("1111111111111111111111");
-				if(taiKhoanByUserName != null && taiKhoanByEmail != null &&
-						taikhoan.getId() != taiKhoanByUserName.getId() && 
-						taikhoan.getId() != taiKhoanByEmail.getId()) {
+				if (taiKhoanByUserName != null && taiKhoanByEmail != null
+						&& taikhoan.getId() != taiKhoanByUserName.getId()
+						&& taikhoan.getId() != taiKhoanByEmail.getId()) {
 					System.out.println("4");
 					return "error";
-					
-				} else if( taiKhoanByUserName != null &&  taikhoan.getId() != taiKhoanByUserName.getId()) {
+
+				} else if (taiKhoanByUserName != null && taikhoan.getId() != taiKhoanByUserName.getId()) {
 					System.out.println("5");
 					return "errorusername";
-					
-				}else if( taiKhoanByEmail != null && taikhoan.getId() != taiKhoanByEmail.getId()) {
+
+				} else if (taiKhoanByEmail != null && taikhoan.getId() != taiKhoanByEmail.getId()) {
 					System.out.println("6");
 					return "erroremail";
-					
-				}else {
+
+				} else {
 					System.out.println("7");
 					return "success";
 				}
 			}
-			
+
 		} catch (Exception e) {
 			return "error";
 		}
-		
+
 	}
+
 	@PostMapping("/kiemtraemailtaikhoan")
-	String kiemTraEmailtaiKhoan(@RequestBody Taikhoan taikhoan
-			) {
-		
-		Taikhoan taiKhoanByEmail= null;
+	String kiemTraEmailtaiKhoan(@RequestBody Taikhoan taikhoan) {
+
+		Taikhoan taiKhoanByEmail = null;
 		try {
-			taiKhoanByEmail =  taikhoanService.findByEmail(taikhoan.getEmail());
+			taiKhoanByEmail = taikhoanService.findByEmail(taikhoan.getEmail());
 			if (taikhoan.getId() == null) {
-				
-				if(taiKhoanByEmail == null) {
-					
+
+				if (taiKhoanByEmail == null) {
+
 					return "success";
 				}
-			}else {
-				
-				if(taikhoan.getId() == taiKhoanByEmail.getId()) {
-					
+			} else {
+				if (taiKhoanByEmail != null) {
+					if (taikhoan.getId() == taiKhoanByEmail.getId()) {
+
+						return "success";
+
+					}
+				} else {
 					return "success";
-					
 				}
 			}
-			
+
 		} catch (Exception e) {
 			return "error";
 		}
 		return "error";
 	}
+
 	@PostMapping("/thaydoimatkhautaikhoan")
-	String thaydoimatkhautaikhoan(@RequestParam("matkhau") String matkhau,Principal principal
-			) {
+	String thaydoimatkhautaikhoan(@RequestParam("matkhau") String matkhau, Principal principal) {
 		try {
 			Taikhoan taikhoan = taikhoanService.findByUsername(principal.getName());
 			taikhoan.setMatkhau(passwordEncoder.encode(matkhau));
@@ -123,8 +126,6 @@ public class TaiKhoanRestController {
 		} catch (Exception e) {
 			return "error";
 		}
-		
-		
-		
+
 	}
 }

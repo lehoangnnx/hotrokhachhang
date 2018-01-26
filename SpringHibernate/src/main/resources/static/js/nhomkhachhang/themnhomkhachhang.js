@@ -27,14 +27,14 @@ $(document).ready(function() {
 					return $.trim(value);
 				}
 
-			},
+			}/*,
 			mota : {
 				required : true,
 				normalizer : function(value) {
 
 					return $.trim(value);
 				}
-			}
+			}*/
 
 		},
 		messages : {
@@ -51,10 +51,10 @@ $(document).ready(function() {
 			phantram : {
 				required : "* Vui Lòng Nhập Phần Trăm"
 				
-			},
+			}/*,
 			mota : {
 				required : "* Vui Lòng Nhập Mô Tả"
-			}
+			}*/
 
 		}
 	});

@@ -80,6 +80,7 @@
 									<option value="${q.id }">${q.maquyen} - ${q.tenquyen}</option>
 								</c:forEach>
 							</select>
+							<label id="quyen-error" class="error" for="quyen" style="display: none;"></label>
 						</div>
 					</div>
 					<!-- /.box-body -->

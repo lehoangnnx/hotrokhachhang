@@ -147,9 +147,9 @@ public class NhanVienController {
     	try {
 			arrayId.forEach(x -> {
 
-				Taikhoan taikhoan= taikhoanService.findById(x);
-				taikhoan.setTrangthai("deleted");
-				taikhoanService.saveOrUpdate(taikhoan);
+				Nhanvien nhanvien= nhanVienService.findById(x);
+				nhanvien.setTrangthai("deleted");
+				nhanVienService.saveOrUpdate(nhanvien);
 
 			});
 

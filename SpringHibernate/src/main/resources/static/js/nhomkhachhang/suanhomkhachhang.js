@@ -27,7 +27,7 @@ $(document).ready(function() {
 					return $.trim(value);
 				}
 
-			},
+			}/*,
 			mota : {
 				required : true,
 				normalizer : function(value) {
@@ -35,7 +35,7 @@ $(document).ready(function() {
 					return $.trim(value);
 				}
 			}
-
+*/
 		},
 		messages : {
 			tennhom : {
@@ -51,10 +51,10 @@ $(document).ready(function() {
 			phantram : {
 				required : "* Vui Lòng Nhập Phần Trăm"
 				
-			},
+			}/*,
 			mota : {
 				required : "* Vui Lòng Nhập Mô Tả"
-			}
+			}*/
 
 		}
 	});

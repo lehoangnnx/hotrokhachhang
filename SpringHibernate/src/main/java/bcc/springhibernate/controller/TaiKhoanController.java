@@ -99,21 +99,28 @@ public class TaiKhoanController {
     }	
     	
     @PatchMapping("/taikhoan")
-    String suaTaiKhoan(@ModelAttribute("taikhoan") Taikhoan taikhoan,
+    String suaTaiKhoan(//@ModelAttribute("taikhoan") Taikhoan taikhoan,
+    		@RequestParam("id") Integer id,
+    		@RequestParam("username") String username,
+    		@RequestParam("email") String email,
+    		@RequestParam("thongtinkhac") String thongtinkhac,
     		@RequestParam(value="matkhau",defaultValue="null") String matkhau,
     		@RequestParam("nhanvien") Integer nhanvien,@RequestParam("quyen") List<Integer> quyen,
     		RedirectAttributes redirectAttributes) {
     	try {
+    		
+    		Taikhoan taikhoan = taikhoanService.findById(id);
     		Nhanvien nhanVienById =  nhanVienService.findById(nhanvien);
     		HashSet<Quyen> hsquyen = new HashSet<>();
     		
     		for(Integer q : quyen) {
     			hsquyen.add(quyenService.findById(q));
     		}
-    		
     		if(!matkhau.equals("null")) {
     			taikhoan.setMatkhau(passwordEncoder.encode(matkhau));
     		}
+    		taikhoan.setUsername(username);
+    		taikhoan.setEmail(email);
     		taikhoan.setTrangthai("active");
     		taikhoan.setNhanvien(nhanVienById);
     		taikhoan.setQuyens(hsquyen);

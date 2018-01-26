@@ -18,14 +18,14 @@ $(document).ready(function() {
 					return $.trim(value);
 				}
 
-			},
+			}/*,
 			mota : {
 				required : true,
 				normalizer : function(value) {
 
 					return $.trim(value);
 				}
-			}
+			}*/
 
 		},
 		messages : {
@@ -37,12 +37,12 @@ $(document).ready(function() {
 				required : "* Vui Lòng Nhập Tên Quyền"
 				
 
-			},
+			}/*,
 			
 			mota : {
 				required : "* Vui Lòng Nhập Mô Tả"
 			}
-
+*/
 		}
 	});
 });

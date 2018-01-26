@@ -25,6 +25,9 @@ $(document).ready(function() {
 
 					return $.trim(value);
 				}
+			}, 
+			quyen: {
+				required : true
 			}
 
 		},
@@ -41,6 +44,9 @@ $(document).ready(function() {
 
 			matkhau : {
 				required : "* Vui Lòng Nhập Mật Khẩu"
+			}, 
+			quyen: {
+				required :  "* Vui Lòng Chọn Quyền"
 			}
 
 		}

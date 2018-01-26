@@ -24,79 +24,82 @@ public class KhachHangRestController {
 
 	@Autowired
 	KhachHangService khachHangService;
+
 	@PostMapping("/kiemtramakhachhang")
-	String kiemTraMaKhachHang(@RequestBody Khachhang khachhang
-			) {
-		
-		Khachhang khachHangByMaKh= null;
+	String kiemTraMaKhachHang(@RequestBody Khachhang khachhang) {
+
+		Khachhang khachHangByMaKh = null;
 		try {
-			khachHangByMaKh =  khachHangService.findByMakh(khachhang.getMakh());
+			khachHangByMaKh = khachHangService.findByMakh(khachhang.getMakh());
 			if (khachhang.getId() == null) {
-				
-				if(khachHangByMaKh == null) {
-					
+
+				if (khachHangByMaKh == null) {
+
 					return "success";
 				}
-			}else {
-				
-				if(khachhang.getId() == khachHangByMaKh.getId()) {
-					
+			} else {
+				if (khachHangByMaKh != null) {
+					if (khachhang.getId() == khachHangByMaKh.getId()) {
+
+						return "success";
+
+					} 
+				}else {
 					return "success";
-					
 				}
 			}
-			
+
 		} catch (Exception e) {
 			return "error";
 		}
 		return "error";
 	}
+
 	@PostMapping("/updatethongbaokhachhang")
 	String updateThongBaoKhachHang(@RequestParam("id") Integer id) {
-		
-		
+
 		try {
-			
-			Khachhang khachhang= khachHangService.findById(id);
-			
+
+			Khachhang khachhang = khachHangService.findById(id);
+
 			khachhang.setTrangthainhac("dasinhnhat");
 			khachHangService.saveOrUpdate(khachhang);
 			return "success";
 		} catch (Exception e) {
 			return "error";
 		}
-		
+
 	}
-	
+
 	@PostMapping("/getsolanchamsocvadamphankhachhang")
 	Map<String, Object> getsolanchamsocvadamphankhachhang(@RequestBody Integer id) {
-		
+
 		Map<String, Object> khachHangMap = new HashMap<String, Object>();
 		try {
-			
-			Khachhang khachhang= khachHangService.findById(id);
-			khachHangMap.put("solanchamsoc",khachhang.getSolanchamsoc());
-			
-			khachHangMap.put("solandamphan",khachhang.getSolandamphan());
+
+			Khachhang khachhang = khachHangService.findById(id);
+			khachHangMap.put("solanchamsoc", khachhang.getSolanchamsoc());
+
+			khachHangMap.put("solandamphan", khachhang.getSolandamphan());
 		} catch (Exception e) {
-			
+
 		}
 		return khachHangMap;
 	}
+
 	@PostMapping("/updateuutienkhachhang")
 	String updateuutienkhachhang(@RequestParam("id") Integer id, @RequestParam("uutien") String uutien) {
-		
-		
+
 		try {
-			
-			Khachhang khachhang= khachHangService.findById(id);
-			
+
+			Khachhang khachhang = khachHangService.findById(id);
+
 			khachhang.setUutien(uutien);
 			khachHangService.saveOrUpdate(khachhang);
 			return uutien.toString();
 		} catch (Exception e) {
 			return "error";
 		}
-		
+
 	}
 }

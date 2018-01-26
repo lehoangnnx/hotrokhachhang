@@ -97,6 +97,7 @@
 									</c:choose>
 								</c:forEach>
 							</select>
+							<label id="quyen-error" class="error" for="quyen" style="display: none;"></label>
 						</div>
 					</div>
 					<!-- /.box-body -->
