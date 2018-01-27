@@ -105,7 +105,7 @@
 
 							<c:forEach var="kh" items="${listKhachhang }">
 								<tr>
-									<td>
+									<td style="text-align: center;">
 										<div class="btn-group" data-toggle="buttons">
 											<label id="lbloption1${kh.id }" class="btn  btn-xs
 											${kh.uutien == 'co' ? 'btn-success active' : 'btn-default' }

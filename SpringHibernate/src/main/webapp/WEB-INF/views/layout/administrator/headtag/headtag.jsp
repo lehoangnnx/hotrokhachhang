@@ -36,3 +36,9 @@
 <link rel="stylesheet" href="${contextPath }/css/AdminLTE.min.css">
 <link rel="stylesheet" href="${contextPath }/css/skin-blue.min.css">
 <link rel="stylesheet" href="${contextPath }/css/style.css">
+<style>
+
+	tr td:last-child {
+		text-align: center;
+	}
+</style>

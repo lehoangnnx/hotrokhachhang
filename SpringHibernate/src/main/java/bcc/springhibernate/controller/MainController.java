@@ -3,19 +3,14 @@ package bcc.springhibernate.controller;
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bcc.springhibernate.model.*;
+import bcc.springhibernate.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,25 +24,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import bcc.springhibernate.model.Chamsoc;
-import bcc.springhibernate.model.Hoadon;
-import bcc.springhibernate.model.Khachhang;
-import bcc.springhibernate.model.Nhanvien;
-import bcc.springhibernate.model.Nhanvienkpi;
-import bcc.springhibernate.model.Taikhoan;
-import bcc.springhibernate.service.ChamSocService;
-import bcc.springhibernate.service.HoaDonService;
-import bcc.springhibernate.service.KhachHangService;
-import bcc.springhibernate.service.NhanVienKpiService;
-import bcc.springhibernate.service.NhanVienService;
-import bcc.springhibernate.service.TaikhoanService;
-
 @Controller
 public class MainController {
 	@Autowired
 	TaikhoanService taikhoanService;
 	@Autowired
-	NhanVienService NhanVienService;
+	NhanVienService nhanVienService;
 	@Autowired
 	KhachHangService khachHangService;
 
@@ -57,7 +39,8 @@ public class MainController {
 	HoaDonService hoaDonService;
 	@Autowired
 	NhanVienKpiService nhanVienKpiService;
-
+@Autowired
+	LuongService luongService;
 	@ModelAttribute("taikhoan")
 	// Lưu Session Thông tin người dùng đăng nhập
 	public void sessionUser(Principal principal, HttpSession session) {
@@ -81,7 +64,7 @@ public class MainController {
 	public String home(Model model) {
 		List<Khachhang> khachhangs = khachHangService.findByTrangthaiNotOrderByIdDesc("deleted");
 		List<Chamsoc> chamsocs = chamSocService.findByTrangthaiNotOrderByIdDesc("deleted");
-		List<Nhanvien> nhanviens = NhanVienService.findByTrangthaiNotOrderByIdDesc("deleted");
+		List<Nhanvien> nhanviens = nhanVienService.findByTrangthaiNotOrderByIdDesc("deleted");
 		List<Hoadon> hoadons = hoaDonService.findByTrangthaiNotOrderByIdDesc("deleted");
 		List<Nhanvienkpi> nhanvienkpis = nhanVienKpiService.findByTrangthaiOrderByIdDesc("inactive");
 		model.addAttribute("khachhangs", khachhangs);
@@ -183,6 +166,29 @@ public class MainController {
 		model.addAttribute("listChamSoc", listChamSoc);
 		model.addAttribute("listKhachHang", listKhachHang);
 		model.addAttribute("listNhanVienKpi", listNhanVienKpi);
+
+
+		// Tao Luong
+		Date date = new Date();
+		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		String splitDate[] = df.format(date).split("/");
+
+		//if(new Date(date.getYear(),date.getMonth(),date.getDate()).equals(new Date(date.getYear(),date.getMonth(),01))){
+			List<Nhanvien> listNhanvien = nhanVienService.findByTrangthaiNotOrderByIdDesc("deleted");
+			listNhanvien.forEach(x -> {
+				Luong luong = null;
+				try {
+					luong = luongService.findOneByNhanvienAndThangAndNam(x,splitDate[1],splitDate[2]);
+					if(luong == null){
+						luong =  new Luong(x, x.getLuong(), 0L, splitDate[1], splitDate[2], "chuatraluong",
+								"");
+						luongService.saveOrUpdate(luong);
+					}
+				}catch (Exception e){
+					e.printStackTrace();
+				}
+			});
+		//}
 		return "index";
 	}
 
