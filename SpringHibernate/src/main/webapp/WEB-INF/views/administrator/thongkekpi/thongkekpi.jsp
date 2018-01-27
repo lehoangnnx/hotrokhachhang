@@ -76,14 +76,14 @@
 
 
 		<!-- ./col -->
-		<form:form id="formThongKe" action="${contextPath }/admin/thongkekpi"
+		<form:form id="formThongKeKpi" action="${contextPath }/admin/thongkekpi"
 			method="get">
 			<div class="col-md-12">
 				<div class="box box-primary">
 
 					<div class="box-body">
 						
-						<div class="col-md-12">
+						<div class="col-md-3">
 							<div class="form-group">
 								<label>KPI</label> <select
 									class="form-control select2" name="kpi"
@@ -92,6 +92,54 @@
 									<c:forEach var="k" items="${listKpi }">
 										<option ${param.kpi == k.id ? 'selected' : '' }
 											value="${k.id }">${k.ten }</option>
+									</c:forEach>
+
+								</select>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>Từ Ngày</label>
+
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+									</div>
+									<input name="tungay" id="tungay" onchange="checkNgay();"
+										value="<fmt:formatDate value="${tungay }"
+                                                pattern="dd-MM-yyyy" />"
+										type="text" class="form-control"
+										data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="">
+								</div>
+								<label id="tungay-error" class="error" for="tungay"></label>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>Đến Ngày</label>
+
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+									</div>
+									<input name="denngay" id="denngay" onchange="checkNgay();"
+										value="<fmt:formatDate
+                                                pattern="dd-MM-yyyy" value="${denngay }"/>"
+										type="text" class="form-control"
+										data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="">
+								</div>
+								<label id="denngay-error" class="error" for="denngay"></label>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>Nhân Viên</label> <select
+									class="form-control select2" name="nhanvien"
+									style="width: 100%;">
+									<option value="0">Không</option>
+									<c:forEach var="nv" items="${listNhanvien }">
+										<option ${param.nhanvien == nv.id ? 'selected' : '' }
+											value="${nv.id }">${nv.manhanvien}-${nv.tennhanvien }</option>
 									</c:forEach>
 
 								</select>
@@ -256,12 +304,23 @@
 							<td><fmt:formatDate pattern="dd-MM-yyyy"
 									value="${nvk.ngayhoanthanh }" /></td>
 							
-							<c:if test="${nvk.trangthai == 'active' }">
-							<td>Đã Kích Hoạt</td>
-							</c:if>
-							<c:if test="${nvk.trangthai == 'inactive' }">
-							<td>Chưa Kích Hoạt</td>
-							</c:if>
+							<td style="text-align: center;">
+										<div class="btn-group" data-toggle="buttons">
+											<label id="lbloption1${nvk.id }" class="btn  btn-xs
+											${nvk.trangthai == 'active' ? 'btn-success active' : 'btn-default' }
+											"> <input 
+												onchange="active(${nvk.id });"
+												type="radio" name="options" id="option1${nvk.id }" value="1" /> <span
+												class="glyphicon glyphicon-ok"></span>
+											</label> <label id="lbloption2${nvk.id }" class="btn  btn-xs
+											${nvk.trangthai == 'inactive' ? 'btn-danger active' : 'btn-default' }
+											"> <input
+											onchange="inactive(${nvk.id });"
+												type="radio" name="options" id="option2${nvk.id }" value="0" /> <span
+												class="glyphicon glyphicon-remove"></span>
+											</label>
+										</div>
+									</td>
 							<td><a href="${contextPath }/admin/hoadon/${hd.id}"> <i
 									style="color: blue;" class="fa fa-pencil fa-lg"
 									aria-hidden="true" title="Sửa"> </i>

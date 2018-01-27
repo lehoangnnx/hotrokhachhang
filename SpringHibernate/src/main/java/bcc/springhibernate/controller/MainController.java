@@ -88,10 +88,12 @@ public class MainController {
 						&& kh.getTrangthainhac().equals("dasinhnhat")) {
 					kh.setTrangthainhac("chosinhnhat");
 					khachHangService.saveOrUpdate(kh);
-				} else if (monthdd == monthn && (dayconlaidd <= 7) && (dayconlaidd >= 0)
+					// && (dayconlaidd >= 0)
+				} else if (monthdd == monthn && (dayconlaidd <= 7)
 						&& kh.getTrangthainhac().equals("chosinhnhat")) {
 
 					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("ngay",kh.getNgaysinhnhatndd());
 					map.put("ngaysinhnhat", dayconlaidd);
 					map.put("id", kh.getId());
 					map.put("makh", kh.getMakh());
@@ -108,10 +110,12 @@ public class MainController {
 						&& kh.getTrangthainhac().equals("dasinhnhat")) {
 					kh.setTrangthainhac("chosinhnhat");
 					khachHangService.saveOrUpdate(kh);
-				} else if (monthpt == monthn && (dayconlaipt <= 7) && (dayconlaipt >= 0)
+					//&& (dayconlaipt >= 0)
+				} else if (monthpt == monthn && (dayconlaipt <= 7)
 						&& kh.getTrangthainhac().equals("chosinhnhat")) {
 
 					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("ngay",kh.getNgaysinhphutrach());
 					map.put("ngaysinhnhat", dayconlaipt);
 					map.put("id", kh.getId());
 					map.put("makh", kh.getMakh());
@@ -142,6 +146,7 @@ public class MainController {
 				Map<String, Object> map = new HashMap<String, Object>();
 
 				map.put("id", cs.getId());
+				map.put("ngay",cs.getNgaycstiep());
 				map.put("ngaycstiep", dayconlai);
 				map.put("khachhang", cs.getKhachhang().getTen());
 

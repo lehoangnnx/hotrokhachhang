@@ -64,8 +64,8 @@
 								<th>Ngày Đăng Ký</th>
 								<th>Ngày Hoàn Thành</th>
 								<th>Trạng Thái</th>
-								<th>Mức Độ Hoàn Thành</th>
-								<th>Mô Tả</th>
+								<!-- <th>Mức Độ Hoàn Thành</th>
+								<th>Mô Tả</th> -->
 
 								<th>Thao tác</th>
 							</tr>
@@ -81,9 +81,25 @@
 											value="${nvkpi.ngaydangky}" /></td>
 									<td><fmt:formatDate pattern="dd-MM-yyyy"
 											value="${nvkpi.ngayhoanthanh}" /></td>
-									<td>${nvkpi.trangthai}</td>
-									<td>${nvkpi.mucdohoanthanh}</td>
-									<td>${nvkpi.mota}</td>
+									<td style="text-align: center;">
+										<div class="btn-group" data-toggle="buttons">
+											<label id="lbloption1${nvkpi.id }" class="btn  btn-xs
+											${nvkpi.trangthai == 'active' ? 'btn-success active' : 'btn-default' }
+											"> <input 
+												onchange="active(${nvkpi.id });"
+												type="radio" name="options" id="option1${nvkpi.id }" value="1" /> <span
+												class="glyphicon glyphicon-ok"></span>
+											</label> <label id="lbloption2${nvkpi.id }" class="btn  btn-xs
+											${nvkpi.trangthai == 'inactive' ? 'btn-danger active' : 'btn-default' }
+											"> <input
+											onchange="inactive(${nvkpi.id });"
+												type="radio" name="options" id="option2${nvkpi.id }" value="0" /> <span
+												class="glyphicon glyphicon-remove"></span>
+											</label>
+										</div>
+									</td>
+									<%-- <td>${nvkpi.mucdohoanthanh}</td>
+									<td>${nvkpi.mota}</td> --%>
 									<td><a
 										href="${contextPath }/admin/nhanvienkpi/${nvkpi.id}"> <i
 											style="color: blue;" class="fa fa-pencil fa-lg"
@@ -105,8 +121,8 @@
 								<th>Ngày Đăng Ký</th>
 								<th>Ngày Hoàn Thành</th>
 								<th>Trạng Thái</th>
-								<th>Mức Độ Hoàn Thành</th>
-								<th>Mô Tả</th>
+								<!-- <th>Mức Độ Hoàn Thành</th>
+								<th>Mô Tả</th> -->
 
 								<th>Thao tác</th>
 							</tr>

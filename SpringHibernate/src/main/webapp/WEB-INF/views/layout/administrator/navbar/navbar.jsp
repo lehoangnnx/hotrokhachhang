@@ -69,6 +69,10 @@
 												<b>Hôm Nay</b> Là Lần Chăm Sóc <br>
 											Tiếp Theo Của <b>${cs.khachhang }</b>
 											</c:when>
+											<c:when test="${cs.ngaycstiep < 0}">
+												<b>${cs.ngay}</b> Là Lần Chăm Sóc <br>
+												Tiếp Theo Của <b>${cs.khachhang }</b>
+											</c:when>
 											<c:otherwise>
 											Còn <b>${cs.ngaycstiep }</b> Ngày Nữa Tới Lần Chăm Sóc <br>
 											Tiếp Theo Của <b>${cs.khachhang }</b>
@@ -105,6 +109,10 @@
 											<c:when test="${lkh.ngaysinhnhat == 0}">
 												 <b>Hôm Nay</b> Là Sinh Nhật Của <br>
 										<b>${lkh.makh } - ${lkh.ten }</b>
+											</c:when>
+											<c:when test="${lkh.ngaysinhnhat < 0}">
+												<b>${lkh.ngay}</b> Là Sinh Nhật Của <br>
+												<b>${lkh.makh } - ${lkh.ten }</b>
 											</c:when>
 											<c:otherwise>
 											Còn <b>${lkh.ngaysinhnhat }</b> Ngày Nữa Là Sinh Nhật Của <br>

@@ -1,8 +1,10 @@
 package bcc.springhibernate.service;
 
+import java.util.Date;
 import java.util.List;
 
 import bcc.springhibernate.model.Kpi;
+import bcc.springhibernate.model.Nhanvien;
 import bcc.springhibernate.model.Nhanvienkpi;
 
 public interface NhanVienKpiService {
@@ -13,4 +15,9 @@ public interface NhanVienKpiService {
 	Nhanvienkpi findById(Integer id);
 	
 	List<Nhanvienkpi> findByKpiAndTrangthaiNotOrderByNgaydangkyDesc(Kpi kpi, String trangthai);
+	
+	List<Nhanvienkpi> findByKpiAndTrangthaiNotAndNgaydangkyBetweenOrderByNgaydangkyDesc
+	(Kpi kpi, String trangthai, Date d1 , Date d2);
+	List<Nhanvienkpi> findByNhanvienAndKpiAndTrangthaiNotAndNgaydangkyBetweenOrderByNgaydangkyDesc
+	(Nhanvien nhanvien,Kpi kpi, String trangthai, Date d1 , Date d2);
 }

@@ -59,7 +59,7 @@ public class ThongKeController {
 				if(!denngay.equals("null")) {
 					ddenngay = dateFormat.parse(denngay);
 				}
-				List<Nhanvien> listNhanvien = nhanVienService.findByTrangthaiOrderByIdDesc("active");
+				List<Nhanvien> listNhanvien = nhanVienService.findByTrangthaiNotOrderByIdDesc("deleted");
 				List<Hoadon> listHoadonAll = hoaDonService.findByTrangthaiNotOrderByIdDesc("deleted");
 				List<Hoadon>  listHoadon;
 				if(nhanvienbanhang != 0) {
