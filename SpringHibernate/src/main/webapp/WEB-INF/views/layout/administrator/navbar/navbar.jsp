@@ -70,7 +70,7 @@
 											Tiếp Theo Của <b>${cs.khachhang }</b>
 											</c:when>
 											<c:when test="${cs.ngaycstiep < 0}">
-												<b>${cs.ngay}</b> Là Lần Chăm Sóc <br>
+												<b><fmt:formatDate pattern="dd/MM/yyyy" value="${cs.ngay}"/></b> Là Lần Chăm Sóc <br>
 												Tiếp Theo Của <b>${cs.khachhang }</b>
 											</c:when>
 											<c:otherwise>
@@ -111,7 +111,7 @@
 										<b>${lkh.makh } - ${lkh.ten }</b>
 											</c:when>
 											<c:when test="${lkh.ngaysinhnhat < 0}">
-												<b>${lkh.ngay}</b> Là Sinh Nhật Của <br>
+												<b><fmt:formatDate pattern="dd/MM/yyyy" value="${lkh.ngay}"/></b> Là Sinh Nhật Của <br>
 												<b>${lkh.makh } - ${lkh.ten }</b>
 											</c:when>
 											<c:otherwise>
