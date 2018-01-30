@@ -42,4 +42,16 @@ public class NhomHangServiceImpl implements NhomHangService {
 		return nhomHangRepository.findById(id);
 	}
 
+	@Override
+	public void deleted(Nhomhang nhomhang) {
+		nhomHangRepository.delete(nhomhang);
+		
+	}
+
+	@Override
+	public List<Nhomhang> findByManhomcha(String manhomcha) {
+		
+		return nhomHangRepository.findByManhomcha(manhomcha);
+	}
+
 }

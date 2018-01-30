@@ -26,7 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		System.out.println("UserName la gì" + username);
-		Taikhoan taikhoan = taiKhoanRepository.findByUsername(HtmlUtils.htmlEscape(username));
+		Taikhoan taikhoan = taiKhoanRepository.findByUsernameAndTrangthai(HtmlUtils.htmlEscape(username), "active");
 		System.out.println("123" + taikhoan);
 		if (taikhoan == null) {
 			

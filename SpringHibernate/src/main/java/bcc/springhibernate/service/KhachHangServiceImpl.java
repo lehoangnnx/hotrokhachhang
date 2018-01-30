@@ -98,4 +98,10 @@ public class KhachHangServiceImpl implements KhachHangService {
 		return khachHangRepository.findByLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc(loaikhachhang, nhomkhachhang, trangthai, pageable);
 	}
 
+	@Override
+	public void deleted(Khachhang khachhang) {
+		khachHangRepository.delete(khachhang);
+		
+	}
+
 }

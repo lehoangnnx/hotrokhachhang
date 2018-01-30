@@ -82,7 +82,7 @@
 
 						<div class="form-group">
 							<label for="mota">Mô tả</label>
-							<form:input path="mota" type="text" class="form-control"
+							<form:textarea path="mota" type="text" class="form-control"
 								id="mota" name="mota" placeholder="Mô Tả" />
 						</div>
 

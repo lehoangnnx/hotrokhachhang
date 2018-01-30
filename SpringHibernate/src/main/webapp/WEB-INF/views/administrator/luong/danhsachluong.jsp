@@ -28,12 +28,13 @@
       	
 		        <div class="col-xs-12">
 		          <ul class="nav nav-tabs">
+		          <li class="tablinks ${param.trangthai == 'chuatraluong' ? 'active' : '' }">
+					<a href="${contextPath }/admin/luong?trangthai=chuatraluong"   >Chưa Trả Lương</a>
+					</li>
 					<li class="tablinks ${param.trangthai == 'datraluong' ? 'active' : '' }">
 					<a href="${contextPath }/admin/luong?trangthai=datraluong"   >Đã Trả Lương</a>
 					</li>
-					<li class="tablinks ${param.trangthai == 'chuatraluong' ? 'active' : '' }">
-					<a href="${contextPath }/admin/luong?trangthai=chuatraluong"   >Chưa Trả Lương</a>
-					</li>
+					
 
 					<li class="tablinks ${param.trangthai == 'deleted' ? 'active' : '' }">
 					<a href="${contextPath }/admin/luong?trangthai=deleted"  >Đã Xóa</a>

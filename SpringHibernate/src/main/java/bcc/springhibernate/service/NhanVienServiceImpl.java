@@ -48,4 +48,10 @@ NhanvienRepository nhanvienRepository;
 		
 		return nhanvienRepository.findByTrangthaiNotOrderByIdDesc(trangthai);
 	}
+
+	@Override
+	public void deleted(Nhanvien nhanvien) {
+		nhanvienRepository.delete(nhanvien);
+		
+	}
 }

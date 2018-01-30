@@ -141,12 +141,12 @@
 						
 						<div class="form-group">
 							<label for="thongtinkhac">Thông Tin Khác</label>
-							<form:input path="thongtinkhac" type="text" class="form-control"
+							<form:textarea path="thongtinkhac" type="text" class="form-control"
 								placeholder="Thông Tin Khác" />
 						</div>
 						<div class="form-group">
 							<label for="ghichu">Ghi Chú</label>
-							<form:input path="ghichu" type="text" class="form-control"
+							<form:textarea path="ghichu" type="text" class="form-control"
 								placeholder="Ghi Chú" />
 						</div>
 						<div class="form-group">
@@ -158,6 +158,7 @@
 								</c:forEach>
 
 							</select>
+							<label id="bophan-error" class="error" for="bophan" style="display: none;"></label>
 						</div>
 
 					</div>

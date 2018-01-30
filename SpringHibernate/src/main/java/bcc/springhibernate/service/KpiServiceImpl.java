@@ -55,6 +55,12 @@ public class KpiServiceImpl implements KpiService {
 		
 		return kpiRepository.findByTrangthaiNotOrderByIdDesc(trangthai);
 	}
+
+	@Override
+	public void deleted(Kpi kpi) {
+		kpiRepository.delete(kpi);
+		
+	}
 	
 
 }

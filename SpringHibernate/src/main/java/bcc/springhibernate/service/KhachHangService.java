@@ -11,6 +11,7 @@ import bcc.springhibernate.model.Nhomkhachhang;
 public interface KhachHangService {
 	
 	void saveOrUpdate(Khachhang khachhang);
+	void deleted(Khachhang khachhang);
 	Khachhang findById(Integer id);
 	Khachhang findByMakh(String makh);
 	

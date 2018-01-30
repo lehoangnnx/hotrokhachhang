@@ -33,15 +33,16 @@
 
 		<div class="col-xs-12">
 			<ul class="nav nav-tabs">
-				<li class="tablinks ${param.trangthai == 'active' ? 'active' : '' }">
-					<a href="${contextPath }/admin/nhanvienkpi?trangthai=active">Đã
-						Kích Hoạt</a>
-				</li>
-				<li
+			<li
 					class="tablinks ${param.trangthai == 'inactive' ? 'active' : '' }">
 					<a href="${contextPath }/admin/nhanvienkpi?trangthai=inactive">Chưa
 						Kích Hoạt</a>
 				</li>
+				<li class="tablinks ${param.trangthai == 'active' ? 'active' : '' }">
+					<a href="${contextPath }/admin/nhanvienkpi?trangthai=active">Đã
+						Kích Hoạt</a>
+				</li>
+				
 
 				<li
 					class="tablinks ${param.trangthai == 'deleted' ? 'active' : '' }">
@@ -81,6 +82,7 @@
 											value="${nvkpi.ngaydangky}" /></td>
 									<td><fmt:formatDate pattern="dd-MM-yyyy"
 											value="${nvkpi.ngayhoanthanh}" /></td>
+									<c:if test="${nvkpi.trangthai != 'deleted' }">
 									<td style="text-align: center;">
 										<div class="btn-group" data-toggle="buttons">
 											<label id="lbloption1${nvkpi.id }" class="btn  btn-xs
@@ -98,6 +100,10 @@
 											</label>
 										</div>
 									</td>
+									</c:if>
+									<c:if test="${nvkpi.trangthai == 'deleted' }">
+									<td>Đã Xóa</td>
+									</c:if>
 									<%-- <td>${nvkpi.mucdohoanthanh}</td>
 									<td>${nvkpi.mota}</td> --%>
 									<td><a

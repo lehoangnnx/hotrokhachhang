@@ -10,6 +10,8 @@ import bcc.springhibernate.model.Nhanvien;
 
 public interface HoaDonService {
 	void saveOrUpdate(Hoadon hoadon);
+	void deleted(Hoadon hoadon);
+	
 	List<Hoadon> findAll();
 	List<Hoadon> findByTrangthaiOrderByIdDesc(String trangthai);
 	List<Hoadon> findByTrangthaiOrderByIdDesc(String trangthai, Pageable pageable);

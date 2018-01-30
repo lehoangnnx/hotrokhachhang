@@ -114,7 +114,7 @@
 						Viên</a></li>
 				<li><a href="${contextPath }/admin/bophan?trangthai=active">Bộ
 						Phận</a></li>
-				<li><a href="${contextPath }/admin/luong?trangthai=datraluong">Lương</a></li>
+				<li><a href="${contextPath }/admin/luong?trangthai=chuatraluong">Lương</a></li>
 			</ul></li>
 		<li class="treeview"><a href="#"><i class="fa fa-link"></i> <span>KPI</span>
 				<span class="pull-right-container"> <i
@@ -122,7 +122,7 @@
 			</span> </a>
 			<ul class="treeview-menu">
 				<li><a
-					href="${contextPath }/admin/nhanvienkpi?trangthai=active">Nhân
+					href="${contextPath }/admin/nhanvienkpi?trangthai=inactive">Nhân
 						Viên KPI </a></li>
 				<li><a href="${contextPath }/admin/kpi?trangthai=active">KPI</a></li>
 

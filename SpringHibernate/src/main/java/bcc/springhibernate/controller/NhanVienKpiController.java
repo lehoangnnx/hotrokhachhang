@@ -91,10 +91,10 @@ public class NhanVienKpiController {
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thất Bại");
 		}
     	
-    	return "redirect:/admin/nhanvienkpi?trangthai=active";
+    	return "redirect:/admin/nhanvienkpi?trangthai=inactive";
     }	
     	
-    @PatchMapping("/nhanvienkpi")
+    @PatchMapping(value="/nhanvienkpi",params="update")
     String suaNhanVienKpi(@ModelAttribute("nhanvienkpi") Nhanvienkpi nhanvienkpi,
     		@RequestParam("nhanvien") Integer nhanvien,@RequestParam("kpi") Integer kpi,
     		@RequestParam("ngayhoanthanh") String ngayhoanthanh,
@@ -116,7 +116,22 @@ public class NhanVienKpiController {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
 		}
     	
-    	return "redirect:/admin/nhanvienkpi?trangthai=active";
+    	return "redirect:/admin/nhanvienkpi?trangthai=inactive";
+    }	
+    @PatchMapping(value="/nhanvienkpi",params="deleted")
+    String xoaVinhVienNhanVienKpi(@ModelAttribute("nhanvienkpi") Nhanvienkpi nhanvienkpi,
+    		
+    		RedirectAttributes redirectAttributes) {
+    	try {
+    		
+    		
+        	nhanVienKpiService.deleted(nhanvienkpi);
+        	redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thành Công");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thất Bại");
+		}
+    	
+    	return "redirect:/admin/nhanvienkpi?trangthai=inactive";
     }	
     @DeleteMapping("/nhanvienkpi")
     String xoaNhanVienKpi(@RequestParam("arrayId") List<Integer> arrayId,
@@ -137,6 +152,6 @@ public class NhanVienKpiController {
 			redirectAttributes.addFlashAttribute("msg", "Xóa Thất Bại");
 		}
 
-    	return "redirect:/admin/nhanvienkpi?trangthai=active";
+    	return "redirect:/admin/nhanvienkpi?trangthai=inactive";
     }	
 }

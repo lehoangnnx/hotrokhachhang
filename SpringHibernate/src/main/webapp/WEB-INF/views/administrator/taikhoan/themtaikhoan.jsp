@@ -47,7 +47,7 @@
 						</div>
 						<div class="form-group">
 							<label for="thongtinkhac">Thông Tin Khác</label>
-							<form:input path="thongtinkhac" type="text" class="form-control"
+							<form:textarea path="thongtinkhac" type="text" class="form-control"
 								placeholder="Thông Tin Khác" />
 						</div>
 

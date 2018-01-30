@@ -47,7 +47,7 @@
 						</div>
 						<div class="form-group">
 							<label for="thongtinkhac">Thông Tin Khác</label>
-							<form:input path="thongtinkhac" type="text" class="form-control"
+							<form:textarea path="thongtinkhac" type="text" class="form-control"
 								placeholder="Thông Tin Khác" />
 						</div>
 
@@ -104,8 +104,19 @@
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 					<div class="box-footer">
-						<button id="btn-submit" type="submit" class="btn btn-primary">Xác
-							Nhận</button>
+						<c:if test="${taikhoan.trangthai != 'deleted' }">
+							<div class="box-footer">
+								<button id="btn-submit" name="update" type="submit"
+									class="btn btn-primary">Xác Nhận</button>
+							</div>
+						</c:if>
+						<c:if test="${taikhoan.trangthai == 'deleted' }">
+							<div class="box-footer">
+
+								<button id="btn-submit" name="deleted" type="submit"
+									class="btn btn-danger">Xóa Vĩnh Viễn</button>
+							</div>
+						</c:if>
 					</div>
 				</form:form>
 			</div>

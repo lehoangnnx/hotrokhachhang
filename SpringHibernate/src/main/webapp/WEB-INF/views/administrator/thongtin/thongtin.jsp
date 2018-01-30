@@ -141,7 +141,7 @@
 				<!-- accepted payments column -->
 				
 				<!-- /.col -->
-				<div class="col-xs-6">
+				<div class="col-xs-12">
 					<p class="lead">Thông Tin Tài Khoản</p>
 
 					<div class="table-responsive">
@@ -159,7 +159,7 @@
 					</div>
 				</div>
 				
-				<div class="col-xs-6">
+				<div class="col-xs-12">
 					<p class="lead">Đổi Mật Khẩu</p>
 
 					<div class="table-responsive">

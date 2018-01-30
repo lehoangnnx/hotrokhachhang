@@ -69,6 +69,12 @@ public class NhanVienKpiServiceImpl implements NhanVienKpiService {
 				(nhanvien, kpi, trangthai, d1, d2);
 	}
 
+	@Override
+	public void deleted(Nhanvienkpi nhanvienkpi) {
+		nhanVienKpiRepository.delete(nhanvienkpi);
+		
+	}
+
 	
 	
 

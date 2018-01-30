@@ -54,4 +54,10 @@ public class QuyenServiceImpl implements QuyenService {
 		return quyenRepository.findByMaquyen(maquyen);
 	}
 
+	@Override
+	public void deleted(Quyen quyen) {
+		quyenRepository.delete(quyen);
+		
+	}
+
 }

@@ -266,7 +266,7 @@
 
 						<div class="form-group">
 							<label for="ghichu">Ghi Chú</label>
-							<form:input path="ghichu" type="text" class="form-control"
+							<form:textarea path="ghichu" type="text" class="form-control"
 								placeholder="Ghi Chú" />
 						</div>
 

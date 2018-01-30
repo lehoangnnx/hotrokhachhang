@@ -30,7 +30,9 @@ public class NhomHangController {
     String pageDanhSachNhomHang(@RequestParam(value="trangthai",defaultValue = "active") String trangthai,
 								Model model){
     	List<Nhomhang> listNhomhang = nhomHangService.findByTrangthaiOrderByIdDesc(trangthai);
+    	List<Nhomhang> listNhomhangcha = nhomHangService.findAll();
     	model.addAttribute("listNhomhang", listNhomhang);
+    	model.addAttribute("listNhomhangcha", listNhomhangcha);
         return "danhsachnhomhang";
     }
 
@@ -66,7 +68,7 @@ public class NhomHangController {
     	return "redirect:/admin/nhomhang?trangthai=active";
     }	
     	
-    @PatchMapping("/nhomhang")
+    @PatchMapping(value="/nhomhang", params="update")
     String suaNhomHang(@ModelAttribute("nhomhang") Nhomhang nhomhang,
     		RedirectAttributes redirectAttributes) {
     	try {
@@ -75,6 +77,39 @@ public class NhomHangController {
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
+		}
+    	
+    	return "redirect:/admin/nhomhang?trangthai=active";
+    }	
+    @PatchMapping(value="/nhomhang", params="restore")
+    String khoiPhucNhomHang(@ModelAttribute("nhomhang") Nhomhang nhomhang,
+    		RedirectAttributes redirectAttributes) {
+    	try {
+    		nhomhang.setTrangthai("active");
+        	nhomHangService.saveOrUpdate(nhomhang);
+        	redirectAttributes.addFlashAttribute("msg", "Khôi Phục Thành Công");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("msg", "Khôi Phục Thất Bại");
+		}
+    	
+    	return "redirect:/admin/nhomhang?trangthai=active";
+    }	
+    @PatchMapping(value="/nhomhang", params="deleted")
+    String xoaVinhVienNhomHang(@ModelAttribute("nhomhang") Nhomhang nhomhang,
+    		RedirectAttributes redirectAttributes) {
+    	List<Nhomhang> listNhomhang = null;
+    	try {
+    		listNhomhang = nhomHangService.findByManhomcha(nhomhang.getManhom());
+    		if(listNhomhang == null) {
+    			nhomHangService.deleted(nhomhang);
+            	redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thành Công");
+    		}else {
+    			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thất Bại");
+    		}
+        	nhomHangService.deleted(nhomhang);
+        	redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thành Công");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thất Bại");
 		}
     	
     	return "redirect:/admin/nhomhang?trangthai=active";

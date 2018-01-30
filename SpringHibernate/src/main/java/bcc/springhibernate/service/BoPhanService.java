@@ -10,7 +10,7 @@ import bcc.springhibernate.model.Loaikhachhang;
 public interface BoPhanService {
 	
 	void saveOrUpdate(Bophan bophan);
-	
+	void deleted(Bophan bophan);
 	List<Bophan> findAll();
 	List<Bophan> findByTrangthaiOrderByIdDesc(String trangthai);
 	List<Bophan> findByTrangthaiOrderByIdDesc(String trangthai, Pageable pageable);

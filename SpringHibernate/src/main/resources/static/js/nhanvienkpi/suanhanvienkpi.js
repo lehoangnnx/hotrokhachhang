@@ -2,6 +2,12 @@ $(document).ready(function() {
 	// Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
 	$("#formNhanVienKpi").validate({
 		rules : {
+			nhanvien : {
+				required : true
+			},
+			kpi : {
+				required : true
+			},
 			so: {
 				required : true,
 				normalizer : function(value) {
@@ -21,6 +27,12 @@ $(document).ready(function() {
 
 		},
 		messages : {
+			nhanvien : {
+				required : "* Vui Lòng Chọn Nhân Viên"
+			},
+			kpi : {
+				required : "* Vui Lòng Chọn KPI"
+			},
 			so : {
 				required : "* Vui Lòng Nhập Số"
 				

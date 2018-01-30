@@ -176,7 +176,7 @@ public class ChamSocController {
 		return "redirect:/admin/chamsoc?trangthai=chochamsoc&limit=100&page=1";
 	}
 
-	@PatchMapping("/chamsoc")
+	@PatchMapping(value="/chamsoc",params="update")
 	String suaChamSoc(@ModelAttribute("chamsoc") Chamsoc chamsoc,
 			@RequestParam("nhanvienbanhang") Integer nhanvienbanhang,
 			@RequestParam("nhanviengiaohang") Integer nhanviengiaohang, @RequestParam("khachhang") Integer khachhang,
@@ -256,6 +256,20 @@ public class ChamSocController {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
+		}
+
+		return "redirect:/admin/chamsoc?trangthai=chochamsoc&limit=100&page=1";
+	}
+	
+	@PatchMapping(value="/chamsoc",params="deleted")
+	String xoaVinhVienChamSoc(@ModelAttribute("chamsoc") Chamsoc chamsoc,
+			
+			RedirectAttributes redirectAttributes, Principal principal) {
+		try {
+			chamSocService.deleted(chamsoc);
+			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thành Công");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thất Bại");
 		}
 
 		return "redirect:/admin/chamsoc?trangthai=chochamsoc&limit=100&page=1";

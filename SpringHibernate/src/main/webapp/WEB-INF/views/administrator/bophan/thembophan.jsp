@@ -37,7 +37,7 @@
 						</div>
 						
 						<div class="form-group">
-							<label for="moTa">Mô tả</label> <form:input path="mota" type="text"
+							<label for="moTa">Mô tả</label> <form:textarea path="mota" type="text"
 								class="form-control" id="mota" name="mota"
 								placeholder="Mô Tả" />
 						</div>

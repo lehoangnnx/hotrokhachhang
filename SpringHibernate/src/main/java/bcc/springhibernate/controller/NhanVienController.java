@@ -98,7 +98,7 @@ public class NhanVienController {
     		Bophan bophanById = boPhanService.findById(bophan);
     		nhanvien.setSocmnd(socmnd);
     		nhanvien.setNgaycap(df.parse(ngaycap));
-    		nhanvien.setSodienthoai(sodienthoai);
+    		nhanvien.setSodienthoai(sodienthoai.replace("_", ""));
     		nhanvien.setNgayvaolam(df.parse(ngayvaolam));
     		nhanvien.setBophan(bophanById);
     		nhanvien.setTrangthai("active");
@@ -111,7 +111,7 @@ public class NhanVienController {
     	return "redirect:/admin/nhanvien?trangthai=active";
     }	
     	
-    @PatchMapping("/nhanvien")
+    @PatchMapping(value="/nhanvien",params="update")
     String suaNhanVien(@ModelAttribute("nhanvien") Nhanvien nhanvien, 
     		
     		@RequestParam("socmnd") String socmnd,
@@ -128,7 +128,7 @@ public class NhanVienController {
     		Bophan bophanById = boPhanService.findById(bophan);
     		nhanvien.setSocmnd(socmnd);
     		nhanvien.setNgaycap(df.parse(ngaycap));
-    		nhanvien.setSodienthoai(sodienthoai);
+    		nhanvien.setSodienthoai(sodienthoai.replace("_", ""));
     		nhanvien.setNgayvaolam(df.parse(ngayvaolam));
     		nhanvien.setBophan(bophanById);
     		nhanvien.setTrangthai("active");
@@ -136,6 +136,19 @@ public class NhanVienController {
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
+		}
+    	
+    	return "redirect:/admin/nhanvien?trangthai=active";
+    }	
+    @PatchMapping(value="/nhanvien",params="deleted")
+    String xoaVinhVienNhanVien(@ModelAttribute("nhanvien") Nhanvien nhanvien, 
+    		RedirectAttributes redirectAttributes) {
+    	try {
+    		
+    		nhanVienService.deleted(nhanvien);
+        	redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thành Công");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn  Thất Bại");
 		}
     	
     	return "redirect:/admin/nhanvien?trangthai=active";

@@ -63,14 +63,26 @@ public class BoPhanController {
     	return "redirect:/admin/bophan?trangthai=active";
     }	
     	
-    @PatchMapping("/bophan")
-    String suaLoaiKhachHang(@ModelAttribute("bophan") Bophan bophan,RedirectAttributes redirectAttributes) {
+    @PatchMapping(value="/bophan",params="update")
+    String suaBoPhan(@ModelAttribute("bophan") Bophan bophan,RedirectAttributes redirectAttributes) {
     	try {
     		bophan.setTrangthai("active");
         	boPhanService.saveOrUpdate(bophan);
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
+		}	
+    	return "redirect:/admin/bophan?trangthai=active";
+    }	
+    
+    @PatchMapping(value="/bophan",params="deleted")
+    String xoaVinhVienBoPhan(@ModelAttribute("bophan") Bophan bophan,RedirectAttributes redirectAttributes) {
+    	try {
+    		
+        	boPhanService.deleted(bophan);
+        	redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thành Công");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thất Bại");
 		}	
     	return "redirect:/admin/bophan?trangthai=active";
     }	

@@ -98,7 +98,7 @@ public class TaiKhoanController {
     	return "redirect:/admin/taikhoan?trangthai=active";
     }	
     	
-    @PatchMapping("/taikhoan")
+    @PatchMapping(value="/taikhoan",params="update")
     String suaTaiKhoan(//@ModelAttribute("taikhoan") Taikhoan taikhoan,
     		@RequestParam("id") Integer id,
     		@RequestParam("username") String username,
@@ -128,6 +128,23 @@ public class TaiKhoanController {
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
+		}
+    	
+    	return "redirect:/admin/taikhoan?trangthai=active";
+    }	
+    @PatchMapping(value="/taikhoan",params="deleted")
+    String xoaVinhVienTaiKhoan(//@ModelAttribute("taikhoan") Taikhoan taikhoan,
+    		@RequestParam("id") Integer id,
+    		
+    		RedirectAttributes redirectAttributes) {
+    	try {
+    		
+    		Taikhoan taikhoan = taikhoanService.findById(id);
+    		
+        	taikhoanService.deleted(taikhoan);
+        	redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thành Công");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thất Bại");
 		}
     	
     	return "redirect:/admin/taikhoan?trangthai=active";

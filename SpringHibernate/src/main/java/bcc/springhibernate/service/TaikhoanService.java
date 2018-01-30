@@ -8,6 +8,7 @@ import bcc.springhibernate.model.Taikhoan;
 public interface TaikhoanService {
 	List<Taikhoan> findAll();
 	void saveOrUpdate(Taikhoan tk);
+	void deleted(Taikhoan tk);
 	
 	Taikhoan findById(Integer id);
 	Taikhoan findByUsername(String username);

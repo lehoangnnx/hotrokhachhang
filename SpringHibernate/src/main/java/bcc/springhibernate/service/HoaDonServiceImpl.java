@@ -118,4 +118,10 @@ public class HoaDonServiceImpl implements HoaDonService {
 		return hoaDonRepository.findByNhanvienByIdnhanvienbanAndTrangthaiNotAndNgaylapBetweenOrderByIdDesc(nhanvien, trangthai, d1, d2);
 	}
 
+	@Override
+	public void deleted(Hoadon hoadon) {
+		hoaDonRepository.delete(hoadon);
+		
+	}
+
 }

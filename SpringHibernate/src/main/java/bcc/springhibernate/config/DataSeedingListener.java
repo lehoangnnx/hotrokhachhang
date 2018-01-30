@@ -57,7 +57,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 			taikhoan.setEmail("admin1@gmail.com");
 			taikhoan.setMatkhau(passwordEncoder.encode("123456"));
 			taikhoan.setThongtinkhac("123");
-			
+			taikhoan.setTrangthai("active");
 			Nhanvien nhanvien =nhanvienRepository.findById(1);
 			
 			HashSet<Quyen> hashSet = new HashSet<>();

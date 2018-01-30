@@ -272,7 +272,7 @@
 						</div>
 						<div class="form-group">
 							<label for="ghichu">Ghi Chú</label>
-							<form:input path="ghichu" type="text" class="form-control"
+							<form:textarea path="ghichu" type="text" class="form-control"
 								placeholder="Ghi Chú" />
 						</div>
 
@@ -282,8 +282,19 @@
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 					<div class="box-footer">
-						<button id="btn-submit" type="submit" class="btn btn-primary">Xác
-							Nhận</button>
+						<c:if test="${khachhang.trangthai != 'deleted' }">
+							<div class="box-footer">
+								<button id="btn-submit" name="update" type="submit"
+									class="btn btn-primary">Xác Nhận</button>
+							</div>
+						</c:if>
+						<c:if test="${khachhang.trangthai == 'deleted' }">
+							<div class="box-footer">
+
+								<button id="btn-submit" name="deleted" type="submit"
+									class="btn btn-danger">Xóa Vĩnh Viễn</button>
+							</div>
+						</c:if>
 					</div>
 				</form:form>
 			</div>

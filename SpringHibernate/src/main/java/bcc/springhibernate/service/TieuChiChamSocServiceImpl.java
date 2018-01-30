@@ -44,4 +44,10 @@ public class TieuChiChamSocServiceImpl implements TieuChiChamSocService {
 		
 	}
 
+	@Override
+	public void deleted(Tieuchichamsoc tieuchichamsoc) {
+		tieuChiChamSocRepository.delete(tieuchichamsoc);
+		
+	}
+
 }

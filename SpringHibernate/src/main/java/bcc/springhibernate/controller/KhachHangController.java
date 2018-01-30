@@ -221,7 +221,7 @@ public class KhachHangController {
 		return "redirect:/admin/khachhang?trangthai=active&loaikhachhang=0&nhomkhachhang=0&limit=100&page=1";
 	}
 
-	@PatchMapping("/khachhang")
+	@PatchMapping(value="/khachhang",params="update")
 	String suaKhachHang(//@ModelAttribute("khachhang") Khachhang khachhang,
 			@RequestParam("id") Integer id,
 			@RequestParam(value="loaikhachhang") Integer loaikhachhang, @RequestParam("nhomkhachhang") Integer nhomkhachhang,
@@ -318,6 +318,22 @@ public class KhachHangController {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
+		}
+		return "redirect:/admin/khachhang?trangthai=active&loaikhachhang=0&nhomkhachhang=0&limit=100&page=1";
+	}
+	@PatchMapping(value="/khachhang",params="deleted")
+	String xoaVinhVienKhachHang(//@ModelAttribute("khachhang") Khachhang khachhang,
+			@RequestParam("id") Integer id,
+			
+			RedirectAttributes redirectAttributes) {
+		try {
+			
+			Khachhang khachhang = khachHangService.findById(id);
+			
+			khachHangService.deleted(khachhang);
+			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thành Công");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thất Bại");
 		}
 		return "redirect:/admin/khachhang?trangthai=active&loaikhachhang=0&nhomkhachhang=0&limit=100&page=1";
 	}

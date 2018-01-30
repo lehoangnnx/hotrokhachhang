@@ -9,6 +9,7 @@ import bcc.springhibernate.model.Nhanvienkpi;
 
 public interface NhanVienKpiService {
 	void saveOrUpdate(Nhanvienkpi nhanvienkpi);
+	void deleted(Nhanvienkpi nhanvienkpi);
 	List<Nhanvienkpi> findAll();
 	List<Nhanvienkpi> findByTrangthaiOrderByIdDesc(String trangthai);
 	List<Nhanvienkpi> findByTrangthaiNotOrderByIdDesc(String trangthai);

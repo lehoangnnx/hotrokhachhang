@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface KpiService {
 	void saveOrUpdate(Kpi kpi);
+	void deleted(Kpi kpi);
 	List<Kpi> findAll();
 	List<Kpi> findByTrangthaiOrderByIdDesc(String trangthai);
 	List<Kpi> findByTrangthaiNotOrderByIdDesc(String trangthai);

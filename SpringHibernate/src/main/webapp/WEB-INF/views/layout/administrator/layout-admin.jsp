@@ -29,14 +29,19 @@
 		</aside>
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
+			<c:if test="${not empty  msg}">
+				<div style="text-align: center; color: red; padding-top: 15px;">
+					<label id="msg">${msg }</label>
+				</div>
+			</c:if>
 			<tiles:insertAttribute name="body" />
-			
+
 		</div>
 		<!-- /.content-wrapper -->
-		
+
 		<!-- Main Footer -->
 		<footer class="main-footer">
-		  	<tiles:insertAttribute name="navbar" />
+			<tiles:insertAttribute name="navbar" />
 		</footer>
 		<tiles:insertAttribute name="controlsidebar" />
 	</div>

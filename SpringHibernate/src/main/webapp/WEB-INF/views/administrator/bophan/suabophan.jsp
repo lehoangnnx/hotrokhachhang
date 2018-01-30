@@ -37,7 +37,7 @@
 						</div>
 						
 						<div class="form-group">
-							<label for="moTa">Mô tả</label> <form:input path="mota" type="text"
+							<label for="moTa">Mô tả</label> <form:textarea path="mota" type="text"
 								class="form-control" id="mota" name="mota"
 								placeholder="Mô Tả" />
 						</div>
@@ -48,7 +48,19 @@
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 					<div class="box-footer">
-						<button id="btn-submit" type="submit" class="btn btn-primary">Xác Nhận</button>
+						<c:if test="${bophan.trangthai != 'deleted' }">
+							<div class="box-footer">
+								<button id="btn-submit" name="update" type="submit"
+									class="btn btn-primary">Xác Nhận</button>
+							</div>
+						</c:if>
+						<c:if test="${bophan.trangthai == 'deleted' }">
+							<div class="box-footer">
+
+								<button id="btn-submit" name="deleted" type="submit"
+									class="btn btn-danger">Xóa Vĩnh Viễn</button>
+							</div>
+						</c:if>
 					</div>
 				</form:form>
 			</div>

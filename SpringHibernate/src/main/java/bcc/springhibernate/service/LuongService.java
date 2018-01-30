@@ -8,7 +8,7 @@ import bcc.springhibernate.model.Nhomkhachhang;
 
 public interface LuongService {
 	void saveOrUpdate(Luong luong);
-	
+	void deleted(Luong luong);
 	List<Luong> findAll();
 	List<Luong> findByTrangthaiOrderByIdDesc(String trangthai);
 	List<Luong> findByTrangthaiNotOrderByIdDesc(String trangthai);

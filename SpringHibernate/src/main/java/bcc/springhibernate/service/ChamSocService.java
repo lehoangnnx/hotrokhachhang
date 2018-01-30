@@ -10,6 +10,7 @@ import bcc.springhibernate.model.Hoadon;
 
 public interface ChamSocService {
 	void saveOrUpdate(Chamsoc chamsoc);
+	void deleted(Chamsoc chamsoc);
 	List<Chamsoc> findAll();
 	List<Chamsoc> findByTrangthaiOrderByIdDesc(String trangthai);
 	List<Chamsoc> findByTrangthaiOrderByIdDesc(String trangthai, Pageable pageable);

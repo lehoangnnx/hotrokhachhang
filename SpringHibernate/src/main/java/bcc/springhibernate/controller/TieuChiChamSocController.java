@@ -67,7 +67,7 @@ public class TieuChiChamSocController {
     	return "redirect:/admin/tieuchichamsoc?trangthai=active";
     }	
     	
-    @PatchMapping("/tieuchichamsoc")
+    @PatchMapping(value="/tieuchichamsoc",params="update")
     String suaTieuChiChamSoc(@ModelAttribute("tieuchichamsoc") Tieuchichamsoc tieuchichamsoc,
     		@RequestParam("kieutieuchi") String kieutieuchi,
     		RedirectAttributes redirectAttributes) {
@@ -82,7 +82,22 @@ public class TieuChiChamSocController {
 		}
     	
     	return "redirect:/admin/tieuchichamsoc?trangthai=active";
-    }	
+    }
+    @PatchMapping(value="/tieuchichamsoc",params="deleted")
+    String xoaVinhVienTieuChiChamSoc(@ModelAttribute("tieuchichamsoc") Tieuchichamsoc tieuchichamsoc,
+    		
+    		RedirectAttributes redirectAttributes) {
+    	try {
+    		
+    		
+    		tieuChiChamSocService.deleted(tieuchichamsoc);
+        	redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thành Công");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thất Bại");
+		}
+    	
+    	return "redirect:/admin/tieuchichamsoc?trangthai=active";
+    }
     @DeleteMapping("/tieuchichamsoc")
     String xoaTieuChiChamSoc(@RequestParam("arrayId") List<Integer> arrayId,
     		RedirectAttributes redirectAttributes) {

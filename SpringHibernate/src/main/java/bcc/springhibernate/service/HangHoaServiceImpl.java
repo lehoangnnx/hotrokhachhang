@@ -50,6 +50,12 @@ HangHoaRepository hangHoaRepository;
 		return hangHoaRepository.findById(id);
 	}
 
+	@Override
+	public void deleted(Hanghoa hanghoa) {
+		hangHoaRepository.delete(hanghoa);
+		
+	}
+
 	
 
 }

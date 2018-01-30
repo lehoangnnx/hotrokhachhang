@@ -63,7 +63,7 @@ public class KpiController {
     	return "redirect:/admin/kpi?trangthai=active";
     }	
     	
-    @PatchMapping("/kpi")
+    @PatchMapping(value="/kpi",params="update")
     String suaKpi(@ModelAttribute("kpi") Kpi kpi,
     		RedirectAttributes redirectAttributes) {
     	try {
@@ -72,6 +72,19 @@ public class KpiController {
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
+		}
+    	
+    	return "redirect:/admin/kpi?trangthai=active";
+    }	
+    @PatchMapping(value="/kpi",params="deleted")
+    String xoaVinhVienKpi(@ModelAttribute("kpi") Kpi kpi,
+    		RedirectAttributes redirectAttributes) {
+    	try {
+    		
+        	kpiService.deleted(kpi);
+        	redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thành Công");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thất Bại");
 		}
     	
     	return "redirect:/admin/kpi?trangthai=active";

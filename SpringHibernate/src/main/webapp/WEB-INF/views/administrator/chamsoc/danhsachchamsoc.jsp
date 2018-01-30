@@ -31,11 +31,11 @@
 			<ul class="nav nav-tabs">
 				<li class="tablinks ${param.trangthai == 'chochamsoc' ? 'active' : '' }">
 					<a href="${contextPath }/admin/chamsoc?trangthai=chochamsoc&limit=100&page=1">Chờ Chăm Sóc
-						Hoạt</a>
+						</a>
 				</li>
 				<li class="tablinks ${param.trangthai == 'dachamsoc' ? 'active' : '' }">
 					<a href="${contextPath }/admin/chamsoc?trangthai=dachamsoc&limit=100&page=1">Đã Chăm Sóc
-						Hoạt</a>
+						</a>
 				</li>
 				
 				<li class="tablinks ${param.status == 'deleted' ? 'active' : '' }">

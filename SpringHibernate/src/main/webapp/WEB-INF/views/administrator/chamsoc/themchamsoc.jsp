@@ -214,7 +214,7 @@ tr:nth-child(even) {
 
 						<div class="form-group">
 							<label for="ghichu">Ghi Chú</label>
-							<form:input path="ghichu" type="text" class="form-control"
+							<form:textarea path="ghichu" type="text" class="form-control"
 								placeholder="ghichu" />
 							<label id="_ghichu-error" class="error" style="display: none;"></label>
 						</div>

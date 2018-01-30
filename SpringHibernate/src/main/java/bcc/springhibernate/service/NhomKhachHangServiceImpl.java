@@ -41,4 +41,10 @@ public class NhomKhachHangServiceImpl implements NhomKhachHangService {
 		
 	}
 
+	@Override
+	public void deleted(Nhomkhachhang nhomkhachhang) {
+		nhomKhachHangRepository.delete(nhomkhachhang);
+		
+	}
+
 }

@@ -10,6 +10,33 @@ $(document).ready(function() {
 				}
 
 			},
+			sodiemtrentien : {
+				required : true,
+				
+				normalizer : function(value) {
+
+					return $.trim(value);
+				}
+
+			},
+			sotientrendiem : {
+				required : true,
+				
+				normalizer : function(value) {
+
+					return $.trim(value);
+				}
+
+			},
+			phantramtien : {
+				required : true,
+				
+				normalizer : function(value) {
+
+					return $.trim(value);
+				}
+
+			},
 			diem : {
 				required : true,
 				
@@ -34,14 +61,31 @@ $(document).ready(function() {
 
 					return $.trim(value);
 				}
-			}
-*/
+			}*/
+
 		},
 		messages : {
 			tennhom : {
 				required : "* Vui Lòng Nhập Tên Nhóm Khách Hàng"
 				
 
+			},
+			sodiemtrentien : {
+				required :  "* Vui Lòng Nhập Số Điểm Trên Tiền"
+				
+				
+
+			},
+			sotientrendiem : {
+				required :  "* Vui Lòng Nhập Số Tiền Trên Điểm"
+				
+				
+
+			},
+			phantramtien : {
+				required :  "* Vui Lòng Nhập Phần Trăm Trên Hóa Đơn"
+				
+				
 			},
 			diem : {
 				required : "* Vui Lòng Nhập Điểm"

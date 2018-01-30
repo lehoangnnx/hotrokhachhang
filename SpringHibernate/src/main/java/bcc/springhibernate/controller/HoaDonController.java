@@ -232,8 +232,9 @@ public class HoaDonController {
 
 	}
 
-	@PatchMapping("/hoadon")
-	String suaHoaDon(@ModelAttribute("hoadon") Hoadon hoadon, @RequestParam("nhanvienbanhang") Integer nhanvienbanhang,
+	@PatchMapping(value="/hoadon", params="update")
+	String suaHoaDon(@ModelAttribute("hoadon") Hoadon hoadon, 
+			@RequestParam("nhanvienbanhang") Integer nhanvienbanhang,
 			@RequestParam("nhanviengiaohang") Integer nhanviengiaohang,
 			@RequestParam("nhanvienchamsoc") Integer nhanvienchamsoc, @RequestParam("khachhang") Integer khachhang,
 			@RequestParam("hinhthucthanhtoan") String hinhthucthanhtoan, @RequestParam("ngaylap") String ngaylap,
@@ -355,6 +356,23 @@ public class HoaDonController {
 		}
 	}
 
+	
+	@PatchMapping(value="/hoadon", params="deleted")
+	String xoaVinhVienHoaDon(@ModelAttribute("hoadon") Hoadon hoadon,  RedirectAttributes redirectAttributes) {
+
+		try {
+
+			hoaDonService.deleted(hoadon);
+
+			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thành Công");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thất Bại");
+		}
+
+		return "redirect:/admin/hoadon?trangthai=dathanhtoan&limit=100&page=1";
+
+	}
+	
 	@DeleteMapping("/hoadon")
 	String xoaHoaDon(@RequestParam(value = "trangthai", defaultValue = "dathanhtoan") String trangthai,
 			@RequestParam(value = "limit", defaultValue = "100") Integer limit,

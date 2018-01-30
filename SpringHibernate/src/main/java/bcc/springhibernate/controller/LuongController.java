@@ -76,10 +76,10 @@ public class LuongController {
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thất Bại");
 		}
-		return "redirect:/admin/luong?trangthai=datraluong";
+		return "redirect:/admin/luong?trangthai=chuatraluong";
 	}
 
-	@PatchMapping("/luong")
+	@PatchMapping(value="/luong",params="update")
 	String suaLuong(@ModelAttribute("luong") Luong luong, @RequestParam("nhanvien") Integer nhanvien,
 			@RequestParam("thang") String thang, @RequestParam("nam") String nam,
 			@RequestParam("trangthai") String trangthai, RedirectAttributes redirectAttributes) {
@@ -94,7 +94,18 @@ public class LuongController {
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
 		}
-		return "redirect:/admin/luong?trangthai=datraluong";
+		return "redirect:/admin/luong?trangthai=chuatraluong";
+	}
+	@PatchMapping(value="/luong",params="deleted")
+	String xoaVinhVienLuong(@ModelAttribute("luong") Luong luong,  RedirectAttributes redirectAttributes) {
+		try {
+			
+			LuongService.deleted(luong);
+			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thành Công");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thất Bại");
+		}
+		return "redirect:/admin/luong?trangthai=chuatraluong";
 	}
 
 	@DeleteMapping("/luong")
@@ -115,6 +126,6 @@ public class LuongController {
 			redirectAttributes.addFlashAttribute("msg", "Xóa Thất Bại");
 		}
 
-		return "redirect:/admin/luong?trangthai=datraluong";
+		return "redirect:/admin/luong?trangthai=chuatraluong";
 	}
 }

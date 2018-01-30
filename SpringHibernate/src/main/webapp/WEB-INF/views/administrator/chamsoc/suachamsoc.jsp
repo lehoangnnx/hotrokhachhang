@@ -14,18 +14,20 @@
 </style>
 <style>
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-    border: 1px solid #ddd;
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+	border: 1px solid #ddd;
 }
 
 th, td {
-    text-align: left;
-    padding: 8px;
+	text-align: left;
+	padding: 8px;
 }
 
-tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(even) {
+	background-color: #f2f2f2
+}
 </style>
 <section class="content">
 
@@ -70,8 +72,8 @@ tr:nth-child(even){background-color: #f2f2f2}
 							</select>
 						</div>
 						<div class="form-group">
-							<label>Khách Hàng</label> <select class="form-control select2" id="khachhang"
-								name="khachhang" style="width: 100%;">
+							<label>Khách Hàng</label> <select class="form-control select2"
+								id="khachhang" name="khachhang" style="width: 100%;">
 
 								<c:forEach var="kh" items="${listKhachhang }">
 									<option ${chamsoc.khachhang.id == kh.id ? 'selected' : '' }
@@ -124,7 +126,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 							<label id="_diem-error" class="error" style="display: none;"></label>
 						</div>
 						<div class="box-body">
-							<table border="1" style="overflow-x:auto;" id="tblctcs" >
+							<table border="1" style="overflow-x: auto;" id="tblctcs">
 								<thead>
 									<tr>
 										<th>ID</th>
@@ -146,19 +148,22 @@ tr:nth-child(even){background-color: #f2f2f2}
 
 											<td><c:if
 													test="${ctcs.tieuchichamsoc.kieutieuchi == 'so' }">
-													<input hidden value="${ctcs.diem}" id="ikieutieuchitccs${ctcs.tieuchichamsoc.id}"
+													<input hidden value="${ctcs.diem}"
+														id="ikieutieuchitccs${ctcs.tieuchichamsoc.id}"
 														name="kieutieuchitccs">
 													<span id="kieutieuchitccs${ctcs.tieuchichamsoc.id}">
 														${ctcs.diem} </span>
 												</c:if> <c:if
 													test="${ctcs.tieuchichamsoc.kieutieuchi == 'cokhong' }">
-													<input hidden value="${ctcs.cokhong}" id="ikieutieuchitccs${ctcs.tieuchichamsoc.id}"
+													<input hidden value="${ctcs.cokhong}"
+														id="ikieutieuchitccs${ctcs.tieuchichamsoc.id}"
 														name="kieutieuchitccs">
 													<span id="kieutieuchitccs${ctcs.tieuchichamsoc.id}">
 
 														${ctcs.cokhong == 'true' ? 'Có' : 'Không'} </span>
 												</c:if> <c:if test="${ctcs.tieuchichamsoc.kieutieuchi == 'tien' }">
-													<input hidden value="${ctcs.tienchamsoc}" id="ikieutieuchitccs${ctcs.tieuchichamsoc.id}"
+													<input hidden value="${ctcs.tienchamsoc}"
+														id="ikieutieuchitccs${ctcs.tieuchichamsoc.id}"
 														name="kieutieuchitccs">
 													<span id="kieutieuchitccs${ctcs.tieuchichamsoc.id}">
 
@@ -202,8 +207,8 @@ tr:nth-child(even){background-color: #f2f2f2}
 							<label id="ngay-error" class="error" for="ngay"></label>
 						</div>
 						<div class="form-group">
-							<label  style="margin-right: 60px;">Số
-								Lần Đã Chăm Sóc : <span id="spsolanchamsoc">${chamsoc.khachhang.solanchamsoc }</span>
+							<label style="margin-right: 60px;">Số Lần Đã Chăm Sóc : <span
+								id="spsolanchamsoc">${chamsoc.khachhang.solanchamsoc }</span>
 							</label> <label>Số Lần Đã Đàm Phán : <span id="spsolandamphan">${chamsoc.khachhang.solandamphan }</span></label>
 
 						</div>
@@ -246,7 +251,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 
 						<div class="form-group">
 							<label for="ghichu">Ghi Chú</label>
-							<form:input path="ghichu" type="text" class="form-control"
+							<form:textarea path="ghichu" type="text" class="form-control"
 								placeholder="ghichu" />
 							<label id="_ghichu-error" class="error" style="display: none;"></label>
 						</div>
@@ -256,8 +261,19 @@ tr:nth-child(even){background-color: #f2f2f2}
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 					<div class="box-footer">
-						<button id="btn-submit" type="submit" class="btn btn-primary">Xác
-							Nhận</button>
+						<c:if test="${chamsoc.trangthai != 'deleted' }">
+							<div class="box-footer">
+								<button id="btn-submit" name="update" type="submit"
+									class="btn btn-primary">Xác Nhận</button>
+							</div>
+						</c:if>
+						<c:if test="${chamsoc.trangthai == 'deleted' }">
+							<div class="box-footer">
+
+								<button id="btn-submit" name="deleted" type="submit"
+									class="btn btn-danger">Xóa Vĩnh Viễn</button>
+							</div>
+						</c:if>
 					</div>
 				</form:form>
 			</div>

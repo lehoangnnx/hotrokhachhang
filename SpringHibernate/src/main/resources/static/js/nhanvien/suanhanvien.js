@@ -69,6 +69,9 @@ $(document).ready(function() {
 					return $.trim(value);
 				}
 				
+			}, 
+			bophan : {
+				required : true
 			}
 
 		},
@@ -120,6 +123,9 @@ $(document).ready(function() {
 			chietkhau : {
 				required : "* Vui Lòng Nhập Chiết Khấu"
 				
+			}, 
+			bophan : {
+				required : "* Vui Lòng Chọn Bộ Phận"
 			}
 
 		}

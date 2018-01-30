@@ -2,6 +2,16 @@ $(document).ready(function() {
 	// Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
 	$("#formChamSoc").validate({
 		rules : {
+			nhanvienbanhang : {
+				required : true
+			},
+			
+			nhanviengiaohang : {
+				required : true
+			},
+			khachhang : {
+				required : true
+			},
 			lan : {
 				required : true,
 				normalizer : function(value) {
@@ -22,6 +32,16 @@ $(document).ready(function() {
 
 		},
 		messages : {
+			nhanvienbanhang : {
+				required :  '* Vui Lòng Chọn Nhân Viên Bán Hàng'
+			},
+			
+			nhanviengiaohang : {
+				required :  '* Vui Lòng Chọn Nhân Viên Giao Hàng'
+			},
+			khachhang : {
+				required :  '* Vui Lòng Chọn Khách Hàng'
+			},
 			lan : {
 				required : "* Vui Lòng Nhập Lần Chăm Sóc"
 				

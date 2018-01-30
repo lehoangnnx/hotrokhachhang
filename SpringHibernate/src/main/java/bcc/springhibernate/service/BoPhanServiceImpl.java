@@ -51,6 +51,12 @@ public class BoPhanServiceImpl implements BoPhanService {
 		
 		return boPhanRepository.findByTrangthaiOrderByIdDesc(trangthai, pageable);
 	}
+
+	@Override
+	public void deleted(Bophan bophan) {
+		boPhanRepository.delete(bophan);
+		
+	}
 	
 
 }

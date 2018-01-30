@@ -30,24 +30,24 @@
 								<label id="error" class="error" style="display: none;" ></label>
 						</div>
 						<div class="form-group">
-							<label for="diem">Điểm</label> <form:input path="diem"
+							<label for="diem">Điểm</label> <form:input path="diem" min="0"
 								type="number" class="form-control" 
 								placeholder="Điểm" />
 								
 						</div>
 						<div class="form-group">
-							<label for="phantram">Phần Trắm</label> <form:input path="phantram"
+							<label for="phantram">Phần Trắm</label> <form:input path="phantram" min="0"
 								type="number" class="form-control"
 								placeholder="Phần Trăm" />
 								
 						</div>
 						<div class="form-group">
 							<label for="phantram">Số Điểm/Tiền</label> <br>
-							<div class="col-md-5"><form:input  path="sodiemtrentien"
+							<div class="col-md-5"><form:input  path="sodiemtrentien" min="0"
 								type="number" class="form-control" 
 								placeholder="Số Điểm" /></div>
 								<span class="col-md-2">/</span>
-								<div class="col-md-5"><form:input path="sotientrendiem"
+								<div class="col-md-5"><form:input path="sotientrendiem" min="0"
 								type="number" class="form-control"
 								placeholder="Số Tiền" /></div>
 								
@@ -55,13 +55,13 @@
 						
 						<div class="form-group">
 							<label for="phantramtien">Phần Trăm Trên Hóa Đơn</label> <form:input path="phantramtien"
-								type="number" class="form-control"
+								type="number" class="form-control" min="0"
 								placeholder="Phần Trăm Trên Hóa Đơn" />
 								
 						</div>
 						
 						<div class="form-group">
-							<label for="moTa">Mô tả</label> <form:input path="mota" type="text"
+							<label for="moTa">Mô tả</label> <form:textarea path="mota" type="text"
 								class="form-control" id="mota" name="mota"
 								placeholder="Mô Tả" />
 						</div>
@@ -72,7 +72,19 @@
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 					<div class="box-footer">
-						<button id="btn-submit" type="submit" class="btn btn-primary">Xác Nhận</button>
+						<c:if test="${nhomkhachhang.trangthai != 'deleted' }">
+							<div class="box-footer">
+								<button id="btn-submit" name="update" type="submit"
+									class="btn btn-primary">Xác Nhận</button>
+							</div>
+						</c:if>
+						<c:if test="${nhomkhachhang.trangthai == 'deleted' }">
+							<div class="box-footer">
+
+								<button id="btn-submit" name="deleted" type="submit"
+									class="btn btn-danger">Xóa Vĩnh Viễn</button>
+							</div>
+						</c:if>
 					</div>
 				</form:form>
 			</div>

@@ -34,7 +34,7 @@
 						Hoạt</a>
 				</li>
 
-				<li class="tablinks ${param.status == 'deleted' ? 'active' : '' }">
+				<li class="tablinks ${param.trangthai == 'deleted' ? 'active' : '' }">
 					<a href="${contextPath }/admin/kpi?trangthai=deleted">Đã Xóa</a>
 				</li>
 			</ul>

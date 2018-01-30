@@ -53,4 +53,10 @@ public class TaikhoanServiceImpl implements TaikhoanService {
 		return taikhoanRepository.findByEmail(email);
 	}
 
+	@Override
+	public void deleted(Taikhoan tk) {
+		taikhoanRepository.delete(tk);
+		
+	}
+
 }

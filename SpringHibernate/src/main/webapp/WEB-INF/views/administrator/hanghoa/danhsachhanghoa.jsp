@@ -10,7 +10,7 @@
 <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Nhóm Hàng
+        Hàng Hóa
        <%--  <small><a href="${contextPath }/admin/roles?status=active">Danh Sách Hàng Hóa</a></small>
         <small><a class="btn btn-success" href="${contextPath }/admin/hanghoa/add">Thêm mới</a></small> --%>
       </h1>

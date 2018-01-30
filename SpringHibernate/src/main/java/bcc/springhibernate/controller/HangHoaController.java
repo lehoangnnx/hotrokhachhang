@@ -68,7 +68,7 @@ public class HangHoaController {
     	return "redirect:/admin/hanghoa?trangthai=active";
     }	
     	
-    @PatchMapping("/hanghoa")
+    @PatchMapping(value="/hanghoa",params="update")
     String suaHangHoa(@ModelAttribute("hanghoa") Hanghoa hanghoa,@RequestParam("nhomhang") Integer nhomhang,
     		RedirectAttributes redirectAttributes) {
     	try {
@@ -79,6 +79,19 @@ public class HangHoaController {
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
+		}
+    	
+    	return "redirect:/admin/hanghoa?trangthai=active";
+    }	
+    @PatchMapping(value="/hanghoa",params="deleted")
+    String xoaVinhVienHangHoa(@ModelAttribute("hanghoa") Hanghoa hanghoa,
+    		RedirectAttributes redirectAttributes) {
+    	try {
+    		
+    		hangHoaService.deleted(hanghoa);
+        	redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thành Công");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thất Bại");
 		}
     	
     	return "redirect:/admin/hanghoa?trangthai=active";

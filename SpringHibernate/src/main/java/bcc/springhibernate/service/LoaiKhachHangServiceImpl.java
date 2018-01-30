@@ -42,4 +42,10 @@ public class LoaiKhachHangServiceImpl implements LoaiKhachHangService {
 		return loaiKhachHangRepository.findByTrangthaiOrderByIdDesc(trangthai);
 	}
 
+	@Override
+	public void deleted(Loaikhachhang loaikhachhang) {
+		loaiKhachHangRepository.delete(loaikhachhang);
+		
+	}
+
 }

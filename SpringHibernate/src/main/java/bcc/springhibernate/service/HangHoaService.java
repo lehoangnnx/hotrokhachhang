@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface HangHoaService {
 	void saveOrUpdate(Hanghoa hanghoa);
+	void deleted(Hanghoa hanghoa);
 	List<Hanghoa> findAll();
 	List<Hanghoa> findByTrangthaiOrderByIdDesc(String trangthai);
 	List<Hanghoa> findByTrangthaiOrderByIdDesc(String trangthai, Pageable pageable);

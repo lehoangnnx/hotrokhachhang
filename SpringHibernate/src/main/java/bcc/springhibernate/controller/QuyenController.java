@@ -65,7 +65,7 @@ public class QuyenController {
     	return "redirect:/admin/quyen?trangthai=active";
     }	
     	
-    @PatchMapping("/quyen")
+    @PatchMapping(value="/quyen",params="update")
     String suaQuyen(@ModelAttribute("quyen") Quyen quyen,
     		RedirectAttributes redirectAttributes) {
     	try {
@@ -74,6 +74,19 @@ public class QuyenController {
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
+		}
+    	
+    	return "redirect:/admin/quyen?trangthai=active";
+    }	
+    @PatchMapping(value="/quyen",params="deleted")
+    String xoaVinhVienQuyen(@ModelAttribute("quyen") Quyen quyen,
+    		RedirectAttributes redirectAttributes) {
+    	try {
+    		
+        	quyenService.deleted(quyen);
+        	redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thành Công");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thất Bại");
 		}
     	
     	return "redirect:/admin/quyen?trangthai=active";

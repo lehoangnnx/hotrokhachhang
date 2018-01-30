@@ -52,12 +52,12 @@
 						</div>
 						
 						<div class="form-group">
-							<label for="khac">Khác</label> <form:input path="khac" type="text"
+							<label for="khac">Khác</label> <form:textarea path="khac" type="text"
 								class="form-control" 
 								placeholder="Khác" />
 						</div>
 						<div class="form-group">
-							<label for="mota">Mô tả</label> <form:input path="mota" type="text"
+							<label for="mota">Mô tả</label> <form:textarea path="mota" type="text"
 								class="form-control" 
 								placeholder="Mô Tả" />
 						</div>

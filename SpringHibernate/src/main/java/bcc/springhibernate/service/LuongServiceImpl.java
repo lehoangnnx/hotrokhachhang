@@ -56,6 +56,12 @@ public class LuongServiceImpl implements LuongService {
 		
 		return luongRepository.findOneByNhanvienAndThangAndNam(nhanvien, thang, nam);
 	}
+
+	@Override
+	public void deleted(Luong luong) {
+		luongRepository.delete(luong);
+		
+	}
 	
 
 }

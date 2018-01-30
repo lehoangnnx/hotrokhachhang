@@ -2,6 +2,12 @@ $(document).ready(function() {
 	// Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
 	$("#formKhachHang").validate({
 		rules : {
+			loaikhachhang : {
+				required : true
+			},
+			nhomkhachhang : {
+				required : true
+			},
 			makh : {
 				required : true,
 				normalizer : function(value) {
@@ -20,13 +26,19 @@ $(document).ready(function() {
 
 		},
 		messages : {
+			loaikhachhang : {
+				required : "* Vui Lòng Chọn Loại Khách Hàng"
+			},
+			nhomkhachhang : {
+				required : "* Vui Lòng Chọn Nhóm Khách Hàng"
+			},
 			makh : {
-				required : "Vui Lòng Nhập Mã Khách Hàng"
+				required : "* Vui Lòng Nhập Mã Khách Hàng"
 				
 
 			},
 			ten : {
-				required : "Vui Lòng Nhập Tên Khách Hàng"
+				required : "* Vui Lòng Nhập Tên Khách Hàng"
 			}
 
 		}

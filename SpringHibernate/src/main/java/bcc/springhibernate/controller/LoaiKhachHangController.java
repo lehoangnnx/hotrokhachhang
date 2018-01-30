@@ -63,7 +63,7 @@ public class LoaiKhachHangController {
     	return "redirect:/admin/loaikhachhang?trangthai=active";
     }	
     	
-    @PatchMapping("/loaikhachhang")
+    @PatchMapping(value="/loaikhachhang", params="update")
     String suaLoaiKhachHang(@ModelAttribute("loaikhachhang") Loaikhachhang loaikhachhang,RedirectAttributes redirectAttributes) {
     	try {
     		loaikhachhang.setTrangthai("active");
@@ -71,6 +71,17 @@ public class LoaiKhachHangController {
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
+		}	
+    	return "redirect:/admin/loaikhachhang?trangthai=active";
+    }	
+    @PatchMapping(value="/loaikhachhang", params="deleted")
+    String xoaVinhVienLoaiKhachHang(@ModelAttribute("loaikhachhang") Loaikhachhang loaikhachhang,RedirectAttributes redirectAttributes) {
+    	try {
+    		
+        	loaiKhachHangService.deleted(loaikhachhang);
+        	redirectAttributes.addFlashAttribute("msg", "Xóa VĨnh Viễn Thành Công");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("msg", "Xóa VĨnh Viễn Thất Bại");
 		}	
     	return "redirect:/admin/loaikhachhang?trangthai=active";
     }	

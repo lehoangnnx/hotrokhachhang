@@ -6,18 +6,24 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <input hidden="" id="msg" value="${msg }"></input>
 <!-- Content Header (Page header) -->
+
 <section class="content-header">
+
 	<h1>
-		Nhóm Hàng <%-- <small><a
+		Nhóm Hàng
+		<%-- <small><a
 			href="${contextPath }/admin/roles?status=active">Danh Sách Nhóm
 				Hàng</a></small> <small><a class="btn btn-success"
 			href="${contextPath }/admin/nhomhang/add">Thêm mới</a></small> --%>
+
 	</h1>
+
 	<ol class="breadcrumb">
-	<a class="btn btn-success"
-			href="${contextPath }/admin/nhomhang/add">Thêm mới</a>
+		<a class="btn btn-success" href="${contextPath }/admin/nhomhang/add">Thêm
+			mới</a>
 		<%-- <li><a href="${contextPath }/"><i class="fa fa-dashboard"></i>
 				Home</a></li>
 		<li><a href="${contextPath }/roles">Quyền</a></li>
@@ -32,12 +38,14 @@
 		<div class="col-xs-12">
 			<ul class="nav nav-tabs">
 				<li class="tablinks ${param.trangthai == 'active' ? 'active' : '' }">
-					<a href="${contextPath }/admin/nhomhang?trangthai=active">Đã Kích
-						Hoạt</a>
+					<a href="${contextPath }/admin/nhomhang?trangthai=active">Đã
+						Kích Hoạt</a>
 				</li>
 
-				<li class="tablinks ${param.trangthai == 'deleted' ? 'active' : '' }">
-					<a href="${contextPath }/admin/nhomhang?trangthai=deleted">Đã Xóa</a>
+				<li
+					class="tablinks ${param.trangthai == 'deleted' ? 'active' : '' }">
+					<a href="${contextPath }/admin/nhomhang?trangthai=deleted">Đã
+						Xóa</a>
 				</li>
 			</ul>
 			<div class="box">
@@ -65,9 +73,9 @@
 											<td>Không Có</td>
 										</c:when>
 										<c:otherwise>
-											<c:forEach var="nhc" items="${listNhomhang }">
+											<c:forEach var="nhc" items="${listNhomhangcha }">
 												<c:if test="${nhc.id == nh.manhomcha  }">
-													<td>${nhc.manhom }</td>
+													<td>${nhc.manhom } -  ${nhc.tennhom }</td>
 												</c:if>
 
 
@@ -82,14 +90,13 @@
 									<td><a href="${contextPath }/admin/nhomhang/${nh.id}">
 											<i style="color: blue;" class="fa fa-pencil fa-lg"
 											aria-hidden="true" title="Sửa"> </i>
-									</a>
-									<c:if test="${nh.trangthai != 'deleted' }">
-									 <a onclick="deleteOne(${nh.id});" href="#" data-toggle="modal"
-										data-target="#myModal" style="color: red; margin-left: 10px;">
-											<i class="fa fa-trash-o fa-lg" aria-hidden="true" title="Xóa"></i>
-									</a>
-									</c:if>
-									</td>
+									</a> <c:if test="${nh.trangthai != 'deleted' }">
+											<a onclick="deleteOne(${nh.id});" href="#"
+												data-toggle="modal" data-target="#myModal"
+												style="color: red; margin-left: 10px;"> <i
+												class="fa fa-trash-o fa-lg" aria-hidden="true" title="Xóa"></i>
+											</a>
+										</c:if></td>
 								</tr>
 							</c:forEach>
 						</tbody>

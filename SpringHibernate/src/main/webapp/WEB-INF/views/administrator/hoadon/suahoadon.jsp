@@ -320,7 +320,7 @@ tr:nth-child(even) {
 
 						<div class="form-group">
 							<label for="ghichu">Ghi Chú</label>
-							<form:input path="ghichu" type="text" class="form-control"
+							<form:textarea path="ghichu" type="text" class="form-control"
 								placeholder="ghichu" />
 							<label id="_ghichu-error" class="error" style="display: none;"></label>
 						</div>
@@ -329,10 +329,18 @@ tr:nth-child(even) {
 					<!-- /.box-body -->
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
+					<c:if test="${hoadon.trangthai != 'deleted' }">
 					<div class="box-footer">
-						<button id="btn-submit" type="submit" class="btn btn-primary">Xác
+						<button id="btn-submit" name="update" type="submit" class="btn btn-primary">Xác
 							Nhận</button>
 					</div>
+					</c:if>
+					<c:if test="${hoadon.trangthai == 'deleted' }">
+					<div class="box-footer">
+						
+							<button id="btn-submit" name="deleted" type="submit" class="btn btn-danger">Xóa Vĩnh Viễn</button>
+					</div>
+					</c:if>
 				</form:form>
 			</div>
 			<!-- /.box -->

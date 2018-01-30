@@ -2,6 +2,26 @@ $(document).ready(function() {
 	// Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
 	$("#formHoaDon").validate({
 		rules : {
+			nhanvienbanhang : {
+				required : true
+			},
+			nhanvienchamsoc : {
+				required : true
+			},
+			nhanviengiaohang : {
+				required : true
+			},
+			khachhang : {
+				required : true
+			},
+			sohoadon : {
+				required : true,
+				normalizer : function(value) {
+
+					return $.trim(value);
+				}
+
+			},
 			ngaylap : {
 				required : true
 			},
@@ -28,6 +48,22 @@ $(document).ready(function() {
             }
 		},
 		messages : {
+			nhanvienbanhang : {
+				required :  '* Vui Lòng Chọn Nhân Viên Bán Hàng'
+			},
+			nhanvienchamsoc : {
+				required :  '* Vui Lòng Chọn Nhân Viên Chăm Sóc'
+			},
+			nhanviengiaohang : {
+				required :  '* Vui Lòng Chọn Nhân Viên Giao Hàng'
+			},
+			khachhang : {
+				required :  '* Vui Lòng Chọn Khách Hàng'
+			},
+			sohoadon : {
+				required :  '* Vui Lòng Nhập Số Hóa Đơn'
+				
+			},
             ngaylap : {
                 required : '* Vui Lòng Nhập Ngày Lập'
             },

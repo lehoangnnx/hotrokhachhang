@@ -60,6 +60,12 @@ public class ChamSocServiceImpl implements ChamSocService {
 		
 		return chamSocRepository.findByNhanvienchamsocAndTrangthaiNotAndNgayBetweenOrderByIdDesc(nhanvien, trangthai, d1, d2);
 	}
+
+	@Override
+	public void deleted(Chamsoc chamsoc) {
+		chamSocRepository.delete(chamsoc);
+		
+	}
 	
 	
 }

@@ -27,7 +27,7 @@ public class NhomKhachHangController {
 	NhomKhachHangService  nhomKhachHangService;
 	
     @GetMapping("/nhomkhachhang")
-    String pageDanhSachLoaiKhachHangg(@RequestParam(value="trangthai",defaultValue = "active") String trangthai,
+    String pageDanhSachNhomKhachHangg(@RequestParam(value="trangthai",defaultValue = "active") String trangthai,
 									  Model model){
     	List<Nhomkhachhang> listNhomkhachhang = nhomKhachHangService.findByTrangthaiOrderByIdDesc(trangthai);
     	model.addAttribute("listNhomkhachhang", listNhomkhachhang);
@@ -35,19 +35,19 @@ public class NhomKhachHangController {
     }
 
     @GetMapping("/nhomkhachhang/add")
-    String pageThemLoaiKhachHangg(Model model ){
+    String pageThemNhomKhachHangg(Model model ){
     		model.addAttribute("nhomkhachhang", new Nhomkhachhang());
         return "themnhomkhachhang";
     }
     @GetMapping("/nhomkhachhang/{id}")
-    String pageSuaLoaiKhachHangg(Model model, @PathVariable("id") Integer id ){
+    String pageSuaNhomKhachHangg(Model model, @PathVariable("id") Integer id ){
     	Nhomkhachhang nhomkhachhang = nhomKhachHangService.findById(id);
     		model.addAttribute("nhomkhachhang", nhomkhachhang);
         return "suanhomkhachhang";
     }
     
     @PostMapping("/nhomkhachhang")
-    String themLoaiKhachHang(@ModelAttribute("nhomkhachhang") Nhomkhachhang nhomkhachhang,
+    String themNhomKhachHang(@ModelAttribute("nhomkhachhang") Nhomkhachhang nhomkhachhang,
     		
     		RedirectAttributes redirectAttributes) {
     	try {
@@ -62,8 +62,8 @@ public class NhomKhachHangController {
     	return "redirect:/admin/nhomkhachhang?trangthai=active";
     }	
     	
-    @PatchMapping("/nhomkhachhang")
-    String suaLoaiKhachHang(@ModelAttribute("nhomkhachhang") Nhomkhachhang nhomkhachhang,
+    @PatchMapping(value="/nhomkhachhang",params="update")
+    String suaNhomKhachHang(@ModelAttribute("nhomkhachhang") Nhomkhachhang nhomkhachhang,
     	
     		RedirectAttributes redirectAttributes) {
     	try {
@@ -77,8 +77,23 @@ public class NhomKhachHangController {
     	
     	return "redirect:/admin/nhomkhachhang?trangthai=active";
     }	
+    @PatchMapping(value="/nhomkhachhang",params="deleted")
+    String xoaVinhVienNhomKhachHang(@ModelAttribute("nhomkhachhang") Nhomkhachhang nhomkhachhang,
+    	
+    		RedirectAttributes redirectAttributes) {
+    	try {
+    		
+    		
+        	nhomKhachHangService.deleted(nhomkhachhang);
+        	redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thành Công");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thất Bại");
+		}
+    	
+    	return "redirect:/admin/nhomkhachhang?trangthai=active";
+    }	
     @DeleteMapping("/nhomkhachhang")
-    String xoaLoaiKhachHang(@RequestParam("arrayId") List<Integer> arrayId,
+    String xoaNhomKhachHang(@RequestParam("arrayId") List<Integer> arrayId,
     		RedirectAttributes redirectAttributes) {
     	
     	try {

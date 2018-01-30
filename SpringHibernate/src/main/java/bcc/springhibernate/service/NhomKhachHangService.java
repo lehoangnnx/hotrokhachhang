@@ -6,7 +6,7 @@ import bcc.springhibernate.model.Nhomkhachhang;
 
 public interface NhomKhachHangService {
 	void saveOrUpdate(Nhomkhachhang nhomkhachhang);
-	
+	void deleted(Nhomkhachhang nhomkhachhang);	
 	List<Nhomkhachhang> findAll();
 	List<Nhomkhachhang> findByTrangthaiOrderByIdDesc(String trangthai);
 	Nhomkhachhang findByTennhom(String tennhom);
