@@ -37,10 +37,10 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 
 	@Autowired 
 	private PasswordEncoder passwordEncoder;
-
+	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent arg0) {
-
+		System.out.println("Khoi Dong");
 		/*// Roles
 		if (rolesRepository.findByName("ROLE_ADMIN") == null) {
 			rolesRepository.save(new Roles("ROLE_ADMIN", "active"));

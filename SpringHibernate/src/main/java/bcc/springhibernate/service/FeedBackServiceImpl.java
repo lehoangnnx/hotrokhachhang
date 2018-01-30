@@ -36,4 +36,10 @@ FeedBackRepository feedBackRepository;
 		
 	}
 
+	@Override
+	public void deleted(Feedback feedback) {
+		feedBackRepository.delete(feedback);
+		
+	}
+
 }

@@ -39,8 +39,9 @@ public class MainController {
 	HoaDonService hoaDonService;
 	@Autowired
 	NhanVienKpiService nhanVienKpiService;
-@Autowired
+	@Autowired
 	LuongService luongService;
+
 	@ModelAttribute("taikhoan")
 	// Lưu Session Thông tin người dùng đăng nhập
 	public void sessionUser(Principal principal, HttpSession session) {
@@ -52,9 +53,9 @@ public class MainController {
 	}
 
 	@RequestMapping("/")
-	public String index(Principal principal,Model model) {
+	public String index(Principal principal, Model model) {
 		if (principal != null) {
-			
+
 			return "redirect:/admin";
 		}
 		return "redirect:/login";
@@ -89,11 +90,10 @@ public class MainController {
 					kh.setTrangthainhac("chosinhnhat");
 					khachHangService.saveOrUpdate(kh);
 					// && (dayconlaidd >= 0)
-				} else if (monthdd == monthn && (dayconlaidd <= 7)
-						&& kh.getTrangthainhac().equals("chosinhnhat")) {
+				} else if (monthdd == monthn && (dayconlaidd <= 7) && kh.getTrangthainhac().equals("chosinhnhat")) {
 
 					Map<String, Object> map = new HashMap<String, Object>();
-					map.put("ngay",kh.getNgaysinhnhatndd());
+					map.put("ngay", kh.getNgaysinhnhatndd());
 					map.put("ngaysinhnhat", dayconlaidd);
 					map.put("id", kh.getId());
 					map.put("makh", kh.getMakh());
@@ -110,12 +110,11 @@ public class MainController {
 						&& kh.getTrangthainhac().equals("dasinhnhat")) {
 					kh.setTrangthainhac("chosinhnhat");
 					khachHangService.saveOrUpdate(kh);
-					//&& (dayconlaipt >= 0)
-				} else if (monthpt == monthn && (dayconlaipt <= 7)
-						&& kh.getTrangthainhac().equals("chosinhnhat")) {
+					// && (dayconlaipt >= 0)
+				} else if (monthpt == monthn && (dayconlaipt <= 7) && kh.getTrangthainhac().equals("chosinhnhat")) {
 
 					Map<String, Object> map = new HashMap<String, Object>();
-					map.put("ngay",kh.getNgaysinhphutrach());
+					map.put("ngay", kh.getNgaysinhphutrach());
 					map.put("ngaysinhnhat", dayconlaipt);
 					map.put("id", kh.getId());
 					map.put("makh", kh.getMakh());
@@ -146,7 +145,7 @@ public class MainController {
 				Map<String, Object> map = new HashMap<String, Object>();
 
 				map.put("id", cs.getId());
-				map.put("ngay",cs.getNgaycstiep());
+				map.put("ngay", cs.getNgaycstiep());
 				map.put("ngaycstiep", dayconlai);
 				map.put("khachhang", cs.getKhachhang().getTen());
 
@@ -172,28 +171,27 @@ public class MainController {
 		model.addAttribute("listKhachHang", listKhachHang);
 		model.addAttribute("listNhanVienKpi", listNhanVienKpi);
 
-
 		// Tao Luong
 		Date date = new Date();
 		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		String splitDate[] = df.format(date).split("/");
 
-		//if(new Date(date.getYear(),date.getMonth(),date.getDate()).equals(new Date(date.getYear(),date.getMonth(),01))){
-			List<Nhanvien> listNhanvien = nhanVienService.findByTrangthaiNotOrderByIdDesc("deleted");
-			listNhanvien.forEach(x -> {
-				Luong luong = null;
-				try {
-					luong = luongService.findOneByNhanvienAndThangAndNam(x,splitDate[1],splitDate[2]);
-					if(luong == null){
-						luong =  new Luong(x, x.getLuong(), 0L, splitDate[1], splitDate[2], "chuatraluong",
-								"");
-						luongService.saveOrUpdate(luong);
-					}
-				}catch (Exception e){
-					e.printStackTrace();
+		// if(new Date(date.getYear(),date.getMonth(),date.getDate()).equals(new
+		// Date(date.getYear(),date.getMonth(),01))){
+		List<Nhanvien> listNhanvien = nhanVienService.findByTrangthaiNotOrderByIdDesc("deleted");
+		listNhanvien.forEach(x -> {
+			Luong luong = null;
+			try {
+				luong = luongService.findOneByNhanvienAndThangAndNam(x, splitDate[1], splitDate[2]);
+				if (luong == null) {
+					luong = new Luong(x, x.getLuong(), 0L, splitDate[1], splitDate[2], "chuatraluong", "");
+					luongService.saveOrUpdate(luong);
 				}
-			});
-		//}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		// }
 		return "index";
 	}
 

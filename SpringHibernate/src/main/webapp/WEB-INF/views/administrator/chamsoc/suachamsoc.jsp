@@ -125,7 +125,8 @@ tr:nth-child(even) {
 						<div class="form-group">
 							<label id="_diem-error" class="error" style="display: none;"></label>
 						</div>
-						<div class="box-body">
+						<div class="box-body table-responsive">
+						
 							<table border="1" style="overflow-x: auto;" id="tblctcs">
 								<thead>
 									<tr>
@@ -186,6 +187,7 @@ tr:nth-child(even) {
 									</tr>
 								</tfoot>
 							</table>
+						
 						</div>
 
 

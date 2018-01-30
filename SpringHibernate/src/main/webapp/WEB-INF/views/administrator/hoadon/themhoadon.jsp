@@ -14,18 +14,20 @@
 </style>
 <style>
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-    border: 1px solid #ddd;
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+	border: 1px solid #ddd;
 }
 
 th, td {
-    text-align: left;
-    padding: 8px;
+	text-align: left;
+	padding: 8px;
 }
 
-tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(even) {
+	background-color: #f2f2f2
+}
 </style>
 <section class="content">
 
@@ -46,31 +48,37 @@ tr:nth-child(even){background-color: #f2f2f2}
 					<div class="box-body">
 
 						<div class="form-group">
-							<label>Nhân Viên Bán Hàng</label> <select class="form-control select2"
-								name="nhanvienbanhang" style="width: 100%;">
+							<label>Nhân Viên Bán Hàng</label> <select
+								class="form-control select2" name="nhanvienbanhang"
+								style="width: 100%;">
 
 								<c:forEach var="nv" items="${listNhanvien }">
-									<option value="${nv.id }">${nv.manhanvien} - ${nv.tennhanvien }</option>
+									<option value="${nv.id }">${nv.manhanvien}-
+										${nv.tennhanvien }</option>
 								</c:forEach>
 
 							</select>
 						</div>
 						<div class="form-group">
-							<label>Nhân Viên Chăm Sóc</label> <select class="form-control select2"
-								name="nhanvienchamsoc" style="width: 100%;">
+							<label>Nhân Viên Chăm Sóc</label> <select
+								class="form-control select2" name="nhanvienchamsoc"
+								style="width: 100%;">
 
 								<c:forEach var="nv" items="${listNhanvien }">
-									<option value="${nv.id }">${nv.manhanvien} - ${nv.tennhanvien }</option>
+									<option value="${nv.id }">${nv.manhanvien}-
+										${nv.tennhanvien }</option>
 								</c:forEach>
 
 							</select>
 						</div>
 						<div class="form-group">
-							<label>Nhân Viên Giao Hàng</label> <select class="form-control select2"
-								name="nhanviengiaohang" style="width: 100%;">
+							<label>Nhân Viên Giao Hàng</label> <select
+								class="form-control select2" name="nhanviengiaohang"
+								style="width: 100%;">
 
 								<c:forEach var="nv" items="${listNhanvien }">
-									<option value="${nv.id }">${nv.manhanvien} - ${nv.tennhanvien }</option>
+									<option value="${nv.id }">${nv.manhanvien}-
+										${nv.tennhanvien }</option>
 								</c:forEach>
 
 							</select>
@@ -80,7 +88,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 								name="khachhang" style="width: 100%;">
 
 								<c:forEach var="kh" items="${listKhachhang }">
-									<option value="${kh.id }">${kh.makh} - ${kh.ten }</option>
+									<option value="${kh.id }">${kh.makh}- ${kh.ten }</option>
 								</c:forEach>
 
 							</select>
@@ -107,52 +115,55 @@ tr:nth-child(even){background-color: #f2f2f2}
 										<option value="${hh.id }">${hh.mahang}-${hh.tenhang }</option>
 									</c:forEach>
 
-								</select>
-								<label id="_hanghoa-error" class="error" style="display: none;"></label>
+								</select> <label id="_hanghoa-error" class="error" style="display: none;"></label>
 							</div>
 							<div class="col-md-4 form-group">
 								<div class="input-group">
-									<input type="number" id="soluong" class="form-control" value="0" placeholder="Nhập Số Lượng"> <span
+									<input type="number" id="soluong" class="form-control"
+										value="0" placeholder="Nhập Số Lượng"> <span
 										class="input-group-btn">
-										<button  id="btn-thhvcthd" type="button" class="btn btn-info btn-flat">Thêm</button>
+										<button id="btn-thhvcthd" type="button"
+											class="btn btn-info btn-flat">Thêm</button>
 									</span>
 								</div>
 							</div>
-							
+
 						</div>
 						<div class="form-group">
-							<label id="_hanghoa-error" class="error" style="display: none;" ></label>
+							<label id="_hanghoa-error" class="error" style="display: none;"></label>
 						</div>
-						<div class="box-body">
-							<table border="1" style="overflow-x:auto;" id="tblcthd" >
-								<thead>
-									<tr>
-									<th>ID Hàng Hóa</th>
-									<th>Mã Hàng Hóa</th>
-										<th>Tên Hàng Hóa</th>
-										<th>Giá Bán</th>
-										<th>Số Lượng</th>
-										<th>Thành Tiền</th>
-										<th>Thao tác</th>
-									</tr>
-								</thead>
-								<tbody>
+						<div class="box-body table-responsive">
+							
+								<table border="1" style="overflow-x: auto;" id="tblcthd">
+									<thead>
+										<tr>
+											<th>ID Hàng Hóa</th>
+											<th>Mã Hàng Hóa</th>
+											<th>Tên Hàng Hóa</th>
+											<th>Giá Bán</th>
+											<th>Số Lượng</th>
+											<th>Thành Tiền</th>
+											<th>Thao tác</th>
+										</tr>
+									</thead>
+									<tbody>
+										
+									</tbody>
+									<tfoot>
+										<tr>
+											<th>ID Hàng Hóa</th>
+											<th>Mã Hàng Hóa</th>
+											<th>Tên Hàng Hóa</th>
+											<th>Giá Bán</th>
+											<th>Số Lượng</th>
+											<th>Thành Tiền</th>
+											<th>Thao tác</th>
+										</tr>
+									</tfoot>
+								</table>
+							
+						</div>
 
-								</tbody>
-								<tfoot>
-									<tr>
-									<th>ID Hàng Hóa</th>
-									<th>Mã Hàng Hóa</th>
-										<th>Tên Hàng Hóa</th>
-										<th>Giá Bán</th>
-										<th>Số Lượng</th>
-										<th>Thành Tiền</th>
-										<th>Thao tác</th>
-									</tr>
-								</tfoot>
-							</table>
-						</div>
-						
 
 						<div class="form-group">
 							<label for="hinhthucthanhtoan">Hình Thức Thanh Toán</label> <br>
@@ -216,21 +227,21 @@ tr:nth-child(even){background-color: #f2f2f2}
 
 						<div class="form-group">
 							<label for="tongtien">Tổng Tiền</label>
-							<form:input min="0" path="tongtien" type="number" class="form-control" value="0"
-								placeholder="Tổng Tiền" />
+							<form:input min="0" path="tongtien" type="number"
+								class="form-control" value="0" placeholder="Tổng Tiền" />
 
 						</div>
 						<div class="form-group">
 							<label for="tiendatra">Tiền Đã Trả</label>
-							<form:input path="tiendatra" type="number" class="form-control" min="0" value="0"
-								placeholder="Tiền Đã Trả" />
+							<form:input path="tiendatra" type="number" class="form-control"
+								min="0" value="0" placeholder="Tiền Đã Trả" />
 
 						</div>
 
 						<div class="form-group">
 							<label for="congno">Công Nợ</label>
-							<form:input path="congno" type="number" class="form-control" min="0" value="0"
-								placeholder="Công Nợ" />
+							<form:input path="congno" type="number" class="form-control"
+								min="0" value="0" placeholder="Công Nợ" />
 
 						</div>
 
@@ -264,9 +275,11 @@ tr:nth-child(even){background-color: #f2f2f2}
 						<div class="form-group">
 							<label for="trangthai">Trạng Thái</label> <br> <label
 								class="lb-flat-red"> <input value="dagiaohang"
-								type="radio" name="trangthai" class="flat-red"> Đã Giao Hàng
-							</label>  <label class="lb-flat-red"> <input value="chuagiaohang"
-								type="radio" name="trangthai" class="flat-red" checked="checked"> Chưa Giao Hàng
+								type="radio" name="trangthai" class="flat-red"> Đã Giao
+								Hàng
+							</label> <label class="lb-flat-red"> <input value="chuagiaohang"
+								type="radio" name="trangthai" class="flat-red" checked="checked">
+								Chưa Giao Hàng
 							</label>
 						</div>
 

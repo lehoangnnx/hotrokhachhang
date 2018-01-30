@@ -59,6 +59,7 @@
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
+				 <div class="table-responsive">
 					<table id="example2" class="table table-bordered table-hover">
 						<thead>
 							<tr>
@@ -125,6 +126,7 @@
 							</tr>
 						</tfoot>
 					</table>
+					</div>
 				</div>
 
 

@@ -110,7 +110,7 @@ public class FeedBackController {
     	return "redirect:/admin/feedback?trangthai=active";
     }	
     	
-    @PatchMapping("/feedback")
+    @PatchMapping(value="/feedback",params="update")
     String suaFeedBack(@ModelAttribute("feedback") Feedback feedback,
     		@RequestParam("nhanvienId") Integer nhanvienId,
     		@RequestParam("hanghoaId") Integer hanghoaId,
@@ -129,6 +129,21 @@ public class FeedBackController {
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
+		}
+    	
+    	return "redirect:/admin/feedback?trangthai=active";
+    }	
+    @PatchMapping(value="/feedback",params="deleted")
+    String xoaVinhVienFeedBack(@ModelAttribute("feedback") Feedback feedback,
+    		
+    		Principal principal,
+    		RedirectAttributes redirectAttributes) {
+    	try {
+    		
+    		feedBackService.deleted(feedback);
+        	redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thành Công");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thất Bại");
 		}
     	
     	return "redirect:/admin/feedback?trangthai=active";

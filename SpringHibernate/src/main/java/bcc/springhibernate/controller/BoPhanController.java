@@ -27,14 +27,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequestMapping("/admin")
 public class BoPhanController {
-
+	
+	
 	@Autowired
 	BoPhanService  boPhanService;
+	
+	
 	
     @GetMapping("/bophan")
     String pageDanhSachBoPhan(@RequestParam(value="trangthai",defaultValue = "active") String trangthai , Model model){
     	List<Bophan> listBophan = boPhanService.findByTrangthaiOrderByIdDesc(trangthai);
     	model.addAttribute("listBophan", listBophan);
+    	
         return "danhsachbophan";
     }
 
