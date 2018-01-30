@@ -45,6 +45,8 @@
 				class="fa fa-link"></i> <span>Trang Chủ</span></a></li>
 		<li class="treeview"><a href="${contextPath }/admin/thongke"><i
 				class="fa fa-link"></i> <span>Thống Kê</span></a></li>
+				<li class="treeview"><a href="${contextPath }/admin/thongkekpi?kpi=0"><i
+				class="fa fa-link"></i> <span>Thống Kê KPI</span></a></li>
 		<li class="treeview"><a href="${contextPath }/admin/feedback?trangthai=active"><i
 				class="fa fa-link"></i> <span>Feedback</span></a></li>
 		<li class="treeview"><a
@@ -95,10 +97,11 @@
 			</span> </a>
 			<ul class="treeview-menu">
 
-				<li><a href="${contextPath }/admin/nhomhang?trangthai=active">Nhóm
-						Hàng</a></li>
+				
 				<li><a href="${contextPath }/admin/hanghoa?trangthai=active">Hàng
 						Hóa</a></li>
+						<li><a href="${contextPath }/admin/nhomhang?trangthai=active">Nhóm
+						Hàng</a></li>
 
 			</ul></li>
 

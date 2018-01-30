@@ -34,25 +34,25 @@
 						<div class="form-group">
 							<label for="tenhang">Tên Hàng</label>
 							<form:input path="tenhang" type="text" class="form-control"
-								placeholder="Tên Nhóm Hàng" />
+								placeholder="Tên Hàng" />
 
 						</div>
 
 						<div class="form-group">
 							<label for="gianhap">Giá Nhập</label>
-							<form:input path="gianhap" type="number" class="form-control"
+							<form:input path="gianhap" type="number" class="form-control" min="0" value="0"
 								placeholder="Giá Nhập" />
 
 						</div>
 						<div class="form-group">
 							<label for="giaban">Giá Bán</label>
-							<form:input path="giaban" type="number" class="form-control"
+							<form:input path="giaban" type="number" class="form-control" min="0" value="0"
 								placeholder="Giá Bán" />
 							<label id="_giaban-error" class="error" style="display: none;"></label>
 						</div>
 						<div class="form-group">
 							<label for="giakhuyenmai">Giá Khuyến Mãi</label>
-							<form:input path="giakhuyenmai" type="number"
+							<form:input path="giakhuyenmai" type="number" min="0" 
 								class="form-control" placeholder="Giá Khuyến Mãi" />
 							<label id="_giakhuyenmai-error" class="error"
 								style="display: none;"></label>
@@ -74,6 +74,7 @@
 								</c:forEach>
 
 							</select>
+							<label id="nhomhang-error" class="error" for="nhomhang" style="display: none;"></label>
 						</div>
 
 

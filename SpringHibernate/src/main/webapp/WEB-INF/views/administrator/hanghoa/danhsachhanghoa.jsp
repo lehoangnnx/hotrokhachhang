@@ -38,7 +38,7 @@
 				</ul>
 		          <div class="box">
 		            <div class="box-header">
-		              <h3 class="box-title">Danh Hàng Hóan</h3>
+		              <h3 class="box-title">Danh Hàng Hóa</h3>
 		            </div>
 		            <!-- /.box-header -->
 		            <div class="box-body">

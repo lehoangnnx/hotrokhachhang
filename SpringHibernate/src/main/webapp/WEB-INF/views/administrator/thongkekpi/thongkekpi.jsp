@@ -88,7 +88,8 @@
 								<label>KPI</label> <select
 									class="form-control select2" name="kpi"
 									style="width: 100%;">
-									
+									<option ${param.kpi == 0 ? 'selected' : '' }
+											value="0">Không</option>
 									<c:forEach var="k" items="${listKpi }">
 										<option ${param.kpi == k.id ? 'selected' : '' }
 											value="${k.id }">${k.ten }</option>

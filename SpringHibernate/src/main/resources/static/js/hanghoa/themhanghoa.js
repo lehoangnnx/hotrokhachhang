@@ -36,7 +36,7 @@ $(document).ready(function() {
 					return $.trim(value);
 				}
 
-			},
+			}/*,
 			giakhuyenmai : {
 				required : true,
 				
@@ -45,7 +45,7 @@ $(document).ready(function() {
 					return $.trim(value);
 				}
 
-			},
+			}*/,
 			donvitinh : {
 				required : true,
 				
@@ -55,13 +55,17 @@ $(document).ready(function() {
 				}
 
 			},
+			nhomhang : {
+				required : true
+			}
+			/*,
 			mota : {
 				required : true,
 				normalizer : function(value) {
 
 					return $.trim(value);
 				}
-			}
+			}*/
 
 		},
 		messages : {
@@ -85,22 +89,26 @@ $(document).ready(function() {
 				required : "* Vui Lòng Nhập Giá Bán"
 				
 
-			},
+			}/*,
 			giakhuyenmai : {
 				required : "* Vui Lòng Nhập Giá Khuyến Mãi"
 				
 				
 
-			},
+			}*/,
 			donvitinh : {
 				required : "* Vui Lòng Nhập Đơn Vị Tính"
 				
 				
 
 			},
+			nhomhang : {
+				required: " * Vui Lòng Chọn Nhóm Hàng Hóa"
+			}
+			/*,
 			mota : {
 				required : "* Vui Lòng Nhập Mô Tả"
-			}
+			}*/
 
 		}
 	});
@@ -118,15 +126,21 @@ $("input").focusout(function(){
         $("#_giaban-error").css("display","none");
         $('#_giaban-error').text("");
     }
-   
-    if(parseFloat($("#giakhuyenmai").val()) < parseFloat($("#gianhap").val()))
-    {
-        $("#_giakhuyenmai-error").css("display","block");
-        $('#_giakhuyenmai-error').text("* Giá Khuyến Mãi Phải Lớn Hơn Giá Nhập");
-		$('#btn-submit').attr('type','button');
+    if($("#giakhuyenmai").val() != '' ){
+	    if(parseFloat($("#giakhuyenmai").val()) < parseFloat($("#gianhap").val()))
+	    {
+	        $("#_giakhuyenmai-error").css("display","block");
+	        $('#_giakhuyenmai-error').text("* Giá Khuyến Mãi Phải Lớn Hơn Giá Nhập");
+			$('#btn-submit').attr('type','button');
+	    }else {
+	    	 $("#_giakhuyenmai-error").css("display","none");
+	         $('#_giakhuyenmai-error').text("");
+	         $('#btn-submit').attr('type','submit');
+	    }
     }else {
-    	 $("#_giakhuyenmai-error").css("display","none");
-         $('#_giakhuyenmai-error').text("");
+    	$("#_giakhuyenmai-error").css("display","none");
+        $('#_giakhuyenmai-error').text("");
+        $('#btn-submit').attr('type','submit');
     }
     
     

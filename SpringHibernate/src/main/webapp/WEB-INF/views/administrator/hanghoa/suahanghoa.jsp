@@ -75,6 +75,7 @@
 								</c:forEach>
 
 							</select>
+							<label id="nhomhang-error" class="error" for="nhomhang" style="display: none;"></label>
 						</div>
 
 
