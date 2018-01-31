@@ -97,6 +97,7 @@ public class MainController {
 					map.put("ngaysinhnhat", dayconlaidd);
 					map.put("id", kh.getId());
 					map.put("makh", kh.getMakh());
+					map.put("ten", kh.getTen());
 					listKhachHang.add(map);
 				}
 			}
@@ -139,7 +140,8 @@ public class MainController {
 					&& cs.getTrangthai().equals("dachamsoc")) {
 				cs.setTrangthai("chochamsoc");
 				chamSocService.saveOrUpdate(cs);
-			} else if (year == yearn && month == monthn && (dayconlai <= 7) && (dayconlai >= 0)
+				//&& (dayconlai >= 0)
+			} else if (year == yearn && month == monthn && (dayconlai <= 7)
 					&& cs.getTrangthai().equals("chochamsoc")) {
 
 				Map<String, Object> map = new HashMap<String, Object>();

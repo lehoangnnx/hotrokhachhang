@@ -62,7 +62,7 @@
 					</div>
 				</div> -->
 				<!-- /.col -->
-				<div class="pull-right col-xs-4">
+				<div class="pull-right col-xs-6">
 					<button type="submit" class="btn btn-primary btn-block btn-flat">Đăng Nhập</button>
 				</div>
 				<!-- /.col -->
