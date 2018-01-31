@@ -62,16 +62,17 @@ public class MainController {
 	}
 
 	@RequestMapping("/admin")
-	public String home(Model model) {
+	public String home(Model model,HttpServletRequest request) {
 		List<Khachhang> khachhangs = khachHangService.findByTrangthaiNotOrderByIdDesc("deleted");
 		List<Chamsoc> chamsocs = chamSocService.findByTrangthaiNotOrderByIdDesc("deleted");
 		List<Nhanvien> nhanviens = nhanVienService.findByTrangthaiNotOrderByIdDesc("deleted");
 		List<Hoadon> hoadons = hoaDonService.findByTrangthaiNotOrderByIdDesc("deleted");
 		List<Nhanvienkpi> nhanvienkpis = nhanVienKpiService.findByTrangthaiOrderByIdDesc("inactive");
-		model.addAttribute("khachhangs", khachhangs);
-		model.addAttribute("chamsocs", chamsocs);
-		model.addAttribute("nhanviens", nhanviens);
-		model.addAttribute("hoadons", hoadons);
+		
+		request.getServletContext().setAttribute("khachhangs", khachhangs);
+		request.getServletContext().setAttribute("chamsocs", chamsocs);
+		request.getServletContext().setAttribute("nhanviens", nhanviens);
+		request.getServletContext().setAttribute("hoadons", hoadons);
 		List<Map<String, Object>> listChamSoc = new ArrayList<Map<String, Object>>();
 
 		List<Map<String, Object>> listKhachHang = new ArrayList<Map<String, Object>>();
@@ -169,9 +170,9 @@ public class MainController {
 		listKhachHang.sort(Comparator.comparing(s -> (int) s.get("ngaysinhnhat")));
 		listNhanVienKpi.sort(Comparator.comparing(s -> (Date) s.get("ngaydangky")));
 		Collections.reverse(listNhanVienKpi);
-		model.addAttribute("listChamSoc", listChamSoc);
-		model.addAttribute("listKhachHang", listKhachHang);
-		model.addAttribute("listNhanVienKpi", listNhanVienKpi);
+		request.getServletContext().setAttribute("listChamSoc", listChamSoc);
+		request.getServletContext().setAttribute("listKhachHang", listKhachHang);
+		request.getServletContext().setAttribute("listNhanVienKpi", listNhanVienKpi);
 
 		// Tao Luong
 		Date date = new Date();
