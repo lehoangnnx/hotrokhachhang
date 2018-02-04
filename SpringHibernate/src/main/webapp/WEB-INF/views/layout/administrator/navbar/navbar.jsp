@@ -22,7 +22,7 @@
 			<security:authorize access="hasAnyRole('ADMIN')">
 			<li class="dropdown notifications-menu">
 				<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
-				data-toggle="dropdown"> <i class="fa fa-envelope-o"></i> <span
+				data-toggle="dropdown"> <i class="fa fa-bell"></i> <span
 					class="label label-success">${fn:length(listNhanVienKpi) }</span>
 			</a>
 				<ul class="dropdown-menu">
@@ -55,7 +55,7 @@
 			<security:authorize access="hasAnyRole('ADMIN','CHAMSOC')">
 			<li class="dropdown notifications-menu">
 				<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
-				data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span
+				data-toggle="dropdown"> <i class="fa fa-group"></i> <span
 					class="label label-warning">${fn:length(listChamSoc) }</span>
 			</a>
 				<ul class="dropdown-menu">
@@ -97,7 +97,7 @@
 			<security:authorize access="hasAnyRole('ADMIN','CHAMSOC')">
 			<li class="dropdown notifications-menu">
 				<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle"
-				data-toggle="dropdown"> <i class="fa fa-flag-o"></i> <span
+				data-toggle="dropdown"> <i class="fa fa-birthday-cake"></i> <span
 					class="label label-danger">${fn:length(listKhachHang) }</span>
 			</a>
 				<ul class="dropdown-menu">
