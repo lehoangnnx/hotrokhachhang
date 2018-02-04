@@ -5,6 +5,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <style>
 .lb-flat-red {
@@ -331,6 +333,7 @@ tr:nth-child(even) {
 					<!-- /.box-body -->
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
+						<security:authorize access="!hasAnyRole('GIAOHANG')">
 					<c:if test="${hoadon.trangthai != 'deleted' }">
 					<div class="box-footer">
 						<button id="btn-submit" name="update" type="submit" class="btn btn-primary">Xác
@@ -343,6 +346,7 @@ tr:nth-child(even) {
 							<button id="btn-submit" name="deleted" type="submit" class="btn btn-danger">Xóa Vĩnh Viễn</button>
 					</div>
 					</c:if>
+					</security:authorize>
 				</form:form>
 			</div>
 			<!-- /.box -->

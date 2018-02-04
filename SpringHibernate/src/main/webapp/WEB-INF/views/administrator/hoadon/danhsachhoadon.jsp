@@ -4,7 +4,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <input hidden="" id="msg" value="${msg }"></input>
 <!-- Content Header (Page header) -->
@@ -15,8 +16,10 @@
         <small><a class="btn btn-success" href="${contextPath }/admin/hoadon/add">Thêm mới</a></small> --%>
 	</h1>
 	<ol class="breadcrumb">
+	<security:authorize access="!hasAnyRole('GIAOHANG')">
 		<a class="btn btn-success" href="${contextPath }/admin/hoadon/add">Thêm
 			mới</a>
+			</security:authorize>
 		<%--  <li><a href="${contextPath }/"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="${contextPath }/roles">Quyền</a></li>
         <li class="active">Quản lý quyền</li> --%>
@@ -102,12 +105,14 @@
 											style="color: blue;" class="fa fa-pencil fa-lg"
 											aria-hidden="true" title="Sửa"> </i>
 									</a> 
+									<security:authorize access="!hasAnyRole('GIAOHANG')">
 									<c:if test="${hd.trangthai != 'deleted' }">
 									<a onclick="deleteOne(${hd.id});" href="#" data-toggle="modal"
 										data-target="#myModal" style="color: red; margin-left: 10px;">
 											<i class="fa fa-trash-o fa-lg" aria-hidden="true" title="Xóa"></i>
 									</a>
 									</c:if>
+									</security:authorize>
 									</td>
 								</tr>
 							</c:forEach>
