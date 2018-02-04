@@ -5,6 +5,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <style>
 .lb-flat-red {
@@ -31,7 +33,7 @@
 					<div class="box-body">
 
 						<div class="form-group">
-							<label>Nhân Viên</label> <select class="form-control select2"
+							<label>Nhân Viên</label> <select class="form-control select2" disabled="disabled"
 								name="nhanvien" style="width: 100%;">
 
 								<c:forEach var="nv" items="${listNhanvien}">
@@ -53,7 +55,7 @@
 						</div>
 						<div class="form-group">
 							<label for="so">Số</label>
-							<form:input path="so" type="number" class="form-control" min="0" 
+							<form:input path="so" type="number" class="form-control" min="0"
 								placeholder="Số" />
 						</div>
 						<div class="form-group">
@@ -71,28 +73,29 @@
 							</div>
 							<label id="ngayhoanthanh-error" class="error" for="ngayhoanthanh"></label>
 						</div>
+						<security:authorize access="hasAnyRole('ADMIN')">
+
+							<div class="form-group">
+								<label for="mucdohoanthanh">Mức Độ Hoàn Thành</label>
+								<form:input path="mucdohoanthanh" type="number" min="0"
+									class="form-control" placeholder="Mức Độ Hoàn Thành" />
+
+							</div>
 
 
-						<div class="form-group">
-							<label for="mucdohoanthanh">Mức Độ Hoàn Thành</label>
-							<form:input path="mucdohoanthanh" type="number" min="0" 
-								class="form-control" placeholder="Mức Độ Hoàn Thành" />
 
-						</div>
-
-
-
-						<div class="form-group">
-							<label for="trangthai">Trạng Thái</label> <br> <label
-								class="lb-flat-red"> <input value="active" type="radio"
-								${nhanvienkpi.trangthai == 'active' ? 'checked' : '' }
-								name="trangthai" class="flat-red"> Kích Hoạt
-							</label> <label class="lb-flat-red"> <input value="inactive"
-							${nhanvienkpi.trangthai == 'inactive' ? 'checked' : '' }
-								type="radio" name="trangthai" class="flat-red" >
-								Chưa Kích Hoat
-							</label>
-						</div>
+							<div class="form-group">
+								<label for="trangthai">Trạng Thái</label> <br> <label
+									class="lb-flat-red"> <input value="active" type="radio"
+									${nhanvienkpi.trangthai == 'active' ? 'checked' : '' }
+									name="trangthai" class="flat-red"> Kích Hoạt
+								</label> <label class="lb-flat-red"> <input value="inactive"
+									${nhanvienkpi.trangthai == 'inactive' ? 'checked' : '' }
+									type="radio" name="trangthai" class="flat-red"> Chưa
+									Kích Hoat
+								</label>
+							</div>
+						</security:authorize>
 						<div class="form-group">
 							<label for="mota">Mô tả</label>
 							<form:textarea path="mota" type="text" class="form-control"

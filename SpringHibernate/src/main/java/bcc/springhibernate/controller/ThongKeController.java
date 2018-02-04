@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import bcc.springhibernate.service.HoaDonService;
 import bcc.springhibernate.service.NhanVienService;
 
 @Controller
+@PreAuthorize("hasAnyRole('ADMIN','TAICHINH')")
 @RequestMapping("/admin")
 public class ThongKeController {
 

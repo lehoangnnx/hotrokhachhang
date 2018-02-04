@@ -1,11 +1,15 @@
 package bcc.springhibernate.controller;
 
 
+import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,14 +26,17 @@ import bcc.springhibernate.model.Kpi;
 import bcc.springhibernate.model.Nhanvien;
 import bcc.springhibernate.model.Nhanvienkpi;
 import bcc.springhibernate.model.Nhomkhachhang;
+import bcc.springhibernate.model.Taikhoan;
 import bcc.springhibernate.repository.KpiRepository;
 import bcc.springhibernate.service.KpiService;
 import bcc.springhibernate.service.NhanVienKpiService;
 import bcc.springhibernate.service.NhanVienService;
 import bcc.springhibernate.service.NhomKhachHangService;
+import bcc.springhibernate.service.TaikhoanService;
 
 
 @Controller
+@PreAuthorize("hasAnyRole('MEMBER')")
 @RequestMapping("/admin")
 public class NhanVienKpiController {
 
@@ -39,10 +46,20 @@ public class NhanVienKpiController {
 	NhanVienService nhanVienService;
 	@Autowired
 	KpiService	kpiService; 
+	@Autowired
+	TaikhoanService taikhoanService;
     @GetMapping("/nhanvienkpi")
     String pageDanhSachNhanVienKpi(@RequestParam(value="trangthai",defaultValue = "active") String trangthai,
-								   Model model){
-    	List<Nhanvienkpi> listNhanvienkpi = nhanVienKpiService.findByTrangthaiOrderByIdDesc(trangthai);
+								   Model model,Principal principal,HttpServletRequest request){
+    	List<Nhanvienkpi> listNhanvienkpi = null;
+    	if(request.isUserInRole("ROLE_ADMIN")){
+    		listNhanvienkpi = nhanVienKpiService.findByTrangthaiOrderByIdDesc(trangthai);
+
+		}else {
+			Taikhoan taikhoan= taikhoanService.findByUsername(principal.getName());
+			listNhanvienkpi = nhanVienKpiService.findByNhanvienAndTrangthaiOrderByIdDesc(taikhoan.getNhanvien(), trangthai);
+		}
+    	
     	model.addAttribute("listNhanvienkpi", listNhanvienkpi);
         return "danhsachnhanvienkpi";
     }
@@ -73,6 +90,8 @@ public class NhanVienKpiController {
     String themNhanVienKpi(@ModelAttribute("nhanvienkpi") Nhanvienkpi nhanvienkpi,
     		@RequestParam("nhanvien") Integer nhanvien,@RequestParam("kpi") Integer kpi,
     		@RequestParam("ngayhoanthanh") String ngayhoanthanh,
+    		@RequestParam(value="trangthai",defaultValue="inactive") String trangthai,
+    		@RequestParam(value="mucdohoanthanh", defaultValue="0") Double mucdohoanthanh,
     		RedirectAttributes redirectAttributes) {
     	try {
     		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -84,7 +103,8 @@ public class NhanVienKpiController {
     		nhanvienkpi.setKpi(kpiById);
     		nhanvienkpi.setNgaydangky(new Date());
     		nhanvienkpi.setNgayhoanthanh(df.parse(ngayhoanthanh));
-    		
+    		nhanvienkpi.setTrangthai(trangthai);
+    		nhanvienkpi.setMucdohoanthanh(mucdohoanthanh);
         	nhanVienKpiService.saveOrUpdate(nhanvienkpi);
         	redirectAttributes.addFlashAttribute("msg", "Thêm Thành Công");
 		} catch (Exception e) {
@@ -98,6 +118,8 @@ public class NhanVienKpiController {
     String suaNhanVienKpi(@ModelAttribute("nhanvienkpi") Nhanvienkpi nhanvienkpi,
     		@RequestParam("nhanvien") Integer nhanvien,@RequestParam("kpi") Integer kpi,
     		@RequestParam("ngayhoanthanh") String ngayhoanthanh,
+    		@RequestParam(value="trangthai",defaultValue="inactive") String trangthai,
+    		@RequestParam(value="mucdohoanthanh", defaultValue="0") Double mucdohoanthanh,
     		RedirectAttributes redirectAttributes) {
     	try {
     		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -109,7 +131,8 @@ public class NhanVienKpiController {
     		nhanvienkpi.setKpi(kpiById);
     		nhanvienkpi.setNgaydangky(new Date());
     		nhanvienkpi.setNgayhoanthanh(df.parse(ngayhoanthanh));
-    		
+    		nhanvienkpi.setTrangthai(trangthai);
+    		nhanvienkpi.setMucdohoanthanh(mucdohoanthanh);
         	nhanVienKpiService.saveOrUpdate(nhanvienkpi);
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {

@@ -4,6 +4,7 @@ package bcc.springhibernate.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +23,7 @@ import bcc.springhibernate.service.HangHoaService;
 import bcc.springhibernate.service.NhomHangService;
 
 @Controller
+@PreAuthorize("hasAnyRole('ADMIN','BANHANG')")
 @RequestMapping("/admin")
 public class HangHoaController {
 

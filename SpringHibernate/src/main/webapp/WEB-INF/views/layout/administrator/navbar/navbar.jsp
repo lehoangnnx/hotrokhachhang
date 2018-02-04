@@ -5,7 +5,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <!-- Header Navbar -->
@@ -18,6 +19,7 @@
 	<div class="navbar-custom-menu">
 		<ul class="nav navbar-nav">
 			<!-- Messages: style can be found in dropdown.less-->
+			<security:authorize access="hasAnyRole('ADMIN')">
 			<li class="dropdown notifications-menu">
 				<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
 				data-toggle="dropdown"> <i class="fa fa-envelope-o"></i> <span
@@ -46,9 +48,11 @@
 					<!-- <li class="footer"><a href="#">See All Messages</a></li> -->
 				</ul>
 			</li>
+			</security:authorize>
 			<!-- /.messages-menu -->
 
 			<!-- Notifications Menu -->
+			<security:authorize access="hasAnyRole('ADMIN','CHAMSOC')">
 			<li class="dropdown notifications-menu">
 				<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
 				data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span
@@ -88,7 +92,9 @@
 					<!-- <li class="footer"><a href="#">View all</a></li> -->
 				</ul>
 			</li>
+			</security:authorize>
 			<!-- Tasks Menu -->
+			<security:authorize access="hasAnyRole('ADMIN','CHAMSOC')">
 			<li class="dropdown notifications-menu">
 				<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle"
 				data-toggle="dropdown"> <i class="fa fa-flag-o"></i> <span
@@ -128,6 +134,7 @@
 					<!-- <li class="footer"><a href="#">View all tasks</a></li> -->
 				</ul>
 			</li>
+			</security:authorize>
 			<!-- User Account Menu -->
 			<li class="dropdown user user-menu">
 				<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle"

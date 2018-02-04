@@ -4,7 +4,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <input hidden="" id="msg" value="${msg }"></input>
@@ -65,7 +66,9 @@
 								<th>Số</th>
 								<th>Ngày Đăng Ký</th>
 								<th>Ngày Hoàn Thành</th>
+								<security:authorize access="hasAnyRole('ADMIN')">
 								<th>Trạng Thái</th>
+								</security:authorize>
 								<!-- <th>Mức Độ Hoàn Thành</th>
 								<th>Mô Tả</th> -->
 
@@ -83,6 +86,7 @@
 											value="${nvkpi.ngaydangky}" /></td>
 									<td><fmt:formatDate pattern="dd-MM-yyyy"
 											value="${nvkpi.ngayhoanthanh}" /></td>
+											<security:authorize access="hasAnyRole('ADMIN')">
 									<c:if test="${nvkpi.trangthai != 'deleted' }">
 									<td style="text-align: center;">
 										<div class="btn-group" data-toggle="buttons">
@@ -105,6 +109,7 @@
 									<c:if test="${nvkpi.trangthai == 'deleted' }">
 									<td>Đã Xóa</td>
 									</c:if>
+									</security:authorize>
 									<%-- <td>${nvkpi.mucdohoanthanh}</td>
 									<td>${nvkpi.mota}</td> --%>
 									<td><a
@@ -127,7 +132,9 @@
 								<th>Số</th>
 								<th>Ngày Đăng Ký</th>
 								<th>Ngày Hoàn Thành</th>
+								<security:authorize access="hasAnyRole('ADMIN')">
 								<th>Trạng Thái</th>
+								</security:authorize>
 								<!-- <th>Mức Độ Hoàn Thành</th>
 								<th>Mô Tả</th> -->
 

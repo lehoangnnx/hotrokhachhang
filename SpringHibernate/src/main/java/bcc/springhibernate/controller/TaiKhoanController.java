@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,7 @@ import bcc.springhibernate.service.QuyenService;
 import bcc.springhibernate.service.TaikhoanService;
 
 @Controller
+@PreAuthorize("hasAnyRole('ADMIN')")
 @RequestMapping("/admin")
 public class TaiKhoanController {
 

@@ -26,4 +26,6 @@ public interface NhanVienKpiRepository extends JpaRepository<Nhanvienkpi, Intege
 	
 	List<Nhanvienkpi> findByKpi(Kpi kpi);
 	List<Nhanvienkpi> findByNhanvien(Nhanvien nhanvien);
+	
+	List<Nhanvienkpi> findByNhanvienAndTrangthaiOrderByIdDesc(Nhanvien  nhanvien,String trangthai);
 }

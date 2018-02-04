@@ -87,6 +87,12 @@ public class NhanVienKpiServiceImpl implements NhanVienKpiService {
 		return nhanVienKpiRepository.findByNhanvien(nhanvien);
 	}
 
+	@Override
+	public List<Nhanvienkpi> findByNhanvienAndTrangthaiOrderByIdDesc(Nhanvien nhanvien, String trangthai) {
+		
+		return nhanVienKpiRepository.findByNhanvienAndTrangthaiOrderByIdDesc(nhanvien, trangthai);
+	}
+
 	
 	
 
