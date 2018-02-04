@@ -34,7 +34,7 @@ public class LuongServiceImpl implements LuongService {
 	}
 
 	@Override
-	public Luong findByNhanvien(Nhanvien nhanvien) {
+	public List<Luong> findByNhanvien(Nhanvien nhanvien) {
 		
 		return luongRepository.findByNhanvien(nhanvien);
 	}

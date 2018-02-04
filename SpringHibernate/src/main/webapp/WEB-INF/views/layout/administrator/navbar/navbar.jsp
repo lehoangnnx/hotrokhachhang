@@ -62,8 +62,8 @@
 							<c:forEach var="cs" items="${listChamSoc }">
 								<li>
 									<!-- start notification --> <a
-									onclick="updateThongBaoChamSoc(${cs.id });"
-									href="javacript:void(0);"> <i class="fa fa-users text-aqua"></i>
+									<%-- onclick="updateThongBaoChamSoc(${cs.id });" --%>
+									href="${contextPath }/admin/chamsoctieptheo/add/${cs.id}"> <i class="fa fa-users text-aqua"></i>
 										<c:choose>
 											<c:when test="${cs.ngaycstiep == 0}">
 												<b>Hôm Nay</b> Là Lần Chăm Sóc <br>

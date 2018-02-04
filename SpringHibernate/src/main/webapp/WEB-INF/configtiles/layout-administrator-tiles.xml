@@ -449,6 +449,8 @@
 			value="/WEB-INF/views/administrator/tieuchichamsoc/footertag/suatieuchichamsoc-footertag.jsp" />
 	</definition>
 	
+	
+	
 	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
 	
 	
@@ -474,6 +476,15 @@
 		<put-attribute name="title" value="Trang Quản Trị" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/administrator/chamsoc/suachamsoc.jsp" />
+		<put-attribute name="footertagmore"
+			value="/WEB-INF/views/administrator/chamsoc/footertag/suachamsoc-footertag.jsp" />
+	</definition>
+	
+	<!-- Trang Chăm Sóc Tiếp Theo-->
+	<definition name="chamsoctieptheo" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/administrator/chamsoc/chamsoctieptheo.jsp" />
 		<put-attribute name="footertagmore"
 			value="/WEB-INF/views/administrator/chamsoc/footertag/suachamsoc-footertag.jsp" />
 	</definition>

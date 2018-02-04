@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.domain.Pageable;
 
 import bcc.springhibernate.model.Hoadon;
+import bcc.springhibernate.model.Khachhang;
 import bcc.springhibernate.model.Nhanvien;
 
 public interface HoaDonService {
@@ -36,4 +37,10 @@ public interface HoaDonService {
 	
 	List<Hoadon> findByNhanvienByIdnhanvienbanAndTrangthaiNotAndNgaylapBetweenOrderByIdDesc
 	(Nhanvien nhanvien,String trangthai, Date d1, Date d2);
+	
+	List<Hoadon> findByNhanvienByIdnhanvienlaphoadonOrNhanvienByIdnhanvienbanOrNhanvienByIdnhanviengiaohangOrNhanvienByIdnhanvienchamsoc
+	(Nhanvien nhanvienlaphoadon,Nhanvien nhanvienban,
+			Nhanvien nhanviengiaohang,Nhanvien nhanvienchamsoc);
+	
+	List<Hoadon> findByKhachhang(Khachhang khachhang);
 }

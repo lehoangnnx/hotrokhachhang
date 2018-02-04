@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import bcc.springhibernate.model.Hoadon;
+import bcc.springhibernate.model.Khachhang;
 import bcc.springhibernate.model.Nhanvien;
 
 @Repository
@@ -48,4 +49,11 @@ public interface HoaDonRepository extends JpaRepository<Hoadon, Integer> {
 	
 	List<Hoadon> findByNhanvienByIdnhanvienbanAndTrangthaiNotAndNgaylapBetweenOrderByIdDesc
 	(Nhanvien nhanvien,String trangthai, Date d1, Date d2);
+	
+	List<Hoadon> findByNhanvienByIdnhanvienlaphoadonOrNhanvienByIdnhanvienbanOrNhanvienByIdnhanviengiaohangOrNhanvienByIdnhanvienchamsoc
+	(Nhanvien nhanvienlaphoadon,Nhanvien nhanvienban,
+			Nhanvien nhanviengiaohang,Nhanvien nhanvienchamsoc);
+
+	List<Hoadon> findByKhachhang(Khachhang khachhang);
+	
 }

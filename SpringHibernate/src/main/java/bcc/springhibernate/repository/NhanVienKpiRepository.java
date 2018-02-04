@@ -23,4 +23,7 @@ public interface NhanVienKpiRepository extends JpaRepository<Nhanvienkpi, Intege
 	(Kpi kpi, String trangthai, Date d1 , Date d2);
 	List<Nhanvienkpi> findByNhanvienAndKpiAndTrangthaiNotAndNgaydangkyBetweenOrderByNgaydangkyDesc
 	(Nhanvien nhanvien,Kpi kpi, String trangthai, Date d1 , Date d2);
+	
+	List<Nhanvienkpi> findByKpi(Kpi kpi);
+	List<Nhanvienkpi> findByNhanvien(Nhanvien nhanvien);
 }

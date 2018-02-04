@@ -75,6 +75,18 @@ public class NhanVienKpiServiceImpl implements NhanVienKpiService {
 		
 	}
 
+	@Override
+	public List<Nhanvienkpi> findByKpi(Kpi kpi) {
+		
+		return nhanVienKpiRepository.findByKpi(kpi);
+	}
+
+	@Override
+	public List<Nhanvienkpi> findByNhanvien(Nhanvien nhanvien) {
+		
+		return nhanVienKpiRepository.findByNhanvien(nhanvien);
+	}
+
 	
 	
 

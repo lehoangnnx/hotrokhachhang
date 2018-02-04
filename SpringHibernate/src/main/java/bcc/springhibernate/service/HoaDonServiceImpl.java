@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import bcc.springhibernate.model.Hoadon;
+import bcc.springhibernate.model.Khachhang;
 import bcc.springhibernate.model.Nhanvien;
 import bcc.springhibernate.repository.HoaDonRepository;
 
@@ -122,6 +123,20 @@ public class HoaDonServiceImpl implements HoaDonService {
 	public void deleted(Hoadon hoadon) {
 		hoaDonRepository.delete(hoadon);
 		
+	}
+
+	@Override
+	public List<Hoadon> findByNhanvienByIdnhanvienlaphoadonOrNhanvienByIdnhanvienbanOrNhanvienByIdnhanviengiaohangOrNhanvienByIdnhanvienchamsoc(
+			Nhanvien nhanvienlaphoadon, Nhanvien nhanvienban, Nhanvien nhanviengiaohang, Nhanvien nhanvienchamsoc) {
+		
+		return hoaDonRepository.findByNhanvienByIdnhanvienlaphoadonOrNhanvienByIdnhanvienbanOrNhanvienByIdnhanviengiaohangOrNhanvienByIdnhanvienchamsoc
+				(nhanvienlaphoadon, nhanvienban, nhanviengiaohang, nhanvienchamsoc);
+	}
+
+	@Override
+	public List<Hoadon> findByKhachhang(Khachhang khachhang) {
+		
+		return hoaDonRepository.findByKhachhang(khachhang);
 	}
 
 }

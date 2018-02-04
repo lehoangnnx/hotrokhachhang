@@ -12,7 +12,7 @@ public interface LuongService {
 	List<Luong> findAll();
 	List<Luong> findByTrangthaiOrderByIdDesc(String trangthai);
 	List<Luong> findByTrangthaiNotOrderByIdDesc(String trangthai);
-	Luong findByNhanvien(Nhanvien nhanvien);
+	List<Luong> findByNhanvien(Nhanvien nhanvien);
 	Luong findById(Integer id);
 	Luong findOneByNhanvienAndThangAndNam(Nhanvien nhanvien, String thang,String nam);
 }

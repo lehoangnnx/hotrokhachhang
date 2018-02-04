@@ -17,105 +17,116 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "chitietchamsoc", catalog = "hotrobanhang")
 public class Chitietchamsoc implements java.io.Serializable {
+	  private Integer id;
+	     private Chamsoc chamsoc;
+	     private Tieuchichamsoc tieuchichamsoc;
+	     private Integer diem;
+	     private String trangthai;
+	     private Boolean cokhong;
+	     private Long tienchamsoc;
+	     private String mota;
 
-	private Integer id;
-	private Chamsoc chamsoc;
-	private Tieuchichamsoc tieuchichamsoc;
-	private Integer diem;
-	private String trangthai;
-	private Boolean cokhong;
-	private Long tienchamsoc;
-	private String mota;
+	    public Chitietchamsoc() {
+	    }
 
-	public Chitietchamsoc() {
-	}
+		
+	    public Chitietchamsoc(Chamsoc chamsoc, Tieuchichamsoc tieuchichamsoc) {
+	        this.chamsoc = chamsoc;
+	        this.tieuchichamsoc = tieuchichamsoc;
+	    }
+	    public Chitietchamsoc(Chamsoc chamsoc, Tieuchichamsoc tieuchichamsoc, Integer diem, String trangthai, Boolean cokhong, Long tienchamsoc, String mota) {
+	       this.chamsoc = chamsoc;
+	       this.tieuchichamsoc = tieuchichamsoc;
+	       this.diem = diem;
+	       this.trangthai = trangthai;
+	       this.cokhong = cokhong;
+	       this.tienchamsoc = tienchamsoc;
+	       this.mota = mota;
+	    }
+	   
+	     @Id @GeneratedValue(strategy=IDENTITY)
 
-	public Chitietchamsoc(Chamsoc chamsoc, Tieuchichamsoc tieuchichamsoc, Integer diem, String trangthai,
-			Boolean cokhong, Long tienchamsoc, String mota) {
-		this.chamsoc = chamsoc;
-		this.tieuchichamsoc = tieuchichamsoc;
-		this.diem = diem;
-		this.trangthai = trangthai;
-		this.cokhong = cokhong;
-		this.tienchamsoc = tienchamsoc;
-		this.mota = mota;
-	}
+	    
+	    @Column(name="id", unique=true, nullable=false)
+	    public Integer getId() {
+	        return this.id;
+	    }
+	    
+	    public void setId(Integer id) {
+	        this.id = id;
+	    }
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@ManyToOne(fetch=FetchType.LAZY)
+	    @JoinColumn(name="idchamsoc", nullable=false)
+	    public Chamsoc getChamsoc() {
+	        return this.chamsoc;
+	    }
+	    
+	    public void setChamsoc(Chamsoc chamsoc) {
+	        this.chamsoc = chamsoc;
+	    }
 
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
+	@ManyToOne(fetch=FetchType.LAZY)
+	    @JoinColumn(name="tieuchichamsoc", nullable=false)
+	    public Tieuchichamsoc getTieuchichamsoc() {
+	        return this.tieuchichamsoc;
+	    }
+	    
+	    public void setTieuchichamsoc(Tieuchichamsoc tieuchichamsoc) {
+	        this.tieuchichamsoc = tieuchichamsoc;
+	    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+	    
+	    @Column(name="diem")
+	    public Integer getDiem() {
+	        return this.diem;
+	    }
+	    
+	    public void setDiem(Integer diem) {
+	        this.diem = diem;
+	    }
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idchamsoc")
-	public Chamsoc getChamsoc() {
-		return this.chamsoc;
-	}
+	    
+	    @Column(name="trangthai", length=45)
+	    public String getTrangthai() {
+	        return this.trangthai;
+	    }
+	    
+	    public void setTrangthai(String trangthai) {
+	        this.trangthai = trangthai;
+	    }
 
-	public void setChamsoc(Chamsoc chamsoc) {
-		this.chamsoc = chamsoc;
-	}
+	    
+	    @Column(name="cokhong")
+	    public Boolean getCokhong() {
+	        return this.cokhong;
+	    }
+	    
+	    public void setCokhong(Boolean cokhong) {
+	        this.cokhong = cokhong;
+	    }
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "tieuchichamsoc")
-	public Tieuchichamsoc getTieuchichamsoc() {
-		return this.tieuchichamsoc;
-	}
+	    
+	    @Column(name="tienchamsoc", precision=10, scale=0)
+	    public Long getTienchamsoc() {
+	        return this.tienchamsoc;
+	    }
+	    
+	    public void setTienchamsoc(Long tienchamsoc) {
+	        this.tienchamsoc = tienchamsoc;
+	    }
 
-	public void setTieuchichamsoc(Tieuchichamsoc tieuchichamsoc) {
-		this.tieuchichamsoc = tieuchichamsoc;
-	}
+	    
+	    @Column(name="mota")
+	    public String getMota() {
+	        return this.mota;
+	    }
+	    
+	    public void setMota(String mota) {
+	        this.mota = mota;
+	    }
 
-	@Column(name = "diem")
-	public Integer getDiem() {
-		return this.diem;
-	}
 
-	public void setDiem(Integer diem) {
-		this.diem = diem;
-	}
 
-	@Column(name = "trangthai", length = 45)
-	public String getTrangthai() {
-		return this.trangthai;
-	}
-
-	public void setTrangthai(String trangthai) {
-		this.trangthai = trangthai;
-	}
-
-	@Column(name = "cokhong")
-	public Boolean getCokhong() {
-		return this.cokhong;
-	}
-
-	public void setCokhong(Boolean cokhong) {
-		this.cokhong = cokhong;
-	}
-
-	@Column(name = "tienchamsoc", precision = 10, scale = 0)
-	public Long getTienchamsoc() {
-		return this.tienchamsoc;
-	}
-
-	public void setTienchamsoc(Long tienchamsoc) {
-		this.tienchamsoc = tienchamsoc;
-	}
-
-	@Column(name = "mota")
-	public String getMota() {
-		return this.mota;
-	}
-
-	public void setMota(String mota) {
-		this.mota = mota;
-	}
 
 }

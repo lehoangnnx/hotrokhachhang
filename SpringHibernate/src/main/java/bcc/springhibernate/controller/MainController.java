@@ -137,7 +137,8 @@ public class MainController {
 			int yearn = date.getYear();
 
 			int dayconlai = day - dayn;
-			if (year == yearn && month == monthn && (dayconlai <= 14) && (dayconlai > 7)
+			//&& (dayconlai > 7)
+			if (year == yearn && month == monthn && (dayconlai <= 14) 
 					&& cs.getTrangthai().equals("dachamsoc")) {
 				cs.setTrangthai("chochamsoc");
 				chamSocService.saveOrUpdate(cs);

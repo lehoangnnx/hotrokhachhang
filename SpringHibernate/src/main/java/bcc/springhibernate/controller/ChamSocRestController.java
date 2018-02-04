@@ -23,7 +23,7 @@ public class ChamSocRestController {
 	ChamSocService chamSocService;
 	@Autowired
 	TaikhoanService taikhoanService;
-	@PostMapping("/updatethongbaochamsoc")
+	/*@PostMapping("/updatethongbaochamsoc")
 	String updateThongBaoChamSoc(@RequestParam("id") Integer id, Principal principal) {
 		
 		
@@ -59,5 +59,5 @@ public class ChamSocRestController {
 			return "error";
 		}
 		
-	}
+	}*/
 }

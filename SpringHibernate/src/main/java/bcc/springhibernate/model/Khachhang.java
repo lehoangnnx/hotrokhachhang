@@ -25,7 +25,6 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "khachhang", catalog = "hotrobanhang", uniqueConstraints = @UniqueConstraint(columnNames = "makh"))
 public class Khachhang implements java.io.Serializable {
 
-
 	 private Integer id;
      private Loaikhachhang loaikhachhang;
      private Nhomkhachhang nhomkhachhang;
@@ -63,7 +62,8 @@ public class Khachhang implements java.io.Serializable {
     }
 
 	
-    public Khachhang(Nhomkhachhang nhomkhachhang, String makh, String ten) {
+    public Khachhang(Loaikhachhang loaikhachhang, Nhomkhachhang nhomkhachhang, String makh, String ten) {
+        this.loaikhachhang = loaikhachhang;
         this.nhomkhachhang = nhomkhachhang;
         this.makh = makh;
         this.ten = ten;
@@ -115,7 +115,7 @@ public class Khachhang implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="maloaikhachhang")
+    @JoinColumn(name="maloaikhachhang", nullable=false)
     public Loaikhachhang getLoaikhachhang() {
         return this.loaikhachhang;
     }

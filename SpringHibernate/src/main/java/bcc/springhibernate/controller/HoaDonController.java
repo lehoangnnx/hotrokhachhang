@@ -359,11 +359,16 @@ public class HoaDonController {
 	
 	@PatchMapping(value="/hoadon", params="deleted")
 	String xoaVinhVienHoaDon(@ModelAttribute("hoadon") Hoadon hoadon,  RedirectAttributes redirectAttributes) {
-
+		List<Chitiethoadon> chitiethoadons = null;
 		try {
-
+			chitiethoadons = chiTietHoaDonService.findByHoadon(hoadon);
+			if(!chitiethoadons.isEmpty()) {
+				for(Chitiethoadon cthd : chitiethoadons) {
+					chiTietHoaDonService.delete(cthd);
+				}
+			}
 			hoaDonService.deleted(hoadon);
-
+			
 			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thành Công");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thất Bại");
