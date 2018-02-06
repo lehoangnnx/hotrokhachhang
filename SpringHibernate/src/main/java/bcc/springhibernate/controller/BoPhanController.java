@@ -85,7 +85,7 @@ public class BoPhanController {
     String xoaVinhVienBoPhan(@ModelAttribute("bophan") Bophan bophan,RedirectAttributes redirectAttributes) {
     	try {
     		
-        	boPhanService.deleted(bophan);
+        	//boPhanService.deleted(bophan);
         	redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thành Công");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thất Bại");

@@ -23,6 +23,7 @@
 					action="${contextPath }/admin/loaikhachhang" method="patch" modelAttribute="loaikhachhang">
 					
 					<form:hidden path="id"/>
+					<form:hidden path="trangthai" />
 					<div class="box-body">
 						<div class="form-group">
 							<label for="tenLoai">Tên Loại Khách Hàng</label> <form:input path="tenloai"

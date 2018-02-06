@@ -27,6 +27,7 @@
 				<form:form role="form" id="formTieuChiChamSoc"
 					action="${contextPath }/admin/tieuchichamsoc" method="patch" modelAttribute="tieuchichamsoc">
 					<form:hidden path="id"/>
+					<form:hidden path="trangthai" />
 					<div class="box-body">
 						<div class="form-group">
 							<label for="tentieuchi">Tên Tiêu Chí</label> <form:input path="tentieuchi"
@@ -43,7 +44,7 @@
 							<label
 								class="lb-flat-red"> <input value="cokhong" type="radio"
 								${tieuchichamsoc.kieutieuchi == 'cokhong' ? 'checked' : '' }
-								name="kieutieuchi" class="flat-red"> Có Không
+								name="kieutieuchi" class="flat-red"> Tốt/Chưa Tốt
 							</label>
 							<label
 								class="lb-flat-red"> <input value="tien" type="radio"

@@ -54,11 +54,12 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 		if (taikhoanRepository.findByUsername("admin") == null) {
 			Taikhoan taikhoan = new Taikhoan();
 			taikhoan.setUsername("admin");
-			taikhoan.setEmail("admin1@gmail.com");
+			taikhoan.setEmail("admin@gmail.com");
 			taikhoan.setMatkhau(passwordEncoder.encode("123456"));
 			taikhoan.setThongtinkhac("123");
 			taikhoan.setTrangthai("active");
-			Nhanvien nhanvien =nhanvienRepository.findById(1);
+			
+			Nhanvien nhanvien =nhanvienRepository.findByManhanvien("QT001");
 			
 			HashSet<Quyen> hashSet = new HashSet<>();
 			

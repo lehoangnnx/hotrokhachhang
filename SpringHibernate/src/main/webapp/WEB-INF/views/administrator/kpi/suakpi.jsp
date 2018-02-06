@@ -22,6 +22,7 @@
 				<form:form role="form" id="formKpi"
 					action="${contextPath }/admin/kpi" method="patch" modelAttribute="kpi">
 					<form:hidden path="id"/>
+					<form:hidden path="trangthai" />
 					<div class="box-body">
 						<div class="form-group">
 							<label for="ten">Tên </label> <form:input path="ten"

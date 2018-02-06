@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,13 +48,15 @@ public class KhachHangController {
 	KhachHangService khachHangService;
 	@Autowired
 	HoaDonService hoaDonService;
-
+@Autowired
+ThongBao thongBao;
 	@GetMapping("/khachhang")
 	String pageDanhSachKhachHangg(@RequestParam(value = "trangthai", defaultValue = "active") String trangthai,
 			@RequestParam(value = "limit", defaultValue = "100") Integer limit,
 			@RequestParam(value = "page", defaultValue = "1") Integer page,
 			@RequestParam(value = "loaikhachhang", defaultValue = "0") Integer loaikhachhang,
-			@RequestParam(value = "nhomkhachhang", defaultValue = "0") Integer nhomkhachhang, Model model) {
+			@RequestParam(value = "nhomkhachhang", defaultValue = "0") Integer nhomkhachhang, Model model,
+			HttpServletRequest request) {
 
 		List<Khachhang> listKhachhang = null;
 
@@ -99,6 +102,7 @@ public class KhachHangController {
 
 		model.addAttribute("currentpage", page);
 		model.addAttribute("pagecount", pageCount);
+		thongBao.thongbao(model, request);
 		return "danhsachkhachhang";
 	}
 
@@ -316,8 +320,8 @@ public class KhachHangController {
 				khachhang.setGhichu(ghichu);
 			}
 			khachhang.setUutien(uutien);
-			khachhang.setTrangthai("active");
-			khachhang.setTrangthainhac("chosinhnhat");
+			//khachhang.setTrangthai("active");
+			//khachhang.setTrangthainhac("chosinhnhat");
 			khachHangService.saveOrUpdate(khachhang);
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {

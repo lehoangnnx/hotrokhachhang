@@ -126,7 +126,7 @@ public class FeedBackController {
     		feedback.setKhachhangId(khachhangId);
     		feedback.setNhavientaoId(getTaiKhoanByUserName.getNhanvien().getId());
     		feedback.setNgaytao(new Date());
-    		feedback.setTrangthai("active");
+    		//feedback.setTrangthai("active");
     		feedBackService.saveOrUpdate(feedback);
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {

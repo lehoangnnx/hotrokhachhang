@@ -28,8 +28,8 @@
 					action="${contextPath }/admin/khachhang" method="patch"
 					modelAttribute="khachhang">
 					<form:hidden path="id" />
-
-
+<form:hidden path="trangthai" />
+<form:hidden path="trangthainhac" />
 					<div class="box-body">
 						<div class="form-group">
 							<label>Loại Khách Hàng</label> <select

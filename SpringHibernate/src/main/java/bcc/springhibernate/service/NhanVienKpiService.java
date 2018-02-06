@@ -16,7 +16,8 @@ public interface NhanVienKpiService {
 	Nhanvienkpi findById(Integer id);
 	
 	List<Nhanvienkpi> findByKpiAndTrangthaiNotOrderByNgaydangkyDesc(Kpi kpi, String trangthai);
-	
+	List<Nhanvienkpi> findByTrangthaiNotAndNgaydangkyBetweenOrderByNgaydangkyDesc
+	( String trangthai, Date d1 , Date d2);
 	List<Nhanvienkpi> findByKpiAndTrangthaiNotAndNgaydangkyBetweenOrderByNgaydangkyDesc
 	(Kpi kpi, String trangthai, Date d1 , Date d2);
 	List<Nhanvienkpi> findByNhanvienAndKpiAndTrangthaiNotAndNgaydangkyBetweenOrderByNgaydangkyDesc

@@ -31,9 +31,10 @@
 					modelAttribute="nhanvienkpi">
 					<form:hidden path="id" />
 					<div class="box-body">
-
+					
+						
 						<div class="form-group">
-							<label>Nhân Viên</label> <select class="form-control select2" disabled="disabled"
+							<label>Nhân Viên</label> <select class="form-control select2"
 								name="nhanvien" style="width: 100%;">
 
 								<c:forEach var="nv" items="${listNhanvien}">
@@ -45,6 +46,8 @@
 
 							</select>
 						</div>
+						
+						
 						<div class="form-group">
 							<label>KPI</label> <select class="form-control select2"
 								name="kpi" style="width: 100%;">
@@ -60,6 +63,7 @@
 							<form:input path="so" type="number" class="form-control" min="0"
 								value="0" placeholder="Số" />
 						</div>
+						
 						<div class="form-group">
 							<label>Ngày Hoàn Thành</label>
 
@@ -67,7 +71,7 @@
 								<div class="input-group-addon">
 									<i class="fa fa-calendar"></i>
 								</div>
-								<input name="ngayhoanthanh"
+								<input name="ngayhoanthanh" id="ngayhoanthanh" 
 									value="<fmt:formatDate
                                                 pattern="dd-MM-yyyy" value="${nhanvienkpi.ngayhoanthanh}"/>"
 									type="text" class="form-control"

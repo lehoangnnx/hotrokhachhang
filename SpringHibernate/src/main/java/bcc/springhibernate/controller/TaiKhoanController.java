@@ -123,7 +123,7 @@ public class TaiKhoanController {
     		}
     		taikhoan.setUsername(username);
     		taikhoan.setEmail(email);
-    		taikhoan.setTrangthai("active");
+    		//taikhoan.setTrangthai("active");
     		taikhoan.setNhanvien(nhanVienById);
     		taikhoan.setQuyens(hsquyen);
         	taikhoanService.saveOrUpdate(taikhoan);

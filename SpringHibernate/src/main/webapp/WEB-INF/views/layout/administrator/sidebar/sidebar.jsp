@@ -152,11 +152,11 @@
 			</ul></li> --%>
 			<li class="treeview"><a href="${contextPath }/admin/kpi?trangthai=active">KPI</a></li>
 			</security:authorize>
-			<security:authorize access="hasAnyRole('MEMBER')">
+			
 			<li class="treeview"><a
 					href="${contextPath }/admin/nhanvienkpi?trangthai=inactive">Nhân
 						Viên KPI </a></li>
-						</security:authorize>
+						
 	</ul>
 	<!-- /.sidebar-menu -->
 </section>

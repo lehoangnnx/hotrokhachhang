@@ -23,6 +23,7 @@
 					action="${contextPath }/admin/taikhoan" method="patch"
 					modelAttribute="taikhoan">
 					<form:hidden path="id" />
+					<form:hidden path="trangthai" />
 					<div class="box-body">
 						<div class="form-group">
 							<label for="username">User Name</label>

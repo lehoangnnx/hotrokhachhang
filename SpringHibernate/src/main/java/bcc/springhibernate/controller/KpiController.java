@@ -70,7 +70,7 @@ public class KpiController {
 	@PatchMapping(value = "/kpi", params = "update")
 	String suaKpi(@ModelAttribute("kpi") Kpi kpi, RedirectAttributes redirectAttributes) {
 		try {
-			kpi.setTrangthai("active");
+			//kpi.setTrangthai("active");
 			kpiService.saveOrUpdate(kpi);
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {

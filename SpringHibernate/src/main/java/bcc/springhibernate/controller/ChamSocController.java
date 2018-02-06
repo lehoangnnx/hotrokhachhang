@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -57,11 +59,12 @@ public class ChamSocController {
 	TaikhoanService taikhoanService;
 	@Autowired
 	ChiTietChamSocService chiTietChamSocService;
-
+@Autowired
+ThongBao thongBao;
 	@GetMapping("/chamsoc")
 	String pageDanhSachChamSoc(@RequestParam(value = "trangthai", defaultValue = "chochamsoc") String trangthai,
 			@RequestParam(value = "limit", defaultValue = "100") Integer limit,
-			@RequestParam(value = "page", defaultValue = "1") Integer page, Model model) {
+			@RequestParam(value = "page", defaultValue = "1") Integer page, Model model, HttpServletRequest request) {
 		int sizeListChamSoc = chamSocService.findByTrangthaiOrderByIdDesc(trangthai).size();
 		int pageCount = (sizeListChamSoc / limit + (sizeListChamSoc % limit > 0 ? 1 : 0));
 		List<Chamsoc> listChamsoc = chamSocService.findByTrangthaiOrderByIdDesc(trangthai,
@@ -70,6 +73,9 @@ public class ChamSocController {
 		System.out.println(pageCount);
 		model.addAttribute("currentpage", page);
 		model.addAttribute("pagecount", pageCount);
+		
+		
+		thongBao.thongbao(model, request);
 		return "danhsachchamsoc";
 	}
 
@@ -78,7 +84,7 @@ public class ChamSocController {
 		Khachhang khachhang = khachHangService.findById(idkhachhang);
 		List<Khachhang> listKhachhang = khachHangService.findByTrangthaiNotOrderByIdDesc("deleted");
 		List<Nhanvien> listNhanvien = nhanVienService.findByTrangthaiOrderByIdDesc("active");
-		List<Hoadon> listHoadon = hoaDonService.findByTrangthaiNotOrderByIdDesc("deleted");
+		List<Hoadon> listHoadon = hoaDonService.findByKhachhang(listKhachhang.get(0));
 		List<Tieuchichamsoc> listTieuchichamsoc = tieuChiChamSocService.findByTrangthaiOrderByIdDesc("active");
 		model.addAttribute("listTieuchichamsoc", listTieuchichamsoc);
 		model.addAttribute("listHoadon", listHoadon);
@@ -112,7 +118,7 @@ public class ChamSocController {
 	//	Khachhang khachhang = khachHangService.findById(idkhachhang);
 		List<Khachhang> listKhachhang = khachHangService.findByTrangthaiNotOrderByIdDesc("deleted");
 		List<Nhanvien> listNhanvien = nhanVienService.findByTrangthaiOrderByIdDesc("active");
-		List<Hoadon> listHoadon = hoaDonService.findByTrangthaiNotOrderByIdDesc("deleted");
+		List<Hoadon> listHoadon = hoaDonService.findByKhachhang(chamsoc.getKhachhang());
 		List<Tieuchichamsoc> listTieuchichamsoc = tieuChiChamSocService.findByTrangthaiOrderByIdDesc("active");
 		model.addAttribute("listTieuchichamsoc", listTieuchichamsoc);
 		model.addAttribute("listHoadon", listHoadon);
@@ -149,13 +155,15 @@ public class ChamSocController {
 			chamsoc.setNgaycstiep(df.parse(ngaycstiep));
 			chamsoc.setHoadonId(hoadon);
 			chamsoc.setTrangthai("dachamsoc");
+			chamsoc.setTrangthainhac("chuanhac");
 			chamsoc.setLan(chamsocold.getLan());
 			chamsoc.setNoidung(chamsocold.getNoidung());
 			chamsoc.setGhichu(chamsoc.getGhichu());
 			chamSocService.saveOrUpdate(chamsoc);
 			
 			Chamsoc setchamsocold = chamSocService.findById(chamsocold.getId());
-			chamsocold.setTrangthai("dachamsoc");
+			setchamsocold.setTrangthai("dachamsoc");
+			setchamsocold.setTrangthainhac("danhac");
 			chamSocService.saveOrUpdate(setchamsocold);
 			if (!idtccs.isEmpty()) {
 				for (int i = 0; i < idtccs.size(); i++) {
@@ -201,7 +209,7 @@ public class ChamSocController {
 		List<Chitietchamsoc> listChitietchamsoc = chiTietChamSocService.findByChamsoc(chamsoc);
 		List<Khachhang> listKhachhang = khachHangService.findByTrangthaiNotOrderByIdDesc("deleted");
 		List<Nhanvien> listNhanvien = nhanVienService.findByTrangthaiOrderByIdDesc("active");
-		List<Hoadon> listHoadon = hoaDonService.findByTrangthaiNotOrderByIdDesc("deleted");
+		List<Hoadon> listHoadon = hoaDonService.findByKhachhang(chamsoc.getKhachhang());
 		List<Tieuchichamsoc> listTieuchichamsoc = tieuChiChamSocService.findByTrangthaiOrderByIdDesc("active");
 		model.addAttribute("listTieuchichamsoc", listTieuchichamsoc);
 		model.addAttribute("listHoadon", listHoadon);
@@ -238,6 +246,7 @@ public class ChamSocController {
 			chamsoc.setNgaycstiep(df.parse(ngaycstiep));
 			chamsoc.setHoadonId(hoadon);
 			chamsoc.setTrangthai("dachamsoc");
+			chamsoc.setTrangthainhac("chuanhac");
 			chamSocService.saveOrUpdate(chamsoc);
 			if (!idtccs.isEmpty()) {
 				for (int i = 0; i < idtccs.size(); i++) {
@@ -302,7 +311,7 @@ public class ChamSocController {
 			chamsoc.setNgay(df.parse(ngay));
 			chamsoc.setNgaycstiep(df.parse(ngaycstiep));
 			chamsoc.setHoadonId(hoadon);
-			chamsoc.setTrangthai("dachamsoc");
+			//chamsoc.setTrangthai("dachamsoc");
 			chamSocService.saveOrUpdate(chamsoc);
 			if (!idtccs.isEmpty()) {
 				for (int i = 0; i < idtccs.size(); i++) {

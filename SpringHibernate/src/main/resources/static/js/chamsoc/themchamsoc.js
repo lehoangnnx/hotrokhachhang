@@ -83,10 +83,10 @@ function getTieuChiChamSocId() {
 				var tentieuchi = result.tentieuchi;
 		    	var kieutieuchitccs = $('#kieutieuchitccs').val();
 		    	if(kieutieuchitccs == 'true'){
-		    		kieutieuchitccs = 'Có';
+		    		kieutieuchitccs = 'Tốt';
 		    	}
 		    	if(kieutieuchitccs == 'false'){
-		    		kieutieuchitccs = 'Không';
+		    		kieutieuchitccs = 'Chưa Tốt';
 		    	}
 		    	
 		    	
@@ -191,8 +191,8 @@ function getKieuTieuChi() {
 			    }else {
 			    	var html = '<select class="form-control select2" name="" id="kieutieuchitccs"'+
 						'style="width: 100%;">'+
-				'	<option value="true" selected="selected">Có</option>'+		
-					'<option value="false">Không</option>'+
+				'	<option value="true" selected="selected">Tốt</option>'+		
+					'<option value="false">Chưa Tốt</option>'+
 				'	</select> <span class="input-group-btn">'+
 				'	<button id="btn-ttccsvctcs" type="button" onclick="getTieuChiChamSocId();"'+
 					'	class="btn btn-info btn-flat">Thêm</button>'+
@@ -262,4 +262,39 @@ $('#khachhang').change(function(){
 	getSoLanChamSocVaDamPhanKhachHang();
 });
 
+$('#khachhang').change(function(){
+	
+	gethoadontheokhachhang()
+});
 
+function gethoadontheokhachhang() {
+	clearTimeout(timeout);
+	timeout = setTimeout(function() {
+		var id = $('#khachhang :selected').val();
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		$(document).ajaxSend(function(e, xhr, options) {
+			xhr.setRequestHeader(header, token);
+		});
+		
+		$.ajax({
+
+			type : "POST",
+			contentType : "application/json",
+			url : contextPath + "/admin/gethoadontheokhachhang",
+			data: id ,
+			success : function(result) {
+				var html ='';
+				for(var i = 0; i< Object.keys(result).length ; i++){
+					html += '<option value="'+result[i].id+'">'+result[i].sohoadon+'</option>';
+				}
+				html+='<option value="0">Không</option>';
+				$('#hoadon').html(html);
+				
+			},
+			error : function(e) {
+
+			}
+		});
+	}, 100);
+};

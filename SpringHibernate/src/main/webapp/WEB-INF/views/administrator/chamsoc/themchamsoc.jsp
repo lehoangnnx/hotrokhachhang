@@ -51,7 +51,7 @@ tr:nth-child(even) {
 							<label>Nhân Viên Bán Hàng</label> <select
 								class="form-control select2" name="nhanvienbanhang"
 								style="width: 100%;">
-
+								<option value="0" selected="selected">Không</option>
 								<c:forEach var="nv" items="${listNhanvien }">
 									<option value="${nv.id }">${nv.manhanvien}-
 										${nv.tennhanvien }</option>
@@ -63,7 +63,7 @@ tr:nth-child(even) {
 							<label>Nhân Viên Giao Hàng</label> <select
 								class="form-control select2" name="nhanviengiaohang"
 								style="width: 100%;">
-
+								<option value="0" selected="selected">Không</option>
 								<c:forEach var="nv" items="${listNhanvien }">
 									<option value="${nv.id }">${nv.manhanvien}-
 										${nv.tennhanvien }</option>
@@ -86,7 +86,7 @@ tr:nth-child(even) {
 
 
 						<div class="form-group">
-							<label>Hóa Đơn</label> <select class="form-control select2"
+							<label>Hóa Đơn</label> <select class="form-control select2" id="hoadon"
 								name="hoadon" style="width: 100%;">
 								<option value="0" selected="selected">Không</option>
 								<c:forEach var="hd" items="${listHoadon }">

@@ -138,7 +138,7 @@ public class NhanVienController {
 			nhanvien.setSodienthoai(sodienthoai.replace("_", ""));
 			nhanvien.setNgayvaolam(df.parse(ngayvaolam));
 			nhanvien.setBophan(bophanById);
-			nhanvien.setTrangthai("active");
+			//nhanvien.setTrangthai("active");
 			nhanVienService.saveOrUpdate(nhanvien);
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {

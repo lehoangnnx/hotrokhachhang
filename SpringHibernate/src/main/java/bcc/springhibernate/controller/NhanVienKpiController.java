@@ -36,7 +36,7 @@ import bcc.springhibernate.service.TaikhoanService;
 
 
 @Controller
-@PreAuthorize("hasAnyRole('MEMBER')")
+
 @RequestMapping("/admin")
 public class NhanVienKpiController {
 
@@ -48,6 +48,8 @@ public class NhanVienKpiController {
 	KpiService	kpiService; 
 	@Autowired
 	TaikhoanService taikhoanService;
+	@Autowired
+	ThongBao thongBao;
     @GetMapping("/nhanvienkpi")
     String pageDanhSachNhanVienKpi(@RequestParam(value="trangthai",defaultValue = "active") String trangthai,
 								   Model model,Principal principal,HttpServletRequest request){
@@ -61,6 +63,7 @@ public class NhanVienKpiController {
 		}
     	
     	model.addAttribute("listNhanvienkpi", listNhanvienkpi);
+    	thongBao.thongbao(model, request);
         return "danhsachnhanvienkpi";
     }
 
@@ -101,7 +104,8 @@ public class NhanVienKpiController {
     		
     		nhanvienkpi.setNhanvien(nhanVienById);
     		nhanvienkpi.setKpi(kpiById);
-    		nhanvienkpi.setNgaydangky(new Date());
+    		Date date = new Date();
+    		nhanvienkpi.setNgaydangky(new Date(date.getYear(),date.getMonth(),date.getDate()));
     		nhanvienkpi.setNgayhoanthanh(df.parse(ngayhoanthanh));
     		nhanvienkpi.setTrangthai(trangthai);
     		nhanvienkpi.setMucdohoanthanh(mucdohoanthanh);
@@ -115,7 +119,7 @@ public class NhanVienKpiController {
     }	
     	
     @PatchMapping(value="/nhanvienkpi",params="update")
-    String suaNhanVienKpi(@ModelAttribute("nhanvienkpi") Nhanvienkpi nhanvienkpi,
+    String suaNhanVienKpi(@ModelAttribute("nhanvienkpi") Nhanvienkpi getnhanvienkpi,
     		@RequestParam("nhanvien") Integer nhanvien,@RequestParam("kpi") Integer kpi,
     		@RequestParam("ngayhoanthanh") String ngayhoanthanh,
     		@RequestParam(value="trangthai",defaultValue="inactive") String trangthai,
@@ -124,12 +128,12 @@ public class NhanVienKpiController {
     	try {
     		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
     		Nhanvien nhanVienById = nhanVienService.findById(nhanvien);
+    		Nhanvienkpi nhanvienkpi =  nhanVienKpiService.findById(getnhanvienkpi.getId());
     		Kpi kpiById = kpiService.findById(kpi);
     		
     		
     		nhanvienkpi.setNhanvien(nhanVienById);
     		nhanvienkpi.setKpi(kpiById);
-    		nhanvienkpi.setNgaydangky(new Date());
     		nhanvienkpi.setNgayhoanthanh(df.parse(ngayhoanthanh));
     		nhanvienkpi.setTrangthai(trangthai);
     		nhanvienkpi.setMucdohoanthanh(mucdohoanthanh);

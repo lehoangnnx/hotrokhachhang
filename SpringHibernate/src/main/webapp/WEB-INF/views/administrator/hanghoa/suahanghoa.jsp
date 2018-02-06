@@ -23,6 +23,7 @@
 					action="${contextPath }/admin/hanghoa" method="patch"
 					modelAttribute="hanghoa">
 					<form:hidden path="id" />
+					<form:hidden path="trangthai" />
 					<div class="box-body">
 						<div class="form-group">
 							<label for="mahang">Mã Hàng</label>

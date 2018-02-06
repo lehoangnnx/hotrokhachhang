@@ -16,7 +16,7 @@
         <small><a class="btn btn-success" href="${contextPath }/admin/hoadon/add">Thêm mới</a></small> --%>
 	</h1>
 	<ol class="breadcrumb">
-	<security:authorize access="!hasAnyRole('GIAOHANG')">
+	<security:authorize access="hasAnyRole('ADMIN','BANHANG')">
 		<a class="btn btn-success" href="${contextPath }/admin/hoadon/add">Thêm
 			mới</a>
 			</security:authorize>
@@ -105,7 +105,7 @@
 											style="color: blue;" class="fa fa-pencil fa-lg"
 											aria-hidden="true" title="Sửa"> </i>
 									</a> 
-									<security:authorize access="!hasAnyRole('GIAOHANG')">
+									<security:authorize access="hasAnyRole('ADMIN','BANHANG')">
 									<c:if test="${hd.trangthai != 'deleted' }">
 									<a onclick="deleteOne(${hd.id});" href="#" data-toggle="modal"
 										data-target="#myModal" style="color: red; margin-left: 10px;">

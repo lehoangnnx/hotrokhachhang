@@ -99,7 +99,7 @@ public class HoaDonController {
 		model.addAttribute("hoadon", new Hoadon());
 		return "themhoadon";
 	}
-	@PreAuthorize("hasAnyRole('ADMIN', 'BANHANG', 'GIAOHANG')")
+	@PreAuthorize("hasAnyRole('ADMIN', 'BANHANG', 'GIAOHANG', 'TAICHINH')")
 	@GetMapping("/hoadon/{id}")
 	String pageSuaHoaDon(@PathVariable("id") Integer id, Model model) {
 

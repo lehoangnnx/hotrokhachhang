@@ -71,7 +71,7 @@ public class QuyenController {
     String suaQuyen(@ModelAttribute("quyen") Quyen quyen,
     		RedirectAttributes redirectAttributes) {
     	try {
-    		quyen.setTrangthai("active");
+    		//quyen.setTrangthai("active");
         	quyenService.saveOrUpdate(quyen);
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {

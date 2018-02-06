@@ -23,6 +23,7 @@
 					action="${contextPath }/admin/feedback" method="patch"
 					modelAttribute="feedback">
 					<form:hidden path="id" />
+					<form:hidden path="trangthai" />
 					<div class="box-body">
 						<div class="form-group">
 							<label>Feedback Nhân Viên</label> <select class="form-control select2"

@@ -99,4 +99,12 @@ $('#ten').on('keyup keypress keydown', function(event){
 		$('#error').text("");
 	}
 	
-})
+});
+
+$(document).ready(function(){
+	var date = new Date();
+	
+	var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+	$('#ngayhoanthanh').val(lastDay+'/'+ (date.getUTCMonth() + 1) +'/'+date.getUTCFullYear());
+	
+});

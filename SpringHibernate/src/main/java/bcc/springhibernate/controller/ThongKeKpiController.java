@@ -60,9 +60,16 @@ public class ThongKeKpiController {
 			List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
 			// List<Nhanvienkpi> listNhanvienkpi =
 			// nhanVienKpiService.findByKpiAndTrangthaiNotOrderByNgaydangkyDesc(kpiById,"deleted");
-			Kpi kpiById = kpiService.findById(kpi);
+			List<Kpi> listKpi = kpiService.findByTrangthaiNotOrderByIdDesc("deleted");
+			Kpi kpiById = null;
+			if(kpi == 0) {
+				kpiById = kpiService.findById(listKpi.get(0).getId());
+			}else {
+				kpiById = kpiService.findById(kpi);
+			}
+			
 			List<Nhanvienkpi> listNhanvienkpi = null;
-			if (nhanvien == 0) {
+			 if (nhanvien == 0) {
 				listNhanvienkpi = nhanVienKpiService.findByKpiAndTrangthaiNotAndNgaydangkyBetweenOrderByNgaydangkyDesc(
 						kpiById, "deleted", dtungay, ddenngay);
 			} else {
@@ -71,7 +78,7 @@ public class ThongKeKpiController {
 						.findByNhanvienAndKpiAndTrangthaiNotAndNgaydangkyBetweenOrderByNgaydangkyDesc(getNhanVienById,
 								kpiById, "deleted", dtungay, ddenngay);
 			}
-			List<Kpi> listKpi = kpiService.findByTrangthaiNotOrderByIdDesc("deleted");
+			
 			if (!listNhanvienkpi.isEmpty()) {
 				for (Nhanvienkpi nvk : listNhanvienkpi) {
 					Map<String, Object> map = new HashMap<String, Object>();

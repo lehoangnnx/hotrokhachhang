@@ -75,7 +75,7 @@ public class HangHoaController {
     		RedirectAttributes redirectAttributes) {
     	try {
     		Nhomhang nhomhangById = nhomHangService.findById(nhomhang);
-    		hanghoa.setTrangthai("active");
+    		//hanghoa.setTrangthai("active");
     		hanghoa.setNhomhang(nhomhangById);
     		hangHoaService.saveOrUpdate(hanghoa);
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");

@@ -58,6 +58,7 @@
 							<form:input path="so" type="number" class="form-control" min="0"
 								placeholder="Số" />
 						</div>
+						
 						<div class="form-group">
 							<label>Ngày Hoàn Thành</label>
 

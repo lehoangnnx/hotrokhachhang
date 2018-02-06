@@ -86,7 +86,7 @@ tr:nth-child(even) {
 
 
 						<div class="form-group">
-							<label>Hóa Đơn</label> <select class="form-control select2"
+							<label>Hóa Đơn</label> <select class="form-control select2" id="hoadon"
 								name="hoadon" style="width: 100%;">
 								<option value="0" ${chamsoc.hoadonId == '0' ? 'selected' : '' }>Không</option>
 								<c:forEach var="hd" items="${listHoadon }">

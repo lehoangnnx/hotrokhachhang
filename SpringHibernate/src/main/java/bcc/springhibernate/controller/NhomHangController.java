@@ -74,7 +74,7 @@ public class NhomHangController {
     String suaNhomHang(@ModelAttribute("nhomhang") Nhomhang nhomhang,
     		RedirectAttributes redirectAttributes) {
     	try {
-    		nhomhang.setTrangthai("active");
+    		//nhomhang.setTrangthai("active");
         	nhomHangService.saveOrUpdate(nhomhang);
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {

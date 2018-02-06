@@ -43,7 +43,7 @@
 							</label>
 							<label
 								class="lb-flat-red"> <input value="cokhong" type="radio"
-								name="kieutieuchi" class="flat-red">Có Không
+								name="kieutieuchi" class="flat-red">Tốt/Chưa Tốt
 							</label>
 							<label
 								class="lb-flat-red"> <input value="tien" type="radio"

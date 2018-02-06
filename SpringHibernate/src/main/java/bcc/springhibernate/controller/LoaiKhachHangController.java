@@ -68,7 +68,7 @@ public class LoaiKhachHangController {
     @PatchMapping(value="/loaikhachhang", params="update")
     String suaLoaiKhachHang(@ModelAttribute("loaikhachhang") Loaikhachhang loaikhachhang,RedirectAttributes redirectAttributes) {
     	try {
-    		loaikhachhang.setTrangthai("active");
+    		//loaikhachhang.setTrangthai("active");
         	loaiKhachHangService.saveOrUpdate(loaikhachhang);
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {

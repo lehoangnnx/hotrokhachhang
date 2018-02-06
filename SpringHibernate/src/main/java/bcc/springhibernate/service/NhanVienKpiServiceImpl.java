@@ -93,6 +93,13 @@ public class NhanVienKpiServiceImpl implements NhanVienKpiService {
 		return nhanVienKpiRepository.findByNhanvienAndTrangthaiOrderByIdDesc(nhanvien, trangthai);
 	}
 
+	@Override
+	public List<Nhanvienkpi> findByTrangthaiNotAndNgaydangkyBetweenOrderByNgaydangkyDesc(String trangthai, Date d1,
+			Date d2) {
+		
+		return nhanVienKpiRepository.findByTrangthaiNotAndNgaydangkyBetweenOrderByNgaydangkyDesc(trangthai, d1, d2);
+	}
+
 	
 	
 

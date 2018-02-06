@@ -70,7 +70,7 @@ public class NhomKhachHangController {
     		RedirectAttributes redirectAttributes) {
     	try {
     		
-    		nhomkhachhang.setTrangthai("active");
+    		//nhomkhachhang.setTrangthai("active");
         	nhomKhachHangService.saveOrUpdate(nhomkhachhang);
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {

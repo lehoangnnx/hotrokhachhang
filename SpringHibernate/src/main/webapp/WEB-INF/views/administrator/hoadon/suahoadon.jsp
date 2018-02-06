@@ -333,7 +333,7 @@ tr:nth-child(even) {
 					<!-- /.box-body -->
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
-						<security:authorize access="!hasAnyRole('GIAOHANG')">
+						<security:authorize access="hasAnyRole('ADMIN','BANHANG')">
 					<c:if test="${hoadon.trangthai != 'deleted' }">
 					<div class="box-footer">
 						<button id="btn-submit" name="update" type="submit" class="btn btn-primary">Xác

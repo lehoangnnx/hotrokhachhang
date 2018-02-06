@@ -38,7 +38,7 @@
 						</a>
 				</li>
 				
-				<li class="tablinks ${param.status == 'deleted' ? 'active' : '' }">
+				<li class="tablinks ${param.trangthai == 'deleted' ? 'active' : '' }">
 					<a href="${contextPath }/admin/chamsoc?trangthai=deleted&limit=100&page=1">Đã Xóa</a>
 				</li>
 			</ul>
@@ -66,16 +66,35 @@
 											value="${cs.ngay }" /></td>
 									<td><fmt:formatDate pattern="dd-MM-yyyy"
 											value="${cs.ngaycstiep }" /></td>
-									<td><a href="${contextPath }/admin/chamsoc/${cs.id}">
+									<td>
+									
+									<c:choose>
+									<c:when test="${cs.trangthai == 'dachamsoc' }">
+									<a href="${contextPath }/admin/chamsoc/${cs.id}">
 											<i style="color: blue;" class="fa fa-pencil fa-lg"
 											aria-hidden="true" title="Sửa"> </i>
 									</a>
-									<c:if test="${cs.trangthai != 'deleted' }">
+									
 									 <a onclick="deleteOne(${cs.id});" href="#" data-toggle="modal"
 										data-target="#myModal" style="color: red; margin-left: 10px;">
 											<i class="fa fa-trash-o fa-lg" aria-hidden="true" title="Xóa"></i>
 									</a>
-									</c:if>
+									</c:when>
+									<c:when test="${cs.trangthai == 'chochamsoc' }">
+									<a href="${contextPath }/admin/chamsoctieptheo/add/${cs.id}">
+											<i style="color: green; margin-left: 10px;"
+											class="fa fa-commenting-o" aria-hidden="true"
+											title="Chăm Sóc"> </i>
+									</a>
+									</c:when>
+									<c:otherwise>
+									<a href="${contextPath }/admin/chamsoc/${cs.id}">
+											<i style="color: blue;" class="fa fa-pencil fa-lg"
+											aria-hidden="true" title="Sửa"> </i>
+									</a>
+									</c:otherwise>
+									</c:choose>
+									
 									</td>
 								</tr>
 							</c:forEach>

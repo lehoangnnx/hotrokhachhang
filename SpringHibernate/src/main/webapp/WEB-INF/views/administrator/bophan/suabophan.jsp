@@ -22,6 +22,7 @@
 				<form:form role="form" id="formBoPhan"
 					action="${contextPath }/admin/bophan" method="patch" modelAttribute="bophan">
 					<form:hidden path="id"/>
+					<form:hidden path="trangthai"/>
 					<div class="box-body">
 						<div class="form-group">
 							<label for="tenbophan">Tên Bộ Phận</label> <form:input path="tenbophan"

@@ -23,6 +23,7 @@
 					action="${contextPath }/admin/quyen" method="patch"
 					modelAttribute="quyen">
 					<form:hidden path="id" />
+					<form:hidden path="trangthai" />
 					<div class="box-body">
 						<div class="form-group">
 							<label for="maquyen">Mã Quyền</label>

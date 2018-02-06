@@ -75,7 +75,7 @@ public class TieuChiChamSocController {
     		RedirectAttributes redirectAttributes) {
     	try {
     		tieuchichamsoc.setKieutieuchi(kieutieuchi);
-    		tieuchichamsoc.setTrangthai("active");
+    		//tieuchichamsoc.setTrangthai("active");
     		
     		tieuChiChamSocService.saveOrUpdate(tieuchichamsoc);
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");

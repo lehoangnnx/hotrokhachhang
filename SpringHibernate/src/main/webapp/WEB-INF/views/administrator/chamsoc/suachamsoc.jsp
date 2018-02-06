@@ -45,13 +45,15 @@ tr:nth-child(even) {
 					action="${contextPath }/admin/chamsoc" method="patch"
 					modelAttribute="chamsoc">
 					<form:hidden path="id" />
+					<form:hidden path="trangthai" />
+					<form:hidden path="trangthainhac" />
 					<div class="box-body">
 
 						<div class="form-group">
 							<label>Nhân Viên Bán Hàng</label> <select
 								class="form-control select2" name="nhanvienbanhang"
 								style="width: 100%;">
-
+								<option value="0" ${chamsoc.nhanvienbanhang == 0 ? 'selected' : '' }>Không</option>
 								<c:forEach var="nv" items="${listNhanvien }">
 									<option ${chamsoc.nhanvienbanhang == nv.id ? 'selected' : '' }
 										value="${nv.id }">${nv.manhanvien}-${nv.tennhanvien }</option>
@@ -63,7 +65,7 @@ tr:nth-child(even) {
 							<label>Nhân Viên Giao Hàng</label> <select
 								class="form-control select2" name="nhanviengiaohang"
 								style="width: 100%;">
-
+								<option value="0" ${chamsoc.nhanviengiaohang == 0 ? 'selected' : '' }>Không</option>
 								<c:forEach var="nv" items="${listNhanvien }">
 									<option ${chamsoc.nhanviengiaohang == nv.id ? 'selected' : '' }
 										value="${nv.id }">${nv.manhanvien}-${nv.tennhanvien }</option>
@@ -85,7 +87,7 @@ tr:nth-child(even) {
 
 
 						<div class="form-group">
-							<label>Hóa Đơn</label> <select class="form-control select2"
+							<label>Hóa Đơn</label> <select class="form-control select2" id="hoadon"
 								name="hoadon" style="width: 100%;">
 								<option value="0" ${chamsoc.hoadonId == '0' ? 'selected' : '' }>Không</option>
 								<c:forEach var="hd" items="${listHoadon }">
@@ -126,7 +128,7 @@ tr:nth-child(even) {
 							<label id="_diem-error" class="error" style="display: none;"></label>
 						</div>
 						<div class="box-body table-responsive">
-						
+
 							<table border="1" style="overflow-x: auto;" id="tblctcs">
 								<thead>
 									<tr>
@@ -161,7 +163,7 @@ tr:nth-child(even) {
 														name="kieutieuchitccs">
 													<span id="kieutieuchitccs${ctcs.tieuchichamsoc.id}">
 
-														${ctcs.cokhong == 'true' ? 'Có' : 'Không'} </span>
+														${ctcs.cokhong == 'true' ? 'Tốt' : 'Chưa Tốt'} </span>
 												</c:if> <c:if test="${ctcs.tieuchichamsoc.kieutieuchi == 'tien' }">
 													<input hidden value="${ctcs.tienchamsoc}"
 														id="ikieutieuchitccs${ctcs.tieuchichamsoc.id}"
@@ -187,7 +189,7 @@ tr:nth-child(even) {
 									</tr>
 								</tfoot>
 							</table>
-						
+
 						</div>
 
 
