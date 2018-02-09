@@ -80,8 +80,8 @@
 						<tbody>
 							<c:forEach var="hd" items="${listHoadon }">
 								<tr>
-									<td>${hd.sohoadon }</td>
-									<td>${hd.khachhang.makh }- ${hd.khachhang.ten }</td>
+									<td><a href="${contextPath}/admin/hoadon/${hd.id}">${hd.sohoadon }</a> </td>
+									<td><a href="${contextPath}/admin/khachhang/${hd.khachhang.id}">${hd.khachhang.makh }- ${hd.khachhang.ten }</a></td>
 									<td>${hd.nhanvienByIdnhanvienban.manhanvien }-
 										${hd.nhanvienByIdnhanvienban.tennhanvien }</td>
 									<td><fmt:formatNumber type="number" pattern="###,###"
