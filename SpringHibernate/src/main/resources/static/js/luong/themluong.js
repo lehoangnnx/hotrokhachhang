@@ -7,6 +7,7 @@ $(document).ready(function() {
 			},
 			luong : {
 				required : true,
+				min : 0,
 				normalizer : function(value) {
 
 					return $.trim(value);
@@ -15,7 +16,7 @@ $(document).ready(function() {
 			},
 			thuong : {
 				required : true,
-				
+                min : 0,
 				normalizer : function(value) {
 
 					return $.trim(value);
@@ -29,12 +30,14 @@ $(document).ready(function() {
 				required : "* Vui Lòng Chọn Nhân Viên"
 			},
 			luong : {
-				required : "* Vui Lòng Nhập Lương"
+				required : "* Vui Lòng Nhập Lương",
+				min : "* Lương Phải lớn Hơn Hoặc Bằng 0"
 				
 
 			},
 			thuong : {
-				required : "* Vui Lòng Nhập Thưởng"
+				required : "* Vui Lòng Nhập Thưởng",
+                min : "* Thưởng Phải lớn Hơn Hoặc Bằng 0"
 				
 
 			}

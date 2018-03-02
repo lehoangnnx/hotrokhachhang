@@ -1,51 +1,57 @@
 $(document).ready(function() {
 	// Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
-	$("#formNhanVienKpi").validate({
-		rules : {
-			nhanvien : {
-				required : true
-			},
-			kpi : {
-				required : true
-			},
-			so: {
-				required : true,
-				normalizer : function(value) {
+    $("#formNhanVienKpi").validate({
+        rules : {
+            nhanvien : {
+                required : true
+            },
+            kpi : {
+                required : true
+            },
+            so: {
+                required : true,
+                min : 0,
+                normalizer : function(value) {
 
-					return $.trim(value);
-				}
+                    return $.trim(value);
+                }
 
-			},
-			ngayhoanthanh: {
-				required : true,
-				normalizer : function(value) {
+            },
+            ngayhoanthanh: {
+                required : true,
+                normalizer : function(value) {
 
-					return $.trim(value);
-				}
+                    return $.trim(value);
+                }
 
-			}
+            }, mucdohoanthanh : {
+                min : 0
+            }
 
-		},
-		messages : {
-			nhanvien : {
-				required : "* Vui Lòng Chọn Nhân Viên"
-			},
-			kpi : {
-				required : "* Vui Lòng Chọn KPI"
-			},
-			so : {
-				required : "* Vui Lòng Nhập Số"
-				
+        },
+        messages : {
+            nhanvien : {
+                required : "* Vui Lòng Chọn Nhân Viên"
+            },
+            kpi : {
+                required : "* Vui Lòng Chọn KPI"
+            },
+            so : {
+                required : "* Vui Lòng Nhập Số",
+                min : "* Số Phải Lớn Hơn Hoặc Bằng 0"
 
-			},
-			ngayhoanthanh : {
-				required : "* Vui Lòng Nhập Ngày Hoàn Thành "
-				
+            },
+            ngayhoanthanh : {
+                required : "* Vui Lòng Nhập Ngày Hoàn Thành "
 
-			}
 
-		}
-	});
+            },
+            mucdohoanthanh : {
+                min : "* Mức Độ Hoàn Thanh Phải Lớn Hơn Hoặc Bằng 0"
+            }
+
+        }
+    });
 });
 
 var timeout = null;

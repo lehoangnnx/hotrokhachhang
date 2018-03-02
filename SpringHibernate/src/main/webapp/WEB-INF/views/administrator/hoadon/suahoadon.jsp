@@ -260,23 +260,35 @@ tr:nth-child(even) {
 						</div>
 
 						<div class="form-group">
-							<label for="tongtien">Tổng Tiền</label>
-							<form:input path="tongtien" type="number" class="form-control"
-								placeholder="Tổng Tiền" />
+							<label>Tổng Tiền</label>
+							<div class="input-group">
 
+
+								<form:input  path="tongtien" type="number" min="0"
+											 class="form-control"  placeholder="Tổng Tiền" />
+								<span class="input-group-addon">VNĐ</span>
+							</div>
 						</div>
+
 						<div class="form-group">
 							<label for="tiendatra">Tiền Đã Trả</label>
-							<form:input path="tiendatra" type="number" class="form-control"
-								placeholder="Tiền Đã Trả" />
+							<div class="input-group">
 
+								<form:input path="tiendatra" type="number" class="form-control"
+											min="0"  placeholder="Tiền Đã Trả" />
+								<span class="input-group-addon">VNĐ</span>
+							</div>
 						</div>
 
-						<div class="form-group">
-							<label for="congno">Công Nợ</label>
-							<form:input path="congno" type="number" class="form-control"
-								placeholder="Công Nợ" />
 
+						<div class="form-group">
+							<label for="congno">Tiền Còn Nợ</label>
+							<div class="input-group">
+
+								<form:input path="congno" type="number" class="form-control"
+											min="0"  placeholder="Tiền Còn Nợ" />
+								<span class="input-group-addon">VNĐ</span>
+							</div>
 						</div>
 
 

@@ -36,10 +36,13 @@
 								
 						</div>
 						<div class="form-group">
-							<label for="phantram">Phần Trắm</label> <form:input path="phantram"
+							<label for="phantram">Phần Trắm (%)</label>
+							<div class="input-group">
+							<form:input path="phantram"
 								type="number" class="form-control" min="0" value="0"
 								placeholder="Phần Trăm" />
-								
+								<span class="input-group-addon">%</span>
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="moTa">Mô tả</label> <form:textarea path="mota" type="text"

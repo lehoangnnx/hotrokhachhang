@@ -1,30 +1,30 @@
 $(document).ready(function() {
 	// Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
-	$("#formHoaDon").validate({
-		rules : {
-			nhanvienbanhang : {
-				required : true
-			},
-			nhanvienchamsoc : {
-				required : true
-			},
-			nhanviengiaohang : {
-				required : true
-			},
-			khachhang : {
-				required : true
-			},
-			sohoadon : {
-				required : true,
-				normalizer : function(value) {
+    $("#formHoaDon").validate({
+        rules : {
+            nhanvienbanhang : {
+                required : true
+            },
+            nhanvienchamsoc : {
+                required : true
+            },
+            nhanviengiaohang : {
+                required : true
+            },
+            khachhang : {
+                required : true
+            },
+            sohoadon : {
+                required : true,
+                normalizer : function(value) {
 
-					return $.trim(value);
-				}
+                    return $.trim(value);
+                }
 
-			},
-			ngaylap : {
-				required : true
-			},
+            },
+            ngaylap : {
+                required : true
+            },
             ngayxuat : {
                 required : true
             },
@@ -32,13 +32,16 @@ $(document).ready(function() {
                 required : true
             },
             tongtien : {
-                required : true
+                required : true,
+                min : 0
             },
             tiendatra: {
-                required : true
+                required : true,
+                min : 0
             },
             congno : {
-                required : true
+                required : true,
+                min : 0
             },
             diachigiaohang : {
                 required : true
@@ -46,24 +49,24 @@ $(document).ready(function() {
             sodienthoai : {
                 required : true
             }
-		},
-		messages : {
-			nhanvienbanhang : {
-				required :  '* Vui Lòng Chọn Nhân Viên Bán Hàng'
-			},
-			nhanvienchamsoc : {
-				required :  '* Vui Lòng Chọn Nhân Viên Chăm Sóc'
-			},
-			nhanviengiaohang : {
-				required :  '* Vui Lòng Chọn Nhân Viên Giao Hàng'
-			},
-			khachhang : {
-				required :  '* Vui Lòng Chọn Khách Hàng'
-			},
-			sohoadon : {
-				required :  '* Vui Lòng Nhập Số Hóa Đơn'
-				
-			},
+        },
+        messages : {
+            nhanvienbanhang : {
+                required :  '* Vui Lòng Chọn Nhân Viên Bán Hàng'
+            },
+            nhanvienchamsoc : {
+                required :  '* Vui Lòng Chọn Nhân Viên Chăm Sóc'
+            },
+            nhanviengiaohang : {
+                required :  '* Vui Lòng Chọn Nhân Viên Giao Hàng'
+            },
+            khachhang : {
+                required :  '* Vui Lòng Chọn Khách Hàng'
+            },
+            sohoadon : {
+                required :  '* Vui Lòng Nhập Số Hóa Đơn'
+
+            },
             ngaylap : {
                 required : '* Vui Lòng Nhập Ngày Lập'
             },
@@ -74,13 +77,16 @@ $(document).ready(function() {
                 required : '* Vui Lòng Nhập Ngày Thanh Toán'
             },
             tongtien : {
-                required : '* Vui Lòng Nhập Tổng Tiền'
+                required : '* Vui Lòng Nhập Tổng Tiền',
+                min : "* Vui Lòng Nhập Tổng Tiền Lớn Hơn 0"
             },
             tiendatra: {
-                required : '* Vui Lòng Tiền Đã Trả'
+                required : '* Vui Lòng Tiền Đã Trả',
+                min : "* Vui Lòng Nhập Tiền Đã Trả Lớn Hơn 0"
             },
             congno : {
-                required : '* Vui Lòng Nhập Công Nợ'
+                required : '* Vui Lòng Nhập Công Nợ',
+                min : "* Vui Lòng Nhập Tiền Còn Nợ Lớn Hơn 0"
             },
             diachigiaohang : {
                 required : '* Vui Lòng Nhập Địa Chỉ Giao Hàng'
@@ -89,8 +95,8 @@ $(document).ready(function() {
                 required :'* Vui Lòng Nhập Số Điện Thoại'
             }
 
-		}
-	});
+        }
+    });
 });
 
 var timeout = null;
@@ -258,7 +264,16 @@ function capnhatthanhtien(id){
 
 	$('#thanhtienhh'+id).val(parseFloat(giaban) * parseInt(soluong));
 }
-$('#formHoaDon').change(function () {
+/*$('#formHoaDon').change(function () {
+    setcongno();
+
+});*/
+$('#tongtien').change(function () {
+
+    setcongno();
+});
+$('#tiendatra').change(function () {
+
     setcongno();
 });
 function setcongno() {

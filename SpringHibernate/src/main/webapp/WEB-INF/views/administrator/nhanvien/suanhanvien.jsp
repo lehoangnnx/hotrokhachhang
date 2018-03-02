@@ -119,24 +119,31 @@
 							<label id="ngayvaolam-error" class="error" for="ngayvaolam"></label>
 						</div>
 
-						<div class="form-group">
+					<%--	<div class="form-group">
 							<label for="loainhanvien">Loại Nhân Viên</label>
 							<form:input path="loainhanvien" type="text" class="form-control"
 								placeholder="Loại Nhân Viên" />
 							<label id="_loainhanvien-error" class="error"
 								style="display: none;"></label>
-						</div>
+						</div>--%>
 						<div class="form-group">
 							<label for="luong">Lương</label>
-							<form:input path="luong" min="0" type="number"
-								class="form-control" placeholder="Lương" />
+							<div class="input-group">
 
+
+								<form:input path="luong" min="0" type="number"
+											class="form-control" placeholder="Lương" />
+								<span class="input-group-addon">VNĐ</span>
+							</div>
 						</div>
 						<div class="form-group">
-							<label for="chietkhau">Chiết Khấu</label>
-							<form:input path="chietkhau" type="number" class="form-control"
-								placeholder="Chiết Khấu" />
+							<label for="chietkhau">Chiết Khấu (%)</label>
+							<div class="input-group">
 
+								<form:input path="chietkhau" type="number" class="form-control"
+											placeholder="Chiết Khấu" />
+								<span class="input-group-addon">%</span>
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="thongtinkhac">Thông Tin Khác</label>

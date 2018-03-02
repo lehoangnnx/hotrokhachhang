@@ -177,13 +177,13 @@ ThongBao thongBao;
 			}
 
 			if (!sodienthoai.equals("null")) {
-				khachhang.setSodienthoai(sodienthoai);
+				khachhang.setSodienthoai(sodienthoai.replace("_",""));
 			}
 			if (!tendaidien.equals("null")) {
 				khachhang.setTendaidien(tendaidien);
 			}
 			if (!dienthoaidaidien.equals("null")) {
-				khachhang.setDienthoaidaidien(dienthoaidaidien);
+				khachhang.setDienthoaidaidien(dienthoaidaidien.replace("_",""));
 			}
 			if (!ngaysinhnhatndd.equals("null")) {
 				khachhang.setNgaysinhnhatndd(df.parse(ngaysinhnhatndd));
@@ -193,7 +193,7 @@ ThongBao thongBao;
 				khachhang.setTenphutrach(tenphutrach);
 			}
 			if (!dienthoaiphutrach.equals("null")) {
-				khachhang.setDienthoaiphutrach(dienthoaiphutrach);
+				khachhang.setDienthoaiphutrach(dienthoaiphutrach.replace("_",""));
 			}
 			if (!ngaysinhphutrach.equals("null")) {
 				khachhang.setNgaysinhphutrach(df.parse(ngaysinhphutrach));
@@ -279,13 +279,13 @@ ThongBao thongBao;
 			}
 
 			if (!sodienthoai.equals("null")) {
-				khachhang.setSodienthoai(sodienthoai);
+				khachhang.setSodienthoai(sodienthoai.replace("_",""));
 			}
 			if (!tendaidien.equals("null")) {
 				khachhang.setTendaidien(tendaidien);
 			}
 			if (!dienthoaidaidien.equals("null")) {
-				khachhang.setDienthoaidaidien(dienthoaidaidien);
+				khachhang.setDienthoaidaidien(dienthoaidaidien.replace("_",""));
 			}
 			if (!ngaysinhnhatndd.equals("null")) {
 				khachhang.setNgaysinhnhatndd(df.parse(ngaysinhnhatndd));
@@ -295,7 +295,7 @@ ThongBao thongBao;
 				khachhang.setTenphutrach(tenphutrach);
 			}
 			if (!dienthoaiphutrach.equals("null")) {
-				khachhang.setDienthoaiphutrach(dienthoaiphutrach);
+				khachhang.setDienthoaiphutrach(dienthoaiphutrach.replace("_",""));
 			}
 			if (!ngaysinhphutrach.equals("null")) {
 				khachhang.setNgaysinhphutrach(df.parse(ngaysinhphutrach));

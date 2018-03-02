@@ -71,9 +71,10 @@ public class MainController {
 		return "redirect:/login?logout";
 	}
 
-	@GetMapping(value = { "403" })
+	@GetMapping(value = { "/403", "/*" })
 	public String page403(Model model) {
 
 		return "403";
 	}
+
 }

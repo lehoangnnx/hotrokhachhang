@@ -174,7 +174,7 @@
 					</c:when>
 					<c:otherwise>
 						<li class="page-item disabled"><a class="page-link"
-							href="javascript:void(0);">Previous</a></li>
+							href="javascript:void(0);">Trước</a></li>
 
 					</c:otherwise>
 
@@ -203,7 +203,7 @@
 					</c:when>
 					<c:otherwise>
 						<li class="page-item disabled"><a class="page-link"
-							href="javascript:void(0);">Next</a></li>
+							href="javascript:void(0);">Sau</a></li>
 
 
 					</c:otherwise>

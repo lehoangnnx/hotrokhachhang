@@ -48,7 +48,7 @@
 		                <tr>
 		                  <th>Tên Nhóm Khách Hàng</th>
 		                   <th>Điểm</th>
-		                    <th>Phần Trăm</th>
+		                    <th>Phần Trăm (%)</th>
 		                  <th>Mô Tả</th>
 		                  
 		                  <th>Thao tác</th>
@@ -59,7 +59,7 @@
 		                	<tr>
 			                  	<td>${nkh.tennhom }</td>
 			                  	<td>${nkh.diem }</td>
-			                  	<td>${nkh.phantram }</td>
+			                  	<td>${nkh.phantram } %</td>
 			                  	<td>${nkh.mota }</td>
 			                  	
 			                  	<td>
@@ -80,7 +80,7 @@
 		                <tr>
 		                  <th>Tên Nhóm Khách Hàng</th>
 		                   <th>Điểm</th>
-		                    <th>Phần Trăm</th>
+							<th>Phần Trăm (%)</th>
 		                  <th>Mô Tả</th>
 		                  
 		                  <th>Thao tác</th>

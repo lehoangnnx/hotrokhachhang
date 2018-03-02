@@ -49,7 +49,7 @@
 		                  <th>Mã Quyền</th>
 		                  
 		                  <th>Tên Quyền</th>
-		                  <th>Mô Tả</th>
+
 		                  <th>Thao tác</th>
 		                </tr>
 		                </thead>
@@ -58,7 +58,7 @@
 		                	<tr>
 			                  	<td>${q.maquyen }</td>
 			                  <td>${q.tenquyen }</td>
-			                  	<td>${q.mota }</td>
+
 			                  	<td>
 			                  		<a href="${contextPath }/admin/quyen/${q.id}">
 			                  			<i style="color: blue;" class="fa fa-pencil fa-lg" aria-hidden="true" title="Sửa">
@@ -78,7 +78,7 @@
 		                  <th>Mã Quyền</th>
 		                  
 		                  <th>Tên Quyền</th>
-		                  <th>Mô Tả</th>
+
 		                  <th>Thao tác</th>
 		                </tr>
 		                </tfoot>

@@ -49,7 +49,7 @@
 		                  <th>User Name</th>
 		                  <th>Email</th>
 		                  <th>Nhân Viên</th>
-		                  <th>Quyền</th>
+
 		                   <th>Thao Tác</th>
 		                </tr>
 		                </thead>
@@ -58,12 +58,12 @@
 		                	<tr>
 			                  	<td>${tk.username }</td>
 			                  <td>${tk.email }</td>
-			                  <td>${tk.nhanvien.manhanvien }</td>
-			                  <td>
+								<td><a href="${contextPath}/admin/nhanvien/${tk.nhanvien.id}">${tk.nhanvien.manhanvien } - ${tk.nhanvien.tennhanvien }</a> </td>
+			                 <%-- <td>
 							<c:forEach var="tq" items="${tk.quyens }">
 							${tq.tenquyen } -
 							</c:forEach>
-							</td>
+							</td>--%>
 			                  	<td>
 			                  		<a href="${contextPath }/admin/taikhoan/${tk.id}">
 			                  			<i style="color: blue;" class="fa fa-pencil fa-lg" aria-hidden="true" title="Sửa">
@@ -83,7 +83,7 @@
 		                  <th>User Name</th>
 		                  <th>Email</th>
 		                  <th>Nhân Viên</th>
-		                  <th>Quyền</th>
+
 		                   <th>Thao Tác</th>
 		                </tr>
 		                </tfoot>

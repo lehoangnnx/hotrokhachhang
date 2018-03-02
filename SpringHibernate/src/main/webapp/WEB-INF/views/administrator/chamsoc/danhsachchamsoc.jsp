@@ -61,7 +61,7 @@
 						<tbody>
 							<c:forEach var="cs" items="${listChamsoc }">
 								<tr>
-									<td>${cs.khachhang.ten }</td>
+									<td><a href="${contextPath}/admin/khachhang/${cs.khachhang.id}">${cs.khachhang.makh }- ${cs.khachhang.ten }</a></td>
 									<td><fmt:formatDate pattern="dd-MM-yyyy"
 											value="${cs.ngay }" /></td>
 									<td><fmt:formatDate pattern="dd-MM-yyyy"
@@ -126,7 +126,7 @@
 					</c:when>
 					<c:otherwise>
 						<li class="page-item disabled"><a class="page-link"
-							href="javascript:void(0);">Previous</a></li>
+							href="javascript:void(0);">Trước</a></li>
 
 					</c:otherwise>
 
@@ -155,7 +155,7 @@
 					</c:when>
 					<c:otherwise>
 						<li class="page-item disabled"><a class="page-link"
-							href="javascript:void(0);">Next</a></li>
+							href="javascript:void(0);">Sau</a></li>
 
 
 					</c:otherwise>

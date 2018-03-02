@@ -1,60 +1,60 @@
 $(document).ready(function() {
 	// Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
-	$("#formNhomKhachHang").validate({
-		rules : {
-			tennhom : {
-				required : true,
-				normalizer : function(value) {
+    $("#formNhomKhachHang").validate({
+        rules : {
+            tennhom : {
+                required : true,
+                normalizer : function(value) {
 
-					return $.trim(value);
-				}
+                    return $.trim(value);
+                }
 
-			},
-			sodiemtrentien : {
-				required : true,
-				
-				normalizer : function(value) {
+            },
+            sodiemtrentien : {
+                required : true,
+                min : 0,
+                normalizer : function(value) {
 
-					return $.trim(value);
-				}
+                    return $.trim(value);
+                }
 
-			},
-			sotientrendiem : {
-				required : true,
-				
-				normalizer : function(value) {
+            },
+            sotientrendiem : {
+                required : true,
+                min : 0,
+                normalizer : function(value) {
 
-					return $.trim(value);
-				}
+                    return $.trim(value);
+                }
 
-			},
-			phantramtien : {
-				required : true,
-				
-				normalizer : function(value) {
+            },
+            phantramtien : {
+                required : true,
+                min : 0,
+                normalizer : function(value) {
 
-					return $.trim(value);
-				}
+                    return $.trim(value);
+                }
 
-			},
-			diem : {
-				required : true,
-				
-				normalizer : function(value) {
+            },
+            diem : {
+                required : true,
+                min : 0,
+                normalizer : function(value) {
 
-					return $.trim(value);
-				}
+                    return $.trim(value);
+                }
 
-			},
-			phantram : {
-				required : true,
-				
-				normalizer : function(value) {
+            },
+            phantram : {
+                required : true,
+                min : 0,
+                normalizer : function(value) {
 
-					return $.trim(value);
-				}
+                    return $.trim(value);
+                }
 
-			}/*,
+            }/*,
 			mota : {
 				required : true,
 				normalizer : function(value) {
@@ -63,45 +63,45 @@ $(document).ready(function() {
 				}
 			}*/
 
-		},
-		messages : {
-			tennhom : {
-				required : "* Vui Lòng Nhập Tên Nhóm Khách Hàng"
-				
+        },
+        messages : {
+            tennhom : {
+                required : "* Vui Lòng Nhập Tên Nhóm Khách Hàng"
 
-			},
-			sodiemtrentien : {
-				required :  "* Vui Lòng Nhập Số Điểm Trên Tiền"
-				
-				
 
-			},
-			sotientrendiem : {
-				required :  "* Vui Lòng Nhập Số Tiền Trên Điểm"
-				
-				
+            },
+            sodiemtrentien : {
+                required :  "* Vui Lòng Nhập Số Điểm Trên Tiền",
+                min : "* Số Điểm Phải Lớn Hơn Hoặc Bằng 0"
 
-			},
-			phantramtien : {
-				required :  "* Vui Lòng Nhập Phần Trăm Trên Hóa Đơn"
-				
-				
-			},
-			diem : {
-				required : "* Vui Lòng Nhập Điểm"
-				
 
-			},
-			phantram : {
-				required : "* Vui Lòng Nhập Phần Trăm"
-				
-			}/*,
+            },
+            sotientrendiem : {
+                required :  "* Vui Lòng Nhập Số Tiền Trên Điểm",
+                min : "* Số Tiền Phải Lớn Hơn Hoặc Bằng 0"
+
+
+            },
+            phantramtien : {
+                required :  "* Vui Lòng Nhập Phần Trăm Trên Hóa Đơn",
+                min : "* Phần Trăm Trên Hóa Đơn Phải Lớn Hơn Hoặc Bằng 0"
+
+            },
+            diem : {
+                required : "* Vui Lòng Nhập Điểm",
+                min : "* Điểm Phải Lớn Hơn Hoặc Bằng 0"
+
+            },
+            phantram : {
+                required : "* Vui Lòng Nhập Phần Trăm",
+                min : "* Phần Trăm Phải Lớn Hơn Hoặc Bằng 0"
+            }/*,
 			mota : {
 				required : "* Vui Lòng Nhập Mô Tả"
 			}*/
 
-		}
-	});
+        }
+    });
 });
 
 var timeout = null;

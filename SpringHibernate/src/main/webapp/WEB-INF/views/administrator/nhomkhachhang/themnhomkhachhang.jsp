@@ -36,12 +36,16 @@
 								
 						</div>
 						<div class="form-group">
-							<label for="phantram">Phần Trắm</label> <form:input path="phantram" min="0" value ="0"
+							<label for="phantram">Phần Trắm (%)</label>
+							<div class="input-group">
+
+								<form:input path="phantram" min="0" value ="0"
 								type="number" class="form-control"
 								placeholder="Phần Trăm" />
-								
+								<span class="input-group-addon">%</span>
+							</div>
 						</div>
-						
+						<div class="col-md-12">
 						<div class="form-group">
 							<label for="phantram">Số Điểm/Tiền</label> <br>
 							<div class="col-md-5"><form:input  path="sodiemtrentien" min="0" value ="0"
@@ -53,12 +57,16 @@
 								placeholder="Số Tiền" /></div>
 								
 						</div>
-						
+						</div>
 						<div class="form-group">
-							<label for="phantramtien">Phần Trăm Trên Hóa Đơn</label> <form:input path="phantramtien"
+							<label for="phantramtien">Phần Trăm Trên Hóa Đơn (%)</label>
+							<div class="input-group">
+
+							 <form:input path="phantramtien"
 								type="number" class="form-control" min="0" value ="0"
 								placeholder="Phần Trăm Trên Hóa Đơn" />
-								
+								<span class="input-group-addon">%</span>
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="moTa">Mô tả</label> <form:textarea path="mota" type="text"

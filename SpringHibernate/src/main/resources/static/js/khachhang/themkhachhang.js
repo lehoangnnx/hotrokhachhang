@@ -22,7 +22,25 @@ $(document).ready(function() {
 
 					return $.trim(value);
 				}
-			}
+			},
+			sotienchamsoc : {
+				min : 0
+			},
+            sotiendachamsoc : {
+                min : 0
+            },
+            diem : {
+                min : 0
+            },
+            solanchamsoc : {
+                min : 0
+            },
+            solandamphan : {
+                min : 0
+            },
+            diemtiemnang : {
+                min : 0
+            }
 
 		},
 		messages : {
@@ -39,7 +57,25 @@ $(document).ready(function() {
 			},
 			ten : {
 				required : "* Vui Lòng Nhập Tên Khách Hàng"
-			}
+			},
+            sotienchamsoc : {
+                min : "* Số Tiền Chăm Sóc Phải Lớn Hơn Hoặc Bằng 0"
+            },
+            sotiendachamsoc : {
+                min : "* Số Tiền Đã Chăm Sóc Phải Lớn Hơn Hoặc Bằng 0"
+            },
+            diem : {
+                min : "* Điểm Phải Lớn Hơn Hoặc Bằng 0"
+            },
+            solanchamsoc : {
+                min : "* Số Lần Chăm Sóc Phải Lớn Hơn Hoặc Bằng 0"
+            },
+            solandamphan : {
+                min : "* Số Lần Đàm Phám Phải Lớn Hơn Hoặc Bằng 0"
+            },
+            diemtiemnang : {
+                min : "* Điểm Tiềm Năng Phải Lớn Hơn Hoặc Bằng 0"
+            }
 
 		}
 	});

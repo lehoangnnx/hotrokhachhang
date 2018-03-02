@@ -6,6 +6,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<jsp:useBean id="now" class="java.util.Date" />
+<fmt:formatDate var="year" value="${now}" pattern="yyyy" />
+<fmt:formatDate var="month" value="${now}" pattern="MM" />
+
 <style>
 .lb-flat-red {
 	padding-left: 10px;
@@ -44,14 +48,21 @@
 						</div>
 						<div class="form-group">
 							<label for="luong">Lương</label>
+							<div class="input-group">
+
 							<form:input path="luong" min="0" type="number"  value="0"
 								class="form-control" placeholder="Lương" />
-
+								<span class="input-group-addon">VNĐ</span>
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="thuong">Thưởng</label>
+							<div class="input-group">
+
 							<form:input path="thuong" min="0" type="number"  value="0"
 								class="form-control" placeholder="Thưởng" />
+								<span class="input-group-addon">VNĐ</span>
+							</div>
 
 						</div>
 						<div class="form-group">
@@ -59,7 +70,9 @@
 								id="thang" name="thang" style="width: 100%;">
 
 								<c:forEach var="i" begin="1" end="12">
-									<option value="<fmt:formatNumber value="${i}" type="number"
+									<option ${ i == month ? "selected" : ""}
+											value="<fmt:formatNumber value="${i}" type="number"
+
 											minIntegerDigits="2" />">Tháng - 
 										<fmt:formatNumber value="${i}" type="number"
 											minIntegerDigits="2" />
@@ -68,12 +81,13 @@
 
 							</select>
 						</div>
+
 						<div class="form-group">
 							<label>Năm</label> <select class="form-control select2" id="nam"
 								name="nam" style="width: 100%;">
 
-								<c:forEach var="i" begin="1990" end="2030">
-									<option value="${i }">Năm - ${i}</option>
+								<c:forEach  var="i" begin="1918" end="2118">
+									<option ${ i == year ? "selected" : ""} value="${i }">Năm - ${i}</option>
 								</c:forEach>
 
 							</select>

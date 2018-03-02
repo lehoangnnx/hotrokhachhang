@@ -40,22 +40,33 @@
 
 						<div class="form-group">
 							<label for="gianhap">Giá Nhập</label>
+							<div class="input-group">
+
 							<form:input path="gianhap" type="number" class="form-control" min="0" value="0"
 								placeholder="Giá Nhập" />
-
+								<span class="input-group-addon">VNĐ</span>
+						</div>
 						</div>
 						<div class="form-group">
 							<label for="giaban">Giá Bán</label>
+							<div class="input-group">
+
 							<form:input path="giaban" type="number" class="form-control" min="0" value="0"
 								placeholder="Giá Bán" />
+								<span class="input-group-addon">VNĐ</span>
 							<label id="_giaban-error" class="error" style="display: none;"></label>
+						</div>
 						</div>
 						<div class="form-group">
 							<label for="giakhuyenmai">Giá Khuyến Mãi</label>
+							<div class="input-group">
+
 							<form:input path="giakhuyenmai" type="number" min="0" 
 								class="form-control" placeholder="Giá Khuyến Mãi" />
+								<span class="input-group-addon">VNĐ</span>
 							<label id="_giakhuyenmai-error" class="error"
 								style="display: none;"></label>
+						</div>
 						</div>
 
 						<div class="form-group">

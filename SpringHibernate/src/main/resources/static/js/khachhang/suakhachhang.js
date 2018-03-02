@@ -1,48 +1,84 @@
 $(document).ready(function() {
 	// Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
-	$("#formKhachHang").validate({
-		rules : {
-			loaikhachhang : {
-				required : true
-			},
-			nhomkhachhang : {
-				required : true
-			},
-			makh : {
-				required : true,
-				normalizer : function(value) {
+    $("#formKhachHang").validate({
+        rules : {
+            loaikhachhang : {
+                required : true
+            },
+            nhomkhachhang : {
+                required : true
+            },
+            makh : {
+                required : true,
+                normalizer : function(value) {
 
-					return $.trim(value);
-				}
+                    return $.trim(value);
+                }
 
-			},
-			ten : {
-				required : true,
-				normalizer : function(value) {
+            },
+            ten : {
+                required : true,
+                normalizer : function(value) {
 
-					return $.trim(value);
-				}
-			}
+                    return $.trim(value);
+                }
+            },
+            sotienchamsoc : {
+                min : 0
+            },
+            sotiendachamsoc : {
+                min : 0
+            },
+            diem : {
+                min : 0
+            },
+            solanchamsoc : {
+                min : 0
+            },
+            solandamphan : {
+                min : 0
+            },
+            diemtiemnang : {
+                min : 0
+            }
 
-		},
-		messages : {
-			loaikhachhang : {
-				required : "* Vui Lòng Chọn Loại Khách Hàng"
-			},
-			nhomkhachhang : {
-				required : "* Vui Lòng Chọn Nhóm Khách Hàng"
-			},
-			makh : {
-				required : "* Vui Lòng Nhập Mã Khách Hàng"
-				
+        },
+        messages : {
+            loaikhachhang : {
+                required : "* Vui Lòng Chọn Loại Khách Hàng"
+            },
+            nhomkhachhang : {
+                required : "* Vui Lòng Chọn Nhóm Khách Hàng"
+            },
+            makh : {
+                required : "* Vui Lòng Nhập Mã Khách Hàng"
 
-			},
-			ten : {
-				required : "* Vui Lòng Nhập Tên Khách Hàng"
-			}
 
-		}
-	});
+            },
+            ten : {
+                required : "* Vui Lòng Nhập Tên Khách Hàng"
+            },
+            sotienchamsoc : {
+                min : "* Số Tiền Chăm Sóc Phải Lớn Hơn Hoặc Bằng 0"
+            },
+            sotiendachamsoc : {
+                min : "* Số Tiền Đã Chăm Sóc Phải Lớn Hơn Hoặc Bằng 0"
+            },
+            diem : {
+                min : "* Điểm Phải Lớn Hơn Hoặc Bằng 0"
+            },
+            solanchamsoc : {
+                min : "* Số Lần Chăm Sóc Phải Lớn Hơn Hoặc Bằng 0"
+            },
+            solandamphan : {
+                min : "* Số Lần Đàm Phám Phải Lớn Hơn Hoặc Bằng 0"
+            },
+            diemtiemnang : {
+                min : "* Điểm Tiềm Năng Phải Lớn Hơn Hoặc Bằng 0"
+            }
+
+        }
+    });
 });
 
 var timeout = null;

@@ -44,14 +44,17 @@
 			<c:if test="${not empty sessionScope.SPRING_SECURITY_LAST_EXCEPTION}">
 				<div class="error" style="color: red;">* Sai Tên Đăng Nhập Hoặc Mật Khẩu</div>
 			</c:if>
+
 		</div>
 		<form:form action="/login" method="post">
 			<div class="form-group has-feedback">
-				<input required="required" type="text" name="username" class="form-control" placeholder="Email">
+
+
+				<input required="required" type="text" name="username" class="form-control" placeholder="Tên Đăng Nhập">
 				<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 			</div>
 			<div class="form-group has-feedback">
-				<input required="required" type="password" name="password" class="form-control" placeholder="Password">
+				<input required="required" type="password" name="password" class="form-control" placeholder="Mật Khẩu">
 				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 			</div>
 			<div class="row">

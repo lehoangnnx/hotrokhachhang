@@ -12,7 +12,7 @@ $(document).ready(function() {
 			},
 			sodiemtrentien : {
 				required : true,
-				
+				min : 0,
 				normalizer : function(value) {
 
 					return $.trim(value);
@@ -21,7 +21,7 @@ $(document).ready(function() {
 			},
 			sotientrendiem : {
 				required : true,
-				
+                min : 0,
 				normalizer : function(value) {
 
 					return $.trim(value);
@@ -30,7 +30,7 @@ $(document).ready(function() {
 			},
 			phantramtien : {
 				required : true,
-				
+                min : 0,
 				normalizer : function(value) {
 
 					return $.trim(value);
@@ -39,7 +39,7 @@ $(document).ready(function() {
 			},
 			diem : {
 				required : true,
-				
+                min : 0,
 				normalizer : function(value) {
 
 					return $.trim(value);
@@ -48,7 +48,7 @@ $(document).ready(function() {
 			},
 			phantram : {
 				required : true,
-				
+                min : 0,
 				normalizer : function(value) {
 
 					return $.trim(value);
@@ -71,30 +71,30 @@ $(document).ready(function() {
 
 			},
 			sodiemtrentien : {
-				required :  "* Vui Lòng Nhập Số Điểm Trên Tiền"
-				
+				required :  "* Vui Lòng Nhập Số Điểm Trên Tiền",
+				min : "* Số Điểm Phải Lớn Hơn Hoặc Bằng 0"
 				
 
 			},
 			sotientrendiem : {
-				required :  "* Vui Lòng Nhập Số Tiền Trên Điểm"
-				
+				required :  "* Vui Lòng Nhập Số Tiền Trên Điểm",
+                min : "* Số Tiền Phải Lớn Hơn Hoặc Bằng 0"
 				
 
 			},
 			phantramtien : {
-				required :  "* Vui Lòng Nhập Phần Trăm Trên Hóa Đơn"
-				
+				required :  "* Vui Lòng Nhập Phần Trăm Trên Hóa Đơn",
+                min : "* Phần Trăm Trên Hóa Đơn Phải Lớn Hơn Hoặc Bằng 0"
 				
 			},
 			diem : {
-				required : "* Vui Lòng Nhập Điểm"
-				
+				required : "* Vui Lòng Nhập Điểm",
+                min : "* Điểm Phải Lớn Hơn Hoặc Bằng 0"
 
 			},
 			phantram : {
-				required : "* Vui Lòng Nhập Phần Trăm"
-				
+				required : "* Vui Lòng Nhập Phần Trăm",
+                min : "* Phần Trăm Phải Lớn Hơn Hoặc Bằng 0"
 			}/*,
 			mota : {
 				required : "* Vui Lòng Nhập Mô Tả"

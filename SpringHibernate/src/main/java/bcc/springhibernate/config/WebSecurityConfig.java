@@ -87,7 +87,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     	http
         .authorizeRequests()
-           
             .antMatchers("/admin/**").hasAnyRole("ADMIN","CHAMSOC","BANHANG","GIAOHANG","TAICHINH")
             .antMatchers("/login").permitAll()
             .and()
@@ -99,7 +98,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             .failureUrl("/login?error")
             .and()
         .exceptionHandling()
-            .accessDeniedPage("/403");
+            .accessDeniedPage("/authlogin");
 
 
     }

@@ -1,46 +1,49 @@
 $(document).ready(function() {
 	// Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
-	$("#formLuong").validate({
-		rules : {
-			nhanvien : {
-				required : true
-			},
-			luong : {
-				required : true,
-				normalizer : function(value) {
+    $("#formLuong").validate({
+        rules : {
+            nhanvien : {
+                required : true
+            },
+            luong : {
+                required : true,
+                min : 0,
+                normalizer : function(value) {
 
-					return $.trim(value);
-				}
+                    return $.trim(value);
+                }
 
-			},
-			thuong : {
-				required : true,
-				
-				normalizer : function(value) {
+            },
+            thuong : {
+                required : true,
+                min : 0,
+                normalizer : function(value) {
 
-					return $.trim(value);
-				}
+                    return $.trim(value);
+                }
 
-			}
-			
-		},
-		messages : {
-			nhanvien : {
-				required : "* Vui Lòng Chọn Nhân Viên"
-			},
-			luong : {
-				required : "* Vui Lòng Nhập Lương"
-				
+            }
 
-			},
-			thuong : {
-				required : "* Vui Lòng Nhập Thưởng"
-				
+        },
+        messages : {
+            nhanvien : {
+                required : "* Vui Lòng Chọn Nhân Viên"
+            },
+            luong : {
+                required : "* Vui Lòng Nhập Lương",
+                min : "* Lương Phải lớn Hơn Hoặc Bằng 0"
 
-			}
 
-		}
-	});
+            },
+            thuong : {
+                required : "* Vui Lòng Nhập Thưởng",
+                min : "* Thưởng Phải lớn Hơn Hoặc Bằng 0"
+
+
+            }
+
+        }
+    });
 });
 
 var timeout = null;

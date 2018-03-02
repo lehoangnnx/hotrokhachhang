@@ -208,7 +208,6 @@ tr:nth-child(even) {
 							</div>
 							<label id="ngayxuat-error" class="error" for="ngayxuat"></label>
 						</div>
-
 						<div class="form-group">
 							<label>Ngày Thanh Toán</label>
 
@@ -217,34 +216,44 @@ tr:nth-child(even) {
 									<i class="fa fa-calendar"></i>
 								</div>
 								<input name="ngaythanhtoan" id="ngaythanhtoan"
-									value="<fmt:formatDate
+									   value="<fmt:formatDate
                                                 pattern="dd-MM-yyyy" value="${hoadon.ngaythanhtoan}"/>"
-									type="text" class="form-control"
-									data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="">
+									   type="text" class="form-control"
+									   data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="">
 							</div>
 							<label id="ngaythanhtoan-error" class="error" for="ngaythanhtoan"></label>
 						</div>
-
 						<div class="form-group">
-							<label for="tongtien">Tổng Tiền</label>
-							<form:input min="0" path="tongtien" type="number"
-								class="form-control" value="0" placeholder="Tổng Tiền" />
+							<label>Tổng Tiền</label>
+						<div class="input-group">
 
+
+								<form:input  path="tongtien" type="number" min="0"
+											class="form-control" value="0" placeholder="Tổng Tiền" />
+								<span class="input-group-addon">VNĐ</span>
 						</div>
+						</div>
+
 						<div class="form-group">
 							<label for="tiendatra">Tiền Đã Trả</label>
+							<div class="input-group">
+
 							<form:input path="tiendatra" type="number" class="form-control"
 								min="0" value="0" placeholder="Tiền Đã Trả" />
-
+								<span class="input-group-addon">VNĐ</span>
 						</div>
+						</div>
+
 
 						<div class="form-group">
-							<label for="congno">Công Nợ</label>
+							<label for="congno">Tiền Còn Nợ</label>
+							<div class="input-group">
+
 							<form:input path="congno" type="number" class="form-control"
-								min="0" value="0" placeholder="Công Nợ" />
-
+								min="0" value="0" placeholder="Tiền Còn Nợ" />
+								<span class="input-group-addon">VNĐ</span>
 						</div>
-
+						</div>
 
 						<div class="form-group">
 							<label for="diachigiaohang">Địa Chỉ Giao Hàng</label>

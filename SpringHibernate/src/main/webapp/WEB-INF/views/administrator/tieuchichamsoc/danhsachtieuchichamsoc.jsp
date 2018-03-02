@@ -48,16 +48,25 @@
 		                <tr>
 		                  <th>Tên Tiêu Chí</th>
 		                  <th>Kiểu Tiêu Chí</th>
-		                  <th>Mô Tả</th>
+
 		                  <th>Thao tác</th>
 		                </tr>
 		                </thead>
 		                <tbody>
 		                <c:forEach var="tccs" items="${listTieuchichamsoc }" >
 		                	<tr>
-			                  	<td>${tccs.tentieuchi }</td>
-			                  	<td>${tccs.kieutieuchi }</td>
-			                  	<td>${tccs.mota }</td>
+								<td><a href="${contextPath}/admin/tieuchichamsoc/${tccs.id}">${tccs.tentieuchi }</a></td>
+								<td><c:if test="${tccs.kieutieuchi == 'cokhong' }">
+									Tốt/Chưa Tớt
+								</c:if>
+									<c:if test="${tccs.kieutieuchi == 'tien' }">
+										Tiền
+									</c:if>
+									<c:if test="${tccs.kieutieuchi == 'so' }">
+										Số
+									</c:if>
+								</td>
+
 			                  	
 			                  	<td>
 			                  		<a href="${contextPath }/admin/tieuchichamsoc/${tccs.id}">
@@ -77,7 +86,7 @@
 		                <tr>
 		                  <th>Tên Tiêu Chí</th>
 		                  <th>Kiểu Tiêu Chí</th>
-		                  <th>Mô Tả</th>
+
 		                  <th>Thao tác</th>
 		                </tr>
 		                </tfoot>

@@ -43,7 +43,9 @@
 	<definition name="login" template="/WEB-INF/views/administrator/login.jsp">
 		
 	</definition>
-	
+	<definition name="authlogin" template="/WEB-INF/views/administrator/authlogin.jsp">
+
+	</definition>
 
 	
 

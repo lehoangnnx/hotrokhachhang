@@ -44,14 +44,21 @@
 						</div>
 						<div class="form-group">
 							<label for="luong">Lương</label>
-							<form:input path="luong" min="0" type="number"
-								class="form-control" placeholder="Lương" />
+							<div class="input-group">
 
+								<form:input path="luong" min="0" type="number"
+											class="form-control" placeholder="Lương" />
+								<span class="input-group-addon">VNĐ</span>
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="thuong">Thưởng</label>
-							<form:input path="thuong" min="0" type="number"
-								class="form-control" placeholder="Thưởng" />
+							<div class="input-group">
+
+								<form:input path="thuong" min="0" type="number"
+											class="form-control" placeholder="Thưởng" />
+								<span class="input-group-addon">VNĐ</span>
+							</div>
 
 						</div>
 						<div class="form-group">

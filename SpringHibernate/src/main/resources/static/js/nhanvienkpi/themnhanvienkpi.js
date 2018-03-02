@@ -10,6 +10,7 @@ $(document).ready(function() {
 			},
 			so: {
 				required : true,
+				min : 0,
 				normalizer : function(value) {
 
 					return $.trim(value);
@@ -23,6 +24,8 @@ $(document).ready(function() {
 					return $.trim(value);
 				}
 
+			}, mucdohoanthanh : {
+				min : 0
 			}
 
 		},
@@ -34,14 +37,17 @@ $(document).ready(function() {
 				required : "* Vui Lòng Chọn KPI"
 			},
 			so : {
-				required : "* Vui Lòng Nhập Số"
-				
+				required : "* Vui Lòng Nhập Số",
+				min : "* Số Phải Lớn Hơn Hoặc Bằng 0"
 
 			},
 			ngayhoanthanh : {
 				required : "* Vui Lòng Nhập Ngày Hoàn Thành "
 				
 
+			},
+			mucdohoanthanh : {
+				min : "* Mức Độ Hoàn Thanh Phải Lớn Hơn Hoặc Bằng 0"
 			}
 
 		}
@@ -105,6 +111,7 @@ $(document).ready(function(){
 	var date = new Date();
 	
 	var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-	$('#ngayhoanthanh').val(lastDay+'/'+ (date.getUTCMonth() + 1) +'/'+date.getUTCFullYear());
+    var month = date.getUTCMonth() + 1;
+	$('#ngayhoanthanh').val(lastDay.getDate()+'/'+ month +'/'+date.getUTCFullYear());
 	
 });

@@ -81,11 +81,14 @@
 						</div>
 
 						<security:authorize access="hasAnyRole('ADMIN')">
-							<div class="form-group">
-								<label for="mucdohoanthanh">Mức Độ Hoàn Thành</label>
+						<div class="form-group">
+							<label for="mucdohoanthanh">Mức Độ Hoàn Thành (%)</label>
+							<div class="input-group">
+
 								<form:input path="mucdohoanthanh" type="number" min="0"
 									value="0" class="form-control" placeholder="Mức Độ Hoàn Thành" />
-
+								<span class="input-group-addon">%</span>
+							</div>
 							</div>
 
 							<div class="form-group">

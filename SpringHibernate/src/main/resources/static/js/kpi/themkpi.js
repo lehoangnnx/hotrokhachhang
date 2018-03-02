@@ -12,7 +12,7 @@ $(document).ready(function() {
 			},
 			so : {
 				required : true,
-				
+				min : 0,
 				normalizer : function(value) {
 
 					return $.trim(value);
@@ -21,7 +21,7 @@ $(document).ready(function() {
 			},
 			phantram : {
 				required : true,
-				
+                min : 0,
 				normalizer : function(value) {
 
 					return $.trim(value);
@@ -44,12 +44,14 @@ $(document).ready(function() {
 
 			},
 			so : {
-				required : "* Vui Lòng Nhập Số"
+				required : "* Vui Lòng Nhập Số",
+                min : "* Số Phải Lớn Hơn Hoặc Bằng 0"
 				
 
 			},
 			phantram : {
-				required : "* Vui Lòng Nhập Phần Trăm"
+				required : "* Vui Lòng Nhập Phần Trăm",
+                min : "* Phần Trăm Phải Lớn Hơn Hoặc Bằng 0"
 				
 			}/*,
 			mota : {

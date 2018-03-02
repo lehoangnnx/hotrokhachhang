@@ -32,13 +32,16 @@ $(document).ready(function() {
                 required : true
             },
             tongtien : {
-                required : true
+                required : true,
+				min : 0
             },
             tiendatra: {
-                required : true
+                required : true,
+                min : 0
             },
             congno : {
-                required : true
+                required : true,
+                min : 0
             },
             diachigiaohang : {
                 required : true
@@ -74,13 +77,16 @@ $(document).ready(function() {
                 required : '* Vui Lòng Nhập Ngày Thanh Toán'
             },
             tongtien : {
-                required : '* Vui Lòng Nhập Tổng Tiền'
+                required : '* Vui Lòng Nhập Tổng Tiền',
+				min : "* Vui Lòng Nhập Tổng Tiền Lớn Hơn 0"
             },
             tiendatra: {
-                required : '* Vui Lòng Tiền Đã Trả'
+                required : '* Vui Lòng Tiền Đã Trả',
+                min : "* Vui Lòng Nhập Tiền Đã Trả Lớn Hơn 0"
             },
             congno : {
-                required : '* Vui Lòng Nhập Công Nợ'
+                required : '* Vui Lòng Nhập Công Nợ',
+                min : "* Vui Lòng Nhập Tiền Còn Nợ Lớn Hơn 0"
             },
             diachigiaohang : {
                 required : '* Vui Lòng Nhập Địa Chỉ Giao Hàng'
@@ -239,9 +245,17 @@ function capnhatthanhtien(id){
 
 	$('#thanhtienhh'+id).val(parseFloat(giaban) * parseInt(soluong));
 }
-$('#formHoaDon').change(function () {
+/*$('#formHoaDon').change(function () {
     setcongno();
    
+});*/
+$('#tongtien').change(function () {
+
+    setcongno();
+});
+$('#tiendatra').change(function () {
+
+    setcongno();
 });
 function setcongno() {
     $('#congno').val(parseInt($('#tongtien').val()) - parseInt($('#tiendatra').val()));

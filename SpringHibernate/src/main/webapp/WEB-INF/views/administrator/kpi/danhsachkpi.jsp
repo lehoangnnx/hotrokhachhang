@@ -50,8 +50,8 @@
 							<tr>
 								<th>Tên</th>
 								<th>Số</th>
-								<th>Phần Trăm</th>
-								<th>Mô Tả</th>
+								<th>Phần Trăm (%)</th>
+
 
 								<th>Thao tác</th>
 							</tr>
@@ -61,8 +61,8 @@
 								<tr>
 									<td>${kpi.ten}</td>
 									<td>${kpi.so}</td>
-									<td>${kpi.phantram}</td>
-									<td>${kpi.mota}</td>
+									<td>${kpi.phantram} %</td>
+
 
 									<td><a href="${contextPath }/admin/kpi/${kpi.id}"> <i
 											style="color: blue;" class="fa fa-pencil fa-lg"
@@ -86,8 +86,8 @@
 							<tr>
 								<th>Tên</th>
 								<th>Số</th>
-								<th>Phần Trăm</th>
-								<th>Mô Tả</th>
+								<th>Phần Trăm (%)</th>
+
 
 								<th>Thao tác</th>
 							</tr>

@@ -1,63 +1,65 @@
 $(document).ready(function() {
 	// Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
-	$("#formKpi").validate({
-		rules : {
-			ten: {
-				required : true,
-				normalizer : function(value) {
+    $("#formKpi").validate({
+        rules : {
+            ten: {
+                required : true,
+                normalizer : function(value) {
 
-					return $.trim(value);
-				}
+                    return $.trim(value);
+                }
 
-			},
-			so : {
-				required : true,
-				
-				normalizer : function(value) {
+            },
+            so : {
+                required : true,
+                min : 0,
+                normalizer : function(value) {
 
-					return $.trim(value);
-				}
+                    return $.trim(value);
+                }
 
-			},
-			phantram : {
-				required : true,
-				
-				normalizer : function(value) {
+            },
+            phantram : {
+                required : true,
+                min : 0,
+                normalizer : function(value) {
 
-					return $.trim(value);
-				}
+                    return $.trim(value);
+                }
 
-			}/*,
+            }/*,
 			mota : {
 				required : true,
 				normalizer : function(value) {
 
 					return $.trim(value);
 				}
-			}
-*/
-		},
-		messages : {
-			ten : {
-				required : "* Vui Lòng Nhập Tên "
-				
+			}*/
 
-			},
-			so : {
-				required : "* Vui Lòng Nhập Số"
-				
+        },
+        messages : {
+            ten : {
+                required : "* Vui Lòng Nhập Tên "
 
-			},
-			phantram : {
-				required : "* Vui Lòng Nhập Phần Trăm"
-				
-			}/*,
+
+            },
+            so : {
+                required : "* Vui Lòng Nhập Số",
+                min : "* Số Phải Lớn Hơn Hoặc Bằng 0"
+
+
+            },
+            phantram : {
+                required : "* Vui Lòng Nhập Phần Trăm",
+                min : "* Phần Trăm Phải Lớn Hơn Hoặc Bằng 0"
+
+            }/*,
 			mota : {
 				required : "* Vui Lòng Nhập Mô Tả"
 			}*/
 
-		}
-	});
+        }
+    });
 });
 
 var timeout = null;
