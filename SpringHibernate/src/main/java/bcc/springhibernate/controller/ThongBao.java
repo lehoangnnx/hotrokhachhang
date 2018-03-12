@@ -143,13 +143,15 @@ public class ThongBao {
 		}
 
 		for (Nhanvienkpi nvk : nhanvienkpis) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("id", nvk.getId());
-			map.put("ngaydangky", nvk.getNgaydangky());
-			map.put("manhanvien", nvk.getNhanvien().getManhanvien());
-			map.put("tennhanvien", nvk.getNhanvien().getTennhanvien());
-			map.put("tenkpi", nvk.getKpi().getTen());
-			listNhanVienKpi.add(map);
+			if(!nvk.getKpi().getTrangthai().equals("deleted")) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("id", nvk.getId());
+				map.put("ngaydangky", nvk.getNgaydangky());
+				map.put("manhanvien", nvk.getNhanvien().getManhanvien());
+				map.put("tennhanvien", nvk.getNhanvien().getTennhanvien());
+				map.put("tenkpi", nvk.getKpi().getTen());
+				listNhanVienKpi.add(map);
+			}
 		}
 
 		listChamSoc.sort(Comparator.comparing(s -> (int) s.get("ngaycstiep")));

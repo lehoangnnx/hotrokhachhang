@@ -33,7 +33,7 @@
 					<div class="box-body">
 					
 						
-						<div class="form-group">
+						<%--<div class="form-group">
 							<label>Nhân Viên</label> <select class="form-control select2"
 								name="nhanvien" style="width: 100%;">
 
@@ -45,8 +45,20 @@
 								</c:forEach>
 
 							</select>
-						</div>
-						
+						</div>--%>
+							<div class="form-group">
+								<label>Nhân Viên</label> <select class="form-control select2"
+																 name="nhanvien" style="width: 100%;">
+
+
+									<option
+
+											value="${taikhoan.nhanvien.id }">${taikhoan.nhanvien.manhanvien}-
+											${taikhoan.nhanvien.tennhanvien }</option>
+
+
+							</select>
+							</div>
 						
 						<div class="form-group">
 							<label>KPI</label> <select class="form-control select2"

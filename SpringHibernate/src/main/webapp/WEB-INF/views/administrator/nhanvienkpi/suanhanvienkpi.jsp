@@ -32,23 +32,37 @@
 					<form:hidden path="id" />
 					<div class="box-body">
 
-						<div class="form-group">
-							<label>Nhân Viên</label> <select class="form-control select2" disabled="disabled"
+						<%--<div class="form-group">
+							<label>Nhân Viên</label> <select class="form-control select2" disabled
 								name="nhanvien" style="width: 100%;">
 
 								<c:forEach var="nv" items="${listNhanvien}">
-									<option value="${nv.id }">${nv.manhanvien}-
+									<option  ${nhanvienkpi.nhanvien.id == nv.id ? 'selected' : ''}
+											value="${nv.id }">${nv.manhanvien}-
 										${nv.tennhanvien }</option>
 								</c:forEach>
 
 							</select>
-						</div>
+						</div>--%>
+							<div class="form-group">
+								<label>Nhân Viên</label> <select class="form-control select2"
+																 name="nhanvien" style="width: 100%;">
+
+
+									<option
+											value="${nhanvienkpi.nhanvien.id }">${nhanvienkpi.nhanvien.manhanvien}-
+											${nhanvienkpi.nhanvien.tennhanvien }</option>
+
+
+							</select>
+							</div>
 						<div class="form-group">
 							<label>KPI</label> <select class="form-control select2"
 								name="kpi" style="width: 100%;">
 
 								<c:forEach var="kpi" items="${listKpi}">
-									<option value="${kpi.id }">${kpi.ten}</option>
+									<option ${nhanvienkpi.kpi.id == kpi.id ? 'selected' : ''}
+											value="${kpi.id }">${kpi.ten}</option>
 								</c:forEach>
 
 							</select>
@@ -103,7 +117,7 @@
 						<div class="form-group">
 							<label for="mota">Mô tả</label>
 							<form:textarea path="mota" type="text" class="form-control"
-								id="mota" name="mota" placeholder="Mô Tả" />
+								 placeholder="Mô Tả" />
 						</div>
 
 
