@@ -110,7 +110,8 @@
 								<th>Tháng/Năm</th>
 								<th>Lương</th>
 								<th>Thưởng</th>
-								<th>Tổng</th>
+								<th>Thưởng Theo Hóa Đơn</th>
+								<th style="text-align: center;">Tổng</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -121,9 +122,14 @@
 											value="${luong.luong }" /> &#8363;</td>
 									<td><fmt:formatNumber type="number" pattern="###,###"
 											value="${luong.thuong }" /> &#8363;</td>
-
 									<td><fmt:formatNumber type="number" pattern="###,###"
-											value="${luong.luong + luong.thuong }" /> &#8363;</td>
+														  value="${luong.thuongcuahoadon }" /> &#8363;</td>
+									<c:if test="${luong.thuongcuahoadon > 0}" >
+									<td><fmt:formatNumber type="number" pattern="###,###"
+											value="${luong.thuongcuahoadon > 0 ?
+											(luong.luong + luong.thuong + luong.thuongcuahoadon) : (luong.luong + luong.thuong) }" /> &#8363;</td>
+									</c:if>
+
 								</tr>
 							</c:if>
 							<c:if test="${empty luong }">

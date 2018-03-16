@@ -53,6 +53,7 @@
 		                <th>Nhân Viên</th>
 		                  <th>Lương</th>
 		                   <th>Thưởng</th>
+							<th>Thưởng Theo Hóa Đơn</th>
 		                  <th>Tháng/Năm</th>
 		                  <th>Thao tác</th>
 		                </tr>
@@ -65,6 +66,8 @@
 											type="number" pattern="###,###" value="${l.luong }" /> &#8363;</td>
 			                  	<td><fmt:formatNumber
 											type="number" pattern="###,###" value="${l.thuong }" /> &#8363;</td>
+								<td><fmt:formatNumber
+										type="number" pattern="###,###" value="${l.thuongcuahoadon }" /> &#8363;</td>
 			                  	<td>${l.thang}/${l.nam }</td>
 			                  	<td>
 			                  		<a href="${contextPath }/admin/luong/${l.id}">
@@ -85,6 +88,7 @@
 		                 <th>Nhân Viên</th>
 		                  <th>Lương</th>
 		                  <th>Thưởng</th>
+							<th>Thưởng Theo Hóa Đơn</th>
 		                  <th>Ngày/Tháng</th>
 		                  <th>Thao tác</th>
 		                </tr>

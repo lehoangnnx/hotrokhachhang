@@ -287,6 +287,18 @@ public class HoaDonController {
 			luong.setThuongcuahoadon(luong.getThuongcuahoadon() + (thuong));
 			luongService.saveOrUpdate(luong);
 
+			// Cộng Thưởng Hóa Đơn Cho Nhân Viên Cấp Trên
+			System.out.println(nv.getIdnhanviencaptren() +"=="+hoadon.getTongtien() +"=="+ hoadon.getTiendatra() );
+			if(nv.getIdnhanviencaptren() != 0 && hoadon.getTongtien().equals(hoadon.getTiendatra())){
+				Nhanvien nhanviencaptren = nhanVienService.findById(nv.getIdnhanviencaptren());
+				System.out.println(nhanviencaptren.getId()+"=="+nhanviencaptren.getTennhanvien() +"=="+ hoadon.getTiendatra() );
+				Luong luongnhanviencaptren = luongService.findOneByNhanvienAndThangAndNam(nhanviencaptren, splitDate[1], splitDate[2]);
+				Long thuongcaptren = (long) (((hoadon.getTiendatra() - (tongtienvon)) * nv.getChietkhauchonhanviencaptren()) / 100);
+				System.out.println(luongnhanviencaptren.getId()+"=="+thuongcaptren +"=="+ hoadon.getTiendatra() );
+				luongnhanviencaptren.setThuongcuahoadon(luongnhanviencaptren.getThuongcuahoadon() + (thuongcaptren));
+				luongService.saveOrUpdate(luongnhanviencaptren);
+			}
+
 		}
 
 
@@ -453,6 +465,21 @@ public class HoaDonController {
 					hoadon.getTiendatra()+"==="+thuongcu +"==="+ thuong);
 			luong.setThuongcuahoadon(thuongcu + (thuong));
 			luongService.saveOrUpdate(luong);
+
+			if(nv.getIdnhanviencaptren() != 0 && hoadoncu.getTongtien().equals(hoadoncu.getTiendatra())){
+				Nhanvien nhanviencaptren = nhanVienService.findById(nv.getIdnhanviencaptren());
+				Luong luongnhanviencaptren = luongService.findOneByNhanvienAndThangAndNam(nhanviencaptren, splitDate[1], splitDate[2]);
+				Long thuongcaptren = (long) (((hoadoncu.getTiendatra() - (tongtienvon)) * nv.getChietkhauchonhanviencaptren()) / 100);
+				luongnhanviencaptren.setThuongcuahoadon(luongnhanviencaptren.getThuongcuahoadon() - (thuongcaptren));
+				luongService.saveOrUpdate(luongnhanviencaptren);
+			}
+			if(nv.getIdnhanviencaptren() != 0 && hoadon.getTongtien().equals(hoadon.getTiendatra())){
+				Nhanvien nhanviencaptren = nhanVienService.findById(nv.getIdnhanviencaptren());
+				Luong luongnhanviencaptren = luongService.findOneByNhanvienAndThangAndNam(nhanviencaptren, splitDate[1], splitDate[2]);
+				Long thuongcaptren = (long) (((hoadon.getTiendatra() - (tongtienvon)) * nv.getChietkhauchonhanviencaptren()) / 100);
+				luongnhanviencaptren.setThuongcuahoadon(luongnhanviencaptren.getThuongcuahoadon() + (thuongcaptren));
+				luongService.saveOrUpdate(luongnhanviencaptren);
+			}
 		}
 	}
 
@@ -514,11 +541,11 @@ public class HoaDonController {
 					tongtienvon += ct.getHanghoa().getGianhap() * ct.getSoluong();
 				}
 				SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-				String splitngaylap[] = df.format(hoadon.getNgaythanhtoan()).split("/");
+				String splitngay[] = df.format(hoadon.getNgaythanhtoan()).split("/");
 
-				System.out.println(splitngaylap[1] + "-" + splitngaylap[2]);
+				System.out.println(splitngay[1] + "-" + splitngay[2]);
 				Luong luong = luongService.findOneByNhanvienAndThangAndNam(hoadon.getNhanvienByIdnhanvienban(),
-						splitngaylap[1], splitngaylap[2]);
+						splitngay[1], splitngay[2]);
 				Long thuongcu = 0L;
 				if(hoadon.getTiendatra() == 0){
 					thuongcu = (long) (luong.getThuongcuahoadon()
@@ -532,7 +559,15 @@ public class HoaDonController {
 				luong.setThuongcuahoadon(thuongcu);
 				luongService.saveOrUpdate(luong);
 				hoaDonService.saveOrUpdate(hoadon);
-
+				if(hoadon.getNhanvienByIdnhanvienban().getIdnhanviencaptren() != 0
+						&& hoadon.getTongtien().equals(hoadon.getTiendatra())){
+					Nhanvien nhanviencaptren = nhanVienService.findById(hoadon.getNhanvienByIdnhanvienban().getIdnhanviencaptren());
+					Luong luongnhanviencaptren = luongService.findOneByNhanvienAndThangAndNam(nhanviencaptren,
+							splitngay[1], splitngay[2]);
+					Long thuongcaptren = (long) (((hoadon.getTiendatra() - (tongtienvon)) * hoadon.getNhanvienByIdnhanvienban().getChietkhauchonhanviencaptren()) / 100);
+					luongnhanviencaptren.setThuongcuahoadon(luongnhanviencaptren.getThuongcuahoadon() - (thuongcaptren));
+					luongService.saveOrUpdate(luongnhanviencaptren);
+				}
 			});
 
 			redirectAttributes.addFlashAttribute("msg", "Xóa Thành Công");
