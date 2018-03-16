@@ -1,5 +1,6 @@
 package bcc.springhibernate.controller;
 
+import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
@@ -56,7 +57,7 @@ ThongBao thongBao;
 			@RequestParam(value = "page", defaultValue = "1") Integer page,
 			@RequestParam(value = "loaikhachhang", defaultValue = "0") Integer loaikhachhang,
 			@RequestParam(value = "nhomkhachhang", defaultValue = "0") Integer nhomkhachhang, Model model,
-			HttpServletRequest request) {
+			HttpServletRequest request, Principal principal) {
 
 		List<Khachhang> listKhachhang = null;
 
@@ -102,7 +103,7 @@ ThongBao thongBao;
 
 		model.addAttribute("currentpage", page);
 		model.addAttribute("pagecount", pageCount);
-		thongBao.thongbao(model, request);
+		thongBao.thongbao(model, request,principal);
 		return "danhsachkhachhang";
 	}
 
@@ -146,8 +147,8 @@ ThongBao thongBao;
 			@RequestParam(value = "sogpkd", defaultValue = "null") String sogpkd,
 			@RequestParam(value = "noicap", defaultValue = "null") String noicap,
 			@RequestParam(value = "ngaycap", defaultValue = "null") String ngaycap,
-			@RequestParam(value = "sotienchamsoc", defaultValue = "0") Long sotienchamsoc,
-			@RequestParam(value = "sotiendachamsoc", defaultValue = "0") Long sotiendachamsoc,
+			@RequestParam(value = "sotienchamsoc_money", defaultValue = "0") String sotienchamsoc,
+			@RequestParam(value = "sotiendachamsoc_money", defaultValue = "0") String sotiendachamsoc,
 			@RequestParam(value = "diem", defaultValue = "0") Integer diem,
 			@RequestParam(value = "solanchamsoc", defaultValue = "0") Integer solanchamsoc,
 			@RequestParam(value = "solandamphan", defaultValue = "0") Integer solandamphan,
@@ -208,8 +209,8 @@ ThongBao thongBao;
 			if (!ngaycap.equals("null")) {
 				khachhang.setNgaycap(df.parse(ngaycap));
 			}
-			khachhang.setSotienchamsoc(sotienchamsoc);
-			khachhang.setSotiendachamsoc(sotiendachamsoc);
+			khachhang.setSotienchamsoc(Long.valueOf(sotienchamsoc.replace(".","")));
+			khachhang.setSotiendachamsoc(Long.valueOf(sotiendachamsoc.replace(".","")));
 			khachhang.setDiem(diem);
 			khachhang.setSolanchamsoc(solanchamsoc);
 			khachhang.setSolandamphan(solandamphan);
@@ -249,8 +250,8 @@ ThongBao thongBao;
 			@RequestParam(value = "sogpkd", defaultValue = "null") String sogpkd,
 			@RequestParam(value = "noicap", defaultValue = "null") String noicap,
 			@RequestParam(value = "ngaycap", defaultValue = "null") String ngaycap,
-			@RequestParam(value = "sotienchamsoc", defaultValue = "0") Long sotienchamsoc,
-			@RequestParam(value = "sotiendachamsoc", defaultValue = "0") Long sotiendachamsoc,
+			@RequestParam(value = "sotienchamsoc_money", defaultValue = "0") String sotienchamsoc,
+			@RequestParam(value = "sotiendachamsoc_money", defaultValue = "0") String sotiendachamsoc,
 			@RequestParam(value = "diem", defaultValue = "0") Integer diem,
 			@RequestParam(value = "solanchamsoc", defaultValue = "0") Integer solanchamsoc,
 			@RequestParam(value = "solandamphan", defaultValue = "0") Integer solandamphan,
@@ -310,8 +311,8 @@ ThongBao thongBao;
 			if (!ngaycap.equals("null")) {
 				khachhang.setNgaycap(df.parse(ngaycap));
 			}
-			khachhang.setSotienchamsoc(sotienchamsoc);
-			khachhang.setSotiendachamsoc(sotiendachamsoc);
+			khachhang.setSotienchamsoc(Long.valueOf(sotienchamsoc.replace(".","")));
+			khachhang.setSotiendachamsoc(Long.valueOf(sotiendachamsoc.replace(".","")));
 			khachhang.setDiem(diem);
 			khachhang.setSolanchamsoc(solanchamsoc);
 			khachhang.setSolandamphan(solandamphan);

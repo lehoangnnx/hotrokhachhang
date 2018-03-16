@@ -66,6 +66,9 @@ public class ChamSocServiceImpl implements ChamSocService {
 		chamSocRepository.delete(chamsoc);
 		
 	}
-	
-	
+
+	@Override
+	public List<Chamsoc> findByTrangthaiNotAndNhanvienbanhangOrderByIdDesc(String trangthai, Integer nhanvienbanhang) {
+		return chamSocRepository.findByTrangthaiNotAndNhanvienbanhangOrderByIdDesc(trangthai,nhanvienbanhang);
+	}
 }

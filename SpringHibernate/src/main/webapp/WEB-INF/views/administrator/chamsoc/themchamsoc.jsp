@@ -111,7 +111,7 @@ tr:nth-child(even) {
 
 								</select>
 							</div>
-							<div class="col-md-4 form-group">
+							<div class="col-md-4 form-group" id="giatritieuchichamsoc">
 								<div class="input-group" id="dkieutieuchi">
 									<input type="number" id="diem" class="form-control" value="0"
 										placeholder="Nhập Điểm"> <span class="input-group-btn">

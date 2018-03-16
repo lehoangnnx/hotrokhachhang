@@ -1,26 +1,17 @@
 package bcc.springhibernate.controller;
 
+import java.security.Principal;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import bcc.springhibernate.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
-import bcc.springhibernate.model.Chamsoc;
-import bcc.springhibernate.model.Hoadon;
-import bcc.springhibernate.model.Khachhang;
-import bcc.springhibernate.model.Luong;
-import bcc.springhibernate.model.Nhanvien;
-import bcc.springhibernate.model.Nhanvienkpi;
 import bcc.springhibernate.service.ChamSocService;
 import bcc.springhibernate.service.HoaDonService;
 import bcc.springhibernate.service.KhachHangService;
@@ -45,10 +36,37 @@ public class ThongBao {
 	NhanVienKpiService nhanVienKpiService;
 	@Autowired
 	LuongService luongService;
+@Autowired
+TaikhoanService taikhoanService;
+	public void thongbao(Model model, HttpServletRequest request, Principal principal) {
 
-	public void thongbao(Model model,HttpServletRequest request) {
-		List<Khachhang> khachhangs = khachHangService.findByTrangthaiNotOrderByIdDesc("deleted");
-		List<Chamsoc> chamsocs = chamSocService.findByTrangthaiNotOrderByIdDesc("deleted");
+		if (principal != null) {
+			System.out.println(principal.getName());
+			HttpSession session = request.getSession();
+			session.setAttribute("taikhoan", taikhoanService.findByUsername(principal.getName()));
+
+		}
+
+
+		List<Khachhang> khachhangs =new ArrayList<>();
+		List<Chamsoc> chamsocs = null;
+
+		if(request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_CHAMSOC") ){
+			khachhangs = khachHangService.findByTrangthaiNotOrderByIdDesc("deleted");
+			chamsocs = chamSocService.findByTrangthaiNotOrderByIdDesc("deleted");
+		}else if (request.isUserInRole("ROLE_BANHANG")){
+			Taikhoan taikhoan= taikhoanService.findByUsername(principal.getName());
+			khachhangs = hoaDonService.findDistinctKhachhangByNhanvienByIdnhanvienbanAndTrangthaiNot
+					(taikhoan.getNhanvien(), "deleted");
+			/*if (!hoadons.isEmpty()){
+				for (Hoadon hd : hoadons){
+					khachhangs.add(hd.getKhachhang());
+				}
+			}*/
+			chamsocs = chamSocService.findByTrangthaiNotAndNhanvienbanhangOrderByIdDesc(
+					"deleted",taikhoan.getNhanvien().getId());
+		}
+
 		List<Nhanvien> nhanviens = nhanVienService.findByTrangthaiNotOrderByIdDesc("deleted");
 		List<Hoadon> hoadons = hoaDonService.findByTrangthaiNotOrderByIdDesc("deleted");
 		List<Nhanvienkpi> nhanvienkpis = nhanVienKpiService.findByTrangthaiOrderByIdDesc("inactive");
@@ -171,11 +189,31 @@ public class ThongBao {
 		// Date(date.getYear(),date.getMonth(),01))){
 		List<Nhanvien> listNhanvien = nhanVienService.findByTrangthaiNotOrderByIdDesc("deleted");
 		listNhanvien.forEach(x -> {
+			System.out.println(x.getTennhanvien());
 			Luong luong = null;
 			try {
+				// Lấy Tháng Trước Ngày hiện tại
+				Date dt = new Date();
+				Calendar c = Calendar.getInstance();
+				c.add(Calendar.MONTH, -1);
+				int lastmonth = c.get(Calendar.MONTH) + 1; // beware of month indexing from zero
+				int lastyear  = c.get(Calendar.YEAR);
+
 				luong = luongService.findOneByNhanvienAndThangAndNam(x, splitDate[1], splitDate[2]);
 				if (luong == null) {
-					luong = new Luong(x, x.getLuong(), 0L, splitDate[1], splitDate[2], "chuatraluong", "");
+
+					Luong lastluong = luongService.findOneByNhanvienAndThangAndNam(x, String.valueOf(lastmonth),
+							String.valueOf(lastyear));
+					if(lastluong != null){
+						if(lastluong.getThuongcuahoadon() < 0){
+							luong = new Luong(x, x.getLuong(), 0L,lastluong.getThuongcuahoadon() , splitDate[1], splitDate[2], "chuatraluong", "");
+						}else {
+							luong = new Luong(x, x.getLuong(), 0L,0L, splitDate[1], splitDate[2], "chuatraluong", "");
+						}
+					}else {
+						luong = new Luong(x, x.getLuong(), 0L,0L, splitDate[1], splitDate[2], "chuatraluong", "");
+					}
+
 					luongService.saveOrUpdate(luong);
 				}
 			} catch (Exception e) {

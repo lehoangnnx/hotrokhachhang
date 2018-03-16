@@ -1,3 +1,66 @@
+(function($, undefined) {
+
+    "use strict";
+
+    // When ready.
+    $(function() {
+
+        var $form = $( "#formHoaDon" );
+        var $input = $form.find( "input[name*='_money']" );
+
+        $input.on( "keyup", function( event ) {
+
+
+            // When user select text in the document, also abort.
+            var selection = window.getSelection().toString();
+            if ( selection !== '' ) {
+                return;
+            }
+
+            // When the arrow keys are pressed, abort.
+            if ( $.inArray( event.keyCode, [38,40,37,39] ) !== -1 ) {
+                return;
+            }
+
+
+            var $this = $( this );
+
+            // Get the value.
+            var input = $this.val();
+
+            var input = input.replace(/[\D\s\._\-]+/g, "");
+            input = input ? parseInt( input, 10 ) : 0;
+
+            $this.val( function() {
+                // return ( input === 0 ) ? "" : input.toLocaleString( "en-US" );
+                return ( input < 0 ) ? "" : input.toLocaleString( "it-IT" );
+            } );
+        } );
+
+        /**
+         * ==================================
+         * When Form Submitted
+         * ==================================
+         */
+        /*$form.on( "submit", function( event ) {
+
+            var $this = $( this );
+            var arr = $this.serializeArray();
+
+            for (var i = 0; i < arr.length; i++) {
+                arr[i].value = arr[i].value.replace(/[($)\s\._\-]+/g, ''); // Sanitize the values.
+            };
+
+            console.log( arr );
+
+            event.preventDefault();
+        });*/
+
+    });
+})(jQuery);
+
+
+
 $(document).ready(function() {
 	// Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
     $("#formHoaDon").validate({
@@ -131,12 +194,14 @@ function getHangHoaById() {
 		    	
 				
 			    	if($('#idhh'+id).text() != ''){
-			    		console.log("if");
-			    		var soluongcu = parseInt($('#soluonghh'+id).val());
-			    		$('#soluonghh'+id).val(soluongcu + soluong);
-			    		
-			    		var soluongmoi = parseInt($('#soluonghh'+id).val());
-			    		$('#thanhtienhh'+id).val(soluongmoi * giaban);
+                        var soluongcu = parseInt($('#soluonghh'+id).val());
+                        $('#soluonghh'+id).val(soluongcu + soluong);
+
+                        var soluongmoi = parseInt($('#soluonghh'+id).val());
+                        var giabanhhold = parseFloat($('#giabanhh'+id).val().replace(/\./g,""));
+
+                        var thanhtiennew =soluongmoi * giabanhhold;
+                        $('#thanhtienhh'+id).val(changeNumberToString(thanhtiennew));
 			    	}else {
 			    		console.log("else");
 			    		//Get the reference of the Table's TBODY element.
@@ -154,17 +219,17 @@ function getHangHoaById() {
 			    		
 				    	cell = $(row.insertCell(-1));
 				    	cell.html('<span id="tenhanghh'+id+'">'+result.tenhang+'</span>');
-				    	
-				    	cell = $(row.insertCell(-1));
-				    	cell.html('<input min="0" onchange="capnhatthanhtien('+id+');" name="giabanhh" id="giabanhh'+id+'" type="number" value="'+giaban+'" >');
-				    	
-				    	cell = $(row.insertCell(-1));
-				    	cell.html('<input min="0" onchange="capnhatthanhtien('+id+');" name="soluonghh" id="soluonghh'+id+'" type="number" value="'+soluong+'" >');
-				    	
-				    	cell = $(row.insertCell(-1));
-				    	cell.html('<input name="thanhtienhh" id="thanhtienhh'+id+'" type="number" value="'+thanhtien+'" >');
-				    	
-				    	cell = $(row.insertCell(-1));
+
+                        cell = $(row.insertCell(-1));
+                        cell.html('<input onkeyup="showNumberToString();" onchange="capnhatthanhtien('+id+');kiemTraGiaBan('+id+');"   name="giabanhh" id="giabanhh'+id+'" type="text" value="'+changeNumberToString(giaban)+'" >');
+
+                        cell = $(row.insertCell(-1));
+                        cell.html('<input min="0" onchange="capnhatthanhtien('+id+');"  name="soluonghh" id="soluonghh'+id+'" type="number" value="'+soluong+'" >');
+
+                        cell = $(row.insertCell(-1));
+                        cell.html('<input onkeyup="showNumberToString();"  name="thanhtienhh" id="thanhtienhh'+id+'" type="text" value="'+changeNumberToString(thanhtien)+'" >');
+
+                        cell = $(row.insertCell(-1));
 				    	cell.html('<a onclick="Remove(this,'+id+',0);" href="javascript:void(0);"> <i style="color: red;" class="fa fa-close" aria-hidden="true" title="Sửa"> </i></a>');
 				    
 			    	}
@@ -177,6 +242,93 @@ function getHangHoaById() {
 			}
 		});
 	}, 100);
+};
+
+function kiemTraGiaBan(id) {
+   /* $('input[name="giabanhh"]').each(function(){
+        var input = $(this); // This is the jquery object of the input, do what you will\
+        console.log(input.val());
+    });*/
+
+    clearTimeout(timeout);
+    timeout = setTimeout(function() {
+        var hanghoa = {};
+        hanghoa["giaban"] = $('#giabanhh'+id).val().replace(/\./g,"");
+        hanghoa["id"] = id;
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        $(document).ajaxSend(function(e, xhr, options) {
+            xhr.setRequestHeader(header, token);
+        });
+
+        $.ajax({
+
+            type : "POST",
+            contentType : "application/json",
+            url : contextPath + "/admin/kiemtragiaban",
+            data:JSON.stringify(hanghoa),
+            success : function(result) {
+                if(result == 'success'){
+                    $('#giabanhh'+id).focus();
+                    $('#btn-thhvcthd').hide();
+                    $('#btn-submit').hide();
+                    $('#giabanhh'+id).css('border', '1px solid red');
+                    $('#_giaban-error').css("display", "block");
+                    $('#_giaban-error').text("* Giá Bán Hiện Tại Nhỏ Hơn Giá Nhập");
+                }else {
+                    $('#btn-thhvcthd').show();
+                    $('#btn-submit').show();
+                    $('#giabanhh'+id).css('border', '');
+                    $('#_giaban-error').css("display", "none");
+                    $('#_giaban-error').text("");
+                }
+            },
+            error : function(e) {
+
+            }
+        });
+    }, 100);
+
+};
+
+
+function changeNumberToString(__input) {
+
+
+    var output = __input.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
+    return output;
+};
+
+function showNumberToString() {
+
+    $("input[name*='hh']").on( "keyup", function( event ) {
+
+
+        // When user select text in the document, also abort.
+        var selection = window.getSelection().toString();
+        if ( selection !== '' ) {
+            return;
+        }
+
+        // When the arrow keys are pressed, abort.
+        if ( $.inArray( event.keyCode, [38,40,37,39] ) !== -1 ) {
+            return;
+        }
+
+
+        var $this = $( this );
+
+        // Get the value.
+        var input = $this.val();
+
+        var input = input.replace(/[\D\s\._\-]+/g, "");
+        input = input ? parseInt( input, 10 ) : 0;
+
+        $this.val( function() {
+            // return ( input === 0 ) ? "" : input.toLocaleString( "en-US" );
+            return ( input < 0 ) ? "" : input.toLocaleString( "it-IT" );
+        } );
+    } );
 };
 function updateChiTietHoaDonById(id) {
 	clearTimeout(timeout);
@@ -249,20 +401,21 @@ $('#tblcthd').change(function () {
     settongtien();
     setcongno();
 });
+
 function settongtien(){
     var getthanhtienhh = document.getElementsByName('thanhtienhh');
     var tongtien = 0;
     for (var i = 0; i < getthanhtienhh.length; i++) {
-        tongtien += parseInt(getthanhtienhh.item(i).value);
+        tongtien += parseFloat(getthanhtienhh.item(i).value.replace(/\./g,""));
 
     }
-    $('#tongtien').val(tongtien);
+    $('#tongtien').val(changeNumberToString(tongtien));
 };
 function capnhatthanhtien(id){
-	var giaban = $('#giabanhh'+id).val();
-	var soluong = $('#soluonghh'+id).val();
-
-	$('#thanhtienhh'+id).val(parseFloat(giaban) * parseInt(soluong));
+    var giaban = parseFloat($('#giabanhh'+id).val().replace(/\./g,""));
+    var soluong = parseInt($('#soluonghh'+id).val().replace(/\./g,""));
+    var thanhtien = giaban * soluong;
+    $('#thanhtienhh'+id).val(changeNumberToString(thanhtien));
 }
 /*$('#formHoaDon').change(function () {
     setcongno();
@@ -277,7 +430,11 @@ $('#tiendatra').change(function () {
     setcongno();
 });
 function setcongno() {
-    $('#congno').val(parseInt($('#tongtien').val()) - parseInt($('#tiendatra').val()));
+    var tongtien = $('#tongtien').val().replace(/\./g,"");
+    var tiendatra = $('#tiendatra').val().replace(/\./g,"");
+    var congno = tongtien - tiendatra;
+
+    $('#congno').val(changeNumberToString(congno));
 };
 $('#btn-submit').click(function(){
 	 var tbody = $("#tblcthd tbody");

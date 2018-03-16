@@ -136,6 +136,8 @@
 						Phận</a></li>
 				<li><a
 					href="${contextPath }/admin/luong?trangthai=chuatraluong">Lương</a></li>
+				<li><a
+						href="${contextPath }/admin/ungluong?trangthai=active">Ứng Lương</a></li>
 			</ul></li>
 			</security:authorize>
 			<security:authorize access="hasAnyRole('ADMIN')">

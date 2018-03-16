@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    $('#dkieutieuchi').hide();
 	// Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
 	$("#formChamSoc").validate({
 		rules : {
@@ -173,6 +174,25 @@ function Remove(button,id,idctcs) {
         table.deleteRow(row[0].rowIndex);
     }
 };
+
+function checkGiaTriTieuChiCHamSoc(){
+    var kieutieuchitccs = $('#kieutieuchitccs').val();
+    console.log(kieutieuchitccs);
+    if( kieutieuchitccs > 0){
+
+        $('#_diem-error').css("display", "none");
+        $('#_diem-error').text("");
+        getTieuChiChamSocId();
+    }else {
+
+        $('#_diem-error').css("display", "block");
+        $('#_diem-error').text("* Vui Lòng Nhập Lớn Hơn 0");
+
+    }
+
+    //getTieuChiChamSocId();
+    //console.log("â");
+};
 $('#btn-ttccsvctcs').click(function (){
 	
 /*	if($('#diem').val() > 0){
@@ -191,50 +211,94 @@ $('#btn-ttccsvctcs').click(function (){
     
 });
 function getKieuTieuChi() {
-	clearTimeout(timeout);
-	timeout = setTimeout(function() {
-		var id = $('#tieuchichamsoc :selected').val();
-		var token = $("meta[name='_csrf']").attr("content");
-		var header = $("meta[name='_csrf_header']").attr("content");
-		$(document).ajaxSend(function(e, xhr, options) {
-			xhr.setRequestHeader(header, token);
-		});
-		
-		$.ajax({
+    clearTimeout(timeout);
+    timeout = setTimeout(function() {
+        var id = $('#tieuchichamsoc :selected').val();
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        $(document).ajaxSend(function(e, xhr, options) {
+            xhr.setRequestHeader(header, token);
+        });
 
-			type : "POST",
-			contentType : "application/json",
-			url : contextPath + "/admin/getkieutieuchi",
-			data: id,
-			success : function(result) {
-				var kieutieuchi = result.kieutieuchi;
-			    console.log(kieutieuchi);	
-			    if(kieutieuchi == 'so' || kieutieuchi == 'tien'  ){
-			    	var html = '<input type="number" id="kieutieuchitccs" class="form-control" value="0" ' +
-						 ' placeholder="Nhập Điểm"> <span class="input-group-btn"> ' +
-						' <button id="btn-ttccsvctcs" type="button" onclick="getTieuChiChamSocId();" '+
-							'class="btn btn-info btn-flat">Thêm</button>'+
-					'</span>';
-			    	$('#dkieutieuchi').html(html);
-			    }else {
-			    	var html = '<select class="form-control select2" name="" id="kieutieuchitccs"'+
-						'style="width: 100%;">'+
-				'	<option value="true" selected="selected">Tốt</option>'+		
-					'<option value="false">Chưa Tốt</option>'+
-				'	</select> <span class="input-group-btn">'+
-				'	<button id="btn-ttccsvctcs" type="button" onclick="getTieuChiChamSocId();"'+
-					'	class="btn btn-info btn-flat">Thêm</button>'+
-					'	</span>';
-		    	$('#dkieutieuchi').html(html);
-			    }
-			    	
-				
-			},
-			error : function(e) {
+        $.ajax({
 
-			}
-		});
-	}, 100);
+            type : "POST",
+            contentType : "application/json",
+            url : contextPath + "/admin/getkieutieuchi",
+            data: id,
+            success : function(result) {
+                var kieutieuchi = result.kieutieuchi;
+                // console.log(kieutieuchi);
+                if(kieutieuchi == 'so'   ){
+                    $('#dkieutieuchi').show();
+                    var html = '<input type="number" id="kieutieuchitccs" class="form-control" value="0" ' +
+                        ' placeholder="Nhập Điểm"> <span class="input-group-btn"> ' +
+                        ' <button id="btn-ttccsvctcs" type="button" onclick="checkGiaTriTieuChiCHamSoc();"  '+
+                        'class="btn btn-info btn-flat">Thêm</button>'+
+                        '</span>';
+                    $('#dkieutieuchi').html(html);
+                }else if(kieutieuchi == 'tien'){
+                    $('#dkieutieuchi').show();
+                    var html = '<input name="kieutieuchitccs_tien" type="text" id="kieutieuchitccs" class="form-control" value="0" ' +
+                        ' onkeypress="showNumberToString();" placeholder="Nhập Số Tiền"> <span class="input-group-btn"> ' +
+                        ' <button id="btn-ttccsvctcs" type="button" onclick="checkGiaTriTieuChiCHamSoc();"  '+
+                        'class="btn btn-info btn-flat">Thêm</button>'+
+                        '</span>';
+                    $('#dkieutieuchi').html(html);
+                }else if(kieutieuchi == 'cokhong') {
+                    $('#dkieutieuchi').show();
+                    var html = '<select class="form-control select2" name="" id="kieutieuchitccs"'+
+                        'style="width: 100%;">'+
+                        '	<option value="true" selected="selected">Tốt</option>'+
+                        '<option value="false">Chưa Tốt</option>'+
+                        '	</select> <span class="input-group-btn">'+
+                        '	<button id="btn-ttccsvctcs" type="button" onclick="getTieuChiChamSocId();"'+
+                        '	class="btn btn-info btn-flat">Thêm</button>'+
+                        '	</span>';
+                    $('#dkieutieuchi').html(html);
+                }else {
+                    $('#dkieutieuchi').hide();
+                }
+
+
+            },
+            error : function(e) {
+
+            }
+        });
+    }, 100);
+};
+
+function showNumberToString() {
+
+    $("input[name='kieutieuchitccs_tien']").on( "keyup", function( event ) {
+
+
+        // When user select text in the document, also abort.
+        var selection = window.getSelection().toString();
+        if ( selection !== '' ) {
+            return;
+        }
+
+        // When the arrow keys are pressed, abort.
+        if ( $.inArray( event.keyCode, [38,40,37,39] ) !== -1 ) {
+            return;
+        }
+
+
+        var $this = $( this );
+
+        // Get the value.
+        var input = $this.val();
+
+        var input = input.replace(/[\D\s\._\-]+/g, "");
+        input = input ? parseInt( input, 10 ) : 0;
+
+        $this.val( function() {
+            // return ( input === 0 ) ? "" : input.toLocaleString( "en-US" );
+            return ( input < 0 ) ? "" : input.toLocaleString( "it-IT" );
+        } );
+    } );
 };
 $('#tieuchichamsoc').change(function(){
 	

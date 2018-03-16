@@ -53,12 +53,13 @@ tr:nth-child(even) {
 							<label>Nhân Viên Bán Hàng</label> <select
 								class="form-control select2" name="nhanvienbanhang"
 								style="width: 100%;">
-
-								<c:forEach var="nv" items="${listNhanvien }">
+							<option value="${taikhoan.nhanvien.id }">${taikhoan.nhanvien.manhanvien}-
+									${taikhoan.nhanvien.tennhanvien }</option>
+								<%--<c:forEach var="nv" items="${listNhanvien }">
 									<option
 										${hoadon.nhanvienByIdnhanvienban.id == nv.id ? 'selected' : '' }
 										value="${nv.id }">${nv.manhanvien}-${nv.tennhanvien }</option>
-								</c:forEach>
+								</c:forEach>--%>
 
 							</select>
 						</div>
@@ -161,17 +162,22 @@ tr:nth-child(even) {
 												<span id="idhh${cthd.hanghoa.id }">${cthd.hanghoa.id }</span></td>
 											<td><span id="mahanghh${cthd.hanghoa.id }">${cthd.hanghoa.mahang }</span></td>
 											<td><span id="tenhanghh${cthd.hanghoa.id }">${cthd.hanghoa.tenhang }</span></td>
-											<td><input name="giabanhh" min="0"
-												onchange="capnhatthanhtien(${cthd.hanghoa.id });"
-												id="giabanhh${cthd.hanghoa.id }" type="number"
-												value="${cthd.giaban }"></td>
+											<td><input name="giabanhh"
+
+                                                       onkeyup="showNumberToString();"
+												onchange="capnhatthanhtien(${cthd.hanghoa.id });kiemTraGiaBan(${cthd.hanghoa.id });"
+												id="giabanhh${cthd.hanghoa.id }" type="text"
+												value="<fmt:formatNumber type="number" pattern="###,###"
+														  value="${cthd.giaban }" />"></td>
 											<td><input name="soluonghh" min="0"
 												onchange="capnhatthanhtien(${cthd.hanghoa.id });"
 												id="soluonghh${cthd.hanghoa.id }" type="number"
 												value="${cthd.soluong }"></td>
 											<td><input name="thanhtienhh"
-												id="thanhtienhh${cthd.hanghoa.id }" type="number"
-												value="${cthd.thanhtien }"></td>
+                                                       onkeyup="showNumberToString();"
+												id="thanhtienhh${cthd.hanghoa.id }" type="text"
+												value="<fmt:formatNumber type="number" pattern="###,###"
+														  value="${cthd.thanhtien }" />"></td>
 
 											<td><a
 												onclick="Remove(this,${cthd.hanghoa.id },${cthd.id });"
@@ -193,7 +199,7 @@ tr:nth-child(even) {
 									</tr>
 								</tfoot>
 							</table>
-							
+                            <label id="_giaban-error" class="error" style="display: none;"></label>
 						</div>
 
 
@@ -260,12 +266,15 @@ tr:nth-child(even) {
 						</div>
 
 						<div class="form-group">
-							<label>Tổng Tiền</label>
+							<label for="tongtien">Tổng Tiền</label>
 							<div class="input-group">
 
 
-								<form:input  path="tongtien" type="number" min="0"
-											 class="form-control"  placeholder="Tổng Tiền" />
+								<input  path="tongtien" type="text" name="tongtien_money" id="tongtien"
+										class="form-control"
+										value="<fmt:formatNumber type="number" pattern="###,###"
+																			   value="${hoadon.tongtien }" />"
+										placeholder="Tổng Tiền" />
 								<span class="input-group-addon">VNĐ</span>
 							</div>
 						</div>
@@ -274,8 +283,9 @@ tr:nth-child(even) {
 							<label for="tiendatra">Tiền Đã Trả</label>
 							<div class="input-group">
 
-								<form:input path="tiendatra" type="number" class="form-control"
-											min="0"  placeholder="Tiền Đã Trả" />
+								<input id="tiendatra" type="text" class="form-control" name="tiendatra_money"
+									   value="<fmt:formatNumber type="number" pattern="###,###"
+														  value="${hoadon.tiendatra }" />" placeholder="Tiền Đã Trả" />
 								<span class="input-group-addon">VNĐ</span>
 							</div>
 						</div>
@@ -285,8 +295,10 @@ tr:nth-child(even) {
 							<label for="congno">Tiền Còn Nợ</label>
 							<div class="input-group">
 
-								<form:input path="congno" type="number" class="form-control"
-											min="0"  placeholder="Tiền Còn Nợ" />
+								<input id="congno" type="text" class="form-control" name="congno_money"
+										value="<fmt:formatNumber type="number" pattern="###,###"
+														  value="${hoadon.congno }" />"
+									   placeholder="Tiền Còn Nợ" />
 								<span class="input-group-addon">VNĐ</span>
 							</div>
 						</div>

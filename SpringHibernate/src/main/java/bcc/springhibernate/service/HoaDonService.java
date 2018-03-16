@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import bcc.springhibernate.model.Hoadon;
 import bcc.springhibernate.model.Khachhang;
 import bcc.springhibernate.model.Nhanvien;
+import org.springframework.data.jpa.repository.Query;
 
 public interface HoaDonService {
 	void saveOrUpdate(Hoadon hoadon);
@@ -15,8 +16,14 @@ public interface HoaDonService {
 	
 	List<Hoadon> findAll();
 	List<Hoadon> findByTrangthaiOrderByIdDesc(String trangthai);
-	List<Hoadon> findByTrangthaiOrderByIdDesc(String trangthai, Pageable pageable);
 	List<Hoadon> findByTrangthaiNotOrderByIdDesc(String trangthai);
+	List<Hoadon> findByTrangthaiOrderByIdDesc(String trangthai, Pageable pageable);
+	List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc(String trangthai,Nhanvien nhanvienByIdnhanvienban);
+	List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanOrderByIdDesc(String trangthai,Nhanvien nhanvienByIdnhanvienban);
+	List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc(String trangthai,Nhanvien nhanvienByIdnhanvienban, Pageable pageable);
+
+
+
 	Hoadon findBySohoadon(String sohoadon);
 	Hoadon findById(Integer id);
 	
@@ -31,10 +38,16 @@ public interface HoaDonService {
 	
 	List<Hoadon> findByTrangthaiDaThanhToan(String trangthai);
 	List<Hoadon> findByTrangthaiDaThanhToan(String trangthai,Pageable pageable);
-	
+	List<Hoadon> findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienban(String trangthai,Nhanvien nhanvienByIdnhanvienban);
+	List<Hoadon> findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienban(String trangthai,Nhanvien nhanvienByIdnhanvienban,
+																	  Pageable pageable);
+
 	List<Hoadon> findByTrangthaiChuaThanhToan(String trangthai);
 	List<Hoadon> findByTrangthaiChuaThanhToan(String trangthai,Pageable pageable);
-	
+	List<Hoadon> findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienban(String trangthai,Nhanvien nhanvienByIdnhanvienban);
+	List<Hoadon> findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienban(String trangthai,Nhanvien nhanvienByIdnhanvienban,
+																		Pageable pageable);
+
 	List<Hoadon> findByNhanvienByIdnhanvienbanAndTrangthaiNotAndNgaylapBetweenOrderByIdDesc
 	(Nhanvien nhanvien,String trangthai, Date d1, Date d2);
 	
@@ -43,4 +56,6 @@ public interface HoaDonService {
 			Nhanvien nhanviengiaohang,Nhanvien nhanvienchamsoc);
 	
 	List<Hoadon> findByKhachhang(Khachhang khachhang);
+	List<Khachhang> findDistinctKhachhangByNhanvienByIdnhanvienbanAndTrangthaiNot(Nhanvien nhanvienByIdnhanvienban, String trangthai);
+	List<Hoadon> findKhachhangDistinctByNhanvienByIdnhanvienbanAndTrangthaiNot(Nhanvien nhanvienByIdnhanvienban, String trangthai);
 }

@@ -73,9 +73,9 @@ public class NhanVienController {
 	@GetMapping("/nhanvien/add")
 	String pageThemNhanVien(Model model) {
 		List<Bophan> listBophan = boPhanService.findByTrangthaiOrderByIdDesc("active");
-
+		List<Nhanvien> listNhanvien = nhanVienService.findByTrangthaiOrderByIdDesc("active");
 		model.addAttribute("listBophan", listBophan);
-
+		model.addAttribute("listNhanvien", listNhanvien);
 		model.addAttribute("nhanvien", new Nhanvien());
 		return "themnhanvien";
 	}
@@ -83,24 +83,24 @@ public class NhanVienController {
 	@GetMapping("/nhanvien/{id}")
 	String pageSuaNhanVien(Model model, @PathVariable("id") Integer id) {
 		Nhanvien nhanvien = nhanVienService.findById(id);
-
+		List<Nhanvien> listNhanvien = nhanVienService.findByTrangthaiOrderByIdDesc("active");
 		List<Bophan> listBophan = boPhanService.findByTrangthaiOrderByIdDesc("active");
 
 		model.addAttribute("listBophan", listBophan);
-
+		model.addAttribute("listNhanvien", listNhanvien);
 		model.addAttribute("nhanvien", nhanvien);
 		return "suanhanvien";
 	}
 
 	@PostMapping("/nhanvien")
 	String themNhanVien(@ModelAttribute("nhanvien") Nhanvien nhanvien,
-
+						@RequestParam("hienthiluong") String hienthiluong,
 			@RequestParam("socmnd") String socmnd, @RequestParam("ngaycap") String ngaycap,
-
+						@RequestParam("nhanviencaptren") Integer nhanviencaptren,
 			@RequestParam("sodienthoai") String sodienthoai,
 
 			@RequestParam("ngayvaolam") String ngayvaolam,
-
+			@RequestParam("luong_money") String luong,
 			@RequestParam("bophan") Integer bophan, RedirectAttributes redirectAttributes) {
 		try {
 			SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -110,7 +110,10 @@ public class NhanVienController {
 			nhanvien.setSodienthoai(sodienthoai.replace("_", ""));
 			nhanvien.setNgayvaolam(df.parse(ngayvaolam));
 			nhanvien.setBophan(bophanById);
+			nhanvien.setHienthiluong(hienthiluong);
+			nhanvien.setIdnhanviencaptren(nhanviencaptren);
 			nhanvien.setTrangthai("active");
+			nhanvien.setLuong(Long.valueOf(luong.replace(".","")));
 			nhanVienService.saveOrUpdate(nhanvien);
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thành Công");
 		} catch (Exception e) {
@@ -122,13 +125,13 @@ public class NhanVienController {
 
 	@PatchMapping(value = "/nhanvien", params = "update")
 	String suaNhanVien(@ModelAttribute("nhanvien") Nhanvien nhanvien,
-
+					   @RequestParam("hienthiluong") String hienthiluong,
 			@RequestParam("socmnd") String socmnd, @RequestParam("ngaycap") String ngaycap,
-
+					   @RequestParam("nhanviencaptren") Integer nhanviencaptren,
 			@RequestParam("sodienthoai") String sodienthoai,
 
 			@RequestParam("ngayvaolam") String ngayvaolam,
-
+					   @RequestParam("luong_money") String luong,
 			@RequestParam("bophan") Integer bophan, RedirectAttributes redirectAttributes) {
 		try {
 			SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -138,7 +141,10 @@ public class NhanVienController {
 			nhanvien.setSodienthoai(sodienthoai.replace("_", ""));
 			nhanvien.setNgayvaolam(df.parse(ngayvaolam));
 			nhanvien.setBophan(bophanById);
+			nhanvien.setHienthiluong(hienthiluong);
+			nhanvien.setIdnhanviencaptren(nhanviencaptren);
 			//nhanvien.setTrangthai("active");
+			nhanvien.setLuong(Long.valueOf(luong.replace(".","")));
 			nhanVienService.saveOrUpdate(nhanvien);
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {

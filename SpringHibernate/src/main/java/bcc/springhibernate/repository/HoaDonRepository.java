@@ -18,10 +18,14 @@ public interface HoaDonRepository extends JpaRepository<Hoadon, Integer> {
 	List<Hoadon> findAll();
 
 	List<Hoadon> findByTrangthaiOrderByIdDesc(String trangthai);
-
-	List<Hoadon> findByTrangthaiOrderByIdDesc(String trangthai, Pageable pageable);
-
 	List<Hoadon> findByTrangthaiNotOrderByIdDesc(String trangthai);
+	List<Hoadon> findByTrangthaiOrderByIdDesc(String trangthai, Pageable pageable);
+	List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc(String trangthai,Nhanvien nhanvienByIdnhanvienban);
+	List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanOrderByIdDesc(String trangthai,Nhanvien nhanvienByIdnhanvienban);
+	List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc(String trangthai,Nhanvien nhanvienByIdnhanvienban, Pageable pageable);
+
+
+
 
 	Hoadon findBySohoadon(String sohoadon);
 
@@ -37,15 +41,32 @@ public interface HoaDonRepository extends JpaRepository<Hoadon, Integer> {
 	List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaylapBetweenOrderByIdDesc(String trangthai,
 			Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2);
 	
-	@Query("select hd from Hoadon hd where hd.tongtien = hd.tiendatra and hd.congno = 0 and trangthai <> ?1")
+	@Query("select hd from Hoadon hd where hd.tongtien = hd.tiendatra and hd.congno = 0 and hd.trangthai <> ?1")
 	List<Hoadon> findByTrangthaiDaThanhToan(String trangthai);
-	@Query("select hd from Hoadon hd where hd.tongtien = hd.tiendatra and hd.congno = 0 and trangthai <> ?1")
+
+	@Query("select hd from Hoadon hd where hd.tongtien = hd.tiendatra and hd.congno = 0 and hd.trangthai <> ?1")
 	List<Hoadon> findByTrangthaiDaThanhToan(String trangthai,Pageable pageable);
+
+	@Query("select hd from Hoadon hd where hd.tongtien = hd.tiendatra and hd.congno = 0 and hd.trangthai <> ?1 " +
+			"and hd.nhanvienByIdnhanvienban = ?2 ")
+	List<Hoadon> findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienban(String trangthai,Nhanvien nhanvienByIdnhanvienban);
+
+	@Query("select hd from Hoadon hd where hd.tongtien = hd.tiendatra and hd.congno = 0 and hd.trangthai <> ?1 " +
+			"and hd.nhanvienByIdnhanvienban = ?2 ")
+	List<Hoadon> findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienban(String trangthai,Nhanvien nhanvienByIdnhanvienban,
+																	  Pageable pageable);
 	
-	@Query("select hd from Hoadon hd where hd.tongtien > hd.tiendatra and hd.congno > 0 and trangthai <> ?1")
+	@Query("select hd from Hoadon hd where hd.tongtien > hd.tiendatra and hd.congno > 0 and hd.trangthai <> ?1")
 	List<Hoadon> findByTrangthaiChuaThanhToan(String trangthai);
-	@Query("select hd from Hoadon hd where hd.tongtien > hd.tiendatra and hd.congno > 0 and trangthai <> ?1")
+	@Query("select hd from Hoadon hd where hd.tongtien > hd.tiendatra and hd.congno > 0 and hd.trangthai <> ?1")
 	List<Hoadon> findByTrangthaiChuaThanhToan(String trangthai,Pageable pageable);
+	@Query("select hd from Hoadon hd where hd.tongtien > hd.tiendatra and hd.congno > 0 and hd.trangthai <> ?1 " +
+			"and hd.nhanvienByIdnhanvienban = ?2")
+	List<Hoadon> findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienban(String trangthai,Nhanvien nhanvienByIdnhanvienban);
+	@Query("select hd from Hoadon hd where hd.tongtien > hd.tiendatra and hd.congno > 0 and hd.trangthai <> ?1 " +
+			"and hd.nhanvienByIdnhanvienban = ?2")
+	List<Hoadon> findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienban(String trangthai,Nhanvien nhanvienByIdnhanvienban,
+																		Pageable pageable);
 	
 	List<Hoadon> findByNhanvienByIdnhanvienbanAndTrangthaiNotAndNgaylapBetweenOrderByIdDesc
 	(Nhanvien nhanvien,String trangthai, Date d1, Date d2);
@@ -55,5 +76,9 @@ public interface HoaDonRepository extends JpaRepository<Hoadon, Integer> {
 			Nhanvien nhanviengiaohang,Nhanvien nhanvienchamsoc);
 
 	List<Hoadon> findByKhachhang(Khachhang khachhang);
-	
+	//List<Hoadon> findDistinctKhachhangByNhanvienByIdnhanvienbanAndTrangthaiNot(Nhanvien nhanvienByIdnhanvienban, String trangthai);
+	List<Hoadon> findKhachhangDistinctByNhanvienByIdnhanvienbanAndTrangthaiNot(Nhanvien nhanvienByIdnhanvienban, String trangthai);
+
+	@Query("SELECT distinct hd.khachhang from Hoadon hd where hd.nhanvienByIdnhanvienban = ?1 and hd.trangthai <> ?2")
+	List<Khachhang> findDistinctKhachhangByNhanvienByIdnhanvienbanAndTrangthaiNot(Nhanvien nhanvienByIdnhanvienban, String trangthai);
 }

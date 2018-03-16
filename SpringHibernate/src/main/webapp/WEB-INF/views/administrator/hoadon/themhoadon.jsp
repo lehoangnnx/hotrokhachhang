@@ -51,11 +51,12 @@ tr:nth-child(even) {
 							<label>Nhân Viên Bán Hàng</label> <select
 								class="form-control select2" name="nhanvienbanhang"
 								style="width: 100%;">
-
-								<c:forEach var="nv" items="${listNhanvien }">
+							<option value="${taikhoan.nhanvien.id }">${taikhoan.nhanvien.manhanvien}-
+									${taikhoan.nhanvien.tennhanvien }</option>
+								<%--<c:forEach var="nv" items="${listNhanvien }">
 									<option value="${nv.id }">${nv.manhanvien}-
 										${nv.tennhanvien }</option>
-								</c:forEach>
+								</c:forEach>--%>
 
 							</select>
 						</div>
@@ -129,11 +130,11 @@ tr:nth-child(even) {
 							</div>
 
 						</div>
-						<div class="form-group">
+						<%--<div class="form-group">
 							<label id="_hanghoa-error" class="error" style="display: none;"></label>
-						</div>
+						</div>--%>
 						<div class="box-body table-responsive">
-							
+
 								<table border="1" style="overflow-x: auto;" id="tblcthd">
 									<thead>
 										<tr>
@@ -147,7 +148,7 @@ tr:nth-child(even) {
 										</tr>
 									</thead>
 									<tbody>
-										
+
 									</tbody>
 									<tfoot>
 										<tr>
@@ -161,7 +162,7 @@ tr:nth-child(even) {
 										</tr>
 									</tfoot>
 								</table>
-							
+                            <label id="_giaban-error" class="error" style="display: none;"></label>
 						</div>
 
 
@@ -223,12 +224,13 @@ tr:nth-child(even) {
 							</div>
 							<label id="ngaythanhtoan-error" class="error" for="ngaythanhtoan"></label>
 						</div>
+
 						<div class="form-group">
-							<label>Tổng Tiền</label>
+							<label for="tongtien">Tổng Tiền</label>
 						<div class="input-group">
 
 
-								<form:input  path="tongtien" type="number" min="0"
+								<input  path="tongtien" type="text" name="tongtien_money" id="tongtien"
 											class="form-control" value="0" placeholder="Tổng Tiền" />
 								<span class="input-group-addon">VNĐ</span>
 						</div>
@@ -238,8 +240,8 @@ tr:nth-child(even) {
 							<label for="tiendatra">Tiền Đã Trả</label>
 							<div class="input-group">
 
-							<form:input path="tiendatra" type="number" class="form-control"
-								min="0" value="0" placeholder="Tiền Đã Trả" />
+							<input id="tiendatra" type="text" class="form-control" name="tiendatra_money"
+								 value="0" placeholder="Tiền Đã Trả" />
 								<span class="input-group-addon">VNĐ</span>
 						</div>
 						</div>
@@ -249,8 +251,8 @@ tr:nth-child(even) {
 							<label for="congno">Tiền Còn Nợ</label>
 							<div class="input-group">
 
-							<form:input path="congno" type="number" class="form-control"
-								min="0" value="0" placeholder="Tiền Còn Nợ" />
+							<input id="congno" type="text" class="form-control" name="congno_money"
+								 value="0" placeholder="Tiền Còn Nợ" />
 								<span class="input-group-addon">VNĐ</span>
 						</div>
 						</div>

@@ -327,8 +327,34 @@
 	</definition>
 	
 	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
-	
-	
+
+
+	<!-- Trang Danh Sách Ứng Lương -->
+	<definition name="danhsachungluong" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+					   value="/WEB-INF/views/administrator/ungluong/danhsachungluong.jsp" />
+		<put-attribute name="footertagmore"
+					   value="/WEB-INF/views/administrator/ungluong/footertag/ungluong-footertag.jsp" />
+	</definition>
+	<!-- Trang Thêm Ứng Lương -->
+	<definition name="themungluong" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+					   value="/WEB-INF/views/administrator/ungluong/themungluong.jsp" />
+		<put-attribute name="footertagmore"
+					   value="/WEB-INF/views/administrator/ungluong/footertag/themungluong-footertag.jsp" />
+	</definition>
+	<!-- Trang Sửa Ứng Lương -->
+	<definition name="suaungluong" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+					   value="/WEB-INF/views/administrator/ungluong/suaungluong.jsp" />
+		<put-attribute name="footertagmore"
+					   value="/WEB-INF/views/administrator/ungluong/footertag/suaungluong-footertag.jsp" />
+	</definition>
+
+	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
 	
 	
 	
@@ -488,7 +514,7 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/administrator/chamsoc/chamsoctieptheo.jsp" />
 		<put-attribute name="footertagmore"
-			value="/WEB-INF/views/administrator/chamsoc/footertag/suachamsoc-footertag.jsp" />
+			value="/WEB-INF/views/administrator/chamsoc/footertag/chamsoctieptheo-footertag.jsp" />
 	</definition>
 	
 	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->

@@ -46,17 +46,34 @@
 							<label for="luong">Lương</label>
 							<div class="input-group">
 
-								<form:input path="luong" min="0" type="number"
-											class="form-control" placeholder="Lương" />
+								<input id="luong" name="luong_money" type="text"
+									   value="<fmt:formatNumber type="number" pattern="###,###"
+									    value="${luong.luong}"/>"
+									   class="form-control" placeholder="Lương" />
 								<span class="input-group-addon">VNĐ</span>
 							</div>
+							<label id="_luong-error" class="error" style="display: none;"></label>
 						</div>
 						<div class="form-group">
 							<label for="thuong">Thưởng</label>
 							<div class="input-group">
 
-								<form:input path="thuong" min="0" type="number"
-											class="form-control" placeholder="Thưởng" />
+								<input id="thuong" name="thuong_money" type="text"
+									   value="<fmt:formatNumber type="number" pattern="###,###"
+									    value="${luong.thuong}"/>"
+									   class="form-control" placeholder="Thưởng" />
+								<span class="input-group-addon">VNĐ</span>
+							</div>
+
+						</div>
+						<div class="form-group">
+							<label for="thuongcuahoadon_money">Thưởng Của Hóa Đơn</label>
+							<div class="input-group">
+								<form:hidden path="thuongcuahoadon" />
+								<input id="thuongcuahoadon_money" name="thuongcuahoadon_money" type="text" readonly
+									   value="<fmt:formatNumber type="number" pattern="###,###"
+									    value="${luong.thuongcuahoadon}"/>"
+									   class="form-control" placeholder="Thưởng Của Hóa Đơn" />
 								<span class="input-group-addon">VNĐ</span>
 							</div>
 

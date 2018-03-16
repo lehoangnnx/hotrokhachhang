@@ -40,7 +40,12 @@ public class HangHoaRestController {
 			hangHoaMap.put("id", hanghoa.getId());
 			hangHoaMap.put("mahang", hanghoa.getMahang());
 			hangHoaMap.put("tenhang", hanghoa.getTenhang());
-			hangHoaMap.put("giaban", hanghoa.getGiaban());
+			if(hanghoa.getGiakhuyenmai() != null){
+				hangHoaMap.put("giaban", hanghoa.getGiakhuyenmai());
+			}else {
+				hangHoaMap.put("giaban", hanghoa.getGiaban());
+			}
+			System.out.println("GKM : "+ hanghoa.getGiakhuyenmai().longValue());
 		} catch (Exception e) {
 
 		}
@@ -76,5 +81,24 @@ public class HangHoaRestController {
 			return "error";
 		}
 		return "error";
+	}
+
+	@PostMapping("/kiemtragiaban")
+	String kiemtragiaban(@RequestBody Hanghoa getHangHoa) {
+
+		Hanghoa hanghoa = null;
+		try {
+			hanghoa = hangHoaService.findById(getHangHoa.getId());
+			if(hanghoa.getGianhap() > getHangHoa.getGiaban()){
+					return "success";
+			}else {
+				return  "error";
+			}
+
+
+		} catch (Exception e) {
+			return  "error";
+		}
+
 	}
 }

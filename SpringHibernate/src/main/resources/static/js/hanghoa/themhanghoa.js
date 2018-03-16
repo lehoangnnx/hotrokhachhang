@@ -1,3 +1,96 @@
+(function($, undefined) {
+
+    "use strict";
+
+    // When ready.
+    $(function() {
+
+        var $form = $( "#formHangHoa" );
+        var $input = $form.find( "input[name*='_money']" );
+
+        $input.on( "keyup", function( event ) {
+
+
+            // When user select text in the document, also abort.
+            var selection = window.getSelection().toString();
+            if ( selection !== '' ) {
+                return;
+            }
+
+            // When the arrow keys are pressed, abort.
+            if ( $.inArray( event.keyCode, [38,40,37,39] ) !== -1 ) {
+                return;
+            }
+
+
+            var $this = $( this );
+
+            // Get the value.
+            var input = $this.val();
+
+            var input = input.replace(/[\D\s\._\-]+/g, "");
+            input = input ? parseInt( input, 10 ) : 0;
+
+            $this.val( function() {
+                // return ( input === 0 ) ? "" : input.toLocaleString( "en-US" );
+                return ( input < 0 ) ? "" : input.toLocaleString( "it-IT" );
+            } );
+        } );
+
+        /**
+         * ==================================
+         * When Form Submitted
+         * ==================================
+         */
+        /*$form.on( "submit", function( event ) {
+
+            var $this = $( this );
+            var arr = $this.serializeArray();
+
+            for (var i = 0; i < arr.length; i++) {
+                arr[i].value = arr[i].value.replace(/[($)\s\._\-]+/g, ''); // Sanitize the values.
+            };
+
+            console.log( arr );
+
+            event.preventDefault();
+        });*/
+
+    });
+})(jQuery);
+
+
+function showNumberToString() {
+
+    $("input[name*='giakhuyenmai']").on( "keyup", function( event ) {
+
+
+        // When user select text in the document, also abort.
+        var selection = window.getSelection().toString();
+        if ( selection !== '' ) {
+            return;
+        }
+
+        // When the arrow keys are pressed, abort.
+        if ( $.inArray( event.keyCode, [38,40,37,39] ) !== -1 ) {
+            return;
+        }
+
+
+        var $this = $( this );
+
+        // Get the value.
+        var input = $this.val();
+
+        var input = input.replace(/[\D\s\._\-]+/g, "");
+        input = input ? parseInt( input, 10 ) : "";
+
+        $this.val( function() {
+            // return ( input === 0 ) ? "" : input.toLocaleString( "en-US" );
+            return ( input < 0 ) ? "" : input.toLocaleString( "it-IT" );
+        } );
+    } );
+};
 $(document).ready(function() {
 	// Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
 	$("#formHangHoa").validate({
@@ -114,9 +207,10 @@ $(document).ready(function() {
 	});
 });
 $("input").focusout(function(){
-    
-    
-    if(parseFloat($("#giaban").val()) < parseFloat($("#gianhap").val()))
+    var giaban = $("#giaban").val().replace(/\./g,"");
+	var gianhap = $("#gianhap").val().replace(/\./g,"");
+	var giakhuyenmai =$("#giakhuyenmai").val().replace(/\./g,"") ;
+    if(giaban < gianhap)
     {
         $("#_giaban-error").css("display","block");
         $('#_giaban-error').text("* Giá Bán Phải Lớn Hơn Giá Nhập");
@@ -126,8 +220,8 @@ $("input").focusout(function(){
         $("#_giaban-error").css("display","none");
         $('#_giaban-error').text("");
     }
-    if($("#giakhuyenmai").val() != '' ){
-	    if(parseFloat($("#giakhuyenmai").val()) < parseFloat($("#gianhap").val()))
+    if(giakhuyenmai != '' ){
+	    if(giakhuyenmai < gianhap)
 	    {
 	        $("#_giakhuyenmai-error").css("display","block");
 	        $('#_giakhuyenmai-error').text("* Giá Khuyến Mãi Phải Lớn Hơn Giá Nhập");
@@ -144,8 +238,7 @@ $("input").focusout(function(){
     }
     
     
-    if(parseFloat($("#giaban").val()) > parseFloat($("#gianhap").val()) &&
-    		parseFloat($("#giakhuyenmai").val()) > parseFloat($("#gianhap").val())) {
+    if(giaban > gianhap && giakhuyenmai > gianhap) {
     	
  		$('#btn-submit').attr('type','submit'); 
     }

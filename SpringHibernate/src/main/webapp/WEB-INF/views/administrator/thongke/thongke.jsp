@@ -187,10 +187,10 @@
 						</div>
 						
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-12 margin">
 						<div class="col-md-4">
 							<div class="form-group">
-								<label for="congno">Tổng Tiện : <span><fmt:formatNumber
+								<label for="congno">Tổng Tiền : <span><fmt:formatNumber
 											type="number" pattern="###,###" value="${tongtien }" /></span>
 									&#8363;
 								</label>

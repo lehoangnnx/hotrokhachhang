@@ -17,7 +17,7 @@ public interface ChamSocRepository extends JpaRepository<Chamsoc, Integer> {
 	List<Chamsoc> findByTrangthaiOrderByIdDesc(String trangthai);
 	List<Chamsoc> findByTrangthaiOrderByIdDesc(String trangthai, Pageable pageable);
 	List<Chamsoc> findByTrangthaiNotOrderByIdDesc(String trangthai);
-	
+	List<Chamsoc> findByTrangthaiNotAndNhanvienbanhangOrderByIdDesc(String trangthai, Integer nhanvienbanhang);
 	Chamsoc findById(Integer id);
 	
 	List<Chamsoc> findByNhanvienchamsocAndTrangthaiNotAndNgayBetweenOrderByIdDesc

@@ -4,7 +4,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%@ taglib prefix="security"
+		   uri="http://www.springframework.org/security/tags"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <input hidden="" id="msg" value="${msg }"></input>
 <!-- Content Header (Page header) -->
@@ -52,7 +53,9 @@
 								<tr>
 									<th>Mã Hàng</th>
 									<th>Tên Hàng</th>
+<security:authorize access="hasAnyRole('ADMIN')">
 									<th>Giá Nhập</th>
+</security:authorize>
 									<th>Giá Bán</th>
 									<th>Giá Khuyến Mãi</th>
 									<th>Đơn Vị Tính</th>
@@ -62,11 +65,13 @@
 							</thead>
 							<tbody>
 								<c:forEach var="hh" items="${listHanghoa }">
-									<tr>
+									<s>
 										<td>${hh.mahang }</td>
 										<td>${hh.tenhang }</td>
+										<security:authorize access="hasAnyRole('ADMIN')">
 										<td><fmt:formatNumber type="number" pattern="###,###"
 												value="${hh.gianhap }" /> &#8363;</td>
+										</security:authorize>
 										<td><fmt:formatNumber type="number" pattern="###,###"
 												value="${hh.giaban }" /> &#8363;</td>
 										<td><c:choose>
@@ -97,7 +102,9 @@
 								<tr>
 									<th>Mã Hàng</th>
 									<th>Tên Hàng</th>
+<security:authorize access="hasAnyRole('ADMIN')">
 									<th>Giá Nhập</th>
+</security:authorize>
 									<th>Giá Bán</th>
 									<th>Giá Khuyến Mãi</th>
 									<th>Đơn Vị Tính</th>

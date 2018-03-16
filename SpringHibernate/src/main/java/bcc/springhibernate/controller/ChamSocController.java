@@ -64,7 +64,8 @@ ThongBao thongBao;
 	@GetMapping("/chamsoc")
 	String pageDanhSachChamSoc(@RequestParam(value = "trangthai", defaultValue = "chochamsoc") String trangthai,
 			@RequestParam(value = "limit", defaultValue = "100") Integer limit,
-			@RequestParam(value = "page", defaultValue = "1") Integer page, Model model, HttpServletRequest request) {
+			@RequestParam(value = "page", defaultValue = "1") Integer page, Model model, HttpServletRequest request,
+							   Principal principal) {
 		int sizeListChamSoc = chamSocService.findByTrangthaiOrderByIdDesc(trangthai).size();
 		int pageCount = (sizeListChamSoc / limit + (sizeListChamSoc % limit > 0 ? 1 : 0));
 		List<Chamsoc> listChamsoc = chamSocService.findByTrangthaiOrderByIdDesc(trangthai,
@@ -75,7 +76,7 @@ ThongBao thongBao;
 		model.addAttribute("pagecount", pageCount);
 		
 		
-		thongBao.thongbao(model, request);
+		thongBao.thongbao(model, request,principal);
 		return "danhsachchamsoc";
 	}
 
@@ -180,7 +181,7 @@ ThongBao thongBao;
 									kieutieuchitccs.get(i) + "-" + Boolean.parseBoolean(kieutieuchitccs.get(i)));
 							chitietchamsoc.setCokhong(Boolean.parseBoolean(kieutieuchitccs.get(i)));
 						} else if (tieuchichamsoc.getKieutieuchi().equals("tien")) {
-							Long tien = Long.parseLong(kieutieuchitccs.get(i));
+							Long tien = Long.parseLong(kieutieuchitccs.get(i).replace(".",""));
 							chitietchamsoc.setTienchamsoc(tien);
 							getKhachHangById.setSotienchamsoc(getKhachHangById.getSotienchamsoc() - tien);
 							getKhachHangById.setSotiendachamsoc(getKhachHangById.getSotiendachamsoc() + tien);
@@ -263,7 +264,7 @@ ThongBao thongBao;
 									kieutieuchitccs.get(i) + "-" + Boolean.parseBoolean(kieutieuchitccs.get(i)));
 							chitietchamsoc.setCokhong(Boolean.parseBoolean(kieutieuchitccs.get(i)));
 						} else if (tieuchichamsoc.getKieutieuchi().equals("tien")) {
-							Long tien = Long.parseLong(kieutieuchitccs.get(i));
+							Long tien = Long.parseLong(kieutieuchitccs.get(i).replace(".",""));
 							chitietchamsoc.setTienchamsoc(tien);
 							getKhachHangById.setSotienchamsoc(getKhachHangById.getSotienchamsoc() - tien);
 							getKhachHangById.setSotiendachamsoc(getKhachHangById.getSotiendachamsoc() + tien);
@@ -327,7 +328,7 @@ ThongBao thongBao;
 
 							chitietchamsoc.setCokhong(Boolean.parseBoolean(kieutieuchitccs.get(i)));
 						} else if (tieuchichamsoc.getKieutieuchi().equals("tien")) {
-							Long tien = Long.parseLong(kieutieuchitccs.get(i));
+							Long tien = Long.parseLong(kieutieuchitccs.get(i).replace(".",""));
 							chitietchamsoc.setTienchamsoc(tien);
 							getKhachHangById.setSotienchamsoc(getKhachHangById.getSotienchamsoc() - tien);
 							getKhachHangById.setSotiendachamsoc(getKhachHangById.getSotiendachamsoc() + tien);
@@ -349,7 +350,7 @@ ThongBao thongBao;
 
 							chitietchamsoc.setCokhong(Boolean.parseBoolean(kieutieuchitccs.get(i)));
 						} else if (tieuchichamsoc.getKieutieuchi().equals("tien")) {
-							Long tien = Long.parseLong(kieutieuchitccs.get(i));
+							Long tien = Long.parseLong(kieutieuchitccs.get(i).replace(".",""));
 							Long tienchamsoccu, tiendachamsoccu;
 							tienchamsoccu = chitietchamsoc.getTienchamsoc() + getKhachHangById.getSotienchamsoc();
 							tiendachamsoccu = getKhachHangById.getSotiendachamsoc() - chitietchamsoc.getTienchamsoc();

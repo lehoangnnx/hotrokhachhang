@@ -31,15 +31,15 @@ public class MainController {
 	@Autowired
 	ThongBao thongBao;
 
-	@ModelAttribute("taikhoan")
+	//@ModelAttribute("taikhoan")
 	// Lưu Session Thông tin người dùng đăng nhập
-	public void sessionUser(Principal principal, HttpSession session) {
+	/*public void sessionUser(Principal principal, HttpSession session) {
 		if (principal != null) {
 			System.out.println(principal.getName());
 			session.setAttribute("taikhoan", taikhoanService.findByUsername(principal.getName()));
 
 		}
-	}
+	}*/
 
 	@RequestMapping("/")
 	public String index(Principal principal, Model model) {
@@ -51,8 +51,8 @@ public class MainController {
 	}
 
 	@RequestMapping("/admin")
-	public String home(Model model,HttpServletRequest request) {
-		thongBao.thongbao(model, request);
+	public String home(Model model,HttpServletRequest request, Principal principal) {
+		thongBao.thongbao(model, request,principal);
 		return "index";
 	}
 	

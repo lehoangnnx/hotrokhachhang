@@ -55,12 +55,21 @@ public class HangHoaController {
     }
     
     @PostMapping("/hanghoa")
-    String themHangHoa(@ModelAttribute("hanghoa") Hanghoa hanghoa,@RequestParam("nhomhang") Integer nhomhang,
+    String themHangHoa(@ModelAttribute("hanghoa") Hanghoa hanghoa,
+					   @RequestParam("giaban_money") String giaban,
+					   @RequestParam("gianhap_money") String gianhap,
+					   @RequestParam(value="_giakhuyenmai",defaultValue = "") String giakhuyenmai,
+					   @RequestParam("nhomhang") Integer nhomhang,
     		RedirectAttributes redirectAttributes) {
     	try {
     		Nhomhang nhomhangById = nhomHangService.findById(nhomhang);
     		hanghoa.setTrangthai("active");
     		hanghoa.setNhomhang(nhomhangById);
+    		hanghoa.setGiaban(Long.valueOf(giaban.replace(".","")));
+    		hanghoa.setGianhap(Long.valueOf(gianhap.replace(".","")));
+    		if(!giakhuyenmai.equals("")){
+				hanghoa.setGiakhuyenmai(Long.valueOf(giakhuyenmai.replace(".","")));
+			}
     		hangHoaService.saveOrUpdate(hanghoa);
         	redirectAttributes.addFlashAttribute("msg", "Thêm Thành Công");
 		} catch (Exception e) {
@@ -71,12 +80,21 @@ public class HangHoaController {
     }	
     	
     @PatchMapping(value="/hanghoa",params="update")
-    String suaHangHoa(@ModelAttribute("hanghoa") Hanghoa hanghoa,@RequestParam("nhomhang") Integer nhomhang,
+    String suaHangHoa(@ModelAttribute("hanghoa") Hanghoa hanghoa,
+					  @RequestParam("giaban_money") String giaban,
+					  @RequestParam("gianhap_money") String gianhap,
+					  @RequestParam(value="_giakhuyenmai",defaultValue = "") String giakhuyenmai,
+					  @RequestParam("nhomhang") Integer nhomhang,
     		RedirectAttributes redirectAttributes) {
     	try {
     		Nhomhang nhomhangById = nhomHangService.findById(nhomhang);
     		//hanghoa.setTrangthai("active");
     		hanghoa.setNhomhang(nhomhangById);
+			hanghoa.setGiaban(Long.valueOf(giaban.replace(".","")));
+			hanghoa.setGianhap(Long.valueOf(gianhap.replace(".","")));
+			if(!giakhuyenmai.equals("")){
+				hanghoa.setGiakhuyenmai(Long.valueOf(giakhuyenmai.replace(".","")));
+			}
     		hangHoaService.saveOrUpdate(hanghoa);
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {

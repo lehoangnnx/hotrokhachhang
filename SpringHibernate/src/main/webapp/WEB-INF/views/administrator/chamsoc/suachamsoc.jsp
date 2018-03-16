@@ -169,8 +169,8 @@ tr:nth-child(even) {
 														id="ikieutieuchitccs${ctcs.tieuchichamsoc.id}"
 														name="kieutieuchitccs">
 													<span id="kieutieuchitccs${ctcs.tieuchichamsoc.id}">
-
-														${ctcs.tienchamsoc}</span>
+														<fmt:formatNumber type="number" pattern="###,###" value="${ctcs.tienchamsoc}" />
+														&#8363;</span>
 												</c:if></td>
 											<td><a
 												onclick="Remove(this,${ctcs.tieuchichamsoc.id},${ctcs.id });"

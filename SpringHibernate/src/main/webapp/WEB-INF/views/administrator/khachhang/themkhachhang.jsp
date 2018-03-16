@@ -213,7 +213,7 @@
 							<label for="sotienchamsoc">Số Tiền Chăm Sóc</label>
 							<div class="input-group">
 
-							<form:input path="sotienchamsoc" type="number" min="0" value="0"
+							<input id="sotienchamsoc" name="sotienchamsoc_money" type="text"  value="0"
 								class="form-control" placeholder="Số Tiền Chăm Sóc" />
 								<span class="input-group-addon">VNĐ</span>
 							<label id="_sotienchamsoc-error" class="error"
@@ -225,7 +225,7 @@
 								<label for="sotiendachamsoc">Số Tiền Đã Chăm Sóc</label>
 								<div class="input-group">
 
-							<form:input path="sotiendachamsoc" type="number" min="0" value="0"
+							<input id="sotiendachamsoc" name="_money" type="text" value="0"
 								class="form-control" placeholder="Số Đã Tiền Chăm Sóc" />
 									<span class="input-group-addon">VNĐ</span>
 							<label id="_sotiendachamsoc-error" class="error"

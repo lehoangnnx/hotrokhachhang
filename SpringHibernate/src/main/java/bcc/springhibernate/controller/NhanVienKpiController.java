@@ -63,7 +63,7 @@ public class NhanVienKpiController {
 		}
     	
     	model.addAttribute("listNhanvienkpi", listNhanvienkpi);
-    	thongBao.thongbao(model, request);
+    	thongBao.thongbao(model, request,principal);
         return "danhsachnhanvienkpi";
     }
 

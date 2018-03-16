@@ -56,9 +56,91 @@
 						Xóa</a>
 				</li>
 			</ul>
+
+
 			<div class="box">
+
 				<div class="box-header">
 					<h3 class="box-title">Danh Sách Hóa Đơn</h3>
+
+				</div>
+				<div class="box-header">
+					<c:set var="tongtien" value="0" />
+					<c:set var="tiendatra" value="0" />
+					<c:set var="congno" value="0" />
+					<c:forEach var="hd" items="${listHoadonThongKe }">
+						<c:set var="tongtien" value="${tongtien + hd.tongtien }" />
+						<c:set var="tiendatra" value="${tiendatra + hd.tiendatra }" />
+						<c:set var="congno" value="${congno + hd.congno }" />
+					</c:forEach>
+					<div class="box-body">
+						<div class="col-md-12 margin" style="border-bottom: 1px solid;">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Tổng Hóa Đơn : <span>${fn:length(listHoadonThongKe) }</span>
+									</label>
+
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<c:set var="hddtt" value="0" />
+									<c:forEach var="hd" items="${listHoadonThongKe }">
+										<c:if test="${hd.tongtien == hd.tiendatra && hd.congno == 0 }">
+											<c:set var="hddtt" value="${hddtt + 1 }" />
+										</c:if>
+
+									</c:forEach>
+									<label>Hóa Đơn Đã Thanh Toán : <span>${hddtt }</span>
+									</label>
+
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<c:set var="hdctt" value="0" />
+									<c:forEach var="hd" items="${listHoadonThongKe }">
+										<c:if test="${hd.tongtien > hd.tiendatra && hd.congno > 0 }">
+											<c:set var="hdctt" value="${hdctt + 1 }" />
+										</c:if>
+
+									</c:forEach>
+									<label>Hóa Đơn Chưa Thanh Toán : <span>${hdctt }</span>
+									</label>
+
+								</div>
+							</div>
+
+						</div>
+						<div class="col-md-12 margin">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="tongtien">Tổng Tiền : <span><fmt:formatNumber
+											type="number" pattern="###,###" value="${tongtien }" /></span>
+										&#8363;
+									</label>
+
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="tiendatra">Tiền Đã Trả : <span><fmt:formatNumber
+											type="number" pattern="###,###" value="${tiendatra }" /></span>
+										&#8363;
+									</label>
+
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="congno">Đang Nợ : <span><fmt:formatNumber
+											type="number" pattern="###,###" value="${congno }" /></span>
+										&#8363;
+									</label>
+								</div>
+							</div>
+						</div>
+
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">

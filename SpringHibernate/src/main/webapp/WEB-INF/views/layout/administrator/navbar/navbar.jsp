@@ -26,7 +26,7 @@
 					class="label label-success">${fn:length(listNhanVienKpi) }</span>
 			</a>
 				<ul class="dropdown-menu">
-					<li class="header">Bạn Có ${fn:length(listNhanVienKpi) } Thông Báo</li>
+					<li class="header">Bạn Có ${fn:length(listNhanVienKpi) } Thông Báo Nhân Viên KPI</li>
 					<li>
 						<!-- inner menu: contains the messages -->
 						<ul class="menu">
@@ -59,7 +59,7 @@
 					class="label label-warning">${fn:length(listChamSoc) }</span>
 			</a>
 				<ul class="dropdown-menu">
-					<li class="header">Bạn Có ${fn:length(listChamSoc) } Thông Báo</li>
+					<li class="header">Bạn Có ${fn:length(listChamSoc) } Thông Báo Chăm Sóc</li>
 					<li>
 						<!-- Inner Menu: contains the notifications -->
 						<ul class="menu">
@@ -102,7 +102,7 @@
 			</a>
 				<ul class="dropdown-menu">
 					<li class="header">Bạn Có ${fn:length(listKhachHang) } Thông
-						Báo</li>
+						Báo Sinh Nhật</li>
 					<li>
 						<!-- Inner menu: contains the tasks -->
 						<ul class="menu">
@@ -135,6 +135,99 @@
 				</ul>
 			</li>
 			</security:authorize>
+
+			<!-- ==================================================================-->
+			<!-- Notifications Menu -->
+			<security:authorize access="hasAnyRole('BANHANG') && !hasAnyRole('CHAMSOC')">
+				<li class="dropdown notifications-menu">
+					<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
+												   data-toggle="dropdown"> <i class="fa fa-group"></i> <span
+						class="label label-warning">${fn:length(listChamSoc) }</span>
+				</a>
+					<ul class="dropdown-menu">
+
+						<li class="header">Bạn Có ${fn:length(listChamSoc) } Thông Báo Chăm Sóc</li>
+						<li>
+							<!-- Inner Menu: contains the notifications -->
+							<ul class="menu">
+								<c:forEach var="cs" items="${listChamSoc }">
+
+									<li>
+										<!-- start notification --> <a
+										<%-- onclick="updateThongBaoChamSoc(${cs.id });" --%>
+											href="javasctipt:void(0);"> <i class="fa fa-users text-aqua"></i>
+										<c:choose>
+											<c:when test="${cs.ngaycstiep == 0}">
+												<b>Hôm Nay</b> Là Lần Chăm Sóc <br>
+												Tiếp Theo Của <b>${cs.khachhang }</b>
+											</c:when>
+											<c:when test="${cs.ngaycstiep < 0}">
+												<b><fmt:formatDate pattern="dd/MM/yyyy" value="${cs.ngay}"/></b> Là Lần Chăm Sóc <br>
+												Tiếp Theo Của <b>${cs.khachhang }</b>
+											</c:when>
+											<c:otherwise>
+												Còn <b>${cs.ngaycstiep }</b> Ngày Nữa Tới Lần Chăm Sóc <br>
+												Tiếp Theo Của <b>${cs.khachhang }</b>
+											</c:otherwise>
+										</c:choose>
+
+									</a>
+									</li>
+
+								</c:forEach>
+								<!-- end notification -->
+							</ul>
+						</li>
+						<!-- <li class="footer"><a href="#">View all</a></li> -->
+					</ul>
+				</li>
+			</security:authorize>
+			<!-- Tasks Menu -->
+			<security:authorize access="hasAnyRole('BANHANG') && !hasAnyRole('CHAMSOC')">
+				<li class="dropdown notifications-menu">
+					<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle"
+												   data-toggle="dropdown"> <i class="fa fa-birthday-cake"></i> <span
+						class="label label-danger">${fn:length(listKhachHang) }</span>
+				</a>
+					<ul class="dropdown-menu">
+						<li class="header">Bạn Có ${fn:length(listKhachHang) } Thông
+							Báo Sinh Nhật</li>
+						<li>
+							<!-- Inner menu: contains the tasks -->
+							<ul class="menu">
+								<c:forEach var="lkh" items="${listKhachHang }">
+									<li>
+										<!-- start notification --> <a
+
+											href="javascript:void(0);"> <i class="fa fa-user text-red"></i>
+										<c:choose>
+											<c:when test="${lkh.ngaysinhnhat == 0}">
+												<b>Hôm Nay</b> Là Sinh Nhật Của <br>
+												<b>${lkh.makh } - ${lkh.ten }</b>
+											</c:when>
+											<c:when test="${lkh.ngaysinhnhat < 0}">
+												<b><fmt:formatDate pattern="dd/MM/yyyy" value="${lkh.ngay}"/></b> Là Sinh Nhật Của <br>
+												<b>${lkh.makh } - ${lkh.ten }</b>
+											</c:when>
+											<c:otherwise>
+												Còn <b>${lkh.ngaysinhnhat }</b> Ngày Nữa Là Sinh Nhật Của <br>
+												<b>${lkh.makh } - ${lkh.ten }</b>
+											</c:otherwise>
+										</c:choose>
+									</a>
+									</li>
+								</c:forEach>
+								<!-- end task item -->
+							</ul>
+						</li>
+						<!-- <li class="footer"><a href="#">View all tasks</a></li> -->
+					</ul>
+				</li>
+			</security:authorize>
+
+
+
+
 			<!-- User Account Menu -->
 			<li class="dropdown user user-menu">
 				<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle"

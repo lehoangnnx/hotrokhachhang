@@ -3,4 +3,6 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <script>var contextPath = "${pageContext.request.contextPath}"</script>
 <!-- DataTables -->
+
+
 <script src="${contextPath }/js/hoadon/themhoadon.js"></script>

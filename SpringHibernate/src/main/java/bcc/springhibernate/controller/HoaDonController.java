@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -38,6 +39,8 @@ import bcc.springhibernate.service.LuongService;
 import bcc.springhibernate.service.NhanVienService;
 import bcc.springhibernate.service.TaikhoanService;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 
 @RequestMapping("/admin")
@@ -62,25 +65,53 @@ public class HoaDonController {
 	@GetMapping("/hoadon")
 	String pageDanhSachHoaDon(@RequestParam(value = "trangthai", defaultValue = "dathanhtoan") String trangthai,
 			@RequestParam(value = "limit", defaultValue = "100") Integer limit,
-			@RequestParam(value = "page", defaultValue = "1") Integer page, Model model) {
+			@RequestParam(value = "page", defaultValue = "1") Integer page, Model model,Principal principal,
+							  HttpServletRequest request) {
 		int pageCount = 0;
 		List<Hoadon> listHoadon = null;
-		if (trangthai.equals("deleted")) {
-			int listHoaDonSize = hoaDonService.findByTrangthaiOrderByIdDesc("deleted").size();
-			pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
-			listHoadon = hoaDonService.findByTrangthaiOrderByIdDesc("deleted", new PageRequest(page - 1, limit));
+		List<Hoadon> listHoadonThongKe = null;
+		if(request.isUserInRole("ROLE_ADMIN")) {
+			if (trangthai.equals("deleted")) {
+				int listHoaDonSize = hoaDonService.findByTrangthaiOrderByIdDesc("deleted").size();
+				pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
+				listHoadon = hoaDonService.findByTrangthaiOrderByIdDesc("deleted", new PageRequest(page - 1, limit));
 
-		} else if (trangthai.equals("chuathanhtoan")) {
-			int listHoaDonSize = hoaDonService.findByTrangthaiChuaThanhToan("deleted").size();
-			pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
-			listHoadon = hoaDonService.findByTrangthaiChuaThanhToan("deleted", new PageRequest(page - 1, limit));
-		} else {
-			int listHoaDonSize = hoaDonService.findByTrangthaiDaThanhToan("deleted").size();
-			pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
-			listHoadon = hoaDonService.findByTrangthaiDaThanhToan("deleted", new PageRequest(page - 1, limit));
+			} else if (trangthai.equals("chuathanhtoan")) {
+				int listHoaDonSize = hoaDonService.findByTrangthaiChuaThanhToan("deleted").size();
+				pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
+				listHoadon = hoaDonService.findByTrangthaiChuaThanhToan("deleted", new PageRequest(page - 1, limit));
+			} else {
+				int listHoaDonSize = hoaDonService.findByTrangthaiDaThanhToan("deleted").size();
+				pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
+				listHoadon = hoaDonService.findByTrangthaiDaThanhToan("deleted", new PageRequest(page - 1, limit));
+			}
+			listHoadonThongKe = hoaDonService.findByTrangthaiNotOrderByIdDesc("deleted");
+		}else {
+			Taikhoan taikhoan= taikhoanService.findByUsername(principal.getName());
+			if (trangthai.equals("deleted")) {
+				int listHoaDonSize = hoaDonService.findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc(
+						"deleted",taikhoan.getNhanvien()).size();
+				pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
+				listHoadon = hoaDonService.findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc("deleted",
+						taikhoan.getNhanvien(),new PageRequest(page - 1, limit));
+
+			} else if (trangthai.equals("chuathanhtoan")) {
+				int listHoaDonSize = hoaDonService.findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienban(
+						"deleted",taikhoan.getNhanvien()).size();
+				pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
+				listHoadon = hoaDonService.findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienban(
+						"deleted",taikhoan.getNhanvien(), new PageRequest(page - 1, limit));
+			} else {
+				int listHoaDonSize = hoaDonService.findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienban(
+						"deleted",taikhoan.getNhanvien()).size();
+				pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
+				listHoadon = hoaDonService.findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienban(
+						"deleted",taikhoan.getNhanvien(), new PageRequest(page - 1, limit));
+			}
+			listHoadonThongKe = hoaDonService.findByTrangthaiNotAndNhanvienByIdnhanvienbanOrderByIdDesc("deleted", taikhoan.getNhanvien());
 		}
-
 		model.addAttribute("listHoadon", listHoadon);
+		model.addAttribute("listHoadonThongKe", listHoadonThongKe);
 		model.addAttribute("currentpage", page);
 		model.addAttribute("pagecount", pageCount);
 		return "danhsachhoadon";
@@ -93,6 +124,7 @@ public class HoaDonController {
 		List<Hanghoa> listHanghoa = hangHoaService.findByTrangthaiOrderByIdDesc("active");
 		List<Khachhang> listKhachhang = khachHangService.findByTrangthaiNotOrderByIdDesc("deleted");
 		List<Nhanvien> listNhanvien = nhanVienService.findByTrangthaiOrderByIdDesc("active");
+
 		model.addAttribute("listHanghoa", listHanghoa);
 		model.addAttribute("listKhachhang", listKhachhang);
 		model.addAttribute("listNhanvien", listNhanvien);
@@ -101,7 +133,7 @@ public class HoaDonController {
 	}
 	@PreAuthorize("hasAnyRole('ADMIN', 'BANHANG', 'GIAOHANG', 'TAICHINH')")
 	@GetMapping("/hoadon/{id}")
-	String pageSuaHoaDon(@PathVariable("id") Integer id, Model model) {
+	String pageSuaHoaDon(@PathVariable("id") Integer id, Model model,Principal principal ,HttpServletRequest request) {
 
 		Hoadon hoadon = hoaDonService.findById(id);
 		List<Chitiethoadon> listChitiethoadon = chiTietHoaDonService.findByHoadonAndTrangthaiOrderByIdDesc(hoadon,
@@ -109,30 +141,44 @@ public class HoaDonController {
 		List<Hanghoa> listHanghoa = hangHoaService.findByTrangthaiOrderByIdDesc("active");
 		List<Khachhang> listKhachhang = khachHangService.findByTrangthaiNotOrderByIdDesc("deleted");
 		List<Nhanvien> listNhanvien = nhanVienService.findByTrangthaiOrderByIdDesc("active");
+
+
 		model.addAttribute("listHanghoa", listHanghoa);
 		model.addAttribute("listKhachhang", listKhachhang);
 		model.addAttribute("listNhanvien", listNhanvien);
 
 		model.addAttribute("listChitiethoadon", listChitiethoadon);
-		model.addAttribute("hoadon", hoadon);
-		return "suahoadon";
+		Taikhoan taikhoan= taikhoanService.findByUsername(principal.getName());
+		if(request.isUserInRole("ROLE_ADMIN") || hoadon.getNhanvienByIdnhanvienban() == taikhoan.getNhanvien() ) {
+			model.addAttribute("hoadon", hoadon);
+			return "suahoadon";
+		}else {
+			return "redirect:/admin/hoadon?trangthai=dathanhtoan&limit=100&page=1";
+		}
+
 	}
 
 	
 	@PreAuthorize("hasAnyRole('ADMIN', 'BANHANG')")
 	@PostMapping("/hoadon")
-	String themHoaDon(@ModelAttribute("hoadon") Hoadon hoadon, @RequestParam("nhanvienbanhang") Integer nhanvienbanhang,
+	String themHoaDon(@ModelAttribute("hoadon") Hoadon hoadon,
+					  @RequestParam("tongtien_money") String tongtien_money,
+					  @RequestParam("tiendatra_money") String tiendatra_money,
+					  @RequestParam("congno_money") String congno_money,
+					  @RequestParam("nhanvienbanhang") Integer nhanvienbanhang,
 			@RequestParam("nhanviengiaohang") Integer nhanviengiaohang,
 			@RequestParam("nhanvienchamsoc") Integer nhanvienchamsoc, @RequestParam("khachhang") Integer khachhang,
 			@RequestParam("hinhthucthanhtoan") String hinhthucthanhtoan, @RequestParam("ngaylap") String ngaylap,
 			@RequestParam("ngayxuat") String ngayxuat, @RequestParam("ngaythanhtoan") String ngaythanhtoan,
 			@RequestParam("sodienthoai") String sodienthoai, @RequestParam("trangthai") String trangthai,
 			@RequestParam("idhh") List<Integer> idhh, @RequestParam("soluonghh") List<Integer> soluonghh,
-			@RequestParam("giabanhh") List<Long> giabanhh, @RequestParam("thanhtienhh") List<Long> thanhtienhh,
+			@RequestParam("giabanhh") List<String> giabanhh, @RequestParam("thanhtienhh") List<String> thanhtienhh,
 			RedirectAttributes redirectAttributes, Principal principal) {
 
 		try {
-
+			Long tongtien = Long.valueOf(tongtien_money.replace(".",""));
+			Long tiendatra = Long.valueOf(tiendatra_money.replace(".",""));
+			Long congno = Long.valueOf(congno_money.replace(".",""));
 			SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 			Nhanvien getNhanVienBanHangById = nhanVienService.findById(nhanvienbanhang);
 			Nhanvien getNhanVienChamSocById = nhanVienService.findById(nhanvienchamsoc);
@@ -153,12 +199,17 @@ public class HoaDonController {
 			hoadon.setNgaythanhtoan(df.parse(ngaythanhtoan));
 			hoadon.setSodienthoai(sodienthoai.replace("_", ""));
 			hoadon.setTrangthai(trangthai);
+
+			hoadon.setTongtien(tongtien);
+			hoadon.setTiendatra(tiendatra);
+			hoadon.setCongno(congno);
 			hoaDonService.saveOrUpdate(hoadon);
 
 			for (int i = 0; i < idhh.size(); i++) {
 				Hanghoa hangHoaChiTietHoaDon = hangHoaService.findById(idhh.get(i));
-				Chitiethoadon chitiethoadon = new Chitiethoadon(hangHoaChiTietHoaDon, hoadon, giabanhh.get(i),
-						soluonghh.get(i), giabanhh.get(i), thanhtienhh.get(i), "active", "");
+				Chitiethoadon chitiethoadon = new Chitiethoadon(hangHoaChiTietHoaDon, hoadon, hangHoaChiTietHoaDon.getGiaban(),
+						soluonghh.get(i), Long.valueOf(giabanhh.get(i).replace(".","")),
+						Long.valueOf(thanhtienhh.get(i).replace(".","")), "active", "");
 				chiTietHoaDonService.saveOrUpdate(chitiethoadon);
 
 			}
@@ -195,14 +246,10 @@ public class HoaDonController {
 			 * luongService.saveOrUpdate(luong); }
 			 */
 			ArrayList<Nhanvien> nhanvienarr = new ArrayList<Nhanvien>();
-			nhanvienarr.add(getNhanVienLapHoaDon);
-			nhanvienarr.add(getNhanVienGiaoHangById);
+			//nhanvienarr.add(getNhanVienLapHoaDon);
+			//nhanvienarr.add(getNhanVienGiaoHangById);
 			nhanvienarr.add(getNhanVienBanHangById);
-			nhanvienarr.add(getNhanVienChamSocById);
-
-			for (Nhanvien nv : nhanvienarr) {
-				System.out.println("Nhan VIen : " + nv.getId());
-			}
+			//nhanvienarr.add(getNhanVienChamSocById);
 
 			themluong(hoadon, nhanvienarr, ngaylap);
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thành Công");
@@ -216,32 +263,42 @@ public class HoaDonController {
 
 	}
 
-	void themluong(Hoadon hoadon, ArrayList<Nhanvien> nhanvien, String ngaylap) {
-		Luong luong = null;
+	void themluong(Hoadon hoadon, ArrayList<Nhanvien> nhanvien, String ngay) {
+		System.out.println(hoadon+"-=-=-=-=-==--=-=-=-=-=-=");
+		Date date = new Date();
+		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		String splitDate[] = df.format(date).split("/");
+		String splitngay[] = ngay.split("/");
+		Long tongtienvon = 0L;
+		List<Chitiethoadon> chitiethoadons = chiTietHoaDonService.findByHoadon(hoadon);
+		for(Chitiethoadon ct :chitiethoadons){
 
-		String splitngaylap[] = ngaylap.split("/");
+			tongtienvon += (ct.getHanghoa().getGianhap() * ct.getSoluong());
+		}
 		for (Nhanvien nv : nhanvien) {
 
-			luong = luongService.findOneByNhanvienAndThangAndNam(nv, splitngaylap[1], splitngaylap[2]);
-			Long thuong = (long) ((hoadon.getTongtien() * nv.getChietkhau()) / 100);
-			if (luong == null) {
-
-				Luong newluong = new Luong(nv, nv.getLuong(), thuong, splitngaylap[1], splitngaylap[2], "chuatraluong",
-						"");
-				luongService.saveOrUpdate(newluong);
-
-			} else {
-				luong.setThuong(luong.getThuong() + thuong);
-				luongService.saveOrUpdate(luong);
+			Luong luong = luongService.findOneByNhanvienAndThangAndNam(nv, splitDate[1], splitDate[2]);
+			Long thuong = 0L;
+			if(hoadon.getTiendatra() == 0) {
+				thuong = (long) -(((hoadon.getTongtien() - (tongtienvon)) * nv.getChietkhau()) / 100);
+			}else {
+				thuong = (long) (((hoadon.getTiendatra() - (tongtienvon)) * nv.getChietkhau()) / 100);
 			}
+			luong.setThuongcuahoadon(luong.getThuongcuahoadon() + (thuong));
+			luongService.saveOrUpdate(luong);
+
 		}
+
 
 	}
 
 	
 	@PreAuthorize("hasAnyRole('ADMIN', 'BANHANG')")
 	@PatchMapping(value="/hoadon", params="update")
-	String suaHoaDon(@ModelAttribute("hoadon") Hoadon hoadon, 
+	String suaHoaDon(@ModelAttribute("hoadon") Hoadon hoadon,
+					 @RequestParam("tongtien_money") String tongtien_money,
+					 @RequestParam("tiendatra_money") String tiendatra_money,
+					 @RequestParam("congno_money") String congno_money,
 			@RequestParam("nhanvienbanhang") Integer nhanvienbanhang,
 			@RequestParam("nhanviengiaohang") Integer nhanviengiaohang,
 			@RequestParam("nhanvienchamsoc") Integer nhanvienchamsoc, @RequestParam("khachhang") Integer khachhang,
@@ -250,14 +307,17 @@ public class HoaDonController {
 			@RequestParam("ngayxuat") String ngayxuat, @RequestParam("ngaythanhtoan") String ngaythanhtoan,
 			@RequestParam("sodienthoai") String sodienthoai, @RequestParam("trangthai") String trangthai,
 			@RequestParam("idcthd") List<Integer> idcthd, @RequestParam("idhh") List<Integer> idhh,
-			@RequestParam("soluonghh") List<Integer> soluonghh, @RequestParam("giabanhh") List<Long> giabanhh,
-			@RequestParam("thanhtienhh") List<Long> thanhtienhh, RedirectAttributes redirectAttributes,
+			@RequestParam("soluonghh") List<Integer> soluonghh, @RequestParam("giabanhh") List<String> giabanhh,
+			@RequestParam("thanhtienhh") List<String> thanhtienhh, RedirectAttributes redirectAttributes,
 			Principal principal) {
 
 		try {
-
+			Long tongtien = Long.valueOf(tongtien_money.replace(".",""));
+			Long tiendatra = Long.valueOf(tiendatra_money.replace(".",""));
+			Long congno = Long.valueOf(congno_money.replace(".",""));
 			SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 			Hoadon hoadoncu = hoaDonService.findById(hoadon.getId());
+			System.out.println("HOA DON CU :" + hoadoncu.getTiendatra());
 			Nhanvien getNhanVienBanHangById = nhanVienService.findById(nhanvienbanhang);
 			Nhanvien getNhanVienChamSocById = nhanVienService.findById(nhanvienchamsoc);
 			Nhanvien getNhanVienGiaoHangById = nhanVienService.findById(nhanviengiaohang);
@@ -277,6 +337,10 @@ public class HoaDonController {
 			hoadon.setNgaythanhtoan(df.parse(ngaythanhtoan));
 			hoadon.setSodienthoai(sodienthoai.replace("_", ""));
 			hoadon.setTrangthai(trangthai);
+
+			hoadon.setTongtien(tongtien);
+			hoadon.setTiendatra(tiendatra);
+			hoadon.setCongno(congno);
 
 			if (!hoadoncu.getTongtien().equals(hoadon.getTongtien())) {
 				// Tien CHam Soc Khach Hang
@@ -311,26 +375,32 @@ public class HoaDonController {
 				 * 
 				 * luong.setThuong(thuongcu + thuong); luongService.saveOrUpdate(luong);
 				 */
-				ArrayList<Nhanvien> nhanvienarr = new ArrayList<Nhanvien>();
-				nhanvienarr.add(getNhanVienLapHoaDon);
-				nhanvienarr.add(getNhanVienGiaoHangById);
-				nhanvienarr.add(getNhanVienBanHangById);
-				nhanvienarr.add(getNhanVienChamSocById);
-				sualuong(hoadoncu, hoadon, nhanvienarr, ngaylap);
+
 			}
+
+			ArrayList<Nhanvien> nhanvienarr = new ArrayList<Nhanvien>();
+			//nhanvienarr.add(getNhanVienLapHoaDon);
+			//nhanvienarr.add(getNhanVienGiaoHangById);
+			nhanvienarr.add(getNhanVienBanHangById);
+			//nhanvienarr.add(getNhanVienChamSocById);
+			System.out.println("==== " + hoadoncu.getTiendatra());
+			sualuong(hoadoncu, hoadon, nhanvienarr, ngaylap);
 			hoaDonService.saveOrUpdate(hoadon);
 
 			for (int i = 0; i < idhh.size(); i++) {
 				Hanghoa hangHoaChiTietHoaDon = hangHoaService.findById(idhh.get(i));
 				if (idcthd.get(i) == 0) {
-					Chitiethoadon chitiethoadon = new Chitiethoadon(hangHoaChiTietHoaDon, hoadon, giabanhh.get(i),
-							soluonghh.get(i), giabanhh.get(i), thanhtienhh.get(i), "active", "");
+					Chitiethoadon chitiethoadon = new Chitiethoadon(hangHoaChiTietHoaDon, hoadon,hangHoaChiTietHoaDon.getGiaban(),
+							soluonghh.get(i), Long.valueOf(giabanhh.get(i).replace(".","")),
+							Long.valueOf(thanhtienhh.get(i).replace(".","")), "active", "");
 					chiTietHoaDonService.saveOrUpdate(chitiethoadon);
 
 				} else {
 
 					Chitiethoadon chitiethoadon = new Chitiethoadon(idcthd.get(i), hangHoaChiTietHoaDon, hoadon,
-							giabanhh.get(i), soluonghh.get(i), giabanhh.get(i), thanhtienhh.get(i), "active", "");
+							hangHoaChiTietHoaDon.getGiaban(), soluonghh.get(i),
+							Long.valueOf(giabanhh.get(i).replace(".","")),
+							Long.valueOf(thanhtienhh.get(i).replace(".","")), "active", "");
 					chiTietHoaDonService.saveOrUpdate(chitiethoadon);
 				}
 
@@ -346,20 +416,42 @@ public class HoaDonController {
 	}
 
 	void sualuong(Hoadon hoadoncu, Hoadon hoadon, ArrayList<Nhanvien> nhanvien, String ngaylap) {
+		System.out.println(hoadoncu.getTiendatra() +"==="+ hoadon.getTiendatra());
+		Date date = new Date();
+		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		String splitDate[] = df.format(date).split("/");
 		String splitngaylap[] = ngaylap.split("/");
+		Long tongtienvon = 0L;
+		List<Chitiethoadon> chitiethoadons = chiTietHoaDonService.findByHoadon(hoadon);
+		for(Chitiethoadon ct :chitiethoadons){
 
+			tongtienvon += ct.getHanghoa().getGianhap() * ct.getSoluong();
+		}
+
+		System.out.println("TONG TIEN VON : " + tongtienvon);
 		for (Nhanvien nv : nhanvien) {
-			Luong luong = luongService.findOneByNhanvienAndThangAndNam(nv, splitngaylap[1],
-					splitngaylap[2]);
-			System.out.println(luong.getThuong());
-			System.out.println((hoadoncu.getTongtien() * nv.getChietkhau()) / 100);
-			Long thuongcu = (long) (luong.getThuong()
-					- (hoadoncu.getTongtien() * nv.getChietkhau()) / 100);
-			System.out.println(thuongcu);
-			Long thuong = (long) ((hoadon.getTongtien() * nv.getChietkhau()) / 100);
-			System.out.println(thuong);
+			System.out.println("NHAN VIEN : " + nv.getTennhanvien() );
+			Luong luong = luongService.findOneByNhanvienAndThangAndNam(nv, splitDate[1],
+					splitDate[2]);
+			System.out.println("LUONG : " + luong.getId() );
+			Long thuongcu = 0L;
+			if(hoadoncu.getTiendatra() == 0){
+				thuongcu = (long) (luong.getThuongcuahoadon()
+						- (-(((hoadoncu.getTongtien() - (tongtienvon)) * nv.getChietkhau()) / 100)));
+			}else {
+				thuongcu = (long) (luong.getThuongcuahoadon()
+						- (((hoadoncu.getTiendatra() - (tongtienvon)) * nv.getChietkhau()) / 100));
+			}
+			Long thuong = 0L;
+			if(hoadon.getTiendatra() == 0) {
+				thuong = (long) -(((hoadon.getTongtien() - (tongtienvon)) * nv.getChietkhau()) / 100);
+			}else {
+				thuong = (long) (((hoadon.getTiendatra() - (tongtienvon)) * nv.getChietkhau()) / 100);
+			}
 
-			luong.setThuong(thuongcu + thuong);
+			System.out.println(luong.getThuongcuahoadon()+"==="+hoadoncu.getTiendatra()+"==="+
+					hoadon.getTiendatra()+"==="+thuongcu +"==="+ thuong);
+			luong.setThuongcuahoadon(thuongcu + (thuong));
 			luongService.saveOrUpdate(luong);
 		}
 	}
@@ -415,17 +507,29 @@ public class HoaDonController {
 				khachHangService.saveOrUpdate(khachhang);
 
 				// Luong
+				Long tongtienvon = 0L;
+				List<Chitiethoadon> chitiethoadons = chiTietHoaDonService.findByHoadon(hoadon);
+				for(Chitiethoadon ct :chitiethoadons){
+
+					tongtienvon += ct.getHanghoa().getGianhap() * ct.getSoluong();
+				}
 				SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-				String splitngaylap[] = df.format(hoadon.getNgaylap()).split("/");
+				String splitngaylap[] = df.format(hoadon.getNgaythanhtoan()).split("/");
 
 				System.out.println(splitngaylap[1] + "-" + splitngaylap[2]);
 				Luong luong = luongService.findOneByNhanvienAndThangAndNam(hoadon.getNhanvienByIdnhanvienban(),
 						splitngaylap[1], splitngaylap[2]);
+				Long thuongcu = 0L;
+				if(hoadon.getTiendatra() == 0){
+					thuongcu = (long) (luong.getThuongcuahoadon()
+							- (-(((hoadon.getTongtien() - (tongtienvon)) * hoadon.getNhanvienByIdnhanvienban().getChietkhau()) / 100)));
+				}else {
+					thuongcu = (long) (luong.getThuongcuahoadon()
+							- (((hoadon.getTiendatra() - (tongtienvon)) * hoadon.getNhanvienByIdnhanvienban().getChietkhau()) / 100));
+				}
 
-				Long thuong = (long) ((hoadon.getTongtien() * hoadon.getNhanvienByIdnhanvienban().getChietkhau())
-						/ 100);
 
-				luong.setThuong(luong.getThuong() - thuong);
+				luong.setThuongcuahoadon(thuongcu);
 				luongService.saveOrUpdate(luong);
 				hoaDonService.saveOrUpdate(hoadon);
 

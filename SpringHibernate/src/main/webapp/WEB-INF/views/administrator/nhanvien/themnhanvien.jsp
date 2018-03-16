@@ -6,7 +6,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
+<style>
+	.lb-flat-red {
+		padding-left: 10px;
+		padding-right: 20px;
+	}
+</style>
 <section class="content">
 
 	<div class="row">
@@ -131,21 +136,49 @@
 							<div class="input-group">
 
 
-							<form:input path="luong" min="0" type="number" value="0"
+							<input id="luong" name="luong_money" type="text" value="0"
 								class="form-control" placeholder="Lương" />
 								<span class="input-group-addon">VNĐ</span>
 							</div>
 						</div>
 						<div class="form-group">
+							<label for="hienthiluong">Hiển Thị Lương</label> <br> <label
+								class="lb-flat-red"> <input value="hienthi"
+								type="radio" name="hienthiluong" class="flat-red" checked="checked"> Hiển Thị
+						</label> <label class="lb-flat-red"> <input value="khonghienthi"
+								type="radio" name="hienthiluong" class="flat-red" >Không Hiển Thị
+						</label>
+						</div>
+						<div class="form-group">
 							<label for="chietkhau">Chiết Khấu (%)</label>
 							<div class="input-group">
 
-							<form:input path="chietkhau" type="number" class="form-control" value="0"
+							<form:input path="chietkhau" type="number" class="form-control" value="0" min="0"
 								placeholder="Chiết Khấu" />
 								<span class="input-group-addon">%</span>
 							</div>
 						</div>
-						
+						<div class="form-group">
+							<label>Nhân Viên Cấp Trên</label> <select
+								class="form-control select2" name="nhanviencaptren"
+								style="width: 100%;">
+							<option value="0" selected>Không</option>
+							<c:forEach var="nv" items="${listNhanvien }">
+								<option value="${nv.id }">${nv.manhanvien}-
+										${nv.tennhanvien }</option>
+							</c:forEach>
+
+						</select>
+						</div>
+						<div class="form-group">
+							<label for="chietkhauchonhanviencaptren">Chiết Khấu Cho Nhân Viên Cấp Trên (%)</label>
+							<div class="input-group">
+
+								<form:input path="chietkhauchonhanviencaptren" type="number" class="form-control" value="0" min="0"
+											placeholder="Chiết Khấu Cho Nhân Viên Cấp Trên" />
+								<span class="input-group-addon">%</span>
+							</div>
+						</div>
 						<div class="form-group">
 							<label for="thongtinkhac">Thông Tin Khác</label>
 							<form:textarea path="thongtinkhac" type="text" class="form-control"

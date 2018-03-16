@@ -219,25 +219,29 @@
 							<label for="sotienchamsoc">Số Tiền Chăm Sóc</label>
 							<div class="input-group">
 
-								<form:input path="sotienchamsoc" type="number" min="0"
-											class="form-control" placeholder="Số Tiền Chăm Sóc" />
+								<input id="sotienchamsoc" name="sotienchamsoc_money" type="text"
+									   value="<fmt:formatNumber type="number" pattern="###,###"
+											value="${khachhang.sotienchamsoc}" />"
+									   class="form-control" placeholder="Số Tiền Chăm Sóc" />
 								<span class="input-group-addon">VNĐ</span>
 								<label id="_sotienchamsoc-error" class="error"
 									   style="display: none;"></label>
 							</div>
 						</div>
 
-							<div class="form-group">
-								<label for="sotiendachamsoc">Số Tiền Đã Chăm Sóc</label>
-								<div class="input-group">
+						<div class="form-group">
+							<label for="sotiendachamsoc">Số Tiền Đã Chăm Sóc</label>
+							<div class="input-group">
 
-									<form:input path="sotiendachamsoc" type="number" min="0"
-												class="form-control" placeholder="Số Đã Tiền Chăm Sóc" />
-									<span class="input-group-addon">VNĐ</span>
-									<label id="_sotiendachamsoc-error" class="error"
-										   style="display: none;"></label>
-								</div>
+								<input id="sotiendachamsoc" name="_money" type="text"
+									   value="<fmt:formatNumber type="number" pattern="###,###"
+											value="${khachhang.sotiendachamsoc}" />"
+									   class="form-control" placeholder="Số Đã Tiền Chăm Sóc" />
+								<span class="input-group-addon">VNĐ</span>
+								<label id="_sotiendachamsoc-error" class="error"
+									   style="display: none;"></label>
 							</div>
+						</div>
 						<div class="form-group">
 							<label for="diem">Điểm</label>
 							<form:input path="diem" type="number" class="form-control"

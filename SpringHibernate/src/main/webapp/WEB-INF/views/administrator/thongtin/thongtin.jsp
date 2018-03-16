@@ -101,6 +101,7 @@
 			<!-- /.row -->
 
 			<!-- Table row -->
+			<c:if test="${nhanvien.hienthiluong == 'hienthi'}">
 			<div class="row">
 				<div class="col-xs-12 table-responsive">
 					<table class="table table-striped">
@@ -135,9 +136,10 @@
 				</div>
 				<!-- /.col -->
 			</div>
+			</c:if>
 			<!-- /.row -->
 
-			<div class="row">
+			<div style="padding-top: 15px;" class="row">
 				<!-- accepted payments column -->
 				
 				<!-- /.col -->

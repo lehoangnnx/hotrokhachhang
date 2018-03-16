@@ -81,6 +81,10 @@
 									</a>
 									</c:when>
 									<c:when test="${cs.trangthai == 'chochamsoc' }">
+										<a href="${contextPath }/admin/chamsoc/${cs.id}">
+											<i style="color: blue;" class="fa fa-pencil fa-lg"
+											   aria-hidden="true" title="Sửa"> </i>
+										</a>
 									<a href="${contextPath }/admin/chamsoctieptheo/add/${cs.id}">
 											<i style="color: green; margin-left: 10px;"
 											class="fa fa-commenting-o" aria-hidden="true"

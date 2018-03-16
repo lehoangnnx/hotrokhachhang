@@ -139,4 +139,48 @@ public class HoaDonServiceImpl implements HoaDonService {
 		return hoaDonRepository.findByKhachhang(khachhang);
 	}
 
+	@Override
+	public List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc(String trangthai, Nhanvien nhanvienByIdnhanvienban, Pageable pageable) {
+		return hoaDonRepository.findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc(trangthai,nhanvienByIdnhanvienban,pageable);
+	}
+
+	@Override
+	public List<Hoadon> findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienban(String trangthai, Nhanvien nhanvienByIdnhanvienban, Pageable pageable) {
+		return hoaDonRepository.findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienban(trangthai,nhanvienByIdnhanvienban,pageable);
+	}
+
+	@Override
+	public List<Hoadon> findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienban(String trangthai, Nhanvien nhanvienByIdnhanvienban, Pageable pageable) {
+		return hoaDonRepository.findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienban(trangthai,nhanvienByIdnhanvienban,pageable);
+	}
+
+	@Override
+	public List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc(String trangthai, Nhanvien nhanvienByIdnhanvienban) {
+		return hoaDonRepository.findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc(trangthai,nhanvienByIdnhanvienban);
+	}
+
+	@Override
+	public List<Hoadon> findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienban(String trangthai, Nhanvien nhanvienByIdnhanvienban) {
+		return hoaDonRepository.findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienban(trangthai,nhanvienByIdnhanvienban);
+	}
+
+	@Override
+	public List<Hoadon> findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienban(String trangthai, Nhanvien nhanvienByIdnhanvienban) {
+		return hoaDonRepository.findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienban(trangthai,nhanvienByIdnhanvienban);
+	}
+
+	@Override
+	public List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanOrderByIdDesc(String trangthai, Nhanvien nhanvienByIdnhanvienban) {
+		return hoaDonRepository.findByTrangthaiNotAndNhanvienByIdnhanvienbanOrderByIdDesc(trangthai,nhanvienByIdnhanvienban);
+	}
+
+	@Override
+	public List<Khachhang> findDistinctKhachhangByNhanvienByIdnhanvienbanAndTrangthaiNot(Nhanvien nhanvienByIdnhanvienban, String trangthai) {
+		return hoaDonRepository.findDistinctKhachhangByNhanvienByIdnhanvienbanAndTrangthaiNot(nhanvienByIdnhanvienban,trangthai);
+	}
+
+	@Override
+	public List<Hoadon> findKhachhangDistinctByNhanvienByIdnhanvienbanAndTrangthaiNot(Nhanvien nhanvienByIdnhanvienban, String trangthai) {
+		return hoaDonRepository.findKhachhangDistinctByNhanvienByIdnhanvienbanAndTrangthaiNot(nhanvienByIdnhanvienban,trangthai);
+	}
 }
