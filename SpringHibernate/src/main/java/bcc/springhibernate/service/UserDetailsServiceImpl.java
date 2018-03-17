@@ -3,7 +3,9 @@ package bcc.springhibernate.service;
 import java.util.HashSet;
 import java.util.Set;
 
+import bcc.springhibernate.controller.ThongBao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,17 +13,25 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.RequestContextListener;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.util.HtmlUtils;
 
 import bcc.springhibernate.model.Quyen;
 import bcc.springhibernate.model.Taikhoan;
 import bcc.springhibernate.repository.TaikhoanRepository;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
+
 	@Autowired
 	private TaikhoanRepository taiKhoanRepository;
-	
+
+
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -24,6 +24,7 @@ import javax.persistence.TemporalType;
 @Table(name = "hoadon", catalog = "hotrobanhang")
 public class Hoadon implements java.io.Serializable {
 
+
 	private Integer id;
 	private Khachhang khachhang;
 	private Nhanvien nhanvienByIdnhanvienlaphoadon;
@@ -40,6 +41,7 @@ public class Hoadon implements java.io.Serializable {
 	private Long tiendatra;
 	private String diachigiaohang;
 	private String sodienthoai;
+	private Boolean hoadondautien;
 	private String trangthai;
 	private String ghichu;
 	private Set<Chitiethoadon> chitiethoadons = new HashSet<Chitiethoadon>(0);
@@ -48,15 +50,11 @@ public class Hoadon implements java.io.Serializable {
 	public Hoadon() {
 	}
 
+
 	public Hoadon(String sohoadon) {
 		this.sohoadon = sohoadon;
 	}
-
-	public Hoadon(Khachhang khachhang, Nhanvien nhanvienByIdnhanvienlaphoadon, Nhanvien nhanvienByIdnhanvienban,
-			Nhanvien nhanvienByIdnhanviengiaohang, Nhanvien nhanvienByIdnhanvienchamsoc, String sohoadon,
-			String hinhthucthanhtoan, Date ngaylap, Date ngayxuat, Date ngaythanhtoan, Long tongtien, Long congno,
-			Long tiendatra, String diachigiaohang, String sodienthoai, String trangthai, String ghichu,
-			Set<Chitiethoadon> chitiethoadons, Set<Chitiethoadon> chitiethoadons_1) {
+	public Hoadon(Khachhang khachhang, Nhanvien nhanvienByIdnhanvienlaphoadon, Nhanvien nhanvienByIdnhanvienban, Nhanvien nhanvienByIdnhanviengiaohang, Nhanvien nhanvienByIdnhanvienchamsoc, String sohoadon, String hinhthucthanhtoan, Date ngaylap, Date ngayxuat, Date ngaythanhtoan, Long tongtien, Long congno, Long tiendatra, String diachigiaohang, String sodienthoai, Boolean hoadondautien, String trangthai, String ghichu, Set<Chitiethoadon> chitiethoadons, Set<Chitiethoadon> chitiethoadons_1) {
 		this.khachhang = khachhang;
 		this.nhanvienByIdnhanvienlaphoadon = nhanvienByIdnhanvienlaphoadon;
 		this.nhanvienByIdnhanvienban = nhanvienByIdnhanvienban;
@@ -72,16 +70,17 @@ public class Hoadon implements java.io.Serializable {
 		this.tiendatra = tiendatra;
 		this.diachigiaohang = diachigiaohang;
 		this.sodienthoai = sodienthoai;
+		this.hoadondautien = hoadondautien;
 		this.trangthai = trangthai;
 		this.ghichu = ghichu;
 		this.chitiethoadons = chitiethoadons;
 		this.chitiethoadons_1 = chitiethoadons_1;
 	}
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@Id @GeneratedValue(strategy=IDENTITY)
 
-	@Column(name = "id", unique = true, nullable = false)
+
+	@Column(name="id", unique=true, nullable=false)
 	public Integer getId() {
 		return this.id;
 	}
@@ -90,8 +89,8 @@ public class Hoadon implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idkhachhang")
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="idkhachhang")
 	public Khachhang getKhachhang() {
 		return this.khachhang;
 	}
@@ -100,8 +99,8 @@ public class Hoadon implements java.io.Serializable {
 		this.khachhang = khachhang;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idnhanvienlaphoadon")
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="idnhanvienlaphoadon")
 	public Nhanvien getNhanvienByIdnhanvienlaphoadon() {
 		return this.nhanvienByIdnhanvienlaphoadon;
 	}
@@ -110,8 +109,8 @@ public class Hoadon implements java.io.Serializable {
 		this.nhanvienByIdnhanvienlaphoadon = nhanvienByIdnhanvienlaphoadon;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idnhanvienban")
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="idnhanvienban")
 	public Nhanvien getNhanvienByIdnhanvienban() {
 		return this.nhanvienByIdnhanvienban;
 	}
@@ -120,8 +119,8 @@ public class Hoadon implements java.io.Serializable {
 		this.nhanvienByIdnhanvienban = nhanvienByIdnhanvienban;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idnhanviengiaohang")
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="idnhanviengiaohang")
 	public Nhanvien getNhanvienByIdnhanviengiaohang() {
 		return this.nhanvienByIdnhanviengiaohang;
 	}
@@ -130,8 +129,8 @@ public class Hoadon implements java.io.Serializable {
 		this.nhanvienByIdnhanviengiaohang = nhanvienByIdnhanviengiaohang;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idnhanvienchamsoc")
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="idnhanvienchamsoc")
 	public Nhanvien getNhanvienByIdnhanvienchamsoc() {
 		return this.nhanvienByIdnhanvienchamsoc;
 	}
@@ -140,7 +139,8 @@ public class Hoadon implements java.io.Serializable {
 		this.nhanvienByIdnhanvienchamsoc = nhanvienByIdnhanvienchamsoc;
 	}
 
-	@Column(name = "sohoadon", nullable = false, length = 45)
+
+	@Column(name="sohoadon", nullable=false, length=45)
 	public String getSohoadon() {
 		return this.sohoadon;
 	}
@@ -149,7 +149,8 @@ public class Hoadon implements java.io.Serializable {
 		this.sohoadon = sohoadon;
 	}
 
-	@Column(name = "hinhthucthanhtoan", length = 45)
+
+	@Column(name="hinhthucthanhtoan", length=45)
 	public String getHinhthucthanhtoan() {
 		return this.hinhthucthanhtoan;
 	}
@@ -159,7 +160,7 @@ public class Hoadon implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "ngaylap", length = 19)
+	@Column(name="ngaylap", length=19)
 	public Date getNgaylap() {
 		return this.ngaylap;
 	}
@@ -169,7 +170,7 @@ public class Hoadon implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "ngayxuat", length = 19)
+	@Column(name="ngayxuat", length=19)
 	public Date getNgayxuat() {
 		return this.ngayxuat;
 	}
@@ -179,7 +180,7 @@ public class Hoadon implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "ngaythanhtoan", length = 19)
+	@Column(name="ngaythanhtoan", length=19)
 	public Date getNgaythanhtoan() {
 		return this.ngaythanhtoan;
 	}
@@ -188,7 +189,8 @@ public class Hoadon implements java.io.Serializable {
 		this.ngaythanhtoan = ngaythanhtoan;
 	}
 
-	@Column(name = "tongtien", precision = 10, scale = 0)
+
+	@Column(name="tongtien", precision=10, scale=0)
 	public Long getTongtien() {
 		return this.tongtien;
 	}
@@ -197,7 +199,8 @@ public class Hoadon implements java.io.Serializable {
 		this.tongtien = tongtien;
 	}
 
-	@Column(name = "congno", precision = 10, scale = 0)
+
+	@Column(name="congno", precision=10, scale=0)
 	public Long getCongno() {
 		return this.congno;
 	}
@@ -206,7 +209,8 @@ public class Hoadon implements java.io.Serializable {
 		this.congno = congno;
 	}
 
-	@Column(name = "tiendatra", precision = 10, scale = 0)
+
+	@Column(name="tiendatra", precision=10, scale=0)
 	public Long getTiendatra() {
 		return this.tiendatra;
 	}
@@ -215,7 +219,8 @@ public class Hoadon implements java.io.Serializable {
 		this.tiendatra = tiendatra;
 	}
 
-	@Column(name = "diachigiaohang", length = 95)
+
+	@Column(name="diachigiaohang", length=95)
 	public String getDiachigiaohang() {
 		return this.diachigiaohang;
 	}
@@ -224,7 +229,8 @@ public class Hoadon implements java.io.Serializable {
 		this.diachigiaohang = diachigiaohang;
 	}
 
-	@Column(name = "sodienthoai", length = 15)
+
+	@Column(name="sodienthoai", length=15)
 	public String getSodienthoai() {
 		return this.sodienthoai;
 	}
@@ -233,7 +239,18 @@ public class Hoadon implements java.io.Serializable {
 		this.sodienthoai = sodienthoai;
 	}
 
-	@Column(name = "trangthai", length = 45)
+
+	@Column(name="hoadondautien")
+	public Boolean getHoadondautien() {
+		return this.hoadondautien;
+	}
+
+	public void setHoadondautien(Boolean hoadondautien) {
+		this.hoadondautien = hoadondautien;
+	}
+
+
+	@Column(name="trangthai", length=45)
 	public String getTrangthai() {
 		return this.trangthai;
 	}
@@ -242,7 +259,8 @@ public class Hoadon implements java.io.Serializable {
 		this.trangthai = trangthai;
 	}
 
-	@Column(name = "ghichu")
+
+	@Column(name="ghichu")
 	public String getGhichu() {
 		return this.ghichu;
 	}
@@ -251,7 +269,7 @@ public class Hoadon implements java.io.Serializable {
 		this.ghichu = ghichu;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hoadon")
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="hoadon")
 	public Set<Chitiethoadon> getChitiethoadons() {
 		return this.chitiethoadons;
 	}
@@ -260,7 +278,7 @@ public class Hoadon implements java.io.Serializable {
 		this.chitiethoadons = chitiethoadons;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hoadon")
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="hoadon")
 	public Set<Chitiethoadon> getChitiethoadons_1() {
 		return this.chitiethoadons_1;
 	}
@@ -268,5 +286,6 @@ public class Hoadon implements java.io.Serializable {
 	public void setChitiethoadons_1(Set<Chitiethoadon> chitiethoadons_1) {
 		this.chitiethoadons_1 = chitiethoadons_1;
 	}
+
 
 }

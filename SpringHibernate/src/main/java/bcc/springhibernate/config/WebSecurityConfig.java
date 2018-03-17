@@ -22,6 +22,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import bcc.springhibernate.config.*;
 import bcc.springhibernate.service.UserDetailsServiceImpl;
+import org.springframework.web.context.request.RequestContextListener;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;

@@ -203,7 +203,7 @@ function getHangHoaById() {
                         var thanhtiennew =soluongmoi * giabanhhold;
                         $('#thanhtienhh'+id).val(changeNumberToString(thanhtiennew));
 			    	}else {
-			    		console.log("else");
+			    		//console.log("else");
 			    		//Get the reference of the Table's TBODY element.
 						var tBody = $("#tblcthd > TBODY")[0];
 						 
@@ -244,8 +244,10 @@ function getHangHoaById() {
 	}, 100);
 };
 
+
+var trangthai  = [];
 function kiemTraGiaBan(id) {
-   /* $('input[name="giabanhh"]').each(function(){
+   /*$('input[name="giabanhh"]').each(function(){
         var input = $(this); // This is the jquery object of the input, do what you will\
         console.log(input.val());
     });*/
@@ -269,18 +271,36 @@ function kiemTraGiaBan(id) {
             data:JSON.stringify(hanghoa),
             success : function(result) {
                 if(result == 'success'){
-                    $('#giabanhh'+id).focus();
-                    $('#btn-thhvcthd').hide();
-                    $('#btn-submit').hide();
-                    $('#giabanhh'+id).css('border', '1px solid red');
-                    $('#_giaban-error').css("display", "block");
-                    $('#_giaban-error').text("* Giá Bán Hiện Tại Nhỏ Hơn Giá Nhập");
+                    trangthai.push(id);
+
+                    for(var i = 0 ; i < trangthai.length ; i++){
+                      var _id=trangthai[i];
+                        $('#giabanhh'+_id).focus();
+                        $('#btn-thhvcthd').hide();
+                        $('#btn-submit').hide();
+                        $('#giabanhh'+_id).css('border', '1px solid red');
+                        $('#_giaban-error').css("display", "block");
+                        $('#_giaban-error').text("* Giá Bán Hiện Tại Nhỏ Hơn Giá Nhập");
+                    }
+
                 }else {
-                    $('#btn-thhvcthd').show();
-                    $('#btn-submit').show();
-                    $('#giabanhh'+id).css('border', '');
-                    $('#_giaban-error').css("display", "none");
-                    $('#_giaban-error').text("");
+
+                    var index =trangthai.indexOf(id);
+                    if (index !== -1){
+                        trangthai.splice(index, 1);
+
+                    }
+                    $('#giabanhh' + id).css('border', '');
+                    if(trangthai.length == 0) {
+
+                            $('#btn-thhvcthd').show();
+                            $('#btn-submit').show();
+
+                            $('#_giaban-error').css("display", "none");
+                            $('#_giaban-error').text("");
+
+                    }
+
                 }
             },
             error : function(e) {

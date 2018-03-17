@@ -152,13 +152,14 @@
 				<li><a href="${contextPath }/admin/kpi?trangthai=active">KPI</a></li>
 
 			</ul></li> --%>
-			<li class="treeview"><a href="${contextPath }/admin/kpi?trangthai=active">KPI</a></li>
+				<li class="treeview"><a href="${contextPath }/admin/kpi?trangthai=active">
+					<i class="fa fa-link"></i> <span>KPI</span>
+				 </a></li>
+
 			</security:authorize>
-			
-			<li class="treeview"><a
-					href="${contextPath }/admin/nhanvienkpi?trangthai=inactive">Nhân
-						Viên KPI </a></li>
-						
+		<li class="treeview"><a href="${contextPath }/admin/nhanvienkpi?trangthai=inactive">
+			<i class="fa fa-link"></i> <span>Nhân Viên KPI</span>  </a></li>
+
 	</ul>
 	<!-- /.sidebar-menu -->
 </section>
