@@ -15,6 +15,9 @@ import bcc.springhibernate.service.KpiService;
 import bcc.springhibernate.service.LoaiKhachHangService;
 import bcc.springhibernate.service.NhomKhachHangService;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/admin")
 public class KpiRestController {
@@ -53,4 +56,22 @@ public class KpiRestController {
 		}
 		return "error";
 	}
+	@PostMapping("/getkpi")
+	Map<String, Object> getKKPI(@RequestBody Integer id) {
+
+		Kpi kpi = null;
+		Map<String, Object> kpiMap = new HashMap<String, Object>();
+		try {
+			kpi = kpiService.findById(id);
+			kpiMap.put("id", kpi.getId());
+			kpiMap.put("ten", kpi.getTen());
+			kpiMap.put("kieukpi", kpi.getKieukpi());
+
+		} catch (Exception e) {
+
+		}
+		return kpiMap;
+
+	}
+
 }

@@ -35,11 +35,15 @@ public interface HoaDonRepository extends JpaRepository<Hoadon, Integer> {
 
 	List<Hoadon> findByTrangthaiNotAndNgaylapBetweenOrderByIdDesc(String trangthai, Date d1, Date d2);
 
+
 	List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanAndNgaylapBetweenOrderByIdDesc(String trangthai,
 			Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2);
 
 	List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaylapBetweenOrderByIdDesc(String trangthai,
 			Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2);
+	List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc(String trangthai,
+																							Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2);
+
 	
 	@Query("select hd from Hoadon hd where hd.tongtien = hd.tiendatra and hd.congno = 0 and hd.trangthai <> ?1")
 	List<Hoadon> findByTrangthaiDaThanhToan(String trangthai);

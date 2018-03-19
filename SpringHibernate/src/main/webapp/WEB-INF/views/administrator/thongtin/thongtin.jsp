@@ -124,11 +124,11 @@
 											value="${luong.thuong }" /> &#8363;</td>
 									<td><fmt:formatNumber type="number" pattern="###,###"
 														  value="${luong.thuongcuahoadon }" /> &#8363;</td>
-									<c:if test="${luong.thuongcuahoadon > 0}" >
+
 									<td><fmt:formatNumber type="number" pattern="###,###"
 											value="${luong.thuongcuahoadon > 0 ?
 											(luong.luong + luong.thuong + luong.thuongcuahoadon) : (luong.luong + luong.thuong) }" /> &#8363;</td>
-									</c:if>
+
 
 								</tr>
 							</c:if>

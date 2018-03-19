@@ -57,7 +57,7 @@
 							</select>
 							</div>
 						<div class="form-group">
-							<label>KPI</label> <select class="form-control select2"
+							<label>KPI</label> <select class="form-control select2" id="kpi"
 								name="kpi" style="width: 100%;">
 
 								<c:forEach var="kpi" items="${listKpi}">
@@ -67,12 +67,43 @@
 
 							</select>
 						</div>
-						<div class="form-group">
-							<label for="so">Số</label>
-							<form:input path="so" type="number" class="form-control" min="0"
-								placeholder="Số" />
-						</div>
-						
+
+							<c:if test="${nhanvienkpi.kpi.kieukpi == 'so' || nhanvienkpi.kpi.kieukpi == 'phantram'}">
+
+								<div class="form-group">
+									<label for="chitieudangky">Chỉ Tiêu Đăng Ký</label>
+									<div class="input-group">
+										<input id="chitieudangky" name="_chitieudangky" type="number" class="form-control"
+											   value="${nhanvienkpi.chitieudangky}" placeholder="Chỉ Tiêu Đăng Ký"/>
+
+										<span id="addon" class="input-group-addon">
+                                            <c:if test="${nhanvienkpi.kpi.kieukpi == 'so'}">
+												SỐ
+											</c:if>
+                                              <c:if test="${nhanvienkpi.kpi.kieukpi == 'phantram'}">
+												  %
+											  </c:if>
+                                        </span>
+
+
+									</div>
+									<label id="chitieudangky-error" class="error" for="chitieudangky"></label>
+								</div>
+							</c:if>
+							<c:if test="${nhanvienkpi.kpi.kieukpi == 'tien'}">
+								<div class="form-group">
+									<label for="chitieudangky">Chỉ Tiêu Đăng Ký</label>
+									<div class="input-group">
+										<input id="chitieudangky" name="_chitieudangky" type="text" class="form-control"
+											   onkeyup="showNumberToString();"
+											   value="<fmt:formatNumber type="number" pattern="###,###"
+														  value="${nhanvienkpi.chitieudangky }" />" placeholder="Chỉ Tiêu Đăng Ký"/>
+										<span id="addon" class="input-group-addon">VNĐ</span>
+
+									</div>
+									<label id="chitieudangky-error" class="error" for="chitieudangky"></label>
+								</div>
+							</c:if>
 						<div class="form-group">
 							<label>Ngày Hoàn Thành</label>
 
@@ -90,7 +121,7 @@
 						</div>
 						<security:authorize access="hasAnyRole('ADMIN')">
 
-							<div class="form-group">
+							<%--<div class="form-group">
 								<label for="mucdohoanthanh">Mức Độ Hoàn Thành (%)</label>
 								<div class="input-group">
 
@@ -98,7 +129,7 @@
 												 class="form-control" placeholder="Mức Độ Hoàn Thành" />
 									<span class="input-group-addon">%</span>
 								</div>
-							</div>
+							</div>--%>
 
 
 
@@ -128,7 +159,7 @@
 					<div class="box-footer">
 						<c:if test="${nhanvienkpi.trangthai != 'deleted' }">
 							<div class="box-footer">
-								<button id="btn-submit" name="update" type="submit"
+								<button id="btn-submit" name="update" type="submit" onclick="checkchitieudangky();"
 									class="btn btn-primary">Xác Nhận</button>
 							</div>
 						</c:if>

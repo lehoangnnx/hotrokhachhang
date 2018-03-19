@@ -10,21 +10,155 @@
 <input hidden="" id="msg" value="${msg }"></input>
 <!-- Content Header (Page header) -->
 <section class="content-header">
+	<form:form id="formThongKe" action="${contextPath }/admin/hoadon?trangthai=dathanhtoan&limit=100&page=1"
+			   method="get">
+	<input hidden name="trangthai" value="${param.trangthai}" />
+		<input hidden name="limit" value="${param.limit}" />
+		<input hidden name="page" value="${param.page}" />
+		<div class="col-md-12">
+			<div class="box box-primary">
+
+				<div class="box-body">
+					<div class="col-md-12 text-center margin" >
+						<label style="font-size: 16px;">Thống Kê Hóa Đơn Theo Ngày Thanh Toán</label>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Từ Ngày</label>
+
+							<div class="input-group">
+								<div class="input-group-addon">
+									<i class="fa fa-calendar"></i>
+								</div>
+								<input name="tungay" id="tungay" onchange="checkNgay();"
+									   value="<fmt:formatDate value="${tungay }"
+                                                pattern="dd-MM-yyyy" />"
+									   type="text" class="form-control"
+									   data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="">
+							</div>
+							<label id="tungay-error" class="error" for="tungay"></label>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Đến Ngày</label>
+
+							<div class="input-group">
+								<div class="input-group-addon">
+									<i class="fa fa-calendar"></i>
+								</div>
+								<input name="denngay" id="denngay" onchange="checkNgay();"
+									   value="<fmt:formatDate
+                                                pattern="dd-MM-yyyy" value="${denngay }"/>"
+									   type="text" class="form-control"
+									   data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="">
+							</div>
+							<label id="denngay-error" class="error" for="denngay"></label>
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<button style="margin-top: 25px;" type="submit" id="btn-submit"
+								class="btn btn-block btn-success btn-flat">Thống Kê</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form:form>
+	<section class="col-md-12">
+		<div class="box box-primary">
+			<c:set var="tongtien" value="0" />
+			<c:set var="tiendatra" value="0" />
+			<c:set var="congno" value="0" />
+			<c:forEach var="hd" items="${listHoadonThongKe }">
+				<c:set var="tongtien" value="${tongtien + hd.tongtien }" />
+				<c:set var="tiendatra" value="${tiendatra + hd.tiendatra }" />
+				<c:set var="congno" value="${congno + hd.congno }" />
+			</c:forEach>
+			<div class="box-body">
+				<div class="col-md-12 margin" style="border-bottom: 1px solid;">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Tổng Hóa Đơn : <span>${fn:length(listHoadonThongKe) }</span>
+							</label>
+
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<c:set var="hddtt" value="0" />
+							<c:forEach var="hd" items="${listHoadonThongKe }">
+								<c:if test="${hd.tongtien == hd.tiendatra && hd.congno == 0 }">
+									<c:set var="hddtt" value="${hddtt + 1 }" />
+								</c:if>
+
+							</c:forEach>
+							<label>Hóa Đơn Đã Thanh Toán : <span>${hddtt }</span>
+							</label>
+
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<c:set var="hdctt" value="0" />
+							<c:forEach var="hd" items="${listHoadonThongKe }">
+								<c:if test="${hd.tongtien > hd.tiendatra && hd.congno > 0 }">
+									<c:set var="hdctt" value="${hdctt + 1 }" />
+								</c:if>
+
+							</c:forEach>
+							<label>Hóa Đơn Chưa Thanh Toán : <span>${hdctt }</span>
+							</label>
+
+						</div>
+					</div>
+
+				</div>
+				<div class="col-md-12 margin">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="tongtien">Tổng Tiền : <span><fmt:formatNumber
+									type="number" pattern="###,###" value="${tongtien }" /></span>
+								&#8363;
+							</label>
+
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="tiendatra">Tiền Đã Trả : <span><fmt:formatNumber
+									type="number" pattern="###,###" value="${tiendatra }" /></span>
+								&#8363;
+							</label>
+
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="congno">Đang Nợ : <span><fmt:formatNumber
+									type="number" pattern="###,###" value="${congno }" /></span>
+								&#8363;
+							</label>
+						</div>
+					</div>
+				</div>
+		</div>
+	</div>
+</section><%--
+<section class="content-header">
 	<h1>
 		Hóa Đơn
-		<%-- <small><a href="${contextPath }/admin/roles?status=active">Danh Sách Hóa Đơn</a></small>
-        <small><a class="btn btn-success" href="${contextPath }/admin/hoadon/add">Thêm mới</a></small> --%>
+		&lt;%&ndash; <small><a href="${contextPath }/admin/roles?status=active">Danh Sách Hóa Đơn</a></small>
+        <small><a class="btn btn-success" href="${contextPath }/admin/hoadon/add">Thêm mới</a></small> &ndash;%&gt;
+
 	</h1>
-	<ol class="breadcrumb">
-	<security:authorize access="hasAnyRole('ADMIN','BANHANG')">
-		<a class="btn btn-success" href="${contextPath }/admin/hoadon/add">Thêm
-			mới</a>
-			</security:authorize>
-		<%--  <li><a href="${contextPath }/"><i class="fa fa-dashboard"></i> Home</a></li>
+	&lt;%&ndash;<ol class="breadcrumb">
+
+		&lt;%&ndash;  <li><a href="${contextPath }/"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="${contextPath }/roles">Quyền</a></li>
-        <li class="active">Quản lý quyền</li> --%>
-	</ol>
-</section>
+        <li class="active">Quản lý quyền</li> &ndash;%&gt;
+	</ol>&ndash;%&gt;
+</section>--%>
 
 <!-- Main content -->
 <section class="content">
@@ -62,86 +196,12 @@
 
 				<div class="box-header">
 					<h3 class="box-title">Danh Sách Hóa Đơn</h3>
-
+					<security:authorize access="hasAnyRole('ADMIN','BANHANG')">
+						<a class="btn btn-success pull-right" href="${contextPath }/admin/hoadon/add">Thêm
+							mới</a>
+					</security:authorize>
 				</div>
-				<div class="box-header">
-					<c:set var="tongtien" value="0" />
-					<c:set var="tiendatra" value="0" />
-					<c:set var="congno" value="0" />
-					<c:forEach var="hd" items="${listHoadonThongKe }">
-						<c:set var="tongtien" value="${tongtien + hd.tongtien }" />
-						<c:set var="tiendatra" value="${tiendatra + hd.tiendatra }" />
-						<c:set var="congno" value="${congno + hd.congno }" />
-					</c:forEach>
-					<div class="box-body">
-						<div class="col-md-12 margin" style="border-bottom: 1px solid;">
-							<div class="col-md-4">
-								<div class="form-group">
-									<label>Tổng Hóa Đơn : <span>${fn:length(listHoadonThongKe) }</span>
-									</label>
 
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<c:set var="hddtt" value="0" />
-									<c:forEach var="hd" items="${listHoadonThongKe }">
-										<c:if test="${hd.tongtien == hd.tiendatra && hd.congno == 0 }">
-											<c:set var="hddtt" value="${hddtt + 1 }" />
-										</c:if>
-
-									</c:forEach>
-									<label>Hóa Đơn Đã Thanh Toán : <span>${hddtt }</span>
-									</label>
-
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<c:set var="hdctt" value="0" />
-									<c:forEach var="hd" items="${listHoadonThongKe }">
-										<c:if test="${hd.tongtien > hd.tiendatra && hd.congno > 0 }">
-											<c:set var="hdctt" value="${hdctt + 1 }" />
-										</c:if>
-
-									</c:forEach>
-									<label>Hóa Đơn Chưa Thanh Toán : <span>${hdctt }</span>
-									</label>
-
-								</div>
-							</div>
-
-						</div>
-						<div class="col-md-12 margin">
-							<div class="col-md-4">
-								<div class="form-group">
-									<label for="tongtien">Tổng Tiền : <span><fmt:formatNumber
-											type="number" pattern="###,###" value="${tongtien }" /></span>
-										&#8363;
-									</label>
-
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<label for="tiendatra">Tiền Đã Trả : <span><fmt:formatNumber
-											type="number" pattern="###,###" value="${tiendatra }" /></span>
-										&#8363;
-									</label>
-
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<label for="congno">Đang Nợ : <span><fmt:formatNumber
-											type="number" pattern="###,###" value="${congno }" /></span>
-										&#8363;
-									</label>
-								</div>
-							</div>
-						</div>
-
-				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
 				 <div class="table-responsive">

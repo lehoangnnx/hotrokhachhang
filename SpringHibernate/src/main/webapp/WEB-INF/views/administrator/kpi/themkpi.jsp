@@ -6,7 +6,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
+<style>
+	.lb-flat-red {
+		padding-left: 10px;
+		padding-right: 20px;
+	}
+</style>
 <section class="content">
 
 	<div class="row">
@@ -30,19 +35,18 @@
 								<label id="error" class="error" style="display: none;" ></label>
 						</div>
 						<div class="form-group">
-							<label for="so">Số</label> <form:input path="so"
-								type="number" class="form-control"  min="0" value="0"
-								placeholder="Số" />
-								
-						</div>
-						<div class="form-group">
-							<label for="phantram">Phần Trắm (%)</label>
-							<div class="input-group">
-							<form:input path="phantram"
-								type="number" class="form-control" min="0" value="0"
-								placeholder="Phần Trăm" />
-								<span class="input-group-addon">%</span>
-							</div>
+							<label for="kieukpi">Kiểu Tiêu Chí</label> <br> <label
+								class="lb-flat-red"> <input value="so" type="radio"
+															name="kieukpi" class="flat-red" checked> Số
+						</label>
+							<label
+									class="lb-flat-red"> <input value="phantram" type="radio"
+																name="kieukpi" class="flat-red">Phần Trăm
+							</label>
+							<label
+									class="lb-flat-red"> <input value="tien" type="radio"
+																name="kieukpi" class="flat-red"> Tiền
+							</label>
 						</div>
 						<div class="form-group">
 							<label for="moTa">Mô tả</label> <form:textarea path="mota" type="text"

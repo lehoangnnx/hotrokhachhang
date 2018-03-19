@@ -63,7 +63,7 @@
 							<tr>
 								<th>Nhân Viên</th>
 								<th>KPI</th>
-								<th>Số</th>
+								<th>Chỉ Tiêu Đăng Ký</th>
 								<th>Ngày Đăng Ký</th>
 								<th>Ngày Hoàn Thành</th>
 								<security:authorize access="hasAnyRole('ADMIN')">
@@ -81,7 +81,21 @@
 									<td>${nvkpi.nhanvien.manhanvien}-
 										${nvkpi.nhanvien.tennhanvien}</td>
 									<td>${nvkpi.kpi.ten}</td>
-									<td>${nvkpi.so}</td>
+									<td>
+										<c:choose>
+											<c:when test="${nvkpi.kpi.kieukpi == 'so'}">
+												${nvkpi.chitieudangky}
+											</c:when>
+											<c:when test="${ nvkpi.kpi.kieukpi == 'phantram'}">
+												${nvkpi.chitieudangky} %
+											</c:when>
+											<c:when test="${ nvkpi.kpi.kieukpi == 'tien'}">
+												<fmt:formatNumber type="number" pattern="###,###"
+																  value="${nvkpi.chitieudangky }" /> &#8363;
+											</c:when>
+										</c:choose>
+
+									</td>
 									<td><fmt:formatDate pattern="dd-MM-yyyy"
 											value="${nvkpi.ngaydangky}" /></td>
 									<td><fmt:formatDate pattern="dd-MM-yyyy"
@@ -129,7 +143,7 @@
 							<tr>
 								<th>Nhân Viên</th>
 								<th>KPI</th>
-								<th>Số</th>
+								<th>Chỉ Tiêu Đăng Ký</th>
 								<th>Ngày Đăng Ký</th>
 								<th>Ngày Hoàn Thành</th>
 								<security:authorize access="hasAnyRole('ADMIN')">

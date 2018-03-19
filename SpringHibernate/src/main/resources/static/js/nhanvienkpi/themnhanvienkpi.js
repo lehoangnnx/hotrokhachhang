@@ -8,15 +8,6 @@ $(document).ready(function() {
 			kpi : {
 				required : true
 			},
-			so: {
-				required : true,
-				min : 0,
-				normalizer : function(value) {
-
-					return $.trim(value);
-				}
-
-			},
 			ngayhoanthanh: {
 				required : true,
 				normalizer : function(value) {
@@ -24,8 +15,6 @@ $(document).ready(function() {
 					return $.trim(value);
 				}
 
-			}, mucdohoanthanh : {
-				min : 0
 			}
 
 		},
@@ -36,18 +25,8 @@ $(document).ready(function() {
 			kpi : {
 				required : "* Vui Lòng Chọn KPI"
 			},
-			so : {
-				required : "* Vui Lòng Nhập Số",
-				min : "* Số Phải Lớn Hơn Hoặc Bằng 0"
-
-			},
-			ngayhoanthanh : {
-				required : "* Vui Lòng Nhập Ngày Hoàn Thành "
-				
-
-			},
-			mucdohoanthanh : {
-				min : "* Mức Độ Hoàn Thanh Phải Lớn Hơn Hoặc Bằng 0"
+            ngayhoanthanh : {
+                required : "* Vui Lòng Nhập Ngày Hoàn Thành"
 			}
 
 		}
@@ -115,3 +94,94 @@ $(document).ready(function(){
 	$('#ngayhoanthanh').val(lastDay.getDate()+'/'+ month +'/'+date.getUTCFullYear());
 	
 });
+
+function getKPI() {
+    clearTimeout(timeout);
+    timeout = setTimeout(function() {
+        var id = $('#kpi :selected').val();
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        $(document).ajaxSend(function(e, xhr, options) {
+            xhr.setRequestHeader(header, token);
+        });
+
+        $.ajax({
+
+            type : "POST",
+            contentType : "application/json",
+            url : contextPath + "/admin/getkpi",
+            data: id,
+            success : function(result) {
+                var kieukpi= result.kieukpi;
+                // console.log(kieutieuchi);
+                if(kieukpi == 'so'   ){
+					$('#chitieudangky').attr('type', 'number');
+                    $('#chitieudangky').removeAttr('onkeypress');
+					$('#addon').text('SỐ');
+
+                }else if(kieukpi == 'phamtram'){
+                    $('#chitieudangky').attr('type', 'number');
+                    $('#chitieudangky').removeAttr('onkeypress');
+                    $('#addon').text('%');
+                }else if(kieukpi == 'tien') {
+                    $('#chitieudangky').attr('type', 'text');
+                    $('#chitieudangky').attr('onkeyup', 'showNumberToString();');
+                    $('#addon').text('VNĐ');
+                }
+
+
+            },
+            error : function(e) {
+
+            }
+        });
+    }, 100);
+};
+$('#kpi').change(function () {
+	getKPI();
+});
+
+function checkchitieudangky() {
+    var input = $('#chitieudangky').val().replace(/\./g, "");
+    console.log(input);
+    if(input <= 0){
+        $('#btn-submit').attr('type','button');
+        $('#chitieudangky-error').css("display", "block");
+        $('#chitieudangky-error').text("* Chỉ Tiêu Đăng Ký Phải Lớn Hơn 0");
+    }else {
+        $('#btn-submit').attr('type','submit');
+        $('#chitieudangky-error').css("display", "none");
+        $('#chitieudangky-error').text("");
+    }
+}
+function showNumberToString() {
+    checkchitieudangky();
+    $("input[name='_chitieudangky']").on( "keyup", function( event ) {
+
+
+        // When user select text in the document, also abort.
+        var selection = window.getSelection().toString();
+        if ( selection !== '' ) {
+            return;
+        }
+
+        // When the arrow keys are pressed, abort.
+        if ( $.inArray( event.keyCode, [38,40,37,39] ) !== -1 ) {
+            return;
+        }
+
+
+        var $this = $( this );
+
+        // Get the value.
+        var input = $this.val();
+
+        var input = input.replace(/[\D\s\._\-]+/g, "");
+        input = input ? parseInt( input, 10 ) : 0;
+
+        $this.val( function() {
+            // return ( input === 0 ) ? "" : input.toLocaleString( "en-US" );
+            return ( input < 0 ) ? "" : input.toLocaleString( "it-IT" );
+        } );
+    } );
+};

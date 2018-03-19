@@ -91,6 +91,7 @@ public class NhanVienKpiController {
     
     @PostMapping("/nhanvienkpi")
     String themNhanVienKpi(@ModelAttribute("nhanvienkpi") Nhanvienkpi nhanvienkpi,
+    		@RequestParam("_chitieudangky") String chitieudangky,
     		@RequestParam("nhanvien") Integer nhanvien,@RequestParam("kpi") Integer kpi,
     		@RequestParam("ngayhoanthanh") String ngayhoanthanh,
     		@RequestParam(value="trangthai",defaultValue="inactive") String trangthai,
@@ -108,7 +109,7 @@ public class NhanVienKpiController {
     		nhanvienkpi.setNgaydangky(new Date(date.getYear(),date.getMonth(),date.getDate()));
     		nhanvienkpi.setNgayhoanthanh(df.parse(ngayhoanthanh));
     		nhanvienkpi.setTrangthai(trangthai);
-    		nhanvienkpi.setMucdohoanthanh(mucdohoanthanh);
+    		nhanvienkpi.setChitieudangky(Long.valueOf(chitieudangky.replace(".","")));
         	nhanVienKpiService.saveOrUpdate(nhanvienkpi);
         	redirectAttributes.addFlashAttribute("msg", "Thêm Thành Công");
 		} catch (Exception e) {
@@ -120,6 +121,7 @@ public class NhanVienKpiController {
     	
     @PatchMapping(value="/nhanvienkpi",params="update")
     String suaNhanVienKpi(@ModelAttribute("nhanvienkpi") Nhanvienkpi getnhanvienkpi,
+						  @RequestParam("_chitieudangky") String chitieudangky,
     		@RequestParam("nhanvien") Integer nhanvien,@RequestParam("kpi") Integer kpi,
     		@RequestParam("ngayhoanthanh") String ngayhoanthanh,
     		@RequestParam(value="trangthai",defaultValue="inactive") String trangthai,
@@ -136,7 +138,7 @@ public class NhanVienKpiController {
     		nhanvienkpi.setKpi(kpiById);
     		nhanvienkpi.setNgayhoanthanh(df.parse(ngayhoanthanh));
     		nhanvienkpi.setTrangthai(trangthai);
-    		nhanvienkpi.setMucdohoanthanh(mucdohoanthanh);
+			nhanvienkpi.setChitieudangky(Long.valueOf(chitieudangky.replace(".","")));
         	nhanVienKpiService.saveOrUpdate(nhanvienkpi);
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {

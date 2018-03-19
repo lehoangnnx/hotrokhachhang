@@ -63,57 +63,78 @@ public class HoaDonController {
 
     @PreAuthorize("hasAnyRole('ADMIN', 'BANHANG', 'GIAOHANG')")
     @GetMapping("/hoadon")
-    String pageDanhSachHoaDon(@RequestParam(value = "trangthai", defaultValue = "dathanhtoan") String trangthai,
-                              @RequestParam(value = "limit", defaultValue = "100") Integer limit,
-                              @RequestParam(value = "page", defaultValue = "1") Integer page, Model model, Principal principal,
-                              HttpServletRequest request) {
-        int pageCount = 0;
-        List<Hoadon> listHoadon = null;
-        List<Hoadon> listHoadonThongKe = null;
-        if (request.isUserInRole("ROLE_ADMIN")) {
-            if (trangthai.equals("deleted")) {
-                int listHoaDonSize = hoaDonService.findByTrangthaiOrderByIdDesc("deleted").size();
-                pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
-                listHoadon = hoaDonService.findByTrangthaiOrderByIdDesc("deleted", new PageRequest(page - 1, limit));
-
-            } else if (trangthai.equals("chuathanhtoan")) {
-                int listHoaDonSize = hoaDonService.findByTrangthaiChuaThanhToan("deleted").size();
-                pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
-                listHoadon = hoaDonService.findByTrangthaiChuaThanhToan("deleted", new PageRequest(page - 1, limit));
-            } else {
-                int listHoaDonSize = hoaDonService.findByTrangthaiDaThanhToan("deleted").size();
-                pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
-                listHoadon = hoaDonService.findByTrangthaiDaThanhToan("deleted", new PageRequest(page - 1, limit));
+    String pageDanhSachHoaDon(
+            @RequestParam(value = "tungay", defaultValue = "null") String tungay,
+            @RequestParam(value = "denngay", defaultValue = "null") String denngay,
+            @RequestParam(value = "trangthai", defaultValue = "dathanhtoan") String trangthai,
+            @RequestParam(value = "limit", defaultValue = "100") Integer limit,
+            @RequestParam(value = "page", defaultValue = "1") Integer page, Model model, Principal principal,
+            HttpServletRequest request) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date ddenngay = new Date();
+            Date dtungay = new Date(ddenngay.getYear(), ddenngay.getMonth(), 01);
+            if (!tungay.equals("null")) {
+                dtungay = dateFormat.parse(tungay);
             }
-            listHoadonThongKe = hoaDonService.findByTrangthaiNotOrderByIdDesc("deleted");
-        } else {
-            Taikhoan taikhoan = taikhoanService.findByUsername(principal.getName());
-            if (trangthai.equals("deleted")) {
-                int listHoaDonSize = hoaDonService.findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc(
-                        "deleted", taikhoan.getNhanvien()).size();
-                pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
-                listHoadon = hoaDonService.findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc("deleted",
-                        taikhoan.getNhanvien(), new PageRequest(page - 1, limit));
-
-            } else if (trangthai.equals("chuathanhtoan")) {
-                int listHoaDonSize = hoaDonService.findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienban(
-                        "deleted", taikhoan.getNhanvien()).size();
-                pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
-                listHoadon = hoaDonService.findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienban(
-                        "deleted", taikhoan.getNhanvien(), new PageRequest(page - 1, limit));
-            } else {
-                int listHoaDonSize = hoaDonService.findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienban(
-                        "deleted", taikhoan.getNhanvien()).size();
-                pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
-                listHoadon = hoaDonService.findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienban(
-                        "deleted", taikhoan.getNhanvien(), new PageRequest(page - 1, limit));
+            if (!denngay.equals("null")) {
+                ddenngay = dateFormat.parse(denngay);
             }
-            listHoadonThongKe = hoaDonService.findByTrangthaiNotAndNhanvienByIdnhanvienbanOrderByIdDesc("deleted", taikhoan.getNhanvien());
+            int pageCount = 0;
+            List<Hoadon> listHoadon = null;
+            List<Hoadon> listHoadonThongKe = null;
+            if (request.isUserInRole("ROLE_ADMIN")) {
+                if (trangthai.equals("deleted")) {
+                    int listHoaDonSize = hoaDonService.findByTrangthaiOrderByIdDesc("deleted").size();
+                    pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
+                    listHoadon = hoaDonService.findByTrangthaiOrderByIdDesc("deleted", new PageRequest(page - 1, limit));
+
+                } else if (trangthai.equals("chuathanhtoan")) {
+                    int listHoaDonSize = hoaDonService.findByTrangthaiChuaThanhToan("deleted").size();
+                    pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
+                    listHoadon = hoaDonService.findByTrangthaiChuaThanhToan("deleted", new PageRequest(page - 1, limit));
+                } else {
+                    int listHoaDonSize = hoaDonService.findByTrangthaiDaThanhToan("deleted").size();
+                    pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
+                    listHoadon = hoaDonService.findByTrangthaiDaThanhToan("deleted", new PageRequest(page - 1, limit));
+                }
+                listHoadonThongKe = hoaDonService.findByTrangthaiNotOrderByIdDesc("deleted");
+            } else {
+                Taikhoan taikhoan = taikhoanService.findByUsername(principal.getName());
+                if (trangthai.equals("deleted")) {
+                    int listHoaDonSize = hoaDonService.findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc(
+                            "deleted", taikhoan.getNhanvien()).size();
+                    pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
+                    listHoadon = hoaDonService.findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc("deleted",
+                            taikhoan.getNhanvien(), new PageRequest(page - 1, limit));
+
+                } else if (trangthai.equals("chuathanhtoan")) {
+                    int listHoaDonSize = hoaDonService.findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienban(
+                            "deleted", taikhoan.getNhanvien()).size();
+                    pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
+                    listHoadon = hoaDonService.findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienban(
+                            "deleted", taikhoan.getNhanvien(), new PageRequest(page - 1, limit));
+                } else {
+                    int listHoaDonSize = hoaDonService.findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienban(
+                            "deleted", taikhoan.getNhanvien()).size();
+                    pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
+                    listHoadon = hoaDonService.findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienban(
+                            "deleted", taikhoan.getNhanvien(), new PageRequest(page - 1, limit));
+                }
+                listHoadonThongKe = hoaDonService.findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc("deleted",
+                        taikhoan.getNhanvien(),dtungay,ddenngay);
+            }
+
+            model.addAttribute("tungay", dtungay);
+            model.addAttribute("denngay", ddenngay);
+            model.addAttribute("listHoadon", listHoadon);
+            model.addAttribute("listHoadonThongKe", listHoadonThongKe);
+            model.addAttribute("currentpage", page);
+            model.addAttribute("pagecount", pageCount);
+        } catch (Exception e) {
+            return "danhsachhoadon";
         }
-        model.addAttribute("listHoadon", listHoadon);
-        model.addAttribute("listHoadonThongKe", listHoadonThongKe);
-        model.addAttribute("currentpage", page);
-        model.addAttribute("pagecount", pageCount);
+
         return "danhsachhoadon";
     }
 

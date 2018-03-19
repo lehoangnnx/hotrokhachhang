@@ -49,10 +49,7 @@
 						<thead>
 							<tr>
 								<th>Tên</th>
-								<th>Số</th>
-								<th>Phần Trăm (%)</th>
-
-
+								<th>Kiểu KPI</th>
 								<th>Thao tác</th>
 							</tr>
 						</thead>
@@ -60,8 +57,16 @@
 							<c:forEach var="kpi" items="${listKpi }">
 								<tr>
 									<td>${kpi.ten}</td>
-									<td>${kpi.so}</td>
-									<td>${kpi.phantram} %</td>
+									<td><c:if test="${kpi.kieukpi == 'phantram' }">
+										Phần Trăm
+									</c:if>
+										<c:if test="${kpi.kieukpi == 'tien' }">
+											Tiền
+										</c:if>
+										<c:if test="${kpi.kieukpi == 'so' }">
+											Số
+										</c:if></td>
+
 
 
 									<td><a href="${contextPath }/admin/kpi/${kpi.id}"> <i
@@ -85,10 +90,7 @@
 						<tfoot>
 							<tr>
 								<th>Tên</th>
-								<th>Số</th>
-								<th>Phần Trăm (%)</th>
-
-
+								<th>Kiểu KPI</th>
 								<th>Thao tác</th>
 							</tr>
 						</tfoot>

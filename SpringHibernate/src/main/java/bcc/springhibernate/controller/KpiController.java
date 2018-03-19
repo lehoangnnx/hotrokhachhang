@@ -55,9 +55,12 @@ public class KpiController {
 	}
 
 	@PostMapping("/kpi")
-	String themKpi(@ModelAttribute("kpi") Kpi kpi, RedirectAttributes redirectAttributes) {
+	String themKpi(@ModelAttribute("kpi") Kpi kpi,
+				   @RequestParam("kieukpi") String kieukpi,
+				   RedirectAttributes redirectAttributes) {
 		try {
 			kpi.setTrangthai("active");
+			kpi.setKieukpi(kieukpi);
 			kpiService.saveOrUpdate(kpi);
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thành Công");
 		} catch (Exception e) {

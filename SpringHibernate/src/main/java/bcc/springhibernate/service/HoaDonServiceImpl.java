@@ -183,4 +183,9 @@ public class HoaDonServiceImpl implements HoaDonService {
 	public List<Hoadon> findKhachhangDistinctByNhanvienByIdnhanvienbanAndTrangthaiNot(Nhanvien nhanvienByIdnhanvienban, String trangthai) {
 		return hoaDonRepository.findKhachhangDistinctByNhanvienByIdnhanvienbanAndTrangthaiNot(nhanvienByIdnhanvienban,trangthai);
 	}
+
+	@Override
+	public List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc(String trangthai, Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2) {
+		return hoaDonRepository.findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc(trangthai,nhanvienByIdnhanvienban,d1,d2);
+	}
 }
