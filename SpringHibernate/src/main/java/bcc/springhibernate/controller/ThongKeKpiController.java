@@ -82,22 +82,32 @@ public class ThongKeKpiController {
 			if (!listNhanvienkpi.isEmpty()) {
 				for (Nhanvienkpi nvk : listNhanvienkpi) {
 					Map<String, Object> map = new HashMap<String, Object>();
-					Long tongtien = 0L;
+					Long tiendatra = 0L;
+					int khachhangmoi= 0;
+					int khachhangtailap = 0;
 					int tongsolanchamsoc = chamSocService
 							.findByNhanvienchamsocAndTrangthaiNotAndNgayBetweenOrderByIdDesc(nvk.getNhanvien().getId(),
 									"deleted", nvk.getNgaydangky(), nvk.getNgayhoanthanh())
 							.size();
-					List<Hoadon> listHoadon = hoaDonService
+					/*List<Hoadon> listHoadon = hoaDonService
 							.findByNhanvienByIdnhanvienbanAndTrangthaiNotAndNgaylapBetweenOrderByIdDesc(
-									nvk.getNhanvien(), "deleted", nvk.getNgaydangky(), nvk.getNgayhoanthanh());
-
+									nvk.getNhanvien(), "deleted", nvk.getNgaydangky(), nvk.getNgayhoanthanh());*/
+					List<Hoadon> listHoadon = hoaDonService.findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc("deleted",
+							nvk.getNhanvien(), dtungay, ddenngay);
 					for (Hoadon hd : listHoadon) {
-						tongtien += hd.getTongtien();
+						tiendatra += hd.getTiendatra();
+						if(hd.getHoadondautien() == true){
+								khachhangmoi +=1;
+						}else {
+							khachhangtailap+=1;
+						}
 					}
 
 					map.put("idnvkpi", nvk.getId());
 					map.put("idnv", nvk.getNhanvien().getId());
-					map.put("tongtien", tongtien);
+					map.put("tiendatra", tiendatra);
+					map.put("khachhangmoi",khachhangmoi);
+					map.put("khachhangtailap",khachhangtailap);
 					map.put("tongsolanchamsoc", tongsolanchamsoc);
 					listMap.add(map);
 					

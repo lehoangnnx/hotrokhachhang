@@ -47,7 +47,7 @@
                                 </select>
                             </div>--%>
                         <div class="form-group">
-                            <label>Nhân Viên</label> <select class="form-control select2"
+                            <label>Nhân Viên</label> <select class="form-control select2" id="nhanvien"
                                                              name="nhanvien" style="width: 100%;">
 
 
@@ -149,14 +149,17 @@
                             <form:textarea path="mota" type="text" class="form-control"
                                            id="mota" name="mota" placeholder="Mô Tả"/>
                         </div>
-
+                        <div class="form-group">
+                            <label id="error" class="error" style="display: none;" ></label>
+                        </div>
 
                     </div>
                     <!-- /.box-body -->
                     <input type="hidden" name="${_csrf.parameterName}"
                            value="${_csrf.token}"/>
                     <div class="box-footer">
-                        <button id="btn-submit" onclick="checkchitieudangky();" type="submit" class="btn btn-primary">Xác
+
+                        <button id="btn-submit" onclick="checkchitieudangky();" type="button" class="btn btn-primary">Xác
                             Nhận
                         </button>
                     </div>

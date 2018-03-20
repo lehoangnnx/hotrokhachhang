@@ -54,12 +54,21 @@
 		                  <th>Lương</th>
 		                   <th>Thưởng</th>
 							<th>Thưởng Theo Hóa Đơn</th>
+							<th>Tiền Ứng</th>
+							<th>Tổng</th>
 		                  <th>Tháng/Năm</th>
 		                  <th>Thao tác</th>
 		                </tr>
 		                </thead>
 		                <tbody>
 		                <c:forEach var="l" items="${listLuong }" >
+							<c:set var="tienung" value="0"/>
+							<c:forEach var="ul" items="${l.ungluongs}">
+								<c:if test="${ul.trangthai == 'active' }">
+									<c:set var="tienung" value="${tienung + ul.sotienung}"/>
+								</c:if>
+
+							</c:forEach>
 		                	<tr>
 		                		<td>${l.nhanvien.tennhanvien}</td>
 			                  	<td><fmt:formatNumber
@@ -68,6 +77,14 @@
 											type="number" pattern="###,###" value="${l.thuong }" /> &#8363;</td>
 								<td><fmt:formatNumber
 										type="number" pattern="###,###" value="${l.thuongcuahoadon }" /> &#8363;</td>
+								<td><fmt:formatNumber
+										type="number" pattern="###,###" value="${tienung }" /> &#8363;</td>
+								<td><fmt:formatNumber type="number" pattern="###,###"
+													  value="${l.thuongcuahoadon > 0 ?
+											(l.luong + l.thuong + l.thuongcuahoadon - tienung) :
+											(l.luong + l.thuong - tienung) }"/>
+									&#8363;
+								</td>
 			                  	<td>${l.thang}/${l.nam }</td>
 			                  	<td>
 			                  		<a href="${contextPath }/admin/luong/${l.id}">
@@ -89,6 +106,8 @@
 		                  <th>Lương</th>
 		                  <th>Thưởng</th>
 							<th>Thưởng Theo Hóa Đơn</th>
+							<th>Tiền Ứng</th>
+							<th>Tổng</th>
 		                  <th>Ngày/Tháng</th>
 		                  <th>Thao tác</th>
 		                </tr>

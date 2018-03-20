@@ -260,7 +260,7 @@
 								<th>Tổng Tiền</th>
 								<th>Đã Trả</th>
 
-								<th>Ngày Lập</th>
+								<th>Ngày Thanh Toán</th>
 								<th>Trạng Thái</th>
 								<th>Thao Tác</th>
 							</tr>
@@ -278,7 +278,7 @@
 											value="${hd.tiendatra }" /> &#8363;</td>
 
 									<td><fmt:formatDate pattern="dd-MM-yyyy"
-											value="${hd.ngaylap }" /></td>
+											value="${hd.ngaythanhtoan }" /></td>
 
 									<c:if test="${hd.trangthai == 'dagiaohang' }">
 										<td>Đã Giao Hàng</td>
@@ -306,8 +306,8 @@
 								<th>Nhân Viên Bán Hàng</th>
 								<th>Tổng Tiền</th>
 								<th>Đã Trả</th>
-								
-								<th>Ngày Lập</th>
+
+								<th>Ngày Thanh Toán</th>
 								<th>Trạng Thái</th>
 								<th>Thao Tác</th>
 							</tr>

@@ -73,6 +73,54 @@ function kiemtratenkpi(){
 		});
 	}, 100);
 };
+
+
+
+function kiemtranhanvienvakpi(){
+    clearTimeout(timeout);
+    timeout = setTimeout(function() {
+
+       var id =  $('#id').val();
+       console.log(id+"id");
+        var idnhanvien =  $('#nhanvien :selected').val();
+        var idkpi = $('#kpi :selected').val();
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        $(document).ajaxSend(function (e, xhr, options) {
+            xhr.setRequestHeader(header, token);
+        });
+
+        $.ajax({
+
+            type : "POST",
+           // contentType : "application/json",
+            url : contextPath + "/admin/kiemtratennhanvienvakpi",
+            data : {id, idnhanvien,idkpi},
+            // dataType: 'json',
+            // timeout: 600000,
+            success : function(result) {
+                console.log(result);
+                if(result == "error"){
+                    $('#btn-submit').attr('type','button');
+                    $('#error').css("display", "block");
+                    $('#error').text("* Nhân Viên KPI Đã Được Đăng Ký");
+
+                }else {
+                    $('#error').css("display", "none");
+                    $('#error').text("");
+                    $('#btn-submit').attr('type','submit');
+                }
+
+            },
+            error : function(e) {
+
+            }
+        });
+    }, 100);
+};
+
+
+
 $('#ten').on('keyup keypress keydown', function(event){
 	
 	if($('#ten').val().trim() != ''){
@@ -149,7 +197,8 @@ function checkchitieudangky() {
         $('#chitieudangky-error').css("display", "block");
         $('#chitieudangky-error').text("* Chỉ Tiêu Đăng Ký Phải Lớn Hơn 0");
     }else {
-        $('#btn-submit').attr('type','submit');
+        kiemtranhanvienvakpi();
+        //$('#btn-submit').attr('type','submit');
         $('#chitieudangky-error').css("display", "none");
         $('#chitieudangky-error').text("");
     }

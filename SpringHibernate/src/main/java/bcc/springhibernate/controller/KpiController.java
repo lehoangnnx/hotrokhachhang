@@ -74,8 +74,13 @@ public class KpiController {
 	String suaKpi(@ModelAttribute("kpi") Kpi kpi, RedirectAttributes redirectAttributes) {
 		try {
 			//kpi.setTrangthai("active");
-			kpiService.saveOrUpdate(kpi);
-			redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
+			if(kpi.getId() != 1 && kpi.getId() != 2 && kpi.getId() != 3){
+				kpiService.saveOrUpdate(kpi);
+				redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
+			}else {
+				redirectAttributes.addFlashAttribute("msg", "Không Thể Sửa KPI");
+			}
+
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
 		}
@@ -87,13 +92,16 @@ public class KpiController {
 	String xoaVinhVienKpi(@ModelAttribute("kpi") Kpi kpi, RedirectAttributes redirectAttributes) {
 		List<Nhanvienkpi> nhanvienkpis = null;
 		try {
-			nhanvienkpis = nhanVienKpiService.findByKpi(kpi);
-			System.out.println(nhanvienkpis);
-			if (nhanvienkpis.isEmpty()) {
-				kpiService.deleted(kpi);
-				redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thành Công");
-			} else {
-				redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thất Bại");
+			if(kpi.getId() != 1 && kpi.getId() != 2 && kpi.getId() != 3) {
+				nhanvienkpis = nhanVienKpiService.findByKpi(kpi);
+				if (nhanvienkpis.isEmpty()) {
+					kpiService.deleted(kpi);
+					redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thành Công");
+				} else {
+					redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thất Bại");
+				}
+			}else {
+				redirectAttributes.addFlashAttribute("msg", "Không Thể Xóa KPI");
 			}
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thất Bại");
@@ -107,14 +115,17 @@ public class KpiController {
 
 		try {
 			arrayId.forEach(x -> {
-
-				Kpi kpi = kpiService.findById(x);
-				kpi.setTrangthai("deleted");
-				kpiService.saveOrUpdate(kpi);
-
+				if(x != 1 &&x != 2 && x != 3) {
+					Kpi kpi = kpiService.findById(x);
+					kpi.setTrangthai("deleted");
+					kpiService.saveOrUpdate(kpi);
+					redirectAttributes.addFlashAttribute("msg", "Xóa Thành Công");
+				}else {
+					redirectAttributes.addFlashAttribute("msg", "Không Thể Xóa KPI");
+				}
 			});
 
-			redirectAttributes.addFlashAttribute("msg", "Xóa Thành Công");
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			redirectAttributes.addFlashAttribute("msg", "Xóa Thất Bại");

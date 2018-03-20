@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import bcc.springhibernate.model.Kpi;
@@ -32,4 +33,12 @@ public interface NhanVienKpiRepository extends JpaRepository<Nhanvienkpi, Intege
 	List<Nhanvienkpi> findByNhanvien(Nhanvien nhanvien);
 	
 	List<Nhanvienkpi> findByNhanvienAndTrangthaiOrderByIdDesc(Nhanvien  nhanvien,String trangthai);
+
+	@Query("select nvk from Nhanvienkpi nvk where nvk.nhanvien = ?1 and nvk.trangthai = ?2 and nvk.ngaydangky between ?3 and ?4")
+	List<Nhanvienkpi> findByNhanvienAndTrangthaiAndNgaydangkyBetween(Nhanvien  nhanvien,String trangthai, Date d1, Date d2);
+
+	@Query("select nvk from Nhanvienkpi nvk where nvk.trangthai <> ?1 and nvk.nhanvien = ?2 and nvk.kpi = ?3 " +
+			"and  nvk.ngaydangky between ?4 and ?5")
+	Nhanvienkpi findByTrangthaiAndNhanvienAndKpiAndMonthYearNgaydangky
+			(String trangthai,Nhanvien nhanvien, Kpi kpi, Date d1,Date d2);
 }

@@ -67,11 +67,11 @@ public class ThongKeController {
 				if(nhanvienbanhang != 0) {
 					Nhanvien nhanvien = nhanVienService.findById(nhanvienbanhang);
 					listHoadon = hoaDonService
-							.findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaylapBetweenOrderByIdDesc
+							.findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc
 							("deleted",nhanvien, dtungay, ddenngay);
 				}else {
 					listHoadon = hoaDonService
-							.findByTrangthaiNotAndNgaylapBetweenOrderByIdDesc("deleted", dtungay, ddenngay);
+							.findByTrangthaiNotAndNgaythanhtoanBetweenOrderByIdDesc("deleted", dtungay, ddenngay);
 				}
 				
 				

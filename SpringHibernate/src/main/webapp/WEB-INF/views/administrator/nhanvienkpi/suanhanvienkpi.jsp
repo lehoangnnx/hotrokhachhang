@@ -45,7 +45,7 @@
 							</select>
 						</div>--%>
 							<div class="form-group">
-								<label>Nhân Viên</label> <select class="form-control select2"
+								<label>Nhân Viên</label> <select class="form-control select2" id="nhanvien"
 																 name="nhanvien" style="width: 100%;">
 
 
@@ -151,7 +151,9 @@
 								 placeholder="Mô Tả" />
 						</div>
 
-
+							<div class="form-group">
+								<label id="error" class="error" style="display: none;" ></label>
+							</div>
 					</div>
 					<!-- /.box-body -->
 					<input type="hidden" name="${_csrf.parameterName}"
@@ -159,7 +161,7 @@
 					<div class="box-footer">
 						<c:if test="${nhanvienkpi.trangthai != 'deleted' }">
 							<div class="box-footer">
-								<button id="btn-submit" name="update" type="submit" onclick="checkchitieudangky();"
+								<button id="btn-submit" name="update" type="button" onclick="checkchitieudangky();"
 									class="btn btn-primary">Xác Nhận</button>
 							</div>
 						</c:if>

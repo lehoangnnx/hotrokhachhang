@@ -22,14 +22,18 @@ public interface HoaDonService {
 	List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanOrderByIdDesc(String trangthai,Nhanvien nhanvienByIdnhanvienban);
 	List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc(String trangthai,Nhanvien nhanvienByIdnhanvienban, Pageable pageable);
 
-
+	List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc
+			(String trangthai,Nhanvien nhanvienByIdnhanvienban,Date d1, Date d2);
+	List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc
+			(String trangthai,Nhanvien nhanvienByIdnhanvienban,Date d1, Date d2,Pageable pageable);
 
 	Hoadon findBySohoadon(String sohoadon);
 	Hoadon findById(Integer id);
 	
 	List<Hoadon> findByTrangthaiAndNgaylapBetweenOrderByIdDesc(String trangthai, Date d1, Date d2);
 	List<Hoadon> findByTrangthaiNotAndNgaylapBetweenOrderByIdDesc(String trangthai, Date d1, Date d2);
-	
+	List<Hoadon> findByTrangthaiNotAndNgaythanhtoanBetweenOrderByIdDesc(String trangthai, Date d1, Date d2);
+
 	List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanAndNgaylapBetweenOrderByIdDesc(String trangthai,
 			Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2);
 
@@ -45,11 +49,25 @@ public interface HoaDonService {
 	List<Hoadon> findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienban(String trangthai,Nhanvien nhanvienByIdnhanvienban,
 																	  Pageable pageable);
 
+
+	List<Hoadon> findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetween
+			(String trangthai,Nhanvien nhanvienByIdnhanvienban , Date d1, Date d2);
+	List<Hoadon> findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetween
+			(String trangthai,Nhanvien nhanvienByIdnhanvienban , Date d1, Date d2,Pageable pageable);
+
+
 	List<Hoadon> findByTrangthaiChuaThanhToan(String trangthai);
 	List<Hoadon> findByTrangthaiChuaThanhToan(String trangthai,Pageable pageable);
 	List<Hoadon> findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienban(String trangthai,Nhanvien nhanvienByIdnhanvienban);
 	List<Hoadon> findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienban(String trangthai,Nhanvien nhanvienByIdnhanvienban,
 																		Pageable pageable);
+
+
+	List<Hoadon> findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetween
+			(String trangthai,Nhanvien nhanvienByIdnhanvienban,Date d1, Date d2);
+	List<Hoadon> findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetween
+			(String trangthai,Nhanvien nhanvienByIdnhanvienban,Date d1, Date d2,Pageable pageable);
+
 
 	List<Hoadon> findByNhanvienByIdnhanvienbanAndTrangthaiNotAndNgaylapBetweenOrderByIdDesc
 	(Nhanvien nhanvien,String trangthai, Date d1, Date d2);

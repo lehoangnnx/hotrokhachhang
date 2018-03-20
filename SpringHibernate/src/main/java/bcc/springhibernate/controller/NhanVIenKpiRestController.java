@@ -1,8 +1,13 @@
 package bcc.springhibernate.controller;
 
+import java.security.Principal;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import bcc.springhibernate.model.*;
+import bcc.springhibernate.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,22 +17,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import bcc.springhibernate.model.Chamsoc;
-import bcc.springhibernate.model.Khachhang;
-import bcc.springhibernate.model.Loaikhachhang;
-import bcc.springhibernate.model.Nhanvienkpi;
-import bcc.springhibernate.service.KhachHangService;
-import bcc.springhibernate.service.LoaiKhachHangService;
-import bcc.springhibernate.service.NhanVienKpiService;
-
 @RestController
 @RequestMapping("/admin")
 public class NhanVIenKpiRestController {
 
 	@Autowired
 	NhanVienKpiService nhanVienKpiService;
-
-	
+@Autowired
+	NhanVienService nhanVienService;
+	@Autowired
+	KpiService kpiService;
 	@PostMapping("/updatetrangthainhanvienkpi")
 	String updatetrangthainhanvienkpi(@RequestParam("id") Integer id, @RequestParam("trangthai") String trangthai) {
 
@@ -42,5 +41,50 @@ public class NhanVIenKpiRestController {
 			return "error";
 		}
 
+	}
+	@PostMapping("/kiemtratennhanvienvakpi")
+	String kiemtratennhanvienvakpi(@RequestParam(value="id",defaultValue = "0") Integer id,
+								   @RequestParam(value="idnhanvien",defaultValue = "0") Integer idnhanvien,
+								   @RequestParam(value="idkpi",defaultValue = "0") Integer idkpi) {
+
+		Nhanvienkpi nhanvienkpiByNhanvienAndKpi = null;
+		Nhanvienkpi nhanvienkpiById = null;
+		Date ddenngay = new Date();
+		Date dtungay = new Date(ddenngay.getYear(), ddenngay.getMonth(), 01);
+		System.out.println(id+"iiiiiidđ"+idnhanvien +"32"+idkpi);
+		try {
+			Nhanvien nhanvien = nhanVienService.findById(idnhanvien);
+			Kpi kpi = kpiService.findById(idkpi);
+
+			nhanvienkpiByNhanvienAndKpi = nhanVienKpiService.findByTrangthaiAndNhanvienAndKpiAndMonthYearNgaydangky
+					("deleted", nhanvien,kpi, dtungay,ddenngay);
+			System.out.println(nhanvienkpiByNhanvienAndKpi);
+			if (id == 0) {
+				System.out.println(1);
+				if (nhanvienkpiByNhanvienAndKpi == null) {
+					System.out.println(1);
+					return "success";
+				}
+			} else {
+				System.out.println(3);
+				nhanvienkpiById = nhanVienKpiService.findById(id);
+				if (nhanvienkpiByNhanvienAndKpi != null) {
+					System.out.println(4);
+					if (id == nhanvienkpiByNhanvienAndKpi.getId() && nhanvienkpiById.getKpi().getId() == idkpi) {
+						System.out.println(5);
+						return "success";
+
+					}
+				} else {
+					System.out.println(6);
+					return "success";
+				}
+			}
+
+		} catch (Exception e) {
+
+			return "error";
+		}
+		return "error";
 	}
 }

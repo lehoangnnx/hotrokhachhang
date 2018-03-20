@@ -8,6 +8,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import bcc.springhibernate.model.*;
+import bcc.springhibernate.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,22 +24,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import bcc.springhibernate.model.Bophan;
-import bcc.springhibernate.model.Chitiethoadon;
-import bcc.springhibernate.model.Hanghoa;
-import bcc.springhibernate.model.Hoadon;
-import bcc.springhibernate.model.Khachhang;
-import bcc.springhibernate.model.Luong;
-import bcc.springhibernate.model.Nhanvien;
-import bcc.springhibernate.model.Taikhoan;
-import bcc.springhibernate.service.ChiTietHoaDonService;
-import bcc.springhibernate.service.HangHoaService;
-import bcc.springhibernate.service.HoaDonService;
-import bcc.springhibernate.service.KhachHangService;
-import bcc.springhibernate.service.LuongService;
-import bcc.springhibernate.service.NhanVienService;
-import bcc.springhibernate.service.TaikhoanService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -60,29 +46,29 @@ public class HoaDonController {
     ChiTietHoaDonService chiTietHoaDonService;
     @Autowired
     LuongService luongService;
+    @Autowired
+    NhanVienKpiService nhanVienKpiService;
 
     @PreAuthorize("hasAnyRole('ADMIN', 'BANHANG', 'GIAOHANG')")
     @GetMapping("/hoadon")
-    String pageDanhSachHoaDon(
-            @RequestParam(value = "tungay", defaultValue = "null") String tungay,
-            @RequestParam(value = "denngay", defaultValue = "null") String denngay,
-            @RequestParam(value = "trangthai", defaultValue = "dathanhtoan") String trangthai,
-            @RequestParam(value = "limit", defaultValue = "100") Integer limit,
-            @RequestParam(value = "page", defaultValue = "1") Integer page, Model model, Principal principal,
-            HttpServletRequest request) {
+    String pageDanhSachHoaDon(@RequestParam(value = "hthd", required = false) String hthd,
+                              @RequestParam(value = "tungay", defaultValue = "null") String tungay,
+                              @RequestParam(value = "denngay", defaultValue = "null") String denngay,
+                              @RequestParam(value = "trangthai", defaultValue = "dathanhtoan") String trangthai,
+                              @RequestParam(value = "limit", defaultValue = "100") Integer limit,
+                              @RequestParam(value = "page", defaultValue = "1") Integer page, Model model, Principal principal,
+                              HttpServletRequest request) {
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date ddenngay = new Date();
+        Date dtungay = new Date(ddenngay.getYear(), ddenngay.getMonth(), 01);
         try {
-            Date ddenngay = new Date();
-            Date dtungay = new Date(ddenngay.getYear(), ddenngay.getMonth(), 01);
-            if (!tungay.equals("null")) {
-                dtungay = dateFormat.parse(tungay);
-            }
-            if (!denngay.equals("null")) {
-                ddenngay = dateFormat.parse(denngay);
-            }
+
             int pageCount = 0;
             List<Hoadon> listHoadon = null;
             List<Hoadon> listHoadonThongKe = null;
+            List<Hoadon> listHoadonKpi = null;
+            List<Nhanvienkpi> listNhanvienkpi = null;
             if (request.isUserInRole("ROLE_ADMIN")) {
                 if (trangthai.equals("deleted")) {
                     int listHoaDonSize = hoaDonService.findByTrangthaiOrderByIdDesc("deleted").size();
@@ -101,36 +87,74 @@ public class HoaDonController {
                 listHoadonThongKe = hoaDonService.findByTrangthaiNotOrderByIdDesc("deleted");
             } else {
                 Taikhoan taikhoan = taikhoanService.findByUsername(principal.getName());
-                if (trangthai.equals("deleted")) {
-                    int listHoaDonSize = hoaDonService.findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc(
-                            "deleted", taikhoan.getNhanvien()).size();
-                    pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
-                    listHoadon = hoaDonService.findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc("deleted",
-                            taikhoan.getNhanvien(), new PageRequest(page - 1, limit));
+               listNhanvienkpi =nhanVienKpiService.findByNhanvienAndTrangthaiAndNgaydangkyBetween
+                        (taikhoan.getNhanvien(), "active", dtungay,ddenngay);
+                listHoadonKpi = hoaDonService.findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc("deleted",
+                        taikhoan.getNhanvien(), dtungay, ddenngay);
 
-                } else if (trangthai.equals("chuathanhtoan")) {
-                    int listHoaDonSize = hoaDonService.findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienban(
-                            "deleted", taikhoan.getNhanvien()).size();
-                    pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
-                    listHoadon = hoaDonService.findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienban(
-                            "deleted", taikhoan.getNhanvien(), new PageRequest(page - 1, limit));
+                if (!tungay.equals("null")) {
+                    dtungay = dateFormat.parse(tungay);
+                }
+                if (!denngay.equals("null")) {
+                    ddenngay = dateFormat.parse(denngay);
+                }
+                if (hthd != null) {
+                    if (trangthai.equals("deleted")) {
+                        int listHoaDonSize = hoaDonService.findByTrangthaiAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc(
+                                "deleted", taikhoan.getNhanvien(), dtungay, ddenngay).size();
+                        pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
+                        listHoadon = hoaDonService.findByTrangthaiAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc("deleted",
+                                taikhoan.getNhanvien(), dtungay, ddenngay, new PageRequest(page - 1, limit));
+
+                    } else if (trangthai.equals("chuathanhtoan")) {
+                        int listHoaDonSize = hoaDonService.findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetween(
+                                "deleted", taikhoan.getNhanvien(), dtungay, ddenngay).size();
+                        pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
+                        listHoadon = hoaDonService.findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetween(
+                                "deleted", taikhoan.getNhanvien(), dtungay, ddenngay, new PageRequest(page - 1, limit));
+                    } else {
+                        int listHoaDonSize = hoaDonService.findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetween(
+                                "deleted", taikhoan.getNhanvien(), dtungay, ddenngay).size();
+                        pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
+                        listHoadon = hoaDonService.findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetween(
+                                "deleted", taikhoan.getNhanvien(), dtungay, ddenngay, new PageRequest(page - 1, limit));
+                    }
                 } else {
-                    int listHoaDonSize = hoaDonService.findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienban(
-                            "deleted", taikhoan.getNhanvien()).size();
-                    pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
-                    listHoadon = hoaDonService.findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienban(
-                            "deleted", taikhoan.getNhanvien(), new PageRequest(page - 1, limit));
+                    if (trangthai.equals("deleted")) {
+                        int listHoaDonSize = hoaDonService.findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc(
+                                "deleted", taikhoan.getNhanvien()).size();
+                        pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
+                        listHoadon = hoaDonService.findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc("deleted",
+                                taikhoan.getNhanvien(), new PageRequest(page - 1, limit));
+
+                    } else if (trangthai.equals("chuathanhtoan")) {
+                        int listHoaDonSize = hoaDonService.findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienban(
+                                "deleted", taikhoan.getNhanvien()).size();
+                        pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
+                        listHoadon = hoaDonService.findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienban(
+                                "deleted", taikhoan.getNhanvien(), new PageRequest(page - 1, limit));
+                    } else {
+                        int listHoaDonSize = hoaDonService.findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienban(
+                                "deleted", taikhoan.getNhanvien()).size();
+                        pageCount = listHoaDonSize / limit + (listHoaDonSize % limit > 0 ? 1 : 0);
+                        listHoadon = hoaDonService.findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienban(
+                                "deleted", taikhoan.getNhanvien(), new PageRequest(page - 1, limit));
+                    }
                 }
                 listHoadonThongKe = hoaDonService.findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc("deleted",
-                        taikhoan.getNhanvien(),dtungay,ddenngay);
+                        taikhoan.getNhanvien(), dtungay, ddenngay);
             }
 
             model.addAttribute("tungay", dtungay);
             model.addAttribute("denngay", ddenngay);
             model.addAttribute("listHoadon", listHoadon);
+            model.addAttribute("listNhanvienkpi", listNhanvienkpi);
             model.addAttribute("listHoadonThongKe", listHoadonThongKe);
+
+            model.addAttribute("listHoadonKpi", listHoadonKpi);
             model.addAttribute("currentpage", page);
             model.addAttribute("pagecount", pageCount);
+            model.addAttribute("hthd", hthd);
         } catch (Exception e) {
             return "danhsachhoadon";
         }

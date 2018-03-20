@@ -27,4 +27,8 @@ public interface NhanVienKpiService {
 	List<Nhanvienkpi> findByNhanvien(Nhanvien nhanvien);
 	
 	List<Nhanvienkpi> findByNhanvienAndTrangthaiOrderByIdDesc(Nhanvien  nhanvien,String trangthai);
+	List<Nhanvienkpi> findByNhanvienAndTrangthaiAndNgaydangkyBetween(Nhanvien  nhanvien,String trangthai, Date d1, Date d2);
+
+	Nhanvienkpi findByTrangthaiAndNhanvienAndKpiAndMonthYearNgaydangky
+			(String trangthai,Nhanvien nhanvien, Kpi kpi, Date d1,Date d2);
 }

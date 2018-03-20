@@ -188,4 +188,49 @@ public class HoaDonServiceImpl implements HoaDonService {
 	public List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc(String trangthai, Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2) {
 		return hoaDonRepository.findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc(trangthai,nhanvienByIdnhanvienban,d1,d2);
 	}
+
+	@Override
+	public List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc
+			(String trangthai, Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2) {
+		return hoaDonRepository.findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc
+				(trangthai, nhanvienByIdnhanvienban,d1,d2);
+	}
+
+	@Override
+	public List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc
+			(String trangthai, Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2, Pageable pageable) {
+		return hoaDonRepository.findByTrangthaiAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc
+				(trangthai,nhanvienByIdnhanvienban,d1,d2,pageable);
+	}
+
+	@Override
+	public List<Hoadon> findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetween
+			(String trangthai, Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2) {
+		return hoaDonRepository.findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetween
+				(trangthai,nhanvienByIdnhanvienban,d1,d2);
+	}
+
+	@Override
+	public List<Hoadon> findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetween
+			(String trangthai, Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2, Pageable pageable) {
+		return hoaDonRepository.findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetween
+				(trangthai,nhanvienByIdnhanvienban,d1,d2,pageable);
+	}
+
+	@Override
+	public List<Hoadon> findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetween(String trangthai, Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2) {
+		return hoaDonRepository.findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetween
+				(trangthai,nhanvienByIdnhanvienban,d1,d2);
+	}
+
+	@Override
+	public List<Hoadon> findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetween(String trangthai, Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2, Pageable pageable) {
+		return hoaDonRepository.findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetween
+				(trangthai,nhanvienByIdnhanvienban,d1,d2,pageable);
+	}
+
+	@Override
+	public List<Hoadon> findByTrangthaiNotAndNgaythanhtoanBetweenOrderByIdDesc(String trangthai, Date d1, Date d2) {
+		return hoaDonRepository.findByTrangthaiNotAndNgaythanhtoanBetweenOrderByIdDesc(trangthai,d1,d2);
+	}
 }

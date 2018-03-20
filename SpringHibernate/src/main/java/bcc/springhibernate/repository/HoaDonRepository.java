@@ -20,12 +20,16 @@ public interface HoaDonRepository extends JpaRepository<Hoadon, Integer> {
 	List<Hoadon> findByTrangthaiOrderByIdDesc(String trangthai);
 	List<Hoadon> findByTrangthaiNotOrderByIdDesc(String trangthai);
 	List<Hoadon> findByTrangthaiOrderByIdDesc(String trangthai, Pageable pageable);
+
 	List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc(String trangthai,Nhanvien nhanvienByIdnhanvienban);
 	List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanOrderByIdDesc(String trangthai,Nhanvien nhanvienByIdnhanvienban);
+
 	List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc(String trangthai,Nhanvien nhanvienByIdnhanvienban, Pageable pageable);
 
-
-
+	List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc
+			(String trangthai,Nhanvien nhanvienByIdnhanvienban,Date d1, Date d2);
+	List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc
+			(String trangthai,Nhanvien nhanvienByIdnhanvienban,Date d1, Date d2,Pageable pageable);
 
 	Hoadon findBySohoadon(String sohoadon);
 
@@ -34,7 +38,7 @@ public interface HoaDonRepository extends JpaRepository<Hoadon, Integer> {
 	List<Hoadon> findByTrangthaiAndNgaylapBetweenOrderByIdDesc(String trangthai, Date d1, Date d2);
 
 	List<Hoadon> findByTrangthaiNotAndNgaylapBetweenOrderByIdDesc(String trangthai, Date d1, Date d2);
-
+	List<Hoadon> findByTrangthaiNotAndNgaythanhtoanBetweenOrderByIdDesc(String trangthai, Date d1, Date d2);
 
 	List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanAndNgaylapBetweenOrderByIdDesc(String trangthai,
 			Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2);
@@ -59,7 +63,17 @@ public interface HoaDonRepository extends JpaRepository<Hoadon, Integer> {
 			"and hd.nhanvienByIdnhanvienban = ?2 ")
 	List<Hoadon> findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienban(String trangthai,Nhanvien nhanvienByIdnhanvienban,
 																	  Pageable pageable);
-	
+
+	@Query("select hd from Hoadon hd where hd.tongtien = hd.tiendatra and hd.congno = 0 and hd.trangthai <> ?1 " +
+			"and hd.nhanvienByIdnhanvienban = ?2 and hd.ngaythanhtoan between ?3 and ?4 ")
+	List<Hoadon> findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetween
+			(String trangthai,Nhanvien nhanvienByIdnhanvienban , Date d1, Date d2);
+	@Query("select hd from Hoadon hd where hd.tongtien = hd.tiendatra and hd.congno = 0 and hd.trangthai <> ?1 " +
+			"and hd.nhanvienByIdnhanvienban = ?2 and hd.ngaythanhtoan between ?3 and ?4 ")
+	List<Hoadon> findByTrangthaiDaThanhToanAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetween
+			(String trangthai,Nhanvien nhanvienByIdnhanvienban , Date d1, Date d2,Pageable pageable);
+
+
 	@Query("select hd from Hoadon hd where hd.tongtien > hd.tiendatra and hd.congno > 0 and hd.trangthai <> ?1")
 	List<Hoadon> findByTrangthaiChuaThanhToan(String trangthai);
 	@Query("select hd from Hoadon hd where hd.tongtien > hd.tiendatra and hd.congno > 0 and hd.trangthai <> ?1")
@@ -71,7 +85,17 @@ public interface HoaDonRepository extends JpaRepository<Hoadon, Integer> {
 			"and hd.nhanvienByIdnhanvienban = ?2")
 	List<Hoadon> findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienban(String trangthai,Nhanvien nhanvienByIdnhanvienban,
 																		Pageable pageable);
-	
+
+	@Query("select hd from Hoadon hd where hd.tongtien > hd.tiendatra and hd.congno > 0 and hd.trangthai <> ?1 " +
+			"and hd.nhanvienByIdnhanvienban = ?2 and hd.ngaythanhtoan between ?3 and ?4")
+	List<Hoadon> findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetween
+			(String trangthai,Nhanvien nhanvienByIdnhanvienban,Date d1, Date d2);
+	@Query("select hd from Hoadon hd where hd.tongtien > hd.tiendatra and hd.congno > 0 and hd.trangthai <> ?1 " +
+			"and hd.nhanvienByIdnhanvienban = ?2 and hd.ngaythanhtoan between ?3 and ?4")
+	List<Hoadon> findByTrangthaiChuaThanhToanAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetween
+			(String trangthai,Nhanvien nhanvienByIdnhanvienban,Date d1, Date d2,Pageable pageable);
+
+
 	List<Hoadon> findByNhanvienByIdnhanvienbanAndTrangthaiNotAndNgaylapBetweenOrderByIdDesc
 	(Nhanvien nhanvien,String trangthai, Date d1, Date d2);
 	
