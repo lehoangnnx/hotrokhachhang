@@ -11,6 +11,9 @@ import javax.servlet.http.HttpSession;
 
 import bcc.springhibernate.model.*;
 import bcc.springhibernate.service.*;
+import org.joda.time.LocalDateTime;
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -43,6 +46,7 @@ public class MainController {
 
 	@RequestMapping("/")
 	public String index(Principal principal, Model model) {
+
 		if (principal != null) {
 
 			return "redirect:/admin";
@@ -51,8 +55,9 @@ public class MainController {
 	}
 
 	@RequestMapping("/admin")
-	public String home(Model model,HttpServletRequest request, Principal principal) {
+	public String home(Model model,HttpServletRequest request, Principal principal) throws ParseException {
 		thongBao.thongbao(model, request,principal);
+
 		return "index";
 	}
 	

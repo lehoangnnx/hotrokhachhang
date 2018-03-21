@@ -50,6 +50,10 @@
 					class="fa fa-link"></i> <span>Thống Kê</span></a></li>
 		</security:authorize>
 		<security:authorize access="hasAnyRole('ADMIN')">
+			<li class="treeview"><a href="${contextPath }/admin/saokehoadon"><i
+					class="fa fa-link"></i> <span>Sao Kê Hóa Đơn</span></a></li>
+		</security:authorize>
+		<security:authorize access="hasAnyRole('ADMIN')">
 			<li class="treeview"><a
 				href="${contextPath }/admin/thongkekpi?kpi=0"><i
 					class="fa fa-link"></i> <span>Thống Kê KPI</span></a></li>

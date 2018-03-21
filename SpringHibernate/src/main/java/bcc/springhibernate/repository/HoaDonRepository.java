@@ -21,10 +21,13 @@ public interface HoaDonRepository extends JpaRepository<Hoadon, Integer> {
 	List<Hoadon> findByTrangthaiNotOrderByIdDesc(String trangthai);
 	List<Hoadon> findByTrangthaiOrderByIdDesc(String trangthai, Pageable pageable);
 
-	List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc(String trangthai,Nhanvien nhanvienByIdnhanvienban);
-	List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanOrderByIdDesc(String trangthai,Nhanvien nhanvienByIdnhanvienban);
+	List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc
+	(String trangthai,Nhanvien nhanvienByIdnhanvienban);
+	List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanOrderByIdDesc
+	(String trangthai,Nhanvien nhanvienByIdnhanvienban);
 
-	List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc(String trangthai,Nhanvien nhanvienByIdnhanvienban, Pageable pageable);
+	List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc
+	(String trangthai,Nhanvien nhanvienByIdnhanvienban, Pageable pageable);
 
 	List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc
 			(String trangthai,Nhanvien nhanvienByIdnhanvienban,Date d1, Date d2);
@@ -45,8 +48,8 @@ public interface HoaDonRepository extends JpaRepository<Hoadon, Integer> {
 
 	List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaylapBetweenOrderByIdDesc(String trangthai,
 			Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2);
-	List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc(String trangthai,
-																							Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2);
+	List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc
+	(String trangthai,Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2);
 
 	
 	@Query("select hd from Hoadon hd where hd.tongtien = hd.tiendatra and hd.congno = 0 and hd.trangthai <> ?1")

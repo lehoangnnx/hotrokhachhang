@@ -527,7 +527,15 @@
 			value="/WEB-INF/views/administrator/thongke/footertag/thongke-footertag.jsp" />
 	</definition>
 	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
-	
+	<!-- Trang Sao Kê Hóa Đơn-->
+	<definition name="saokehoadon" extends="adminlayout">
+		<put-attribute name="title" value="Trang Quản Trị" />
+		<put-attribute name="body"
+					   value="/WEB-INF/views/administrator/saokehoadon/saokehoadon.jsp" />
+		<put-attribute name="footertagmore"
+					   value="/WEB-INF/views/administrator/saokehoadon/footertag/saokehoadon-footertag.jsp" />
+	</definition>
+	<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- Trang Thống Kê KPI -->
 	<definition name="thongkekpi" extends="adminlayout">
 		<put-attribute name="title" value="Trang Quản Trị" />

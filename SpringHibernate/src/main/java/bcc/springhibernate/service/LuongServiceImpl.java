@@ -62,6 +62,12 @@ public class LuongServiceImpl implements LuongService {
 		luongRepository.delete(luong);
 		
 	}
+
+	@Override
+	public Luong findOneByTrangthaiNotAndNhanvienAndThangAndNam(String trangthai, Nhanvien nhanvien, String thang,
+			String nam) {
+		return luongRepository.findOneByTrangthaiNotAndNhanvienAndThangAndNam(trangthai, nhanvien, thang, nam);
+	}
 	
 
 }
