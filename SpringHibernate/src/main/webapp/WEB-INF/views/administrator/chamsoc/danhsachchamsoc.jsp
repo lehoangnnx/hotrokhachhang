@@ -67,11 +67,15 @@
 									<td><fmt:formatDate pattern="dd-MM-yyyy"
 											value="${cs.ngaycstiep }" /></td>
 									<td>
-									
+										<a href="${contextPath }/admin/xemchamsoc/${cs.id}">
+											<i style="color: #00a7d0;" class="fa fa-eye fa-lg"
+											   aria-hidden="true" title="Xem"> </i>
+										</a>
 									<c:choose>
 									<c:when test="${cs.trangthai == 'dachamsoc' }">
+
 									<a href="${contextPath }/admin/chamsoc/${cs.id}">
-											<i style="color: blue;" class="fa fa-pencil fa-lg"
+											<i style="color: blue;margin-left: 10px;" class="fa fa-pencil fa-lg"
 											aria-hidden="true" title="Sửa"> </i>
 									</a>
 									
@@ -81,8 +85,9 @@
 									</a>
 									</c:when>
 									<c:when test="${cs.trangthai == 'chochamsoc' }">
+
 										<a href="${contextPath }/admin/chamsoc/${cs.id}">
-											<i style="color: blue;" class="fa fa-pencil fa-lg"
+											<i style="color: blue; margin-left: 10px;" class="fa fa-pencil fa-lg"
 											   aria-hidden="true" title="Sửa"> </i>
 										</a>
 									<a href="${contextPath }/admin/chamsoctieptheo/add/${cs.id}">
@@ -93,9 +98,10 @@
 									</c:when>
 									<c:otherwise>
 									<a href="${contextPath }/admin/chamsoc/${cs.id}">
-											<i style="color: blue;" class="fa fa-pencil fa-lg"
+											<i style="color: blue;margin-left: 10px;" class="fa fa-pencil fa-lg"
 											aria-hidden="true" title="Sửa"> </i>
 									</a>
+
 									</c:otherwise>
 									</c:choose>
 									

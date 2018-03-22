@@ -124,7 +124,7 @@
 									<option value="0">Không</option>
 									<c:forEach var="nv" items="${listNhanvien }">
 										<option ${param.nhanvienbanhang == nv.id ? 'selected' : '' }
-											value="${nv.id }">${nv.manhanvien}-${nv.tennhanvien }</option>
+											value="${nv.id }">${nv.manhanvien} - ${nv.tennhanvien }</option>
 									</c:forEach>
 
 								</select>

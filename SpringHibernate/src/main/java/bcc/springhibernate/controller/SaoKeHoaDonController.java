@@ -129,10 +129,13 @@ public class SaoKeHoaDonController {
                 String formatted = String.format("%02d", thang);
                 Luong getluong = luongService.findOneByTrangthaiNotAndNhanvienAndThangAndNam
                         ("deleted", getnhanvienbanhang, formatted, String.valueOf(nam));
+                System.out.println(getluong + "LUONG");
                 if (getluong != null) {
+                    System.out.println(getluong.getLuong() + "GET LUONG");
                     luong += getluong.getLuong();
                     thuong += getluong.getThuong();
-                    if (getluong.getUngluongs().isEmpty()) {
+                    thuonghoadon+=getluong.getThuongcuahoadon();
+                    if (!getluong.getUngluongs().isEmpty()) {
                         for (Ungluong ul : getluong.getUngluongs()) {
                             tienung += ul.getSotienung();
                         }
@@ -166,6 +169,8 @@ public class SaoKeHoaDonController {
 
                 map.put("luong", luong);
                 map.put("thuong", thuong);
+               /* map.put("manhanvien" , getnhanvienbanhang.getManhanvien());
+                map.put("tennhanvien",getnhanvienbanhang.getTennhanvien());*/
                 map.put("thuonghoadon", thuonghoadon);
                 map.put("tienung", tienung);
                 map.put("thang", thang);

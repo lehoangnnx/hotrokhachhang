@@ -133,7 +133,7 @@ tr:nth-child(even) {
 								<thead>
 									<tr>
 										<th>ID</th>
-										<th>Tên Tiêu Chí Chăm Soc</th>
+										<th>Tên Tiêu Chí Chăm Sóc</th>
 										<th>Kiểu Tiêu Chí</th>
 
 										<th>Thao tác</th>
@@ -145,7 +145,7 @@ tr:nth-child(even) {
 											<td><input hidden value="${ctcs.id }" name="idctcs">
 												<input hidden value="${ctcs.tieuchichamsoc.id}"
 												name="idtccs"> <span
-												id="idtccs${ctcs.tieuchichamsoc.id}">${ctcs.tieuchichamsoc.tentieuchi}</span></td>
+												id="idtccs${ctcs.tieuchichamsoc.id}">${ctcs.tieuchichamsoc.id}</span></td>
 											<td><span id="tentieuchitccs${ctcs.tieuchichamsoc.id}">${ctcs.tieuchichamsoc.tentieuchi}</span></td>
 
 
