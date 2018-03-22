@@ -327,7 +327,11 @@ function Remove(button,id) {
     var tenhang = $('#tenhanghh'+id).text();
     var mahang = $('#mahanghh'+id).text();
     if (confirm("Bạn Muốn Xóa : " + mahang +' - '+ tenhang)) {
-        $('#tongtien').val(parseInt($('#tongtien').val()) - parseInt($('#thanhtienhh'+id).val()));
+        var tongtien = $('#tongtien').val().replace(/\./g,"");
+        var thanhtienhh = $('#thanhtienhh'+id).val().replace(/\./g,"");
+        var _tongtien = parseInt(tongtien) - parseInt(thanhtienhh);
+		var output = changeNumberToString(_tongtien);
+        $('#tongtien').val(output);
 
         //Get the reference of the Table.
         var table = $("#tblcthd")[0];

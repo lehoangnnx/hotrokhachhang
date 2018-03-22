@@ -40,12 +40,12 @@ public class ThongBao {
 TaikhoanService taikhoanService;
 	public void thongbao(Model model, HttpServletRequest request, Principal principal) {
 
-		if (principal != null) {
+		/*if (principal != null) {
 			System.out.println(principal.getName());
 			HttpSession session = request.getSession();
 			session.setAttribute("taikhoan", taikhoanService.findByUsername(principal.getName()));
 
-		}
+		}*/
 
 
 		List<Khachhang> khachhangs =new ArrayList<>();

@@ -386,8 +386,13 @@ function Remove(button,id,idcthd) {
     	if(idcthd != 0){
     		updateChiTietHoaDonById(idcthd);
     	}
-    	
-    	$('#tongtien').val(parseInt($('#tongtien').val()) - parseInt($('#thanhtienhh'+id).val()));
+
+        var tongtien = $('#tongtien').val().replace(/\./g,"");
+        var thanhtienhh = $('#thanhtienhh'+id).val().replace(/\./g,"");
+        var _tongtien = parseInt(tongtien) - parseInt(thanhtienhh);
+        var output = changeNumberToString(_tongtien);
+        $('#tongtien').val(output);
+
 
         //Get the reference of the Table.
         var table = $("#tblcthd")[0];

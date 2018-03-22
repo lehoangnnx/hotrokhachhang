@@ -8,19 +8,19 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <input hidden="" id="msg" value="${msg }"></input>
 <!-- Content Header (Page header) -->
-    <section class="content-header">
+<%--    <section class="content-header">
       <h1>
         Loại Khách Hàng
-        <%-- <small><a href="${contextPath }/admin/roles?status=active">Danh Sách Loại Khách Hàng</a></small>
-        <small><a class="btn btn-success" href="${contextPath }/admin/loaikhachhang/add">Thêm mới</a></small> --%>
+        &lt;%&ndash; <small><a href="${contextPath }/admin/roles?status=active">Danh Sách Loại Khách Hàng</a></small>
+        <small><a class="btn btn-success" href="${contextPath }/admin/loaikhachhang/add">Thêm mới</a></small> &ndash;%&gt;
       </h1>
       <ol class="breadcrumb">
       <a class="btn btn-success" href="${contextPath }/admin/loaikhachhang/add">Thêm mới</a>
-       <%--  <li><a href="${contextPath }/"><i class="fa fa-dashboard"></i> Home</a></li>
+       &lt;%&ndash;  <li><a href="${contextPath }/"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="${contextPath }/roles">Quyền</a></li>
-        <li class="active">Quản lý quyền</li> --%>
+        <li class="active">Quản lý quyền</li> &ndash;%&gt;
       </ol>
-    </section>
+    </section>--%>
 
     <!-- Main content -->
     <section class="content">
@@ -38,7 +38,8 @@
 				</ul>
 		          <div class="box">
 		            <div class="box-header">
-		              <h3 class="box-title">Danh sách quyền</h3>
+		              <h3 class="box-title">Danh Sách Loại Khách Hàng</h3>
+						<a class="btn btn-success pull-right" href="${contextPath }/admin/loaikhachhang/add">Thêm mới</a>
 		            </div>
 		            <!-- /.box-header -->
 		            <div class="box-body">

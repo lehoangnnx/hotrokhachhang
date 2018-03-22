@@ -21,7 +21,13 @@ function thaydoimatkhautaikhoan(matkhau) {
 			// timeout: 600000,
 			success : function(result) {
 				
-
+				if(result == 'success'){
+                   // $('#error').text('* Thay Đổi Mật Khẩu Thành Công');
+                 	  alert('* Thay Đổi Mật Khẩu Thành Công');
+                    location.reload();
+				}else {
+                    $('#error').text('* Thay Đổi Mật Khẩu Thất Bại');
+				}
 			},
 			error : function(e) {
 

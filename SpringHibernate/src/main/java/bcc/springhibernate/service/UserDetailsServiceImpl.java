@@ -30,27 +30,28 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 
 	@Autowired
 	private TaikhoanRepository taiKhoanRepository;
-
+@Autowired
+HttpServletRequest request;
 
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		System.out.println("UserName la gì" + username);
+
 		Taikhoan taikhoan = taiKhoanRepository.findByUsernameAndTrangthai(HtmlUtils.htmlEscape(username), "active");
-		System.out.println("123" + taikhoan);
 		if (taikhoan == null) {
-			
-			System.out.println("-------------------------------------------------------------------");
             throw new UsernameNotFoundException("User not found");
-            
+
         }
+
 
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 		Set<Quyen> quyen = taikhoan.getQuyens();
 		for (Quyen q : quyen) {
 			grantedAuthorities.add(new SimpleGrantedAuthority(q.getMaquyen()));
 		}
-		
+        System.out.println(taikhoan.getNhanvien().getBophan().getTenbophan());
+        HttpSession session = request.getSession();
+        session.setAttribute("taikhoan", taikhoan);
 		return new org.springframework.security.core.userdetails.User(taikhoan.getUsername(), taikhoan.getMatkhau(), grantedAuthorities);
 	}
 

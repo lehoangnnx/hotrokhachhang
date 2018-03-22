@@ -80,7 +80,9 @@
                    method="get">
             <div class="col-md-12">
                 <div class="box box-primary">
-
+                    <div class="box-header with-border text-center">
+                        <h3 class="box-title">Thống Kê KPI</h3>
+                    </div>
                     <div class="box-body">
 
                         <div class="col-md-3">

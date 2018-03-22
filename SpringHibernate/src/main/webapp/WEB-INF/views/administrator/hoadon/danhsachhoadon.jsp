@@ -9,6 +9,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <input hidden="" id="msg" value="${msg }"></input>
 <!-- Content Header (Page header) -->
+
 <security:authorize access="hasAnyRole('BANHANG') && !hasAnyRole('ADMIN')">
     <section class="content-header">
         <form:form id="formThongKe" action="${contextPath }/admin/hoadon?trangthai=dathanhtoan&limit=100&page=1"

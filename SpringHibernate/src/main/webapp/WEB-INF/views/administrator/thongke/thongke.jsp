@@ -76,11 +76,15 @@
 
 
 		<!-- ./col -->
+
 		<form:form id="formThongKe" action="${contextPath }/admin/thongke"
 			method="get">
 			<div class="col-md-12">
-				<div class="box box-primary">
 
+				<div class="box box-primary">
+					<div class="box-header with-border text-center">
+						<h3 class="box-title">Thống Kê Hóa Đơn Theo Ngày Thanh Toán</h3>
+					</div>
 					<div class="box-body">
 						<div class="col-md-4">
 							<div class="form-group">

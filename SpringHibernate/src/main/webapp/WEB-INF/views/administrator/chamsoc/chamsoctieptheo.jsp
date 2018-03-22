@@ -132,7 +132,7 @@ tr:nth-child(even) {
 								<thead>
 									<tr>
 										<th>ID</th>
-										<th>Tên Tiêu Chí Chăm Soc</th>
+										<th>Tên Tiêu Chí Chăm Sóc</th>
 										<th>Kiểu Tiêu Chí</th>
 
 										<th>Thao tác</th>
