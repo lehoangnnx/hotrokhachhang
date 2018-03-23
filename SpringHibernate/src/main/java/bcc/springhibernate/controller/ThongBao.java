@@ -183,7 +183,7 @@ TaikhoanService taikhoanService;
 		// Tao Luong
 		Date date = new Date();
 		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-		String splitDate[] = df.format(date).split("/");
+		String splitDate[] = df.format(date).split("/|-");
 
 		// if(new Date(date.getYear(),date.getMonth(),date.getDate()).equals(new
 		// Date(date.getYear(),date.getMonth(),01))){

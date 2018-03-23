@@ -21,8 +21,8 @@
                 <div class="box box-primary">
 
                     <div class="box-body">
-                        <div class="col-md-12 text-center margin">
-                            <label style="font-size: 16px;">Thống Kê Hóa Đơn Theo Ngày Thanh Toán</label>
+                        <div class="box-header with-border text-center">
+                            <h3 class="box-title">Thống Kê Hóa Đơn Theo Ngày Thanh Toán</h3>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">

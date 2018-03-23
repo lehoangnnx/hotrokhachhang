@@ -87,17 +87,22 @@ public class HoaDonController {
                 listHoadonThongKe = hoaDonService.findByTrangthaiNotOrderByIdDesc("deleted");
             } else {
                 Taikhoan taikhoan = taikhoanService.findByUsername(principal.getName());
-               listNhanvienkpi =nhanVienKpiService.findByNhanvienAndTrangthaiAndNgaydangkyBetween
-                        (taikhoan.getNhanvien(), "active", dtungay,ddenngay);
+
+
                 listHoadonKpi = hoaDonService.findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc("deleted",
                         taikhoan.getNhanvien(), dtungay, ddenngay);
-
+                Date ddenngaynvk = new Date();
+                Date dtungaynvk = new Date(ddenngaynvk.getYear(), ddenngaynvk.getMonth(), 01);
                 if (!tungay.equals("null")) {
                     dtungay = dateFormat.parse(tungay);
                 }
                 if (!denngay.equals("null")) {
                     ddenngay = dateFormat.parse(denngay);
+                    ddenngaynvk = dateFormat.parse(denngay);
+                    dtungaynvk = new Date(ddenngaynvk.getYear(), ddenngaynvk.getMonth(), 01);
                 }
+                listNhanvienkpi =nhanVienKpiService.findByNhanvienAndTrangthaiAndNgaydangkyBetween
+                        (taikhoan.getNhanvien(), "active", dtungaynvk,ddenngaynvk);
                 if (hthd != null) {
                     if (trangthai.equals("deleted")) {
                         int listHoaDonSize = hoaDonService.findByTrangthaiAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc(
@@ -156,6 +161,7 @@ public class HoaDonController {
             model.addAttribute("pagecount", pageCount);
             model.addAttribute("hthd", hthd);
         } catch (Exception e) {
+            e.printStackTrace();
             return "danhsachhoadon";
         }
 
@@ -306,8 +312,8 @@ public class HoaDonController {
         System.out.println(hoadon + "-=-=-=-=-==--=-=-=-=-=-=");
         Date date = new Date();
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        String splitDate[] = df.format(date).split("/");
-        String splitngay[] = ngay.split("/");
+        String splitDate[] = df.format(date).split("/|-");
+        String splitngay[] = ngay.split("/|-");
         Long tongtienvon = 0L;
         List<Chitiethoadon> chitiethoadons = chiTietHoaDonService.findByHoadon(hoadon);
         for (Chitiethoadon ct : chitiethoadons) {
@@ -470,8 +476,8 @@ public class HoaDonController {
         System.out.println(hoadoncu.getTiendatra() + "===" + hoadon.getTiendatra());
         Date date = new Date();
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        String splitDate[] = df.format(date).split("/");
-        String splitngaylap[] = ngaylap.split("/");
+        String splitDate[] = df.format(date).split("/|-");
+        String splitngaylap[] = ngaylap.split("/|-");
         Long tongtienvon = 0L;
         List<Chitiethoadon> chitiethoadons = chiTietHoaDonService.findByHoadon(hoadon);
         for (Chitiethoadon ct : chitiethoadons) {
@@ -582,7 +588,7 @@ public class HoaDonController {
                     tongtienvon += ct.getHanghoa().getGianhap() * ct.getSoluong();
                 }
                 SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                String splitngay[] = df.format(hoadon.getNgaythanhtoan()).split("/");
+                String splitngay[] = df.format(hoadon.getNgaythanhtoan()).split("/|-");
 
                 System.out.println(splitngay[1] + "-" + splitngay[2]);
                 Luong luong = luongService.findOneByNhanvienAndThangAndNam(hoadon.getNhanvienByIdnhanvienban(),

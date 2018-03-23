@@ -99,7 +99,7 @@ function kiemtranhanvienvakpi(){
             // dataType: 'json',
             // timeout: 600000,
             success : function(result) {
-                console.log(result);
+
                 if(result == "error"){
                     $('#btn-submit').attr('type','button');
                     $('#error').css("display", "block");

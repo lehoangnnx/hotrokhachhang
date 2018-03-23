@@ -70,7 +70,6 @@ public class ChamSocController {
         List<Chamsoc> listChamsoc = chamSocService.findByTrangthaiOrderByIdDesc(trangthai,
                 new PageRequest(page - 1, limit));
         model.addAttribute("listChamsoc", listChamsoc);
-        System.out.println(pageCount);
         model.addAttribute("currentpage", page);
         model.addAttribute("pagecount", pageCount);
 
@@ -177,8 +176,7 @@ public class ChamSocController {
                         if (tieuchichamsoc.getKieutieuchi().equals("so")) {
                             chitietchamsoc.setDiem(Integer.parseInt(kieutieuchitccs.get(i)));
                         } else if (tieuchichamsoc.getKieutieuchi().equals("cokhong")) {
-                            System.out.println(
-                                    kieutieuchitccs.get(i) + "-" + Boolean.parseBoolean(kieutieuchitccs.get(i)));
+
                             chitietchamsoc.setCokhong(Boolean.parseBoolean(kieutieuchitccs.get(i)));
                         } else if (tieuchichamsoc.getKieutieuchi().equals("tien")) {
                             Long tien = Long.parseLong(kieutieuchitccs.get(i).replace(".", ""));
@@ -306,8 +304,7 @@ public class ChamSocController {
                         if (tieuchichamsoc.getKieutieuchi().equals("so")) {
                             chitietchamsoc.setDiem(Integer.parseInt(kieutieuchitccs.get(i)));
                         } else if (tieuchichamsoc.getKieutieuchi().equals("cokhong")) {
-                            System.out.println(
-                                    kieutieuchitccs.get(i) + "-" + Boolean.parseBoolean(kieutieuchitccs.get(i)));
+                           
                             chitietchamsoc.setCokhong(Boolean.parseBoolean(kieutieuchitccs.get(i)));
                         } else if (tieuchichamsoc.getKieutieuchi().equals("tien")) {
                             Long tien = Long.parseLong(kieutieuchitccs.get(i).replace(".", ""));

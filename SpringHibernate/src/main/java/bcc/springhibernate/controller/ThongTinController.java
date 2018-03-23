@@ -40,7 +40,7 @@ public class ThongTinController {
 		
 		Date date = new Date();
 		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-		String splitDate[] = df.format(date).split("/");
+		String splitDate[] = df.format(date).split("/|-");
 		Luong luong = null;
 		if(thang.equals("null") && nam.equals("null")) {
 			luong = luongService.findOneByNhanvienAndThangAndNam(nhanvien, splitDate[1], splitDate[2]);
