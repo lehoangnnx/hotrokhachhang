@@ -207,9 +207,9 @@ $(document).ready(function() {
 	});
 });
 $("input").focusout(function(){
-    var giaban = $("#giaban").val().replace(/\./g,"");
-	var gianhap = $("#gianhap").val().replace(/\./g,"");
-	var giakhuyenmai =$("#giakhuyenmai").val().replace(/\./g,"") ;
+    var giaban = Number($("#giaban").val().replace(/\.|,|\s/g,''));
+    var gianhap = Number($("#gianhap").val().replace(/\.|,|\s/g,''));
+    var giakhuyenmai =Number($("#giakhuyenmai").val().replace(/\.|,|\s/g,''));
     if(giaban < gianhap)
     {
         $("#_giaban-error").css("display","block");

@@ -65,10 +65,10 @@ public class HangHoaController {
     		Nhomhang nhomhangById = nhomHangService.findById(nhomhang);
     		hanghoa.setTrangthai("active");
     		hanghoa.setNhomhang(nhomhangById);
-    		hanghoa.setGiaban(Long.valueOf(giaban.replace(".","")));
-    		hanghoa.setGianhap(Long.valueOf(gianhap.replace(".","")));
+    		hanghoa.setGiaban(Long.valueOf(giaban.replaceAll("\\.|\\,|\\s","")));
+    		hanghoa.setGianhap(Long.valueOf(gianhap.replaceAll("\\.|\\,|\\s","")));
     		if(!giakhuyenmai.equals("")){
-				hanghoa.setGiakhuyenmai(Long.valueOf(giakhuyenmai.replace(".","")));
+				hanghoa.setGiakhuyenmai(Long.valueOf(giakhuyenmai.replaceAll("\\.|\\,|\\s","")));
 			}
     		hangHoaService.saveOrUpdate(hanghoa);
         	redirectAttributes.addFlashAttribute("msg", "Thêm Thành Công");
@@ -90,10 +90,10 @@ public class HangHoaController {
     		Nhomhang nhomhangById = nhomHangService.findById(nhomhang);
     		//hanghoa.setTrangthai("active");
     		hanghoa.setNhomhang(nhomhangById);
-			hanghoa.setGiaban(Long.valueOf(giaban.replace(".","")));
-			hanghoa.setGianhap(Long.valueOf(gianhap.replace(".","")));
+			hanghoa.setGiaban(Long.valueOf(giaban.replaceAll("\\.|\\,|\\s","")));
+			hanghoa.setGianhap(Long.valueOf(gianhap.replaceAll("\\.|\\,|\\s","")));
 			if(!giakhuyenmai.equals("")){
-				hanghoa.setGiakhuyenmai(Long.valueOf(giakhuyenmai.replace(".","")));
+				hanghoa.setGiakhuyenmai(Long.valueOf(giakhuyenmai.replaceAll("\\.|\\,|\\s","")));
 			}
     		hangHoaService.saveOrUpdate(hanghoa);
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");

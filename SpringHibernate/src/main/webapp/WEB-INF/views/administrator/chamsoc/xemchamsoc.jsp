@@ -84,7 +84,7 @@
                         <dd>${chamsoc.noidung}</dd>
                     </dl>
                     <dl class="col-md-12 text-center">
-                        <dt>Tên Tiêu Chí Chăm Sóc/Chăm Sóc</dt>
+                        <dt>Tên Tiêu Chí Chăm Sóc/Nội Dung Chăm Sóc</dt>
                         <c:forEach var="ctcs" items="${listChitietchamsoc }">
 
                             <dd>${ctcs.tieuchichamsoc.tentieuchi} / <c:if

@@ -198,14 +198,14 @@ TaikhoanService taikhoanService;
 				c.add(Calendar.MONTH, -1);
 				int lastmonth = c.get(Calendar.MONTH) + 1; // beware of month indexing from zero
 				int lastyear  = c.get(Calendar.YEAR);
-
+				System.out.println(lastmonth +" + " +lastyear);
 				luong = luongService.findOneByNhanvienAndThangAndNam(x, splitDate[1], splitDate[2]);
 				if (luong == null) {
-
-					Luong lastluong = luongService.findOneByNhanvienAndThangAndNam(x, String.valueOf(lastmonth),
+					String formatmonth =  String.format("%02d", lastmonth);
+					Luong lastluong = luongService.findOneByNhanvienAndThangAndNam(x,formatmonth,
 							String.valueOf(lastyear));
 					if(lastluong != null){
-						if(lastluong.getThuongcuahoadon() < 0){
+						if(lastluong.getThuongcuahoadon() < 0L){
 							luong = new Luong(x, x.getLuong(), 0L,lastluong.getThuongcuahoadon() , splitDate[1], splitDate[2], "chuatraluong", "");
 						}else {
 							luong = new Luong(x, x.getLuong(), 0L,0L, splitDate[1], splitDate[2], "chuatraluong", "");

@@ -96,11 +96,12 @@ public class ThongKeKpiController {
 							nvk.getNhanvien(), dtungay, ddenngay);
 					for (Hoadon hd : listHoadon) {
 						tiendatra += hd.getTiendatra();
+						if(hd.getHoadondautien() != null){
 						if(hd.getHoadondautien() == true){
 								khachhangmoi +=1;
 						}else {
 							khachhangtailap+=1;
-						}
+						}}
 					}
 
 					map.put("idnvkpi", nvk.getId());

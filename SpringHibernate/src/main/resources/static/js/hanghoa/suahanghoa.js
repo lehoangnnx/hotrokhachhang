@@ -206,40 +206,41 @@ $(document).ready(function() {
 	});
 });
 $("input").focusout(function(){
-    
-    
-    if(parseFloat($("#giaban").val()) < parseFloat($("#gianhap").val()))
+    var giaban = Number($("#giaban").val().replace(/\.|,|\s/g,''));
+    var gianhap = Number($("#gianhap").val().replace(/\.|,|\s/g,''));
+    var giakhuyenmai =Number($("#giakhuyenmai").val().replace(/\.|,|\s/g,''));
+
+    if(giaban < gianhap)
     {
         $("#_giaban-error").css("display","block");
         $('#_giaban-error').text("* Giá Bán Phải Lớn Hơn Giá Nhập");
-		$('#btn-submit').attr('type','button');
+        $('#btn-submit').attr('type','button');
     }else {
 
         $("#_giaban-error").css("display","none");
         $('#_giaban-error').text("");
     }
-   
-    if($("#giakhuyenmai").val() != '' ){
-	    if(parseFloat($("#giakhuyenmai").val()) < parseFloat($("#gianhap").val()))
-	    {
-	        $("#_giakhuyenmai-error").css("display","block");
-	        $('#_giakhuyenmai-error').text("* Giá Khuyến Mãi Phải Lớn Hơn Giá Nhập");
-			$('#btn-submit').attr('type','button');
-	    }else {
-	    	 $("#_giakhuyenmai-error").css("display","none");
-	         $('#_giakhuyenmai-error').text("");
-	         $('#btn-submit').attr('type','submit');
-	    }
+    if(giakhuyenmai != '' ){
+        if(giakhuyenmai < gianhap)
+        {
+            $("#_giakhuyenmai-error").css("display","block");
+            $('#_giakhuyenmai-error').text("* Giá Khuyến Mãi Phải Lớn Hơn Giá Nhập");
+            $('#btn-submit').attr('type','button');
+        }else {
+            $("#_giakhuyenmai-error").css("display","none");
+            $('#_giakhuyenmai-error').text("");
+            $('#btn-submit').attr('type','submit');
+        }
     }else {
-    	$("#_giakhuyenmai-error").css("display","none");
+        $("#_giakhuyenmai-error").css("display","none");
         $('#_giakhuyenmai-error').text("");
         $('#btn-submit').attr('type','submit');
     }
-    
-    if(parseFloat($("#giaban").val()) > parseFloat($("#gianhap").val()) &&
-    		parseFloat($("#giakhuyenmai").val()) > parseFloat($("#gianhap").val())) {
-    	
- 		$('#btn-submit').attr('type','submit'); 
+
+
+    if(giaban > gianhap && giakhuyenmai > gianhap) {
+
+        $('#btn-submit').attr('type','submit');
     }
 });
 var timeout = null;

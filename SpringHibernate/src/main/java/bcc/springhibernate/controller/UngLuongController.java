@@ -65,7 +65,7 @@ public class UngLuongController {
 			Nhanvien getNhanvienById = nhanVienService.findById(nhanvien);
 			Luong luong = luongService.findOneByNhanvienAndThangAndNam(getNhanvienById, splitngayung[1],splitngayung[2]);
 			ungluong.setLuong(luong);
-			ungluong.setSotienung(Long.valueOf(sotienung.replace(".","")));
+			ungluong.setSotienung(Long.valueOf(sotienung.replaceAll("\\.|\\,|\\s","")));
 			ungluong.setNgayung(df.parse(ngayung));
 			ungluong.setTrangthai("active");
 			ungLuongService.saveOrUpdate(ungluong);
@@ -87,7 +87,7 @@ public class UngLuongController {
 			Nhanvien getNhanvienById = nhanVienService.findById(nhanvien);
 			Luong luong = luongService.findOneByNhanvienAndThangAndNam(getNhanvienById, splitngayung[1],splitngayung[2]);
 			ungluong.setLuong(luong);
-			ungluong.setSotienung(Long.valueOf(sotienung.replace(".","")));
+			ungluong.setSotienung(Long.valueOf(sotienung.replaceAll("\\.|\\,|\\s","")));
 			ungluong.setNgayung(df.parse(ngayung));
 			ungLuongService.saveOrUpdate(ungluong);
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");

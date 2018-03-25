@@ -154,3 +154,15 @@ function kiemtraluong(){
 $('#formLuong').change(function(){
 	kiemtraluong();
 });
+$('#btn-submit').click(function (event) {
+    var sotienung = Number($('#sotienung').val().replace(/\.|,|\s/g,''));
+    if(sotienung <= 0){
+        $('#sotienung').focus();
+        $('#_sotienung-error').css("display", "block");
+        $('#_sotienung-error').text(" * Vui Lòng Nhập Số Tiền Ứng Lớn Hơn 0");
+        event.preventDefault();
+    }else {
+        $('#_sotienung-error').css("display", "none");
+        $('#_sotienung-error').text("");
+    }
+});

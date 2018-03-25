@@ -3,6 +3,13 @@ function deleteOne(id) {
 	$("#command").attr("action", contextPath + "/admin/hoadon");
 };
 $(document).ready(function() {
+    var a = '123.456.789,.  123';
+    var b = '123,456,789  123123';
+
+    var a1 = a.replace(/\.|,|\s/g,'');
+    var b1 = b.replace(/\.|,|\s/g,'');
+    console.log(a1);
+    console.log(b1);
     // Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
     $("#formThongKe").validate({
         rules : {

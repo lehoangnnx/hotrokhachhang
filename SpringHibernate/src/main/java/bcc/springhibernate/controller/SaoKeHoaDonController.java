@@ -111,16 +111,18 @@ public class SaoKeHoaDonController {
                         tiendatra += hd.getTiendatra();
                         congno += hd.getCongno();
                         tonghoadon += 1;
-                        if (hd.getTongtien().equals(hd.getTiendatra()) && hd.getCongno() == 0) {
+                        if (hd.getTongtien().equals(hd.getTiendatra()) && hd.getCongno() == 0L) {
                             hoadondathanhtoan += 1;
                         }
-                        if (hd.getTongtien() > hd.getTiendatra() && hd.getCongno() > 0) {
+                        if (hd.getTongtien() > hd.getTiendatra() && hd.getCongno() > 0L) {
                             hoadonchuathanhtoan += 1;
                         }
-                        if (hd.getHoadondautien() == true) {
-                            khachhangmoi += 1;
-                        } else {
-                            khachhangtailap += 1;
+                        if (hd.getHoadondautien() != null) {
+                            if (hd.getHoadondautien() == true) {
+                                khachhangmoi += 1;
+                            } else {
+                                khachhangtailap += 1;
+                            }
                         }
 
                     }
@@ -134,14 +136,17 @@ public class SaoKeHoaDonController {
                     System.out.println(getluong.getLuong() + "GET LUONG");
                     luong += getluong.getLuong();
                     thuong += getluong.getThuong();
-                    thuonghoadon+=getluong.getThuongcuahoadon();
+                    thuonghoadon += getluong.getThuongcuahoadon();
                     if (!getluong.getUngluongs().isEmpty()) {
                         for (Ungluong ul : getluong.getUngluongs()) {
-                            tienung += ul.getSotienung();
+                            if (!ul.getTrangthai().equals("deleted")) {
+                                tienung += ul.getSotienung();
+                            }
+
+
                         }
                     }
                 }
-
 
 
                 List<Map<String, Object>> listMapvnk = new ArrayList<Map<String, Object>>();

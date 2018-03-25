@@ -179,7 +179,7 @@ public class ChamSocController {
 
                             chitietchamsoc.setCokhong(Boolean.parseBoolean(kieutieuchitccs.get(i)));
                         } else if (tieuchichamsoc.getKieutieuchi().equals("tien")) {
-                            Long tien = Long.parseLong(kieutieuchitccs.get(i).replace(".", ""));
+                            Long tien = Long.parseLong(kieutieuchitccs.get(i).replaceAll("\\.|\\,|\\s",""));
                             chitietchamsoc.setTienchamsoc(tien);
                             getKhachHangById.setSotienchamsoc(getKhachHangById.getSotienchamsoc() - tien);
                             getKhachHangById.setSotiendachamsoc(getKhachHangById.getSotiendachamsoc() + tien);
@@ -307,7 +307,7 @@ public class ChamSocController {
                            
                             chitietchamsoc.setCokhong(Boolean.parseBoolean(kieutieuchitccs.get(i)));
                         } else if (tieuchichamsoc.getKieutieuchi().equals("tien")) {
-                            Long tien = Long.parseLong(kieutieuchitccs.get(i).replace(".", ""));
+                            Long tien = Long.parseLong(kieutieuchitccs.get(i).replaceAll("\\.|\\,|\\s",""));
                             chitietchamsoc.setTienchamsoc(tien);
                             getKhachHangById.setSotienchamsoc(getKhachHangById.getSotienchamsoc() - tien);
                             getKhachHangById.setSotiendachamsoc(getKhachHangById.getSotiendachamsoc() + tien);
@@ -371,7 +371,7 @@ public class ChamSocController {
 
                             chitietchamsoc.setCokhong(Boolean.parseBoolean(kieutieuchitccs.get(i)));
                         } else if (tieuchichamsoc.getKieutieuchi().equals("tien")) {
-                            Long tien = Long.parseLong(kieutieuchitccs.get(i).replace(".", ""));
+                            Long tien = Long.parseLong(kieutieuchitccs.get(i).replaceAll("\\.|\\,|\\s",""));
                             chitietchamsoc.setTienchamsoc(tien);
                             getKhachHangById.setSotienchamsoc(getKhachHangById.getSotienchamsoc() - tien);
                             getKhachHangById.setSotiendachamsoc(getKhachHangById.getSotiendachamsoc() + tien);
@@ -393,7 +393,7 @@ public class ChamSocController {
 
                             chitietchamsoc.setCokhong(Boolean.parseBoolean(kieutieuchitccs.get(i)));
                         } else if (tieuchichamsoc.getKieutieuchi().equals("tien")) {
-                            Long tien = Long.parseLong(kieutieuchitccs.get(i).replace(".", ""));
+                            Long tien = Long.parseLong(kieutieuchitccs.get(i).replaceAll("\\.|\\,|\\s",""));
                             Long tienchamsoccu, tiendachamsoccu;
                             tienchamsoccu = chitietchamsoc.getTienchamsoc() + getKhachHangById.getSotienchamsoc();
                             tiendachamsoccu = getKhachHangById.getSotiendachamsoc() - chitietchamsoc.getTienchamsoc();

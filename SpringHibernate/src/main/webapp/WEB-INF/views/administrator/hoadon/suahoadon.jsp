@@ -47,7 +47,7 @@ tr:nth-child(even) {
 					action="${contextPath }/admin/hoadon" method="patch"
 					modelAttribute="hoadon">
 					<form:hidden path="id" />
-					<form:hidden path="hoadondautien" />
+					<%--<form:hidden path="hoadondautien" />--%>
 					<div class="box-body">
 
 						<div class="form-group">

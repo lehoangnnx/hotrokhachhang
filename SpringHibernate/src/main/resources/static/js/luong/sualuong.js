@@ -157,7 +157,7 @@ $('#formLuong').change(function(){
 
 
 $('#btn-submit').click(function (event) {
-    var luong = $('#luong').val().replace(/\./g,'');
+    var luong = Number($('#luong').val().replace(/\.|,|\s/g,''));
     if(luong <= 0){
         $('#luong').focus();
         $('#_luong-error').css("display", "block");

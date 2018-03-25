@@ -113,7 +113,7 @@ public class NhanVienController {
 			nhanvien.setHienthiluong(hienthiluong);
 			nhanvien.setIdnhanviencaptren(nhanviencaptren);
 			nhanvien.setTrangthai("active");
-			nhanvien.setLuong(Long.valueOf(luong.replace(".","")));
+			nhanvien.setLuong(Long.valueOf(luong.replaceAll("\\.|\\,|\\s","")));
 			nhanVienService.saveOrUpdate(nhanvien);
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thành Công");
 		} catch (Exception e) {
@@ -144,7 +144,7 @@ public class NhanVienController {
 			nhanvien.setHienthiluong(hienthiluong);
 			nhanvien.setIdnhanviencaptren(nhanviencaptren);
 			//nhanvien.setTrangthai("active");
-			nhanvien.setLuong(Long.valueOf(luong.replace(".","")));
+			nhanvien.setLuong(Long.valueOf(luong.replaceAll("\\.|\\,|\\s","")));
 			nhanVienService.saveOrUpdate(nhanvien);
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {

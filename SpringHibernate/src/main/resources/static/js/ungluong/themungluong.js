@@ -90,7 +90,7 @@ $(document).ready(function(){
 
 
 $('#btn-submit').click(function (event) {
-    var sotienung = $('#sotienung').val().replace(/\./g,'');
+    var sotienung = Number($('#sotienung').val().replace(/\.|,|\s/g,''));
     if(sotienung <= 0){
         $('#sotienung').focus();
         $('#_sotienung-error').css("display", "block");

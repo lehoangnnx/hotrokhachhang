@@ -181,7 +181,7 @@ $('#kpi').change(function () {
 });
 
 function checkchitieudangky() {
-    var input = $('#chitieudangky').val().replace(/\./g, "");
+    var input = Number($('#chitieudangky').val().replace(/\.|,|\s/g,''));
     console.log(input);
     if(input <= 0){
         $('#btn-submit').attr('type','button');

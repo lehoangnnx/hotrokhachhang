@@ -109,7 +109,7 @@ public class NhanVienKpiController {
     		nhanvienkpi.setNgaydangky(new Date(date.getYear(),date.getMonth(),date.getDate()));
     		nhanvienkpi.setNgayhoanthanh(df.parse(ngayhoanthanh));
     		nhanvienkpi.setTrangthai(trangthai);
-    		nhanvienkpi.setChitieudangky(Long.valueOf(chitieudangky.replace(".","")));
+    		nhanvienkpi.setChitieudangky(Long.valueOf(chitieudangky.replaceAll("\\.|\\,|\\s","")));
         	nhanVienKpiService.saveOrUpdate(nhanvienkpi);
         	redirectAttributes.addFlashAttribute("msg", "Thêm Thành Công");
 		} catch (Exception e) {
@@ -138,7 +138,7 @@ public class NhanVienKpiController {
     		nhanvienkpi.setKpi(kpiById);
     		nhanvienkpi.setNgayhoanthanh(df.parse(ngayhoanthanh));
     		nhanvienkpi.setTrangthai(trangthai);
-			nhanvienkpi.setChitieudangky(Long.valueOf(chitieudangky.replace(".","")));
+			nhanvienkpi.setChitieudangky(Long.valueOf(chitieudangky.replaceAll("\\.|\\,|\\s","")));
         	nhanVienKpiService.saveOrUpdate(nhanvienkpi);
         	redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
 		} catch (Exception e) {

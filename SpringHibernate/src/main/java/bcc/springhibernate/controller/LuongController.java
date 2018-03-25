@@ -74,8 +74,8 @@ public class LuongController {
 			luong.setThang(thang);
 			luong.setNam(nam);
 			luong.setTrangthai(trangthai);
-			luong.setLuong(Long.valueOf(tienluong.replace(".","")));
-			luong.setThuong(Long.valueOf(thuong.replace(".","")));
+			luong.setLuong(Long.valueOf(tienluong.replaceAll("\\.|\\,|\\s","")));
+			luong.setThuong(Long.valueOf(thuong.replaceAll("\\.|\\,|\\s","")));
 			luong.setThuongcuahoadon(0L);
 			LuongService.saveOrUpdate(luong);
 			redirectAttributes.addFlashAttribute("msg", "Thêm Thành Công");
@@ -96,8 +96,8 @@ public class LuongController {
 			luong.setThang(thang);
 			luong.setNam(nam);
 			luong.setTrangthai(trangthai);
-			luong.setLuong(Long.valueOf(tienluong.replace(".","")));
-			luong.setThuong(Long.valueOf(thuong.replace(".","")));
+			luong.setLuong(Long.valueOf(tienluong.replaceAll("\\.|\\,|\\s","")));
+			luong.setThuong(Long.valueOf(thuong.replaceAll("\\.|\\,|\\s","")));
 
 			LuongService.saveOrUpdate(luong);
 			redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");

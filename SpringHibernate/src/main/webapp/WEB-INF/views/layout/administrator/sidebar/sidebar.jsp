@@ -65,7 +65,7 @@
 				</security:authorize>
 				<security:authorize access="hasAnyRole('ADMIN','BANHANG','GIAOHANG')">
 		<li class="treeview"><a
-			href="${contextPath }/admin/hoadon?trangthai=dathanhtoan&limit=100&page=1"><i
+			href="${contextPath }/admin/hoadon?trangthai=dathanhtoan&limit=100&page=1&hthd=on"><i
 				class="fa fa-link"></i> <span>Hóa Đơn</span></a></li>
 				</security:authorize>
 				<security:authorize access="hasAnyRole('ADMIN','CHAMSOC')">

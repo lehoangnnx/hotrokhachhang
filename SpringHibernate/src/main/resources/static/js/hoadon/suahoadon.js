@@ -185,8 +185,8 @@ function getHangHoaById() {
 				
 				
 				var id = result.id;
-		    	var soluong = parseInt($('#soluong').val());
-		    	var giaban = parseFloat(result.giaban);
+		    	var soluong = Number($('#soluong').val());
+		    	var giaban = Number(result.giaban);
 		    	
 		    	var thanhtien = soluong * giaban;
 		    	
@@ -194,11 +194,11 @@ function getHangHoaById() {
 		    	
 				
 			    	if($('#idhh'+id).text() != ''){
-                        var soluongcu = parseInt($('#soluonghh'+id).val());
+                        var soluongcu = Number($('#soluonghh'+id).val());
                         $('#soluonghh'+id).val(soluongcu + soluong);
 
-                        var soluongmoi = parseInt($('#soluonghh'+id).val());
-                        var giabanhhold = parseFloat($('#giabanhh'+id).val().replace(/\./g,""));
+                        var soluongmoi = Number($('#soluonghh'+id).val());
+                        var giabanhhold = Number($('#giabanhh'+id).val().replace(/\.|,|\s/g,''));
 
                         var thanhtiennew =soluongmoi * giabanhhold;
                         $('#thanhtienhh'+id).val(changeNumberToString(thanhtiennew));
@@ -255,7 +255,7 @@ function kiemTraGiaBan(id) {
     clearTimeout(timeout);
     timeout = setTimeout(function() {
         var hanghoa = {};
-        hanghoa["giaban"] = $('#giabanhh'+id).val().replace(/\./g,"");
+        hanghoa["giaban"] = $('#giabanhh'+id).val().replace(/\.|,|\s/g,'');
         hanghoa["id"] = id;
         var token = $("meta[name='_csrf']").attr("content");
         var header = $("meta[name='_csrf_header']").attr("content");
@@ -387,9 +387,9 @@ function Remove(button,id,idcthd) {
     		updateChiTietHoaDonById(idcthd);
     	}
 
-        var tongtien = $('#tongtien').val().replace(/\./g,"");
-        var thanhtienhh = $('#thanhtienhh'+id).val().replace(/\./g,"");
-        var _tongtien = parseInt(tongtien) - parseInt(thanhtienhh);
+        var tongtien = $('#tongtien').val().replace(/\.|,|\s/g,'');
+        var thanhtienhh = $('#thanhtienhh'+id).val().replace(/\.|,|\s/g,'');
+        var _tongtien = Number(tongtien) - Number(thanhtienhh);
         var output = changeNumberToString(_tongtien);
         $('#tongtien').val(output);
 
@@ -431,14 +431,14 @@ function settongtien(){
     var getthanhtienhh = document.getElementsByName('thanhtienhh');
     var tongtien = 0;
     for (var i = 0; i < getthanhtienhh.length; i++) {
-        tongtien += parseFloat(getthanhtienhh.item(i).value.replace(/\./g,""));
+        tongtien += Number(getthanhtienhh.item(i).value.replace(/\.|,|\s/g,''));
 
     }
     $('#tongtien').val(changeNumberToString(tongtien));
 };
 function capnhatthanhtien(id){
-    var giaban = parseFloat($('#giabanhh'+id).val().replace(/\./g,""));
-    var soluong = parseInt($('#soluonghh'+id).val().replace(/\./g,""));
+    var giaban = Number($('#giabanhh'+id).val().replace(/\.|,|\s/g,''));
+    var soluong = Number($('#soluonghh'+id).val().replace(/\.|,|\s/g,''));
     var thanhtien = giaban * soluong;
     $('#thanhtienhh'+id).val(changeNumberToString(thanhtien));
 }
@@ -455,8 +455,8 @@ $('#tiendatra').change(function () {
     setcongno();
 });
 function setcongno() {
-    var tongtien = $('#tongtien').val().replace(/\./g,"");
-    var tiendatra = $('#tiendatra').val().replace(/\./g,"");
+    var tongtien = Number($('#tongtien').val().replace(/\.|,|\s/g,''));
+    var tiendatra = Number($('#tiendatra').val().replace(/\.|,|\s/g,''));
     var congno = tongtien - tiendatra;
 
     $('#congno').val(changeNumberToString(congno));
