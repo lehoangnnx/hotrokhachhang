@@ -1,11 +1,11 @@
 package bcc.springhibernate.service;
 
-import java.util.Date;
-import java.util.List;
-
 import bcc.springhibernate.model.Kpi;
 import bcc.springhibernate.model.Nhanvien;
 import bcc.springhibernate.model.Nhanvienkpi;
+
+import java.util.Date;
+import java.util.List;
 
 public interface NhanVienKpiService {
 	void saveOrUpdate(Nhanvienkpi nhanvienkpi);

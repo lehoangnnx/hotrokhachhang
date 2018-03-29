@@ -1,9 +1,9 @@
 package bcc.springhibernate.service;
 
-import java.util.List;
-
 import bcc.springhibernate.model.Hanghoa;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public interface HangHoaService {
 	void saveOrUpdate(Hanghoa hanghoa);

@@ -1,16 +1,12 @@
 package bcc.springhibernate.service;
 
-import java.util.List;
-
+import bcc.springhibernate.model.Chamsoc;
+import bcc.springhibernate.model.Chitietchamsoc;
+import bcc.springhibernate.repository.ChiTietChamSocRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import bcc.springhibernate.model.Chamsoc;
-import bcc.springhibernate.model.Chitietchamsoc;
-import bcc.springhibernate.model.Chitiethoadon;
-import bcc.springhibernate.model.Hoadon;
-import bcc.springhibernate.repository.ChiTietChamSocRepository;
-import bcc.springhibernate.repository.ChiTietHoaDonRepository;
+import java.util.List;
 
 @Service
 public class ChiTietChamSocServiceImpl implements ChiTietChamSocService {

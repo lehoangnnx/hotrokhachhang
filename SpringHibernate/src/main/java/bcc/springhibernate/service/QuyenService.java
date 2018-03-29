@@ -1,8 +1,8 @@
 package bcc.springhibernate.service;
 
-import java.util.List;
-
 import bcc.springhibernate.model.Quyen;
+
+import java.util.List;
 
 public interface QuyenService {
 	List<Quyen> findAll();

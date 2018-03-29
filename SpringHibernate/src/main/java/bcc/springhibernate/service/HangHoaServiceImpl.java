@@ -1,15 +1,12 @@
 package bcc.springhibernate.service;
 
-import java.util.List;
-
+import bcc.springhibernate.model.Hanghoa;
+import bcc.springhibernate.repository.HangHoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import bcc.springhibernate.model.Hanghoa;
-import bcc.springhibernate.model.Nhomhang;
-import bcc.springhibernate.repository.HangHoaRepository;
-import bcc.springhibernate.repository.NhomHangRepository;
+import java.util.List;
 @Service
 public class HangHoaServiceImpl implements HangHoaService {
 @Autowired

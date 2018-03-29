@@ -180,9 +180,9 @@
                                     <c:when test="${hd.hoadondautien == true}">
                                         <c:set var="khachhangmoi" value="${khachhangmoi + 1}"/>
                                     </c:when>
-                                    <c:otherwise>
+                                    <c:when test="${hd.hoadondautien == false}">
                                         <c:set var="khachhangtailap" value="${khachhangtailap + 1}"/>
-                                    </c:otherwise>
+                                    </c:when>
                                 </c:choose>
                             </c:forEach>
                             <c:forEach var="nvk" items="${listNhanvienkpi}">
@@ -262,13 +262,13 @@
                 <li
                         class="tablinks ${param.trangthai == 'dathanhtoan' ? 'active' : '' }">
                     <a
-                            href="${contextPath }/admin/hoadon?trangthai=dathanhtoan&limit=100&page=1">Đã
+                            href="${contextPath }/admin/hoadon?trangthai=dathanhtoan&limit=100&page=1&hthd=on">Đã
                         Thanh Toán</a>
                 </li>
                 <li
                         class="tablinks ${param.trangthai == 'chuathanhtoan' ? 'active' : '' }">
                     <a
-                            href="${contextPath }/admin/hoadon?trangthai=chuathanhtoan&limit=100&page=1">Chưa
+                            href="${contextPath }/admin/hoadon?trangthai=chuathanhtoan&limit=100&page=1&hthd=on">Chưa
                         Thanh Toán</a>
                 </li>
                 <%-- <li class="tablinks ${param.trangthai == 'dangno' ? 'active' : '' }">
@@ -279,7 +279,7 @@
                 <li
                         class="tablinks ${param.trangthai == 'deleted' ? 'active' : '' }">
                     <a
-                            href="${contextPath }/admin/hoadon?trangthai=deleted&limit=100&page=1">Đã
+                            href="${contextPath }/admin/hoadon?trangthai=deleted&limit=100&page=1&hthd=on">Đã
                         Xóa</a>
                 </li>
             </ul>
@@ -308,6 +308,7 @@
                                 <th>Đã Trả</th>
 
                                 <th>Ngày Lập</th>
+                                <th>Ngày Thanh Toán</th>
                                 <th>Trạng Thái</th>
                                 <th>Thao Tác</th>
                             </tr>
@@ -330,7 +331,8 @@
 
                                     <td><fmt:formatDate pattern="dd-MM-yyyy"
                                                         value="${hd.ngaylap }"/></td>
-
+                                    <td><fmt:formatDate pattern="dd-MM-yyyy"
+                                                        value="${hd.ngaythanhtoan }"/></td>
                                     <c:if test="${hd.trangthai == 'dagiaohang' }">
                                         <td>Đã Giao Hàng</td>
                                     </c:if>
@@ -365,6 +367,7 @@
                                 <th>Đã Trả</th>
 
                                 <th>Ngày Lập</th>
+                                <th>Ngày Thanh Toán</th>
                                 <th>Trạng Thái</th>
                                 <th>Thao Tác</th>
                             </tr>

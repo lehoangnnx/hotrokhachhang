@@ -1,19 +1,12 @@
 package bcc.springhibernate.controller;
 
+import bcc.springhibernate.model.Kpi;
+import bcc.springhibernate.service.KpiService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import bcc.springhibernate.model.Kpi;
-import bcc.springhibernate.model.Loaikhachhang;
-import bcc.springhibernate.model.Nhomkhachhang;
-import bcc.springhibernate.service.KpiService;
-import bcc.springhibernate.service.LoaiKhachHangService;
-import bcc.springhibernate.service.NhomKhachHangService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,56 +15,57 @@ import java.util.Map;
 @RequestMapping("/admin")
 public class KpiRestController {
 
-	@Autowired
-	KpiService kpiService;
+    @Autowired
+    KpiService kpiService;
 
-	@PostMapping("/kiemtratenkpi")
-	String kiemTraTenKpi(@RequestBody Kpi kpi) {
+    @PostMapping("/kiemtratenkpi")
+    String kiemTraTenKpi(@RequestBody Kpi kpi) {
 
-		Kpi kpiByTen = null;
-		try {
-			kpiByTen = kpiService.findByTen(kpi.getTen());
-			if (kpi.getId() == null) {
+        Kpi kpiByTen = null;
+        try {
+            kpiByTen = kpiService.findByTen(kpi.getTen());
+            if (kpi.getId() == null) {
 
-				if (kpiByTen == null) {
+                if (kpiByTen == null) {
 
-					return "success";
-				}
-			} else {
-				if (kpiByTen != null) {
-					if (kpi.getId() == kpiByTen.getId()) {
+                    return "success";
+                }
+            } else {
+                if (kpiByTen != null) {
+                    if (kpi.getId() == kpiByTen.getId()) {
 
-						return "success";
+                        return "success";
 
-					}
-				} else {
+                    }
+                } else {
 
-					return "success";
+                    return "success";
 
-				}
-			}
+                }
+            }
 
-		} catch (Exception e) {
-			return "error";
-		}
-		return "error";
-	}
-	@PostMapping("/getkpi")
-	Map<String, Object> getKKPI(@RequestBody Integer id) {
+        } catch (Exception e) {
+            return "error";
+        }
+        return "error";
+    }
 
-		Kpi kpi = null;
-		Map<String, Object> kpiMap = new HashMap<String, Object>();
-		try {
-			kpi = kpiService.findById(id);
-			kpiMap.put("id", kpi.getId());
-			kpiMap.put("ten", kpi.getTen());
-			kpiMap.put("kieukpi", kpi.getKieukpi());
+    @PostMapping("/getkpi")
+    Map<String, Object> getKKPI(@RequestBody Integer id) {
 
-		} catch (Exception e) {
+        Kpi kpi = null;
+        Map<String, Object> kpiMap = new HashMap<String, Object>();
+        try {
+            kpi = kpiService.findById(id);
+            kpiMap.put("id", kpi.getId());
+            kpiMap.put("ten", kpi.getTen());
+            kpiMap.put("kieukpi", kpi.getKieukpi());
 
-		}
-		return kpiMap;
+        } catch (Exception e) {
 
-	}
+        }
+        return kpiMap;
+
+    }
 
 }

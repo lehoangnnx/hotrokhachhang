@@ -1,12 +1,10 @@
 package bcc.springhibernate.service;
 
-import java.util.Date;
-import java.util.List;
-
+import bcc.springhibernate.model.Chamsoc;
 import org.springframework.data.domain.Pageable;
 
-import bcc.springhibernate.model.Chamsoc;
-import bcc.springhibernate.model.Hoadon;
+import java.util.Date;
+import java.util.List;
 
 public interface ChamSocService {
 	void saveOrUpdate(Chamsoc chamsoc);

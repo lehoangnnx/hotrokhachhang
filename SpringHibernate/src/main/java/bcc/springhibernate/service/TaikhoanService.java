@@ -1,9 +1,8 @@
 package bcc.springhibernate.service;
 
-import java.util.List;
-
-import bcc.springhibernate.model.Nhanvien;
 import bcc.springhibernate.model.Taikhoan;
+
+import java.util.List;
 
 public interface TaikhoanService {
 	List<Taikhoan> findAll();

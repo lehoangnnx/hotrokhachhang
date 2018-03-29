@@ -1,18 +1,14 @@
 package bcc.springhibernate.service;
 
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import bcc.springhibernate.model.Kpi;
 import bcc.springhibernate.model.Nhanvien;
 import bcc.springhibernate.model.Nhanvienkpi;
-import bcc.springhibernate.model.Nhomkhachhang;
-import bcc.springhibernate.repository.KpiRepository;
 import bcc.springhibernate.repository.NhanVienKpiRepository;
-import bcc.springhibernate.repository.NhomKhachHangRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 @Service
 public class NhanVienKpiServiceImpl implements NhanVienKpiService {
 	@Autowired

@@ -1,8 +1,8 @@
 package bcc.springhibernate.service;
 
-import java.util.List;
-
 import bcc.springhibernate.model.Loaikhachhang;
+
+import java.util.List;
 
 public interface LoaiKhachHangService {
 	void saveOrUpdate(Loaikhachhang loaikhachhang);

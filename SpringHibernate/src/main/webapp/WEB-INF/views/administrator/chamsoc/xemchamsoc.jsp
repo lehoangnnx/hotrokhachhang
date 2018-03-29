@@ -43,8 +43,8 @@
             <div class="box box-solid">
                 <div class="box-header with-border">
                     <i class="fa fa-commenting-o"></i>
-
                     <h3 class="box-title">Chăm Sóc</h3>
+                    <button class="btn btn-info pull-right" type="button" onclick="goBack();">Quay Lại</button>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -82,12 +82,14 @@
                         <dd>${chamsoc.lan}</dd>
                         <dt>Nội Dung Chăm Sóc</dt>
                         <dd>${chamsoc.noidung}</dd>
+                        <dt>Ghi Chú</dt>
+                        <dd>${chamsoc.ghichu}</dd>
                     </dl>
                     <dl class="col-md-12 text-center">
-                        <dt>Tên Tiêu Chí Chăm Sóc/Nội Dung Chăm Sóc</dt>
+                        <dt>Tên Tiêu Chí Chăm Sóc - Nội Dung Chăm Sóc</dt>
                         <c:forEach var="ctcs" items="${listChitietchamsoc }">
 
-                            <dd>${ctcs.tieuchichamsoc.tentieuchi} / <c:if
+                            <dd>${ctcs.tieuchichamsoc.tentieuchi} - <c:if
                                     test="${ctcs.tieuchichamsoc.kieutieuchi == 'so' }">
                                 <input hidden value="${ctcs.diem}"
                                        id="ikieutieuchitccs${ctcs.tieuchichamsoc.id}"

@@ -155,3 +155,8 @@ $(".sidebar-menu>li").each(function() {
 });
 
 </script>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>

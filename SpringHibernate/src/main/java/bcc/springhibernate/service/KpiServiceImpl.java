@@ -1,15 +1,12 @@
 package bcc.springhibernate.service;
 
-import java.util.List;
-
+import bcc.springhibernate.model.Kpi;
+import bcc.springhibernate.repository.KpiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import bcc.springhibernate.model.Kpi;
-import bcc.springhibernate.model.Nhomkhachhang;
-import bcc.springhibernate.repository.KpiRepository;
-import bcc.springhibernate.repository.NhomKhachHangRepository;
+import java.util.List;
 @Service
 public class KpiServiceImpl implements KpiService {
 	@Autowired

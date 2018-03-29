@@ -125,7 +125,7 @@ $(document).ready(function() {
 			
 			chietkhau : {
 				required : true,
-				min : true,
+
 				normalizer : function(value) {
 
 					return $.trim(value);
@@ -184,7 +184,7 @@ $(document).ready(function() {
 			,
 			chietkhau : {
 				required : "* Vui Lòng Nhập Chiết Khấu",
-				min : "* Chiết Khấu Phải Lớn Hơn 0"
+				// min : "* Chiết Khấu Phải Lớn Hơn 0"
 				
 			}, 
 			bophan : {

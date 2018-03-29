@@ -1,131 +1,116 @@
 package bcc.springhibernate.controller;
 
-import java.security.Principal;
-
+import bcc.springhibernate.model.Taikhoan;
+import bcc.springhibernate.service.TaikhoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import bcc.springhibernate.model.Loaikhachhang;
-import bcc.springhibernate.model.Nhomhang;
-import bcc.springhibernate.model.Nhomkhachhang;
-import bcc.springhibernate.model.Quyen;
-import bcc.springhibernate.model.Taikhoan;
-import bcc.springhibernate.service.LoaiKhachHangService;
-import bcc.springhibernate.service.NhomHangService;
-import bcc.springhibernate.service.NhomKhachHangService;
-import bcc.springhibernate.service.QuyenService;
-import bcc.springhibernate.service.TaikhoanService;
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/admin")
 public class TaiKhoanRestController {
 
-	@Autowired
-	TaikhoanService taikhoanService;
-	@Autowired
-	PasswordEncoder passwordEncoder;
+    @Autowired
+    TaikhoanService taikhoanService;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
-	@PostMapping("/kiemtrausernamevaemailtaikhoan")
-	String kiemTraUserNameVaEmailtaiKhoan(@RequestBody Taikhoan taikhoan) {
+    @PostMapping("/kiemtrausernamevaemailtaikhoan")
+    String kiemTraUserNameVaEmailtaiKhoan(@RequestBody Taikhoan taikhoan) {
 
-		Taikhoan taiKhoanByUserName = null;
-		Taikhoan taiKhoanByEmail = null;
-		try {
-			taiKhoanByUserName = taikhoanService.findByUsername(taikhoan.getUsername());
-			taiKhoanByEmail = taikhoanService.findByEmail(taikhoan.getEmail());
-			System.out.println(taikhoan.getEmail());
-			if (taikhoan.getId() == null) {
-				System.out.println("101010010110");
-				if (taiKhoanByUserName != null && taiKhoanByEmail != null) {
-					System.out.println(1);
-					return "error";
-				} else if (taiKhoanByUserName != null) {
-					System.out.println(2);
-					return "errorusername";
+        Taikhoan taiKhoanByUserName = null;
+        Taikhoan taiKhoanByEmail = null;
+        try {
+            taiKhoanByUserName = taikhoanService.findByUsername(taikhoan.getUsername());
+            taiKhoanByEmail = taikhoanService.findByEmail(taikhoan.getEmail());
+            System.out.println(taikhoan.getEmail());
+            if (taikhoan.getId() == null) {
+                System.out.println("101010010110");
+                if (taiKhoanByUserName != null && taiKhoanByEmail != null) {
+                    System.out.println(1);
+                    return "error";
+                } else if (taiKhoanByUserName != null) {
+                    System.out.println(2);
+                    return "errorusername";
 
-				} else if (taiKhoanByEmail != null) {
-					System.out.println(3);
-					return "erroremail";
+                } else if (taiKhoanByEmail != null) {
+                    System.out.println(3);
+                    return "erroremail";
 
-				} else {
+                } else {
 
-					return "success";
-				}
-			} else {
-				System.out.println("1111111111111111111111");
-				if (taiKhoanByUserName != null && taiKhoanByEmail != null
-						&& taikhoan.getId() != taiKhoanByUserName.getId()
-						&& taikhoan.getId() != taiKhoanByEmail.getId()) {
-					System.out.println("4");
-					return "error";
+                    return "success";
+                }
+            } else {
+                System.out.println("1111111111111111111111");
+                if (taiKhoanByUserName != null && taiKhoanByEmail != null
+                        && taikhoan.getId() != taiKhoanByUserName.getId()
+                        && taikhoan.getId() != taiKhoanByEmail.getId()) {
+                    System.out.println("4");
+                    return "error";
 
-				} else if (taiKhoanByUserName != null && taikhoan.getId() != taiKhoanByUserName.getId()) {
-					System.out.println("5");
-					return "errorusername";
+                } else if (taiKhoanByUserName != null && taikhoan.getId() != taiKhoanByUserName.getId()) {
+                    System.out.println("5");
+                    return "errorusername";
 
-				} else if (taiKhoanByEmail != null && taikhoan.getId() != taiKhoanByEmail.getId()) {
-					System.out.println("6");
-					return "erroremail";
+                } else if (taiKhoanByEmail != null && taikhoan.getId() != taiKhoanByEmail.getId()) {
+                    System.out.println("6");
+                    return "erroremail";
 
-				} else {
-					System.out.println("7");
-					return "success";
-				}
-			}
+                } else {
+                    System.out.println("7");
+                    return "success";
+                }
+            }
 
-		} catch (Exception e) {
-			return "error";
-		}
+        } catch (Exception e) {
+            return "error";
+        }
 
-	}
+    }
 
-	@PostMapping("/kiemtraemailtaikhoan")
-	String kiemTraEmailtaiKhoan(@RequestBody Taikhoan taikhoan) {
+    @PostMapping("/kiemtraemailtaikhoan")
+    String kiemTraEmailtaiKhoan(@RequestBody Taikhoan taikhoan) {
 
-		Taikhoan taiKhoanByEmail = null;
-		try {
-			taiKhoanByEmail = taikhoanService.findByEmail(taikhoan.getEmail());
-			if (taikhoan.getId() == null) {
+        Taikhoan taiKhoanByEmail = null;
+        try {
+            taiKhoanByEmail = taikhoanService.findByEmail(taikhoan.getEmail());
+            if (taikhoan.getId() == null) {
 
-				if (taiKhoanByEmail == null) {
+                if (taiKhoanByEmail == null) {
 
-					return "success";
-				}
-			} else {
-				if (taiKhoanByEmail != null) {
-					if (taikhoan.getId() == taiKhoanByEmail.getId()) {
+                    return "success";
+                }
+            } else {
+                if (taiKhoanByEmail != null) {
+                    if (taikhoan.getId() == taiKhoanByEmail.getId()) {
 
-						return "success";
+                        return "success";
 
-					}
-				} else {
-					return "success";
-				}
-			}
+                    }
+                } else {
+                    return "success";
+                }
+            }
 
-		} catch (Exception e) {
-			return "error";
-		}
-		return "error";
-	}
+        } catch (Exception e) {
+            return "error";
+        }
+        return "error";
+    }
 
-	@PostMapping("/thaydoimatkhautaikhoan")
-	String thaydoimatkhautaikhoan(@RequestParam("matkhau") String matkhau, Principal principal) {
-		try {
-			Taikhoan taikhoan = taikhoanService.findByUsername(principal.getName());
-			taikhoan.setMatkhau(passwordEncoder.encode(matkhau));
-			taikhoanService.saveOrUpdate(taikhoan);
-			return "success";
-		} catch (Exception e) {
-			return "error";
-		}
+    @PostMapping("/thaydoimatkhautaikhoan")
+    String thaydoimatkhautaikhoan(@RequestParam("matkhau") String matkhau, Principal principal) {
+        try {
+            Taikhoan taikhoan = taikhoanService.findByUsername(principal.getName());
+            taikhoan.setMatkhau(passwordEncoder.encode(matkhau));
+            taikhoanService.saveOrUpdate(taikhoan);
+            return "success";
+        } catch (Exception e) {
+            return "error";
+        }
 
-	}
+    }
 }

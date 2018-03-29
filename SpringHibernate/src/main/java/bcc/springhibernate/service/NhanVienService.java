@@ -1,8 +1,8 @@
 package bcc.springhibernate.service;
 
-import java.util.List;
-
 import bcc.springhibernate.model.Nhanvien;
+
+import java.util.List;
 
 public interface NhanVienService {
 	void saveOrUpdate(Nhanvien nhanvien);

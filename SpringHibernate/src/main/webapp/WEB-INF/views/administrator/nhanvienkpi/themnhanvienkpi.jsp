@@ -23,6 +23,7 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Thêm Nhân Viên KPI</h3>
+                    <button class="btn btn-info pull-right" type="button" onclick="goBack();">Quay Lại</button>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
@@ -162,6 +163,7 @@
                         <button id="btn-submit" onclick="checkchitieudangky();" type="button" class="btn btn-primary">Xác
                             Nhận
                         </button>
+                        <button class="btn btn-info pull-right" type="button" onclick="goBack();">Quay Lại</button>
                     </div>
                 </form:form>
             </div>

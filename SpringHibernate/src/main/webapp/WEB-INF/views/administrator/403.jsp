@@ -31,7 +31,13 @@
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
   <![endif]-->
+  <script>
+      function goBack() {
+          window.history.back();
+      }
+  </script>
 </head>
 <body>
 <section class="content">
@@ -43,7 +49,7 @@
 
           <p>
             Chúng tôi không tìm thấy trang nào phù hợp với yêu cầu của bạn.
-            Đề xuất, bạn có thể <a href="${contextPath }/admin">quay về trang chủ</a>.
+            Đề xuất, bạn có thể <a href="#" onclick="goBack();">quay về </a>.
           </p>
 
           
@@ -63,5 +69,6 @@
 <script src="${contexPath }/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="${contexPath }/js/demo.js"></script>
+
 </body>
 </html>

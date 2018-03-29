@@ -122,7 +122,7 @@
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<label>Nhân Viên Bán Hàng</label> <select
+								<label>Nhân Viên</label> <select
 									class="form-control select2" name="nhanvienbanhang"
 									style="width: 100%;">
 									<option value="0">Không</option>

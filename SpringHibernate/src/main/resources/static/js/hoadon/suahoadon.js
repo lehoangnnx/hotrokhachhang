@@ -62,6 +62,14 @@
 
 
 $(document).ready(function() {
+
+
+    $('input[name*="hh"]').each(function () {
+        var input = $(this).val().replace(/\.|,|\s/g,'.');
+
+        $(this).val(input);
+    });
+
 	// Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
     $("#formHoaDon").validate({
         rules : {
@@ -474,4 +482,50 @@ $('#btn-submit').click(function(){
 			$('#_hanghoa-error').text("");
 	    	$('#btn-submit').attr('type', 'submit');
 	    }
-})
+});
+
+function parseDate(str) {
+    var mdy = str.split('/');
+    return new Date(mdy[2], mdy[1], mdy[0]);
+};
+function checkngay(event) {
+    var dateObj = new Date();
+    var month = dateObj.getUTCMonth() + 1;
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear();
+
+    var ngaylap = parseDate($('#ngaylap').val()).getTime();
+    var ngayxuat = parseDate($('#ngayxuat').val()).getTime();
+    var ngaythanhtoan = parseDate($('#ngaythanhtoan').val()).getTime();
+    var ngayhientai = parseDate(day+'/'+month+'/'+year).getTime();
+
+    if(ngaylap > ngayhientai){
+
+        event.preventDefault();
+
+        $('#ngaylap-error').css("display", "block");
+        $('#ngaylap-error').text("* Ngày Lập Không Lớn Hơn Ngày Hiện Tại");
+        return;
+    }else if(ngayxuat > ngayhientai){
+        event.preventDefault();
+
+        $('#ngayxuat-error').css("display", "block");
+        $('#ngayxuat-error').text("* Ngày Xuất Không Lớn Hơn Ngày Hiện Tại");
+        return;
+    }else if(ngaythanhtoan > ngayhientai){
+        event.preventDefault();
+
+        $('#ngaythanhtoan-error').css("display", "block");
+        $('#ngaythanhtoan-error').text("* Ngày Thanh Toán Không Lớn Hơn Ngày Hiện Tại");
+        return;
+    }else {
+        $('#ngaylap-error').css("display", "none");
+        $('#ngaylap-error').text("");
+        $('#ngayxuat-error').css("display", "none");
+        $('#ngayxuat-error').text("");
+        $('#ngaythanhtoan-error').css("display", "none");
+        $('#ngaythanhtoan-error').text("");
+        return;
+    }
+};
+

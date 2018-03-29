@@ -1,11 +1,9 @@
 package bcc.springhibernate.service;
 
-import java.util.List;
-
+import bcc.springhibernate.model.Bophan;
 import org.springframework.data.domain.Pageable;
 
-import bcc.springhibernate.model.Bophan;
-import bcc.springhibernate.model.Loaikhachhang;
+import java.util.List;
 
 public interface BoPhanService {
 	

@@ -1,26 +1,5 @@
 package bcc.springhibernate.controller;
 
-import java.security.Principal;
-import java.text.SimpleDateFormat;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.websocket.server.PathParam;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-
 import bcc.springhibernate.model.Hoadon;
 import bcc.springhibernate.model.Khachhang;
 import bcc.springhibernate.model.Loaikhachhang;
@@ -28,12 +7,20 @@ import bcc.springhibernate.model.Nhomkhachhang;
 import bcc.springhibernate.service.HoaDonService;
 import bcc.springhibernate.service.KhachHangService;
 import bcc.springhibernate.service.LoaiKhachHangService;
-import bcc.springhibernate.service.NhomHangService;
 import bcc.springhibernate.service.NhomKhachHangService;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.Comparator;
+import java.util.List;
 
 @Controller
 @PreAuthorize("hasAnyRole('ADMIN','BANHANG','CHAMSOC')")
@@ -111,7 +98,7 @@ public class KhachHangController {
     @GetMapping("/khachhang/add")
     String pageThemKhachHangg(Model model) {
         List<Loaikhachhang> listLoaikhachhang = loaiKhachHangService.findByTrangthaiOrderByIdDesc("active");
-        List<Nhomkhachhang> listNhomkhachhang = nhomKhachHangService.findByTrangthaiOrderByIdDesc("active");
+        List<Nhomkhachhang> listNhomkhachhang = nhomKhachHangService.findByTrangthaiOrderByIdAsc("active");
         model.addAttribute("listLoaikhachhang", listLoaikhachhang);
         model.addAttribute("listNhomkhachhang", listNhomkhachhang);
         model.addAttribute("khachhang", new Khachhang());
@@ -120,13 +107,21 @@ public class KhachHangController {
 
     @GetMapping("/khachhang/{id}")
     String pageSuaKhachHangg(Model model, @PathVariable("id") Integer id) {
-        List<Loaikhachhang> listLoaikhachhang = loaiKhachHangService.findByTrangthaiOrderByIdDesc("active");
-        List<Nhomkhachhang> listNhomkhachhang = nhomKhachHangService.findByTrangthaiOrderByIdDesc("active");
-        Khachhang khachhang = khachHangService.findById(id);
-        model.addAttribute("listLoaikhachhang", listLoaikhachhang);
-        model.addAttribute("listNhomkhachhang", listNhomkhachhang);
-        model.addAttribute("khachhang", khachhang);
-        return "suakhachhang";
+        try {
+            Khachhang khachhang = khachHangService.findById(id);
+            if (khachhang != null) {
+                List<Loaikhachhang> listLoaikhachhang = loaiKhachHangService.findByTrangthaiOrderByIdDesc("active");
+                List<Nhomkhachhang> listNhomkhachhang = nhomKhachHangService.findByTrangthaiOrderByIdDesc("active");
+                model.addAttribute("listLoaikhachhang", listLoaikhachhang);
+                model.addAttribute("listNhomkhachhang", listNhomkhachhang);
+                model.addAttribute("khachhang", khachhang);
+                return "suakhachhang";
+            } else {
+                return "redirect:/403";
+            }
+        } catch (Exception e) {
+            return "redirect:/403";
+        }
     }
 
     @PostMapping("/khachhang")
@@ -210,8 +205,8 @@ public class KhachHangController {
             if (!ngaycap.equals("null")) {
                 khachhang.setNgaycap(df.parse(ngaycap));
             }
-            khachhang.setSotienchamsoc(Long.valueOf(sotienchamsoc.replaceAll("\\.|\\,|\\s","")));
-            khachhang.setSotiendachamsoc(Long.valueOf(sotiendachamsoc.replaceAll("\\.|\\,|\\s","")));
+            khachhang.setSotienchamsoc(Long.valueOf(sotienchamsoc.replaceAll("\\.|\\,|\\s", "")));
+            khachhang.setSotiendachamsoc(Long.valueOf(sotiendachamsoc.replaceAll("\\.|\\,|\\s", "")));
             khachhang.setDiem(diem);
             khachhang.setSolanchamsoc(solanchamsoc);
             khachhang.setSolandamphan(solandamphan);
@@ -313,8 +308,8 @@ public class KhachHangController {
             if (!ngaycap.equals("null")) {
                 khachhang.setNgaycap(df.parse(ngaycap));
             }
-            khachhang.setSotienchamsoc(Long.valueOf(sotienchamsoc.replaceAll("\\.|\\,|\\s","")));
-            khachhang.setSotiendachamsoc(Long.valueOf(sotiendachamsoc.replaceAll("\\.|\\,|\\s","")));
+            khachhang.setSotienchamsoc(Long.valueOf(sotienchamsoc.replaceAll("\\.|\\,|\\s", "")));
+            khachhang.setSotiendachamsoc(Long.valueOf(sotiendachamsoc.replaceAll("\\.|\\,|\\s", "")));
             khachhang.setDiem(diem);
             khachhang.setSolanchamsoc(solanchamsoc);
             khachhang.setSolandamphan(solandamphan);

@@ -1,42 +1,19 @@
 package bcc.springhibernate.controller;
 
-import java.security.Principal;
-import java.text.SimpleDateFormat;
-import java.util.*;
-
-import javax.servlet.http.HttpServletRequest;
-
+import bcc.springhibernate.model.*;
+import bcc.springhibernate.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import bcc.springhibernate.model.Chamsoc;
-import bcc.springhibernate.model.Chitietchamsoc;
-import bcc.springhibernate.model.Hoadon;
-import bcc.springhibernate.model.Khachhang;
-import bcc.springhibernate.model.Nhanvien;
-import bcc.springhibernate.model.Nhomkhachhang;
-import bcc.springhibernate.model.Taikhoan;
-import bcc.springhibernate.model.Tieuchichamsoc;
-import bcc.springhibernate.service.ChamSocService;
-import bcc.springhibernate.service.ChiTietChamSocService;
-import bcc.springhibernate.service.HoaDonService;
-import bcc.springhibernate.service.KhachHangService;
-import bcc.springhibernate.service.NhanVienService;
-import bcc.springhibernate.service.NhomKhachHangService;
-import bcc.springhibernate.service.TaikhoanService;
-import bcc.springhibernate.service.TieuChiChamSocService;
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 @PreAuthorize("hasAnyRole('ADMIN','CHAMSOC')")
@@ -179,7 +156,7 @@ public class ChamSocController {
 
                             chitietchamsoc.setCokhong(Boolean.parseBoolean(kieutieuchitccs.get(i)));
                         } else if (tieuchichamsoc.getKieutieuchi().equals("tien")) {
-                            Long tien = Long.parseLong(kieutieuchitccs.get(i).replaceAll("\\.|\\,|\\s",""));
+                            Long tien = Long.parseLong(kieutieuchitccs.get(i).replaceAll("\\.|\\,|\\s", ""));
                             chitietchamsoc.setTienchamsoc(tien);
                             getKhachHangById.setSotienchamsoc(getKhachHangById.getSotienchamsoc() - tien);
                             getKhachHangById.setSotiendachamsoc(getKhachHangById.getSotiendachamsoc() + tien);
@@ -222,47 +199,56 @@ public class ChamSocController {
 
     @GetMapping("/xemchamsoc/{id}")
     String pageXemChamSoc(Model model, @PathVariable("id") Integer id) {
+        try {
+            Chamsoc chamsoc = chamSocService.findById(id);
+            if (chamsoc != null) {
+                Map<String, Object> map = new HashMap<>();
+                if (chamsoc.getNhanvienbanhang() != 0) {
+                    Nhanvien nhanvienbanhang = nhanVienService.findById(chamsoc.getNhanvienbanhang());
+                    map.put("nhanvienbanhang", nhanvienbanhang.getManhanvien() + " - " + nhanvienbanhang.getTennhanvien());
+                } else {
+                    map.put("nhanvienbanhang", "Không");
+                }
+                if (chamsoc.getNhanviengiaohang() != 0) {
+                    Nhanvien nhanviengiaohang = nhanVienService.findById(chamsoc.getNhanvienchamsoc());
+                    map.put("nhanviengiaohang", nhanviengiaohang.getManhanvien() + " - " + nhanviengiaohang.getTennhanvien());
+                } else {
+                    map.put("nhanviengiaohang", "Không");
+                }
 
-        Chamsoc chamsoc = chamSocService.findById(id);
-        Map<String, Object> map = new HashMap<>();
-        if (chamsoc.getNhanvienbanhang() != 0) {
-            Nhanvien nhanvienbanhang = nhanVienService.findById(chamsoc.getNhanvienbanhang());
-            map.put("nhanvienbanhang", nhanvienbanhang.getManhanvien() + " - " + nhanvienbanhang.getTennhanvien());
-        } else {
-            map.put("nhanvienbanhang", "Không");
+                if (chamsoc.getHoadonId() != 0) {
+                    Hoadon hoadon = hoaDonService.findById(chamsoc.getHoadonId());
+                    map.put("hoadon", hoadon.getSohoadon());
+                } else {
+                    map.put("hoadon", "Không");
+                }
+                Nhanvien nhanvienchamsoc = nhanVienService.findById(chamsoc.getNhanvienchamsoc());
+                Hoadon hoadon = hoaDonService.findById(chamsoc.getHoadonId());
+
+                map.put("nhanvienchamsoc", nhanvienchamsoc.getManhanvien() + " - " + nhanvienchamsoc.getTennhanvien());
+
+
+                List<Chitietchamsoc> listChitietchamsoc = chiTietChamSocService.findByChamsoc(chamsoc);
+                List<Khachhang> listKhachhang = khachHangService.findByTrangthaiNotOrderByIdDesc("deleted");
+                List<Nhanvien> listNhanvien = nhanVienService.findByTrangthaiOrderByIdDesc("active");
+                List<Hoadon> listHoadon = hoaDonService.findByKhachhang(chamsoc.getKhachhang());
+                List<Tieuchichamsoc> listTieuchichamsoc = tieuChiChamSocService.findByTrangthaiOrderByIdDesc("active");
+                model.addAttribute("listTieuchichamsoc", listTieuchichamsoc);
+                model.addAttribute("listHoadon", listHoadon);
+                model.addAttribute("listKhachhang", listKhachhang);
+                model.addAttribute("listNhanvien", listNhanvien);
+                model.addAttribute("listChitietchamsoc", listChitietchamsoc);
+                model.addAttribute("chamsoc", chamsoc);
+                model.addAttribute("map", map);
+                return "xemchamsoc";
+            } else {
+                return "redirect:/403";
+            }
+
+        } catch (Exception e) {
+            return "redirect:/403";
         }
-        if (chamsoc.getNhanviengiaohang() != 0) {
-            Nhanvien nhanviengiaohang = nhanVienService.findById(chamsoc.getNhanvienchamsoc());
-            map.put("nhanviengiaohang", nhanviengiaohang.getManhanvien() + " - " + nhanviengiaohang.getTennhanvien());
-        } else {
-            map.put("nhanviengiaohang", "Không");
-        }
 
-        if (chamsoc.getHoadonId() != 0) {
-            Hoadon hoadon = hoaDonService.findById(chamsoc.getHoadonId());
-            map.put("hoadon", hoadon.getSohoadon());
-        } else {
-            map.put("hoadon", "Không");
-        }
-        Nhanvien nhanvienchamsoc = nhanVienService.findById(chamsoc.getNhanvienchamsoc());
-        Hoadon hoadon = hoaDonService.findById(chamsoc.getHoadonId());
-
-        map.put("nhanvienchamsoc", nhanvienchamsoc.getManhanvien() + " - " + nhanvienchamsoc.getTennhanvien());
-
-
-        List<Chitietchamsoc> listChitietchamsoc = chiTietChamSocService.findByChamsoc(chamsoc);
-        List<Khachhang> listKhachhang = khachHangService.findByTrangthaiNotOrderByIdDesc("deleted");
-        List<Nhanvien> listNhanvien = nhanVienService.findByTrangthaiOrderByIdDesc("active");
-        List<Hoadon> listHoadon = hoaDonService.findByKhachhang(chamsoc.getKhachhang());
-        List<Tieuchichamsoc> listTieuchichamsoc = tieuChiChamSocService.findByTrangthaiOrderByIdDesc("active");
-        model.addAttribute("listTieuchichamsoc", listTieuchichamsoc);
-        model.addAttribute("listHoadon", listHoadon);
-        model.addAttribute("listKhachhang", listKhachhang);
-        model.addAttribute("listNhanvien", listNhanvien);
-        model.addAttribute("listChitietchamsoc", listChitietchamsoc);
-        model.addAttribute("chamsoc", chamsoc);
-        model.addAttribute("map", map);
-        return "xemchamsoc";
     }
 
     @PostMapping("/chamsoc")
@@ -304,10 +290,10 @@ public class ChamSocController {
                         if (tieuchichamsoc.getKieutieuchi().equals("so")) {
                             chitietchamsoc.setDiem(Integer.parseInt(kieutieuchitccs.get(i)));
                         } else if (tieuchichamsoc.getKieutieuchi().equals("cokhong")) {
-                           
+
                             chitietchamsoc.setCokhong(Boolean.parseBoolean(kieutieuchitccs.get(i)));
                         } else if (tieuchichamsoc.getKieutieuchi().equals("tien")) {
-                            Long tien = Long.parseLong(kieutieuchitccs.get(i).replaceAll("\\.|\\,|\\s",""));
+                            Long tien = Long.parseLong(kieutieuchitccs.get(i).replaceAll("\\.|\\,|\\s", ""));
                             chitietchamsoc.setTienchamsoc(tien);
                             getKhachHangById.setSotienchamsoc(getKhachHangById.getSotienchamsoc() - tien);
                             getKhachHangById.setSotiendachamsoc(getKhachHangById.getSotiendachamsoc() + tien);
@@ -371,7 +357,7 @@ public class ChamSocController {
 
                             chitietchamsoc.setCokhong(Boolean.parseBoolean(kieutieuchitccs.get(i)));
                         } else if (tieuchichamsoc.getKieutieuchi().equals("tien")) {
-                            Long tien = Long.parseLong(kieutieuchitccs.get(i).replaceAll("\\.|\\,|\\s",""));
+                            Long tien = Long.parseLong(kieutieuchitccs.get(i).replaceAll("\\.|\\,|\\s", ""));
                             chitietchamsoc.setTienchamsoc(tien);
                             getKhachHangById.setSotienchamsoc(getKhachHangById.getSotienchamsoc() - tien);
                             getKhachHangById.setSotiendachamsoc(getKhachHangById.getSotiendachamsoc() + tien);
@@ -393,7 +379,7 @@ public class ChamSocController {
 
                             chitietchamsoc.setCokhong(Boolean.parseBoolean(kieutieuchitccs.get(i)));
                         } else if (tieuchichamsoc.getKieutieuchi().equals("tien")) {
-                            Long tien = Long.parseLong(kieutieuchitccs.get(i).replaceAll("\\.|\\,|\\s",""));
+                            Long tien = Long.parseLong(kieutieuchitccs.get(i).replaceAll("\\.|\\,|\\s", ""));
                             Long tienchamsoccu, tiendachamsoccu;
                             tienchamsoccu = chitietchamsoc.getTienchamsoc() + getKhachHangById.getSotienchamsoc();
                             tiendachamsoccu = getKhachHangById.getSotiendachamsoc() - chitietchamsoc.getTienchamsoc();

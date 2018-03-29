@@ -1,28 +1,19 @@
 package bcc.springhibernate.controller;
 
-import bcc.springhibernate.model.*;
-import bcc.springhibernate.service.*;
+import bcc.springhibernate.service.ChamSocService;
+import bcc.springhibernate.service.TaikhoanService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.security.Principal;
-import java.util.Calendar;
-import java.util.Date;
 
 @RestController
 @RequestMapping("/admin")
 public class ChamSocRestController {
 
-	@Autowired
-	ChamSocService chamSocService;
-	@Autowired
-	TaikhoanService taikhoanService;
+    @Autowired
+    ChamSocService chamSocService;
+    @Autowired
+    TaikhoanService taikhoanService;
 	/*@PostMapping("/updatethongbaochamsoc")
 	String updateThongBaoChamSoc(@RequestParam("id") Integer id, Principal principal) {
 		

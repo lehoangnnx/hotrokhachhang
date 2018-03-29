@@ -1,16 +1,13 @@
 package bcc.springhibernate.service;
 
-import java.util.Date;
-import java.util.List;
-
+import bcc.springhibernate.model.Chamsoc;
+import bcc.springhibernate.repository.ChamSocRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import bcc.springhibernate.model.Chamsoc;
-import bcc.springhibernate.model.Hoadon;
-import bcc.springhibernate.repository.ChamSocRepository;
-import bcc.springhibernate.repository.HoaDonRepository;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class ChamSocServiceImpl implements ChamSocService {

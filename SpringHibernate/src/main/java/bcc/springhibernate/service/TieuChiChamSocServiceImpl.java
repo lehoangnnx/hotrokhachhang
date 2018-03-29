@@ -1,12 +1,11 @@
 package bcc.springhibernate.service;
 
-import java.util.List;
-
+import bcc.springhibernate.model.Tieuchichamsoc;
+import bcc.springhibernate.repository.TieuChiChamSocRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import bcc.springhibernate.model.Tieuchichamsoc;
-import bcc.springhibernate.repository.TieuChiChamSocRepository;
+import java.util.List;
 
 @Service
 public class TieuChiChamSocServiceImpl implements TieuChiChamSocService {

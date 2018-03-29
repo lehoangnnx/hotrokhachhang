@@ -1,12 +1,11 @@
 package bcc.springhibernate.service;
 
-import java.util.List;
-
-import org.springframework.data.domain.Pageable;
-
 import bcc.springhibernate.model.Khachhang;
 import bcc.springhibernate.model.Loaikhachhang;
 import bcc.springhibernate.model.Nhomkhachhang;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public interface KhachHangService {
 	

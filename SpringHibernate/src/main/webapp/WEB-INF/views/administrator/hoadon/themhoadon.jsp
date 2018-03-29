@@ -38,6 +38,8 @@ tr:nth-child(even) {
 			<div class="box box-primary">
 				<div class="box-header with-border">
 					<h3 class="box-title">Thêm Hóa Đơn</h3>
+
+					<button class="btn btn-info pull-right" type="button" onclick="goBack();">Quay Lại</button>
 				</div>
 				<!-- /.box-header -->
 				<!-- form start -->
@@ -98,7 +100,7 @@ tr:nth-child(even) {
 
 						<div class="form-group">
 							<label for="sohoadon">Số Hóa Đơn</label>
-							<form:input path="sohoadon" type="text" class="form-control"
+							<input id="sohoadon" name="sohoadon" type="text" class="form-control" readonly
 								placeholder="Số Hóa Đơn" />
 							<label id="_sohoadon-error" class="error" style="display: none;"></label>
 						</div>
@@ -186,7 +188,7 @@ tr:nth-child(even) {
 								<div class="input-group-addon">
 									<i class="fa fa-calendar"></i>
 								</div>
-								<input name="ngaylap" id="ngaylap"
+								<input name="ngaylap" id="ngaylap" onchange="checkngay(event);"
 									value="<fmt:formatDate
                                                 pattern="dd-MM-yyyy" value="${hoadon.ngaylap}"/>"
 									type="text" class="form-control"
@@ -201,7 +203,7 @@ tr:nth-child(even) {
 								<div class="input-group-addon">
 									<i class="fa fa-calendar"></i>
 								</div>
-								<input name="ngayxuat" id="ngayxuat"
+								<input name="ngayxuat" id="ngayxuat" onchange="checkngay(event);"
 									value="<fmt:formatDate
                                                 pattern="dd-MM-yyyy" value="${hoadon.ngayxuat}"/>"
 									type="text" class="form-control"
@@ -216,7 +218,7 @@ tr:nth-child(even) {
 								<div class="input-group-addon">
 									<i class="fa fa-calendar"></i>
 								</div>
-								<input name="ngaythanhtoan" id="ngaythanhtoan"
+								<input name="ngaythanhtoan" id="ngaythanhtoan" onchange="checkngay(event);"
 									   value="<fmt:formatDate
                                                 pattern="dd-MM-yyyy" value="${hoadon.ngaythanhtoan}"/>"
 									   type="text" class="form-control"
@@ -298,7 +300,7 @@ tr:nth-child(even) {
 						<div class="form-group">
 							<label for="ghichu">Ghi Chú</label>
 							<form:textarea path="ghichu" type="text" class="form-control"
-								placeholder="ghichu" />
+								placeholder="Ghi Chú" />
 							<label id="_ghichu-error" class="error" style="display: none;"></label>
 						</div>
 
@@ -307,8 +309,9 @@ tr:nth-child(even) {
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 					<div class="box-footer">
-						<button id="btn-submit" type="button" class="btn btn-primary">Xác
+						<button id="btn-submit" type="button" onclick="checkngay(event);" class="btn btn-primary">Xác
 							Nhận</button>
+						<button class="btn btn-info pull-right" type="button" onclick="goBack();">Quay Lại</button>
 					</div>
 				</form:form>
 			</div>

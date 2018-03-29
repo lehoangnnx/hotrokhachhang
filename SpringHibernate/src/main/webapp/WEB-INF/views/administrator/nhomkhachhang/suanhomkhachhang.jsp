@@ -16,6 +16,7 @@
 			<div class="box box-primary">
 				<div class="box-header with-border">
 					<h3 class="box-title">Sửa Nhóm Khách Hàng</h3>
+					<button class="btn btn-info pull-right" type="button" onclick="goBack();">Quay Lại</button>
 				</div>
 				<!-- /.box-header -->
 				<!-- form start -->
@@ -83,18 +84,19 @@
 						value="${_csrf.token}" />
 					<div class="box-footer">
 						<c:if test="${nhomkhachhang.trangthai != 'deleted' }">
-							<div class="box-footer">
+
 								<button id="btn-submit" name="update" type="submit"
 									class="btn btn-primary">Xác Nhận</button>
-							</div>
+
 						</c:if>
 						<c:if test="${nhomkhachhang.trangthai == 'deleted' }">
-							<div class="box-footer">
+
 
 								<button id="btn-submit" name="deleted" type="submit"
 									class="btn btn-danger">Xóa Vĩnh Viễn</button>
-							</div>
+
 						</c:if>
+						<button class="btn btn-info pull-right" type="button" onclick="goBack();">Quay Lại</button>
 					</div>
 				</form:form>
 			</div>

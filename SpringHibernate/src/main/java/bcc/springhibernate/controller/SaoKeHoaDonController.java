@@ -1,6 +1,10 @@
 package bcc.springhibernate.controller;
 
 import bcc.springhibernate.model.*;
+import bcc.springhibernate.service.HoaDonService;
+import bcc.springhibernate.service.LuongService;
+import bcc.springhibernate.service.NhanVienKpiService;
+import bcc.springhibernate.service.NhanVienService;
 import org.joda.time.LocalDateTime;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
@@ -12,13 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import bcc.springhibernate.model.Nhanvien;
-import bcc.springhibernate.model.Nhanvien;
-import bcc.springhibernate.service.HoaDonService;
-import bcc.springhibernate.service.LuongService;
-import bcc.springhibernate.service.NhanVienKpiService;
-import bcc.springhibernate.service.NhanVienService;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -120,7 +117,7 @@ public class SaoKeHoaDonController {
                         if (hd.getHoadondautien() != null) {
                             if (hd.getHoadondautien() == true) {
                                 khachhangmoi += 1;
-                            } else {
+                            } else if (hd.getHoadondautien() == false) {
                                 khachhangtailap += 1;
                             }
                         }

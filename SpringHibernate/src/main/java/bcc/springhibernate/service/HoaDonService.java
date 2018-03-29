@@ -1,14 +1,12 @@
 package bcc.springhibernate.service;
 
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.data.domain.Pageable;
-
 import bcc.springhibernate.model.Hoadon;
 import bcc.springhibernate.model.Khachhang;
 import bcc.springhibernate.model.Nhanvien;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.domain.Pageable;
+
+import java.util.Date;
+import java.util.List;
 
 public interface HoaDonService {
 	void saveOrUpdate(Hoadon hoadon);

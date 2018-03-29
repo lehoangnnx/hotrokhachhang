@@ -38,6 +38,7 @@ tr:nth-child(even) {
 			<div class="box box-primary">
 				<div class="box-header with-border">
 					<h3 class="box-title">Thêm Chăm Sóc</h3>
+					<button class="btn btn-info pull-right" type="button" onclick="goBack();">Quay Lại</button>
 				</div>
 				<!-- /.box-header -->
 				<!-- form start -->
@@ -228,6 +229,7 @@ tr:nth-child(even) {
 					<div class="box-footer">
 						<button id="btn-submit" type="submit" class="btn btn-primary">Xác
 							Nhận</button>
+						<button class="btn btn-info pull-right" type="button" onclick="goBack();">Quay Lại</button>
 					</div>
 				</form:form>
 			</div>

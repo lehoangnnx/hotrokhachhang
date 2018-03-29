@@ -1,8 +1,8 @@
 package bcc.springhibernate.service;
 
-import java.util.List;
-
 import bcc.springhibernate.model.Feedback;
+
+import java.util.List;
 
 public interface FeedBackService {
 	void saveOrUpdate(Feedback feedback);

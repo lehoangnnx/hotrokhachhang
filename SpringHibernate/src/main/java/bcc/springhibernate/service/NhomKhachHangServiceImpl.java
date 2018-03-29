@@ -1,12 +1,11 @@
 package bcc.springhibernate.service;
 
-import java.util.List;
-
+import bcc.springhibernate.model.Nhomkhachhang;
+import bcc.springhibernate.repository.NhomKhachHangRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import bcc.springhibernate.model.Nhomkhachhang;
-import bcc.springhibernate.repository.NhomKhachHangRepository;
+import java.util.List;
 @Service
 public class NhomKhachHangServiceImpl implements NhomKhachHangService {
 	@Autowired
@@ -47,4 +46,8 @@ public class NhomKhachHangServiceImpl implements NhomKhachHangService {
 		
 	}
 
+	@Override
+	public List<Nhomkhachhang> findByTrangthaiOrderByIdAsc(String trangthai) {
+		return nhomKhachHangRepository.findByTrangthaiOrderByIdAsc(trangthai);
+	}
 }

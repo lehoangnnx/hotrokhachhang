@@ -1,11 +1,9 @@
 package bcc.springhibernate.service;
 
-import java.util.List;
-
 import bcc.springhibernate.model.Chamsoc;
 import bcc.springhibernate.model.Chitietchamsoc;
-import bcc.springhibernate.model.Chitiethoadon;
-import bcc.springhibernate.model.Hoadon;
+
+import java.util.List;
 
 public interface ChiTietChamSocService {
 	void saveOrUpdate(Chitietchamsoc chitietchamsoc);

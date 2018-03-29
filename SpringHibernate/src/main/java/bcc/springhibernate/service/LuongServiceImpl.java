@@ -1,15 +1,12 @@
 package bcc.springhibernate.service;
 
-import java.util.List;
-
+import bcc.springhibernate.model.Luong;
+import bcc.springhibernate.model.Nhanvien;
+import bcc.springhibernate.repository.LuongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import bcc.springhibernate.model.Luong;
-import bcc.springhibernate.model.Nhanvien;
-import bcc.springhibernate.model.Nhomkhachhang;
-import bcc.springhibernate.repository.LuongRepository;
-import bcc.springhibernate.repository.NhomKhachHangRepository;
+import java.util.List;
 @Service
 public class LuongServiceImpl implements LuongService {
 	@Autowired

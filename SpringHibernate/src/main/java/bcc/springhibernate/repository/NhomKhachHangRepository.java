@@ -11,6 +11,7 @@ import bcc.springhibernate.model.Nhomkhachhang;
 public interface NhomKhachHangRepository extends JpaRepository<Nhomkhachhang, Integer> {
 	List<Nhomkhachhang> findAll();
 	List<Nhomkhachhang> findByTrangthaiOrderByIdDesc(String trangthai);
+	List<Nhomkhachhang> findByTrangthaiOrderByIdAsc(String trangthai);
 	Nhomkhachhang findByTennhom(String tennhom);
 	Nhomkhachhang findById(Integer id);
 }

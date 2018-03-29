@@ -350,7 +350,7 @@
                                 </label>
                                 </div>
                             </td>
-                            <td><a href="${contextPath }/admin/hoadon/${hd.id}"> <i
+                            <td><a href="${contextPath }/admin/nhanvienkpi/${nvk.id}"> <i
                                     style="color: blue;" class="fa fa-pencil fa-lg"
                                     aria-hidden="true" title="Sửa"> </i>
                             </a></td>

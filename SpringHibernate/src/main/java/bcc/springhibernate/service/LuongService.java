@@ -1,10 +1,9 @@
 package bcc.springhibernate.service;
 
-import java.util.List;
-
 import bcc.springhibernate.model.Luong;
 import bcc.springhibernate.model.Nhanvien;
-import bcc.springhibernate.model.Nhomkhachhang;
+
+import java.util.List;
 
 public interface LuongService {
 	void saveOrUpdate(Luong luong);
