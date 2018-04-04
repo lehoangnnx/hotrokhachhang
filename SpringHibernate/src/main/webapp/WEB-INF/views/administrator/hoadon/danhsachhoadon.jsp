@@ -9,7 +9,13 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <input hidden="" id="msg" value="${msg }"></input>
 <!-- Content Header (Page header) -->
-
+<style>
+    .changetext {
+        font-weight: bold;
+        font-size: 15px;
+        color: green;
+    }
+</style>
 <security:authorize access="hasAnyRole('BANHANG') && !hasAnyRole('ADMIN')">
     <section class="content-header">
         <form:form id="formThongKe" action="${contextPath }/admin/hoadon?trangthai=dathanhtoan&limit=100&page=1"
@@ -276,12 +282,16 @@
                     href="${contextPath }/admin/hoadon?trangthai=dangno&limit=100&page=1">Đang
                         Nợ</a>
                 </li> --%>
-                <li
-                        class="tablinks ${param.trangthai == 'deleted' ? 'active' : '' }">
-                    <a
-                            href="${contextPath }/admin/hoadon?trangthai=deleted&limit=100&page=1&hthd=on">Đã
-                        Xóa</a>
+                <li class="tablinks ${param.trangthai == 'deleted' ? 'active' : '' }">
+                    <a href="${contextPath }/admin/hoadon?trangthai=deleted&limit=100&page=1&hthd=on">Đã Xóa</a>
                 </li>
+
+                <security:authorize access="hasAnyRole('BANHANG')">
+                    <li class="tablinks ${param.trangthai == 'hoadonnhanviencapduoi' ? 'active' : '' }">
+                        <a href="${contextPath }/admin/hoadon?trangthai=hoadonnhanviencapduoi&limit=100&page=1&hthd=on">Hóa Đơn Nhân Viên Cấp Dưới</a>
+                    </li>
+                </security:authorize>
+
             </ul>
 
 
@@ -305,8 +315,8 @@
                                 <th>Khách Hàng</th>
                                 <th>Nhân Viên Bán Hàng</th>
                                 <th>Tổng Tiền</th>
-                                <th>Đã Trả</th>
-
+                                <th>Tiền Đã Trả</th>
+                                <th>Tiền Còn Nợ</th>
                                 <th>Ngày Lập</th>
                                 <th>Ngày Thanh Toán</th>
                                 <th>Trạng Thái</th>
@@ -316,19 +326,18 @@
                             <tbody>
                             <c:forEach var="hd" items="${listHoadon }">
                                 <tr>
-                                    <td><a href="${contextPath}/admin/hoadon/${hd.id}">${hd.sohoadon }</a></td>
+                                    <td ><a class="${hd.tiendatra < hd.tongtien && hd.congno > 0 ? 'text-red' : '' } " href="${contextPath}/admin/hoadon/${hd.id}">${hd.sohoadon }</a></td>
                                     <td>
                                         <a href="${contextPath}/admin/khachhang/${hd.khachhang.id}">${hd.khachhang.makh }- ${hd.khachhang.ten }</a>
                                     </td>
-                                    <td>${hd.nhanvienByIdnhanvienban.manhanvien }-
-                                            ${hd.nhanvienByIdnhanvienban.tennhanvien }</td>
-                                    <td><fmt:formatNumber type="number" pattern="###,###"
-                                                          value="${hd.tongtien }"/> &#8363;
-                                    </td>
-                                    <td><fmt:formatNumber type="number" pattern="###,###"
-                                                          value="${hd.tiendatra }"/> &#8363;
-                                    </td>
-
+                                    <td><a href="${contextPath}/admin/nhanvien/${hd.nhanvienByIdnhanvienban.id}">${hd.nhanvienByIdnhanvienban.manhanvien }-
+                                            ${hd.nhanvienByIdnhanvienban.tennhanvien }</a></td>
+                                    <td class="changetext"><fmt:formatNumber type="number" pattern="###,###"
+                                                                             value="${hd.tongtien }" /> &#8363;</td>
+                                    <td class="changetext"><fmt:formatNumber type="number" pattern="###,###"
+                                                                             value="${hd.tiendatra }" /> &#8363;</td>
+                                    <td class="changetext text-red"><fmt:formatNumber type="number" pattern="###,###"
+                                                                                      value="${hd.congno }" /> &#8363;</td>
                                     <td><fmt:formatDate pattern="dd-MM-yyyy"
                                                         value="${hd.ngaylap }"/></td>
                                     <td><fmt:formatDate pattern="dd-MM-yyyy"
@@ -337,7 +346,7 @@
                                         <td>Đã Giao Hàng</td>
                                     </c:if>
                                     <c:if test="${hd.trangthai == 'chuagiaohang' }">
-                                        <td>Chưa Giao Hàng</td>
+                                        <td >Chưa Giao Hàng</td>
                                     </c:if>
                                     <c:if test="${hd.trangthai == 'deleted' }">
                                         <td>Đã Xóa</td>
@@ -364,7 +373,8 @@
                                 <th>Khách Hàng</th>
                                 <th>Nhân Viên Bán Hàng</th>
                                 <th>Tổng Tiền</th>
-                                <th>Đã Trả</th>
+                                <th>Tiền Đã Trả</th>
+                                <th>Tiền Còn Nợ</th>
 
                                 <th>Ngày Lập</th>
                                 <th>Ngày Thanh Toán</th>

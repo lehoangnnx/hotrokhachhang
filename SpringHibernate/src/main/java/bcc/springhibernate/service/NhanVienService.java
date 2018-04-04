@@ -12,4 +12,5 @@ public interface NhanVienService {
 	    List<Nhanvien> findAll();
 	   List<Nhanvien> findByTrangthaiOrderByIdDesc(String trangthai);
 	   List<Nhanvien> findByTrangthaiNotOrderByIdDesc(String trangthai);
+	List<Nhanvien> findByIdnhanviencaptren(Integer idnhanviencaptren);
 }

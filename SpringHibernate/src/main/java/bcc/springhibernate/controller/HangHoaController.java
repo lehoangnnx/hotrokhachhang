@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
-@PreAuthorize("hasAnyRole('ADMIN','BANHANG')")
+
 @RequestMapping("/admin")
 public class HangHoaController {
 
@@ -24,13 +24,14 @@ public class HangHoaController {
     @Autowired
     NhomHangService nhomHangService;
 
+    @PreAuthorize("hasAnyRole('ADMIN','BANHANG')")
     @GetMapping("/hanghoa")
     String pageDanhSachHangHoa(@RequestParam(value = "trangthai", defaultValue = "active") String trangthai, Model model) {
         List<Hanghoa> listHanghoa = hangHoaService.findByTrangthaiOrderByIdDesc(trangthai);
         model.addAttribute("listHanghoa", listHanghoa);
         return "danhsachhanghoa";
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/hanghoa/add")
     String pageThemHangHoa(Model model) {
         List<Nhomhang> listNhomhang = nhomHangService.findByTrangthaiOrderByIdDesc("active");
@@ -38,7 +39,7 @@ public class HangHoaController {
         model.addAttribute("hanghoa", new Hanghoa());
         return "themhanghoa";
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/hanghoa/{id}")
     String pageSuaHangHoa(Model model, @PathVariable("id") Integer id) {
         try {
@@ -55,7 +56,7 @@ public class HangHoaController {
             return "redirect:/403";
         }
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/hanghoa")
     String themHangHoa(@ModelAttribute("hanghoa") Hanghoa hanghoa,
                        @RequestParam("giaban_money") String giaban,
@@ -81,6 +82,7 @@ public class HangHoaController {
         return "redirect:/admin/hanghoa?trangthai=active";
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PatchMapping(value = "/hanghoa", params = "update")
     String suaHangHoa(@ModelAttribute("hanghoa") Hanghoa hanghoa,
                       @RequestParam("giaban_money") String giaban,
@@ -106,6 +108,7 @@ public class HangHoaController {
         return "redirect:/admin/hanghoa?trangthai=active";
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PatchMapping(value = "/hanghoa", params = "deleted")
     String xoaVinhVienHangHoa(@ModelAttribute("hanghoa") Hanghoa hanghoa,
                               RedirectAttributes redirectAttributes) {
@@ -119,7 +122,7 @@ public class HangHoaController {
 
         return "redirect:/admin/hanghoa?trangthai=active";
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping("/hanghoa")
     String xoaHangHoa(@RequestParam("arrayId") List<Integer> arrayId,
                       RedirectAttributes redirectAttributes) {

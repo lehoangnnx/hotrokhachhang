@@ -123,8 +123,10 @@
 
 				<li><a href="${contextPath }/admin/hanghoa?trangthai=active">Hàng
 						Hóa</a></li>
+				<security:authorize access="hasAnyRole('ADMIN')">
 				<li><a href="${contextPath }/admin/nhomhang?trangthai=active">Nhóm
 						Hàng</a></li>
+				</security:authorize>
 
 			</ul></li>
 </security:authorize>

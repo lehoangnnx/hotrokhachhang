@@ -40,6 +40,9 @@ public class ThongBao {
 		}*/
 
 
+
+
+
         List<Khachhang> khachhangs = new ArrayList<>();
         List<Chamsoc> chamsocs = null;
 
@@ -163,6 +166,7 @@ public class ThongBao {
                 listNhanVienKpi.add(map);
             }
         }
+        List<HoadonCount> listHoaDonCount = hoaDonService.findHoadonWhereKhachhangChuathanhtoan();
 
         listChamSoc.sort(Comparator.comparing(s -> (int) s.get("ngaycstiep")));
         listKhachHang.sort(Comparator.comparing(s -> (int) s.get("ngaysinhnhat")));
@@ -171,6 +175,7 @@ public class ThongBao {
         request.getServletContext().setAttribute("listChamSoc", listChamSoc);
         request.getServletContext().setAttribute("listKhachHang", listKhachHang);
         request.getServletContext().setAttribute("listNhanVienKpi", listNhanVienKpi);
+        request.getServletContext().setAttribute("listHoaDonCount", listHoaDonCount);
 
         // Tao Luong
         Date date = new Date();
@@ -181,7 +186,7 @@ public class ThongBao {
         // Date(date.getYear(),date.getMonth(),01))){
         List<Nhanvien> listNhanvien = nhanVienService.findByTrangthaiNotOrderByIdDesc("deleted");
         listNhanvien.forEach(x -> {
-            System.out.println(x.getTennhanvien());
+
             Luong luong = null;
             try {
                 // Lấy Tháng Trước Ngày hiện tại
@@ -190,7 +195,7 @@ public class ThongBao {
                 c.add(Calendar.MONTH, -1);
                 int lastmonth = c.get(Calendar.MONTH) + 1; // beware of month indexing from zero
                 int lastyear = c.get(Calendar.YEAR);
-                System.out.println(lastmonth + " + " + lastyear);
+
                 luong = luongService.findOneByNhanvienAndThangAndNam(x, splitDate[1], splitDate[2]);
                 if (luong == null) {
                     String formatmonth = String.format("%02d", lastmonth);

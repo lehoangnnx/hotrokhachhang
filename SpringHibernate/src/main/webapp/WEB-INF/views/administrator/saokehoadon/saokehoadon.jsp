@@ -12,6 +12,13 @@
     dd {
         margin-bottom: 20px;
     }
+
+     .changetext {
+         font-weight: bold;
+         font-size: 15px;
+         color: green;
+     }
+
 </style>
 <section class="content">
     <!-- Small boxes (Stat box) -->
@@ -97,7 +104,7 @@
                     <div class="box-header with-border">
                         <i class="fa fa-calendar"></i>
 
-                        <h3 class="box-title"><fmt:formatNumber minIntegerDigits="2" value="${l.thang}" /> - ${l.nam}</h3>
+                        <h3 class="box-title"><strong><fmt:formatNumber minIntegerDigits="2" value="${l.thang}" /> - ${l.nam}</strong></h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -105,15 +112,15 @@
                             <dt>Tổng Hóa Đơn</dt>
                             <dd>${l.tonghoadon}</dd>
                             <dt>Tổng Tiền</dt>
-                            <dd><fmt:formatNumber type="number" pattern="###,###" value="${l.tongtien}" />  &#8363;</dd>
+                            <dd class="changetext"><fmt:formatNumber type="number" pattern="###,###" value="${l.tongtien}" />  &#8363;</dd>
                             <dt>Hóa Đơn Đã Thanh Toán</dt>
                             <dd>${l.hoadondathanhtoan}</dd>
                             <dt>Tiền Đã Thanh Toán</dt>
-                            <dd><fmt:formatNumber type="number" pattern="###,###" value="${l.tiendatra}" />  &#8363;</dd>
+                            <dd class="changetext"><fmt:formatNumber type="number" pattern="###,###" value="${l.tiendatra}" />  &#8363;</dd>
                             <dt>Hóa Đơn Chưa Thanh Toán</dt>
                             <dd>${l.hoadonchuathanhtoan}</dd>
                             <dt>Tiền Còn Nợ</dt>
-                            <dd><fmt:formatNumber type="number" pattern="###,###" value="${l.congno}" />  &#8363;</dd>
+                            <dd class="changetext text-red"><fmt:formatNumber type="number" pattern="###,###" value="${l.congno}" />  &#8363;</dd>
 
                         </dl>
                         <dl class="dl-horizontal col-md-4">
@@ -124,13 +131,13 @@
                         </dl>
                         <dl class="dl-horizontal col-md-4">
                             <dt>Lương</dt>
-                            <dd><fmt:formatNumber type="number" pattern="###,###" value="${l.luong}" />  &#8363;</dd>
+                            <dd class="changetext"><fmt:formatNumber type="number" pattern="###,###" value="${l.luong}" />  &#8363;</dd>
                             <dt>Thưởng</dt>
-                            <dd><fmt:formatNumber type="number" pattern="###,###" value="${l.thuong}" />  &#8363;</dd>
+                            <dd class="changetext"><fmt:formatNumber type="number" pattern="###,###" value="${l.thuong}" />  &#8363;</dd>
                             <dt>Thưởng Hóa Đơn</dt>
-                            <dd><fmt:formatNumber type="number" pattern="###,###" value="${l.thuonghoadon}" />  &#8363;</dd>
+                            <dd class="changetext ${l.thuonghoadon < 0 ? 'text-red' : ''}"><fmt:formatNumber type="number" pattern="###,###" value="${l.thuonghoadon}" />  &#8363;</dd>
                             <dt>Tiền Ứng</dt>
-                            <dd><fmt:formatNumber type="number" pattern="###,###" value="${l.tienung}" />  &#8363;</dd>
+                            <dd class="changetext text-red"> <fmt:formatNumber type="number" pattern="###,###" value="${l.tienung}" />  &#8363;</dd>
                         </dl>
 
                         <dl class="dl-horizontal col-md-12" >

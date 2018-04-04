@@ -20,6 +20,37 @@
 		<ul class="nav navbar-nav">
 			<!-- Messages: style can be found in dropdown.less-->
 			<security:authorize access="hasAnyRole('ADMIN')">
+
+				<li class="dropdown notifications-menu">
+					<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle"
+												   data-toggle="dropdown"> <i class="fa  fa-exclamation-triangle"></i> <span
+						class="label label-danger">${fn:length(listHoaDonCount) }</span>
+				</a>
+					<ul class="dropdown-menu">
+						<li class="header">Bạn Có ${fn:length(listHoaDonCount) } Cảnh Báo Hóa Đơn</li>
+						<li>
+							<!-- Inner menu: contains the tasks -->
+							<ul class="menu">
+								<c:forEach var="lhdc" items="${listHoaDonCount }">
+									<li>
+										<!-- start notification --> <a
+											href="javascript:void(0);"> <i class="fa  fa-exclamation-circle text-red"></i>
+
+												Có <b>${lhdc.count}</b> Hóa Đơn Của Khách Hàng <br>
+											<b>${lhdc.khachhang.makh } - ${lhdc.khachhang.ten }</b> Nhân <br>
+												  Viên <b>${lhdc.nhanvien.manhanvien} - ${lhdc.nhanvien.tennhanvien}</b> <br>
+										Chưa Thanh Toán
+
+									</a>
+									</li>
+								</c:forEach>
+								<!-- end task item -->
+							</ul>
+						</li>
+						<!-- <li class="footer"><a href="#">View all tasks</a></li> -->
+					</ul>
+				</li>
+
 			<li class="dropdown notifications-menu">
 				<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
 				data-toggle="dropdown"> <i class="fa fa-bell"></i> <span

@@ -5,6 +5,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<style>
+	.changetext {
+		font-weight: bold;
+		font-size: 15px;
+		color: green;
+	}
+</style>
 <section class="content">
 	<!-- Small boxes (Stat box) -->
 	<div class="row">
@@ -194,7 +201,7 @@
 					<div class="col-md-12 margin">
 						<div class="col-md-4">
 							<div class="form-group">
-								<label for="congno">Tổng Tiền : <span><fmt:formatNumber
+								<label class="changetext" for="congno">Tổng Tiền : <span><fmt:formatNumber
 											type="number" pattern="###,###" value="${tongtien }" /></span>
 									&#8363;
 								</label>
@@ -203,7 +210,7 @@
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<label for="congno">Tiền Đã Trả : <span><fmt:formatNumber
+								<label class="changetext" for="congno">Tiền Đã Trả : <span><fmt:formatNumber
 											type="number" pattern="###,###" value="${tiendatra }" /></span>
 									&#8363;
 								</label>
@@ -212,7 +219,7 @@
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<label for="congno">Đang Nợ : <span><fmt:formatNumber
+								<label class="changetext text-red" for="congno">Đang Nợ : <span><fmt:formatNumber
 											type="number" pattern="###,###" value="${congno }" /></span>
 									&#8363;
 								</label>
@@ -263,7 +270,7 @@
 								<th>Nhân Viên Bán Hàng</th>
 								<th>Tổng Tiền</th>
 								<th>Đã Trả</th>
-
+								<th>Còn Nợ</th>
 								<th>Ngày Thanh Toán</th>
 								<th>Trạng Thái</th>
 								<th>Thao Tác</th>
@@ -272,15 +279,16 @@
 						<tbody>
 							<c:forEach var="hd" items="${listHoadon }">
 								<tr>
-									<td>${hd.sohoadon }</td>
-									<td>${hd.khachhang.makh }- ${hd.khachhang.ten }</td>
-									<td>${hd.nhanvienByIdnhanvienban.manhanvien }-
-										${hd.nhanvienByIdnhanvienban.tennhanvien }</td>
-									<td><fmt:formatNumber type="number" pattern="###,###"
+									<td><a class="${hd.tiendatra < hd.tongtien && hd.congno > 0 ? 'text-red' : '' } " href="${contextPath}/admin/hoadon/${hd.id}">${hd.sohoadon }</a></td>
+									<td><a href="${contextPath}/admin/khachhang/${hd.khachhang.id}">${hd.khachhang.makh }- ${hd.khachhang.ten }</a></td>
+									<td><a href="${contextPath}/admin/nhanvien/${hd.nhanvienByIdnhanvienban.id}">${hd.nhanvienByIdnhanvienban.manhanvien }-
+											${hd.nhanvienByIdnhanvienban.tennhanvien }</a></td>
+									<td class="changetext"><fmt:formatNumber type="number" pattern="###,###"
 											value="${hd.tongtien }" /> &#8363;</td>
-									<td><fmt:formatNumber type="number" pattern="###,###"
+									<td class="changetext"><fmt:formatNumber type="number" pattern="###,###"
 											value="${hd.tiendatra }" /> &#8363;</td>
-
+									<td class="changetext text-red"><fmt:formatNumber type="number" pattern="###,###"
+														  value="${hd.congno }" /> &#8363;</td>
 									<td><fmt:formatDate pattern="dd-MM-yyyy"
 											value="${hd.ngaythanhtoan }" /></td>
 
@@ -310,7 +318,7 @@
 								<th>Nhân Viên Bán Hàng</th>
 								<th>Tổng Tiền</th>
 								<th>Đã Trả</th>
-
+								<th>Còn Nợ</th>
 								<th>Ngày Thanh Toán</th>
 								<th>Trạng Thái</th>
 								<th>Thao Tác</th>

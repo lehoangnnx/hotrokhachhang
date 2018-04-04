@@ -35,7 +35,7 @@ public class ThongTinController {
             Taikhoan taikhoan = taikhoanService.findByUsername(principal.getName());
             Nhanvien nhanvien = taikhoan.getNhanvien();
 
-
+            Nhanvien nhanviencaptren = nhanVienService.findById(nhanvien.getIdnhanviencaptren());
             Date date = new Date();
             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             String splitDate[] = df.format(date).split("/|-");
@@ -55,6 +55,7 @@ public class ThongTinController {
             }
 
             model.addAttribute("nhanvien", nhanvien);
+            model.addAttribute("nhanviencaptren",nhanviencaptren);
             model.addAttribute("luong", luong);
             return "thongtin";
         } catch (Exception e) {

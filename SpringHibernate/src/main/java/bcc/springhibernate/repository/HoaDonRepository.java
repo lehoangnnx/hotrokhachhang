@@ -3,6 +3,7 @@ package bcc.springhibernate.repository;
 import java.util.Date;
 import java.util.List;
 
+import bcc.springhibernate.model.HoadonCount;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -25,6 +26,8 @@ public interface HoaDonRepository extends JpaRepository<Hoadon, Integer> {
 	(String trangthai,Nhanvien nhanvienByIdnhanvienban);
 	List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanOrderByIdDesc
 	(String trangthai,Nhanvien nhanvienByIdnhanvienban);
+	List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanOrderByIdDesc
+			(String trangthai,Nhanvien nhanvienByIdnhanvienban, Pageable pageable);
 
 	List<Hoadon> findByTrangthaiAndNhanvienByIdnhanvienbanOrderByIdDesc
 	(String trangthai,Nhanvien nhanvienByIdnhanvienban, Pageable pageable);
@@ -50,7 +53,8 @@ public interface HoaDonRepository extends JpaRepository<Hoadon, Integer> {
 			Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2);
 	List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc
 	(String trangthai,Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2);
-
+	List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc
+			(String trangthai,Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2, Pageable pageable);
 	
 	@Query("select hd from Hoadon hd where hd.tongtien = hd.tiendatra and hd.congno = 0 and hd.trangthai <> ?1")
 	List<Hoadon> findByTrangthaiDaThanhToan(String trangthai);
@@ -112,4 +116,9 @@ public interface HoaDonRepository extends JpaRepository<Hoadon, Integer> {
 
 	@Query("SELECT distinct hd.khachhang from Hoadon hd where hd.nhanvienByIdnhanvienban = ?1 and hd.trangthai <> ?2")
 	List<Khachhang> findDistinctKhachhangByNhanvienByIdnhanvienbanAndTrangthaiNot(Nhanvien nhanvienByIdnhanvienban, String trangthai);
+
+	@Query("SELECT new bcc.springhibernate.model.HoadonCount(count(hd.id), hd.khachhang , hd.nhanvienByIdnhanvienban) FROM Hoadon hd " +
+			"WHERE hd.tiendatra < hd.tongtien AND hd.congno > 0 GROUP BY hd.khachhang, hd.nhanvienByIdnhanvienban " +
+			"HAVING count(hd.id) >=2 ")
+	List<HoadonCount> findHoadonWhereKhachhangChuathanhtoan();
 }

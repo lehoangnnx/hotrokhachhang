@@ -5,6 +5,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<style>
+    .changetext {
+        font-weight: bold;
+        font-size: 15px;
+        color: green;
+    }
+</style>
 <section class="content">
     <!-- Small boxes (Stat box) -->
     <div class="row">
@@ -77,6 +84,17 @@
             <!-- info row -->
             <div class="row invoice-info">
                 <div class="col-sm-4 invoice-col">
+                    Nhân Viên Cấp Trên : <strong>
+                    <c:choose>
+                        <c:when test="${empty nhanviencaptren}" >
+                            Không
+                        </c:when>
+                        <c:otherwise>
+                            ${nhanviencaptren.manhanvien } - ${nhanviencaptren.tennhanvien }
+                        </c:otherwise>
+                    </c:choose>
+
+                </strong> <br>
                     Mã Nhân Viên : <strong>${nhanvien.manhanvien }</strong> <br>
                     Tên Nhân Viên : <strong>${nhanvien.tennhanvien }</strong> <br>
                     Số CMND : ${nhanvien.socmnd } <br> Ngày Cấp :
@@ -129,18 +147,18 @@
                                 </c:forEach>
                                 <tr>
                                     <td>${luong.thang }/${luong.nam }</td>
-                                    <td><fmt:formatNumber type="number" pattern="###,###"
-                                                          value="${luong.luong }"/> &#8363;
+                                    <td class="changetext" ><fmt:formatNumber type="number" pattern="###,###"
+                                                                       value="${luong.luong }"/> &#8363;
                                     </td>
-                                    <td><fmt:formatNumber type="number" pattern="###,###"
+                                    <td class="changetext"><fmt:formatNumber type="number" pattern="###,###"
                                                           value="${luong.thuong }"/> &#8363;
                                     </td>
-                                    <td><fmt:formatNumber type="number" pattern="###,###"
+                                    <td class="changetext ${luong.thuongcuahoadon < 0 ? 'text-red' : ''}"><fmt:formatNumber type="number" pattern="###,###"
                                                           value="${luong.thuongcuahoadon }"/> &#8363;
                                     </td>
-                                    <td><fmt:formatNumber type="number" pattern="###,###"
+                                    <td class="changetext text-red"><fmt:formatNumber type="number" pattern="###,###"
                                                           value="${tienung }"/> &#8363;</td>
-                                    <td><fmt:formatNumber type="number" pattern="###,###"
+                                    <td class="changetext"><fmt:formatNumber type="number" pattern="###,###"
                                                           value="${luong.thuongcuahoadon > 0 ?
 											(luong.luong + luong.thuong + luong.thuongcuahoadon - tienung) :
 											(luong.luong + luong.thuong - tienung) }"/>

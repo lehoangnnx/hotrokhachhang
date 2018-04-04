@@ -1,6 +1,7 @@
 package bcc.springhibernate.service;
 
 import bcc.springhibernate.model.Hoadon;
+import bcc.springhibernate.model.HoadonCount;
 import bcc.springhibernate.model.Khachhang;
 import bcc.springhibernate.model.Nhanvien;
 import bcc.springhibernate.repository.HoaDonRepository;
@@ -231,5 +232,22 @@ public class HoaDonServiceImpl implements HoaDonService {
 	@Override
 	public List<Hoadon> findByTrangthaiNotAndNgaythanhtoanBetweenOrderByIdDesc(String trangthai, Date d1, Date d2) {
 		return hoaDonRepository.findByTrangthaiNotAndNgaythanhtoanBetweenOrderByIdDesc(trangthai,d1,d2);
+	}
+
+	@Override
+	public List<HoadonCount> findHoadonWhereKhachhangChuathanhtoan() {
+		return hoaDonRepository.findHoadonWhereKhachhangChuathanhtoan();
+	}
+
+	@Override
+	public List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc
+			(String trangthai, Nhanvien nhanvienByIdnhanvienban, Date d1, Date d2, Pageable pageable) {
+		return hoaDonRepository.findByTrangthaiNotAndNhanvienByIdnhanvienbanAndNgaythanhtoanBetweenOrderByIdDesc
+				(trangthai,nhanvienByIdnhanvienban,d1,d2,pageable);
+	}
+
+	@Override
+	public List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanOrderByIdDesc(String trangthai, Nhanvien nhanvienByIdnhanvienban, Pageable pageable) {
+		return hoaDonRepository.findByTrangthaiNotAndNhanvienByIdnhanvienbanOrderByIdDesc(trangthai,nhanvienByIdnhanvienban,pageable);
 	}
 }

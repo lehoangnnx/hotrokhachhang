@@ -53,4 +53,9 @@ NhanvienRepository nhanvienRepository;
 		nhanvienRepository.delete(nhanvien);
 		
 	}
+
+	@Override
+	public List<Nhanvien> findByIdnhanviencaptren(Integer idnhanviencaptren) {
+		return nhanvienRepository.findByIdnhanviencaptren(idnhanviencaptren);
+	}
 }

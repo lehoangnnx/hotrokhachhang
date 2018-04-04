@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
-@PreAuthorize("hasAnyRole('ADMIN','BANHANG')")
+@PreAuthorize("hasAnyRole('ADMIN')")
 @RequestMapping("/admin")
 public class NhomHangController {
 
