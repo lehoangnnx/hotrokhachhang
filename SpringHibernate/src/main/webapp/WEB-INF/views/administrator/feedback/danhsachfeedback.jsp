@@ -93,12 +93,19 @@
 										</c:otherwise>
 									</c:choose>
 
+									<c:choose>
+										<c:when test="${fb.khachhangId == 0 }">
+											<td>Không</td>
+										</c:when>
+										<c:otherwise>
+											<c:forEach var="kh" items="${listKhachhang }">
+												<c:if test="${fb.khachhangId == kh.id }">
+													<td>${kh.makh}- ${kh.ten}</td>
+												</c:if>
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
 
-									<c:forEach var="kh" items="${listKhachhang }">
-										<c:if test="${fb.khachhangId == kh.id }">
-											<td>${kh.makh}- ${kh.ten}</td>
-										</c:if>
-									</c:forEach>
 
 
 									<td><fmt:formatDate pattern="dd-MM-yyyy"

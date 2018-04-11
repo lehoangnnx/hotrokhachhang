@@ -83,7 +83,7 @@
                                     <td>${nvkpi.nhanvien.manhanvien}-
                                             ${nvkpi.nhanvien.tennhanvien}</td>
                                     <td>${nvkpi.kpi.ten}</td>
-                                    <td>
+                                    <td class="text-bold">
                                         <c:choose>
                                             <c:when test="${nvkpi.kpi.kieukpi == 'so'}">
                                                 ${nvkpi.chitieudangky}

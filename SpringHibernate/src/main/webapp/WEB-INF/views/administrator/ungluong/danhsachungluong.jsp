@@ -6,6 +6,13 @@
 <%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<style>
+	.changetext {
+		font-weight: bold;
+		font-size: 15px;
+		color: green;
+	}
+</style>
 <input hidden="" id="msg" value="${msg }"></input>
 <!-- Content Header (Page header) -->
   <%--  <section class="content-header">
@@ -62,7 +69,7 @@
 										${ul.luong.nhanvien.manhanvien} - ${ul.luong.nhanvien.tennhanvien}
 								</a>
 								</td>
-			                  	<td><fmt:formatNumber
+			                  	<td class="changetext text-red"><fmt:formatNumber
 											type="number" pattern="###,###" value="${ul.sotienung }" /> &#8363;</td>
 			                  	<td><fmt:formatDate pattern="dd-MM-yyyy"
 													value="${ul.ngayung }" /></td>

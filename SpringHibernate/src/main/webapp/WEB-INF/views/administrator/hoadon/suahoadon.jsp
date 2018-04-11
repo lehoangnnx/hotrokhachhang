@@ -56,13 +56,17 @@
                             <label>Nhân Viên Bán Hàng</label> <select
                                 class="form-control select2" name="nhanvienbanhang"
                                 style="width: 100%;">
-                            <option value="${taikhoan.nhanvien.id }">${taikhoan.nhanvien.manhanvien}-
-                                    ${taikhoan.nhanvien.tennhanvien }</option>
-                                <%--<c:forEach var="nv" items="${listNhanvien }">
+
+                           <%-- <option value="${taikhoan.nhanvien.id }">${taikhoan.nhanvien.manhanvien}-
+                                    ${taikhoan.nhanvien.tennhanvien }</option>--%>
+
+                                <c:forEach var="nv" items="${listNhanvien }">
+                                    <c:if test="${nv.id == hoadon.nhanvienByIdnhanvienban.id}">
                                     <option
                                         ${hoadon.nhanvienByIdnhanvienban.id == nv.id ? 'selected' : '' }
                                         value="${nv.id }">${nv.manhanvien}-${nv.tennhanvien }</option>
-                                </c:forEach>--%>
+                                    </c:if>
+                                </c:forEach>
 
                         </select>
                         </div>

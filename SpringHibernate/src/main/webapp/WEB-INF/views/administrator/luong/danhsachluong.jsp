@@ -6,6 +6,13 @@
 <%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<style>
+	.changetext {
+		font-weight: bold;
+		font-size: 15px;
+		color: green;
+	}
+</style>
 <input hidden="" id="msg" value="${msg }"></input>
 <!-- Content Header (Page header) -->
 <%--    <section class="content-header">
@@ -72,15 +79,15 @@
 							</c:forEach>
 		                	<tr>
 		                		<td>${l.nhanvien.tennhanvien}</td>
-			                  	<td><fmt:formatNumber
+			                  	<td class="changetext"><fmt:formatNumber
 											type="number" pattern="###,###" value="${l.luong }" /> &#8363;</td>
-			                  	<td><fmt:formatNumber
+			                  	<td class="changetext"><fmt:formatNumber
 											type="number" pattern="###,###" value="${l.thuong }" /> &#8363;</td>
-								<td><fmt:formatNumber
+								<td class="changetext ${l.thuongcuahoadon < 0 ? 'text-red' : ''}" ><fmt:formatNumber
 										type="number" pattern="###,###" value="${l.thuongcuahoadon }" /> &#8363;</td>
-								<td><fmt:formatNumber
+								<td class="changetext text-red"><fmt:formatNumber
 										type="number" pattern="###,###" value="${tienung }" /> &#8363;</td>
-								<td><fmt:formatNumber type="number" pattern="###,###"
+								<td class="changetext"><fmt:formatNumber type="number" pattern="###,###"
 													  value="${l.thuongcuahoadon > 0 ?
 											(l.luong + l.thuong + l.thuongcuahoadon - tienung) :
 											(l.luong + l.thuong - tienung) }"/>

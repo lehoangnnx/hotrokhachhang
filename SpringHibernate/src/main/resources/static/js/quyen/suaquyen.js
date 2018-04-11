@@ -97,7 +97,7 @@ $('#maquyen').on('keyup keypress keydown', function(event){
             kiemtramaquyen();
 		}else{
 			$('#error').css("display", "block");
-            $("#error").text("Tên Quyền Phải Bắt Đầu Bằng ROLE_");
+            $("#error").text("Mã Quyền Phải Bắt Đầu Bằng ROLE_");
 		}
 		
 		
