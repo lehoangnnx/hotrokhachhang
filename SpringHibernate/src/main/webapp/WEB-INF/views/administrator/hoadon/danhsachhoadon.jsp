@@ -135,7 +135,7 @@
                     <div class="col-md-12 margin">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="tongtien">Tổng Tiền : <span><fmt:formatNumber
+                                <label class="changetext" for="tongtien">Tổng Tiền : <span><fmt:formatNumber
                                         type="number" pattern="###,###" value="${tongtien }"/></span>
                                     &#8363;
                                 </label>
@@ -144,7 +144,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="tiendatra">Tiền Đã Trả : <span><fmt:formatNumber
+                                <label class="changetext" for="tiendatra">Tiền Đã Trả : <span><fmt:formatNumber
                                         type="number" pattern="###,###" value="${tiendatra }"/></span>
                                     &#8363;
                                 </label>
@@ -153,7 +153,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="congno">Đang Nợ : <span><fmt:formatNumber
+                                <label class="changetext text-red" for="congno">Đang Nợ : <span><fmt:formatNumber
                                         type="number" pattern="###,###" value="${congno }"/></span>
                                     &#8363;
                                 </label>
@@ -165,7 +165,7 @@
         </section>
         <section class="col-md-12">
             <div class="box box-primary">
-                <div class="row">
+                <div class="box-body">
                     <div class="col-xs-12 table-responsive">
                         <table class="table table-striped">
                             <thead>
