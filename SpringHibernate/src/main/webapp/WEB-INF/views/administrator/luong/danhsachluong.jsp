@@ -31,6 +31,7 @@
 
     <!-- Main content -->
     <section class="content">
+
       <div class="row">
       	
 		        <div class="col-xs-12">
@@ -52,6 +53,53 @@
 		              <h3 class="box-title">Danh Sách Lương</h3>
 						<a class="btn btn-success pull-right" href="${contextPath }/admin/luong/add">Thêm mới</a>
 		            </div>
+					  <div class="box-header">
+						  <form:form id="formThongTin" action="${contextPath }/admin/luong"
+									 method="get">
+								<input hidden name="trangthai" value="${param.trangthai}" >
+									  <div class="box-body">
+										  <div class="col-md-4">
+											  <label>Tháng</label> <select class="form-control select2"
+																		   id="thang" name="thang" style="width: 100%;">
+
+											  <c:forEach var="i" begin="1" end="12">
+												  <option ${thang == i ? 'selected' : '' }
+														  value="<fmt:formatNumber value="${i}" type="number"
+											minIntegerDigits="2" />">Tháng
+													  -
+													  <fmt:formatNumber value="${i}" type="number"
+																		minIntegerDigits="2"/>
+												  </option>
+											  </c:forEach>
+
+										  </select>
+										  </div>
+										  <div class="col-md-4">
+											  <div class="form-group">
+												  <label>Năm</label> <select class="form-control select2" id="nam"
+																			 name="nam" style="width: 100%;">
+
+												  <c:forEach var="i" begin="1990" end="2099">
+													  <option ${nam == i ? 'selected' : '' } value="${i }">Năm
+														  - ${i}</option>
+												  </c:forEach>
+
+											  </select>
+											  </div>
+										  </div>
+
+										  <div class="col-md-4">
+											  <button style="margin-top: 25px;" type="submit" id="btn-submit"
+													  class="btn btn-block btn-success btn-flat">Xem
+											  </button>
+										  </div>
+									  </div>
+
+						  </form:form>
+
+
+
+					  </div>
 		            <!-- /.box-header -->
 		            <div class="box-body">
 		             <div class="table-responsive">

@@ -16,4 +16,5 @@ public interface LuongService {
 	Luong findOneByNhanvienAndThangAndNam(Nhanvien nhanvien, String thang,String nam);
 	Luong findOneByTrangthaiNotAndNhanvienAndThangAndNam
 	(String trangthai,Nhanvien nhanvien, String thang,String nam);
+	List<Luong> findByTrangthaiAndThangAndNam(String trangthai,String thang,String nam);
 }

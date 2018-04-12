@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -28,9 +30,21 @@ public class LuongController {
 
     @GetMapping("/luong")
     String pageDanhSachLuong(@RequestParam(value = "trangthai", defaultValue = "active") String trangthai,
+                             @RequestParam(value = "thang", defaultValue = "null") String thang,
+                             @RequestParam(value = "nam", defaultValue = "null") String nam,
                              Model model) {
-        List<Luong> listLuong = LuongService.findByTrangthaiOrderByIdDesc(trangthai);
+        Date date = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String splitDate[] = df.format(date).split("/|-");
+
+        if(thang.equals("null") && nam.equals("null")){
+            thang = splitDate[1];
+            nam = splitDate[2];
+        }
+        List<Luong> listLuong = LuongService.findByTrangthaiAndThangAndNam(trangthai,thang,nam);
         model.addAttribute("listLuong", listLuong);
+        model.addAttribute("thang", thang);
+        model.addAttribute("nam", nam);
         return "danhsachluong";
     }
 
