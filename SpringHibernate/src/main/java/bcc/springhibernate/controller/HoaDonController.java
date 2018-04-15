@@ -720,13 +720,30 @@ public class HoaDonController {
                 luong.setThuongcuahoadon(thuongcu);
                 luongService.saveOrUpdate(luong);
                 hoaDonService.saveOrUpdate(hoadon);
-                if (hoadon.getNhanvienByIdnhanvienban().getIdnhanviencaptren() != 0
+               /* if (hoadon.getNhanvienByIdnhanvienban().getIdnhanviencaptren() != 0
                         && hoadon.getTongtien().equals(hoadon.getTiendatra())) {
                     Nhanvien nhanviencaptren = nhanVienService.findById(hoadon.getNhanvienByIdnhanvienban().getIdnhanviencaptren());
                     Luong luongnhanviencaptren = luongService.findOneByNhanvienAndThangAndNam(nhanviencaptren,
                             splitngay[1], splitngay[2]);
                     Long thuongcaptren = (long) (((hoadon.getTiendatra() - (tongtienvon)) * hoadon.getNhanvienByIdnhanvienban().getChietkhauchonhanviencaptren()) / 100);
                     luongnhanviencaptren.setThuongcuahoadon(luongnhanviencaptren.getThuongcuahoadon() - (thuongcaptren));
+                    luongService.saveOrUpdate(luongnhanviencaptren);
+                }*/
+                if (hoadon.getNhanvienByIdnhanvienban().getIdnhanviencaptren() != 0) {
+                    Long thuongnhanviencaptren = 0L;
+                    Nhanvien nhanviencaptren = nhanVienService.findById
+                            (hoadon.getNhanvienByIdnhanvienban().getIdnhanviencaptren());
+                    Luong luongnhanviencaptren = luongService.findOneByNhanvienAndThangAndNam
+                            (nhanviencaptren, splitngay[1], splitngay[2]);
+
+
+                    if (hoadon.getTiendatra() < tongtienvon) {
+                        thuongnhanviencaptren = (long) -(((hoadon.getTongtien() - (tongtienvon)) * hoadon.getNhanvienByIdnhanvienban().getChietkhauchonhanviencaptren()) / 100);
+                    } else {
+                        thuongnhanviencaptren = (long) (((hoadon.getTiendatra() - (tongtienvon)) * hoadon.getNhanvienByIdnhanvienban().getChietkhauchonhanviencaptren()) / 100);
+                    }
+
+                    luongnhanviencaptren.setThuongcuahoadon(luongnhanviencaptren.getThuongcuahoadon() - (thuongnhanviencaptren));
                     luongService.saveOrUpdate(luongnhanviencaptren);
                 }
             });
