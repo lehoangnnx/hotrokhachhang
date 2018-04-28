@@ -49,15 +49,26 @@
 						</div>
 						</div>
 						<div class="form-group">
-							<label for="giaban">Giá Bán</label>
+							<label for="giaban">Giá Bán Sỉ</label>
 							<div class="input-group">
 
 								<input id="giaban" name="giaban_money" type="text" class="form-control" value="0"
-									placeholder="Giá Bán" />
+									placeholder="Giá Bán Sỉ" />
 									<span class="input-group-addon">VNĐ</span>
 
 							</div>
 							<label id="_giaban-error" class="error" style="display: none;"></label>
+						</div>
+						<div class="form-group">
+							<label for="giabanle">Giá Bán Lẻ</label>
+							<div class="input-group">
+
+								<input id="giabanle" name="giabanle_money" type="text" class="form-control" value="0"
+									   placeholder="Giá Bán Lẻ" />
+								<span class="input-group-addon">VNĐ</span>
+
+							</div>
+							<label id="_giabanle-error" class="error" style="display: none;"></label>
 						</div>
 						<div class="form-group">
 							<label for="giakhuyenmai">Giá Khuyến Mãi</label>
@@ -106,7 +117,7 @@
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 					<div class="box-footer">
-						<button id="btn-submit" type="submit" class="btn btn-primary">Xác
+						<button id="btn-submit" type="button" onclick="kiemTraGia();" class="btn btn-primary">Xác
 							Nhận</button>
 						<button class="btn btn-info pull-right" type="button" onclick="goBack();">Quay Lại</button>
 					</div>

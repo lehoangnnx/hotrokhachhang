@@ -538,6 +538,7 @@ public class HoaDonController {
 
             redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
         } catch (Exception e) {
+            e.printStackTrace();
             redirectAttributes.addFlashAttribute("msg", "Sửa Thất Bại");
         }
 

@@ -52,18 +52,34 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="giaban">Giá Bán</label>
+							<label for="giaban">Giá Bán Sỉ</label>
 							<div class="input-group">
 
 								<input id="giaban" name="giaban_money" type="text" class="form-control"
 									   value="<fmt:formatNumber type="number" pattern="###,###"
 											value="${hanghoa.giaban}" />"
-									   placeholder="Giá Bán" />
+									   placeholder="Giá Bán Sỉ" />
 								<span class="input-group-addon">VNĐ</span>
 
 							</div>
 							<label id="_giaban-error" class="error" style="display: none;"></label>
 						</div>
+
+
+						<div class="form-group">
+							<label for="giabanle">Giá Bán Lẻ</label>
+							<div class="input-group">
+
+								<input id="giabanle" name="giabanle_money" type="text" class="form-control"
+									   value="<fmt:formatNumber type="number" pattern="###,###"
+											value="${hanghoa.giabanle}" />"
+									   placeholder="Giá Bán Lẻ" />
+								<span class="input-group-addon">VNĐ</span>
+
+							</div>
+							<label id="_giabanle-error" class="error" style="display: none;"></label>
+						</div>
+
 						<div class="form-group">
 							<label for="giakhuyenmai">Giá Khuyến Mãi</label>
 							<div class="input-group">
@@ -116,7 +132,7 @@
 					<div class="box-footer">
 						<c:if test="${hanghoa.trangthai != 'deleted' }">
 
-								<button id="btn-submit" name="update" type="submit"
+								<button id="btn-submit" name="update" type="button" onclick="kiemTraGia();"
 									class="btn btn-primary">Xác Nhận</button>
 
 						</c:if>

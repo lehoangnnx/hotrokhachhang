@@ -181,57 +181,74 @@ function getHangHoaById() {
 			url : contextPath + "/admin/gethanghoabyid",
 			data: id,
 			success : function(result) {
-				
-				
-				
-				var id = result.id;
-		    	var soluong = Number($('#soluong').val());
-		    	var giaban = Number(result.giaban);
-		    	
-		    	var thanhtien = soluong * giaban;
-		    	
-				
-			    	if($('#idhh'+id).text() != ''){
-			    		var soluongcu = Number($('#soluonghh'+id).val());
-			    		$('#soluonghh'+id).val(soluongcu + soluong);
-			    		
-			    		var soluongmoi = Number($('#soluonghh'+id).val());
-			    		var giabanhhold = Number($('#giabanhh'+id).val().replace(/\.|,|\s/g,''));
 
-						var thanhtiennew =soluongmoi * giabanhhold;
-			    		$('#thanhtienhh'+id).val(changeNumberToString(thanhtiennew));
-			    	}else {
-			    		//Get the reference of the Table's TBODY element.
-						var tBody = $("#tblcthd > TBODY")[0];
-						 
-					    //Add Row.
-					    row = tBody.insertRow(-1);
+				var kieugia = $('#kieugia').val();
 
-					    //Add Name cell.
-					    var cell = $(row.insertCell(-1));
-			    		cell.html('<input hidden value="'+id+'" name="idhh" ><span id="idhh'+id+'">'+id+'</span>');
-				    	
-			    		cell = $(row.insertCell(-1));
-				    	cell.html('<span id="mahanghh'+id+'">'+result.mahang+'</span>');
-			    		
-				    	cell = $(row.insertCell(-1));
-				    	cell.html('<span id="tenhanghh'+id+'">'+result.tenhang+'</span>');
-				    	
-				    	cell = $(row.insertCell(-1));
-				    	cell.html('<input onkeyup="showNumberToString();" onchange="capnhatthanhtien('+id+');kiemTraGiaBan('+id+');"   name="giabanhh" id="giabanhh'+id+'" type="text" value="'+changeNumberToString(giaban)+'" >');
+				if(result.giakhuyenmai == null && kieugia == 'giakhuyenmai'){
+                    $('#_hanghoa-error').css("display", "block");
+                    $('#_hanghoa-error').text("* Hàng Hóa Này Không Có Giá Khuyến Mãi");
+                }else {
+                    var giaban = 0;
+                    if (kieugia == 'giabansi'){
+                        giaban = Number(result.giaban);
+                    }else if (kieugia == 'giabanle'){
+                        giaban = Number(result.giabanle);
+                    }else if (kieugia == 'giakhuyenmai'){
+                        giaban = Number(result.giakhuyenmai);
+                    }
+				    var id = result.id;
+                     var soluong = Number($('#soluong').val());
 
-				    	cell = $(row.insertCell(-1));
-				    	cell.html('<input min="0" onchange="capnhatthanhtien('+id+');"  name="soluonghh" id="soluonghh'+id+'" type="number" value="'+soluong+'" >');
-				    	
-				    	cell = $(row.insertCell(-1));
-				    	cell.html('<input onkeyup="showNumberToString();"  name="thanhtienhh" id="thanhtienhh'+id+'" type="text" value="'+changeNumberToString(thanhtien)+'" >');
-				    	
-				    	cell = $(row.insertCell(-1));
-				    	cell.html('<a onclick="Remove(this,'+id+');" href="javascript:void(0);"> <i style="color: red;" class="fa fa-close" aria-hidden="true" title="Sửa"> </i></a>');
-				    
-			    	}
-                settongtien();
-                setcongno();
+
+                     var thanhtien = soluong * giaban;
+
+
+                         if($('#idhh'+id).text() != ''){
+                             var soluongcu = Number($('#soluonghh'+id).val());
+                             $('#soluonghh'+id).val(soluongcu + soluong);
+
+                             var soluongmoi = Number($('#soluonghh'+id).val());
+
+                            /* var giabanhhold = Number($('#giabanhh'+id).val().replace(/\.|,|\s/g,''));
+                             var thanhtiennew =soluongmoi * giabanhhold; */
+                             var thanhtiennew =soluongmoi * giaban;
+                             $('#giabanhh'+id).val(changeNumberToString(giaban));
+                             $('#thanhtienhh'+id).val(changeNumberToString(thanhtiennew));
+                         }else {
+                             //Get the reference of the Table's TBODY element.
+                             var tBody = $("#tblcthd > TBODY")[0];
+
+                             //Add Row.
+                             row = tBody.insertRow(-1);
+
+                             //Add Name cell.
+                             var cell = $(row.insertCell(-1));
+                             cell.html('<input hidden value="'+id+'" name="idhh" ><span id="idhh'+id+'">'+id+'</span>');
+
+                             cell = $(row.insertCell(-1));
+                             cell.html('<span id="mahanghh'+id+'">'+result.mahang+'</span>');
+
+                             cell = $(row.insertCell(-1));
+                             cell.html('<span id="tenhanghh'+id+'">'+result.tenhang+'</span>');
+
+                             cell = $(row.insertCell(-1));
+                             cell.html('<input onkeyup="showNumberToString();" onchange="capnhatthanhtien('+id+');kiemTraGiaBan('+id+');"   name="giabanhh" id="giabanhh'+id+'" type="text" value="'+changeNumberToString(giaban)+'" >');
+
+                             cell = $(row.insertCell(-1));
+                             cell.html('<input min="0" onchange="capnhatthanhtien('+id+');"  name="soluonghh" id="soluonghh'+id+'" type="number" value="'+soluong+'" >');
+
+                             cell = $(row.insertCell(-1));
+                             cell.html('<input onkeyup="showNumberToString();"  name="thanhtienhh" id="thanhtienhh'+id+'" type="text" value="'+changeNumberToString(thanhtien)+'" >');
+
+                             cell = $(row.insertCell(-1));
+                             cell.html('<a onclick="Remove(this,'+id+');" href="javascript:void(0);"> <i style="color: red;" class="fa fa-close" aria-hidden="true" title="Sửa"> </i></a>');
+
+                         }
+                     settongtien();
+                     setcongno();
+                }
+
+
 
 			},
 			error : function(e) {
@@ -241,13 +258,18 @@ function getHangHoaById() {
 	}, 100);
 };
 
+var trangthai  = [];
 function kiemTraGiaBan(id) {
+    /*$('input[name="giabanhh"]').each(function(){
+         var input = $(this); // This is the jquery object of the input, do what you will\
+         console.log(input.val());
+     });*/
 
     clearTimeout(timeout);
     timeout = setTimeout(function() {
-    	var hanghoa = {};
-         hanghoa["giaban"] = $('#giabanhh'+id).val().replace(/\.|,|\s/g,'');
-         hanghoa["id"] = id;
+        var hanghoa = {};
+        hanghoa["giaban"] = $('#giabanhh'+id).val().replace(/\.|,|\s/g,'');
+        hanghoa["id"] = id;
         var token = $("meta[name='_csrf']").attr("content");
         var header = $("meta[name='_csrf_header']").attr("content");
         $(document).ajaxSend(function(e, xhr, options) {
@@ -261,19 +283,38 @@ function kiemTraGiaBan(id) {
             url : contextPath + "/admin/kiemtragiaban",
             data:JSON.stringify(hanghoa),
             success : function(result) {
-				if(result == 'success'){
-					$('#btn-thhvcthd').hide();
-                    $('#btn-submit').hide();
-					$('#giabanhh'+id).css('border', '1px solid red');
-                    $('#_giaban-error').css("display", "block");
-                    $('#_giaban-error').text("* Giá Bán Hiện Tại Nhỏ Hơn Giá Nhập");
-				}else {
-                    $('#btn-thhvcthd').show();
-                    $('#btn-submit').show();
-                    $('#giabanhh'+id).css('border', '');
-                    $('#_giaban-error').css("display", "none");
-                    $('#_giaban-error').text("");
-				}
+                if(result == 'success'){
+                    trangthai.push(id);
+
+                    for(var i = 0 ; i < trangthai.length ; i++){
+                        var _id=trangthai[i];
+                        $('#giabanhh'+_id).focus();
+                        $('#btn-thhvcthd').hide();
+                        $('#btn-submit').hide();
+                        $('#giabanhh'+_id).css('border', '1px solid red');
+                        $('#_giaban-error').css("display", "block");
+                        $('#_giaban-error').text("* Giá Bán Hiện Tại Nhỏ Hơn Giá Nhập");
+                    }
+
+                }else {
+
+                    var index =trangthai.indexOf(id);
+                    if (index !== -1){
+                        trangthai.splice(index, 1);
+
+                    }
+                    $('#giabanhh' + id).css('border', '');
+                    if(trangthai.length == 0) {
+
+                        $('#btn-thhvcthd').show();
+                        $('#btn-submit').show();
+
+                        $('#_giaban-error').css("display", "none");
+                        $('#_giaban-error').text("");
+
+                    }
+
+                }
             },
             error : function(e) {
 

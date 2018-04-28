@@ -61,7 +61,8 @@
                                 <security:authorize access="hasAnyRole('ADMIN')">
                                     <th>Giá Nhập</th>
                                 </security:authorize>
-                                <th>Giá Bán</th>
+                                <th>Giá Bán Sỉ</th>
+                                <th>Giá Bán Lẻ</th>
                                 <th>Giá Khuyến Mãi</th>
                                 <th>Đơn Vị Tính</th>
                                 <security:authorize access="hasAnyRole('ADMIN')">
@@ -81,6 +82,9 @@
                                 </security:authorize>
                                 <td><fmt:formatNumber type="number" pattern="###,###"
                                                       value="${hh.giaban }"/> &#8363;
+                                </td>
+                                <td><fmt:formatNumber type="number" pattern="###,###"
+                                                      value="${hh.giabanle }"/> &#8363;
                                 </td>
                                 <td><c:choose>
                                     <c:when test="${hh.giakhuyenmai == null }">
@@ -114,7 +118,8 @@
                                 <security:authorize access="hasAnyRole('ADMIN')">
                                     <th>Giá Nhập</th>
                                 </security:authorize>
-                                <th>Giá Bán</th>
+                                <th>Giá Bán Sỉ</th>
+                                <th>Giá Bán Lẻ</th>
                                 <th>Giá Khuyến Mãi</th>
                                 <th>Đơn Vị Tính</th>
                                 <security:authorize access="hasAnyRole('ADMIN')">

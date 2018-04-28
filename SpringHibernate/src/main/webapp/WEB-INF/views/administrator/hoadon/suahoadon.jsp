@@ -121,7 +121,7 @@
                             <label for="hanghoa">Hàng Hóa</label>
                         </div>
                         <div class="col-md-12 margin ">
-                            <div class="form-group col-md-8">
+                            <div class="form-group col-md-6">
                                 <select class="form-control select2" name="" id="hanghoa"
                                         style="width: 100%;">
 
@@ -132,7 +132,19 @@
                                 </select>
                                 <label id="_hanghoa-error" class="error" style="display: none;"></label>
                             </div>
-                            <div class="col-md-4 form-group">
+
+                            <div class="form-group col-md-3">
+                                <select class="form-control select2" name="kieugia" id="kieugia"
+                                        style="width: 100%;">
+
+                                    <option value="giabansi">Giá Bán Sỉ</option>
+                                    <option value="giabanle">Giá Bán Lẻ</option>
+                                    <option value="giakhuyenmai">Giá Khuyến Mãi</option>
+
+                                </select>
+                            </div>
+
+                            <div class="col-md-3 form-group">
                                 <div class="input-group">
                                     <input type="number" id="soluong" class="form-control"
                                            value="0" placeholder="Nhập Số Lượng"> <span

@@ -139,6 +139,15 @@ $(document).ready(function() {
 				}
 
 			}*/,
+            giabanle : {
+                required : true,
+
+                normalizer : function(value) {
+
+                    return $.trim(value);
+                }
+
+            },
 			donvitinh : {
 				required : true,
 				
@@ -179,7 +188,7 @@ $(document).ready(function() {
 
 			},
 			giaban : {
-				required : "* Vui Lòng Nhập Giá Bán"
+				required : "* Vui Lòng Nhập Giá Bán Sỉ"
 				
 
 			}/*,
@@ -189,6 +198,11 @@ $(document).ready(function() {
 				
 
 			}*/,
+            giaban : {
+                required : "* Vui Lòng Nhập Giá Bán Lẻ"
+
+
+            },
 			donvitinh : {
 				required : "* Vui Lòng Nhập Đơn Vị Tính"
 				
@@ -207,42 +221,64 @@ $(document).ready(function() {
 	});
 });
 $("input").focusout(function(){
+	kiemTraGia();
+});
+
+function kiemTraGia() {
     var giaban = Number($("#giaban").val().replace(/\.|,|\s/g,''));
+    var giabanle = Number($("#giabanle").val().replace(/\.|,|\s/g,''));
     var gianhap = Number($("#gianhap").val().replace(/\.|,|\s/g,''));
     var giakhuyenmai =Number($("#giakhuyenmai").val().replace(/\.|,|\s/g,''));
     if(giaban < gianhap)
     {
         $("#_giaban-error").css("display","block");
-        $('#_giaban-error').text("* Giá Bán Phải Lớn Hơn Giá Nhập");
-		$('#btn-submit').attr('type','button');
+        $('#_giaban-error').text("* Giá Bán Sỉ Phải Lớn Hơn Giá Nhập");
+        $('#btn-submit').attr('type','button');
     }else {
 
         $("#_giaban-error").css("display","none");
         $('#_giaban-error').text("");
     }
-    if(giakhuyenmai != '' ){
-	    if(giakhuyenmai < gianhap)
-	    {
-	        $("#_giakhuyenmai-error").css("display","block");
-	        $('#_giakhuyenmai-error').text("* Giá Khuyến Mãi Phải Lớn Hơn Giá Nhập");
-			$('#btn-submit').attr('type','button');
-	    }else {
-	    	 $("#_giakhuyenmai-error").css("display","none");
-	         $('#_giakhuyenmai-error').text("");
-	         $('#btn-submit').attr('type','submit');
-	    }
+    if(giabanle < gianhap)
+    {
+        $("#_giabanle-error").css("display","block");
+        $('#_giabanle-error').text("* Giá Bán Lẻ Phải Lớn Hơn Giá Nhập");
+        $('#btn-submit').attr('type','button');
     }else {
-    	$("#_giakhuyenmai-error").css("display","none");
+
+        $("#_giabanle-error").css("display","none");
+        $('#_giabanle-error').text("");
+    }
+    if(giakhuyenmai != '' ){
+        if(giakhuyenmai < gianhap)
+        {
+            $("#_giakhuyenmai-error").css("display","block");
+            $('#_giakhuyenmai-error').text("* Giá Khuyến Mãi Phải Lớn Hơn Giá Nhập");
+            $('#btn-submit').attr('type','button');
+        }else {
+            $("#_giakhuyenmai-error").css("display","none");
+            $('#_giakhuyenmai-error').text("");
+            /*$('#btn-submit').attr('type','submit');*/
+        }
+    }else {
+        $("#_giakhuyenmai-error").css("display","none");
         $('#_giakhuyenmai-error').text("");
-        $('#btn-submit').attr('type','submit');
+
     }
-    
-    
-    if(giaban > gianhap && giakhuyenmai > gianhap) {
-    	
- 		$('#btn-submit').attr('type','submit'); 
-    }
-});
+
+    if(giakhuyenmai != '' ){
+        if(giaban > gianhap && giakhuyenmai >= gianhap && giabanle > gianhap) {
+
+            $('#btn-submit').attr('type','submit');
+        }
+	}else {
+        if(giaban > gianhap  && giabanle > gianhap) {
+
+            $('#btn-submit').attr('type','submit');
+        }
+	}
+
+}
 var timeout = null;
 function kiemtramahang(){
 	clearTimeout(timeout);

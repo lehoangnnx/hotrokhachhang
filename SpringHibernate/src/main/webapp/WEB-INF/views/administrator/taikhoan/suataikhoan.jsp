@@ -75,7 +75,7 @@
 
 							</select>
 						</div> --%>
-						<div class="form-group">
+						<%--<div class="form-group">
 							<label>Quyền</label> <select class="form-control select2"
 								multiple="multiple" data-placeholder="Vui Lòng Chọn Quyền"
 								name="quyen" style="width: 100%;">
@@ -99,6 +99,34 @@
 									</c:choose>
 								</c:forEach>
 							</select>
+							<label id="quyen-error" class="error" for="quyen" style="display: none;"></label>
+						</div>--%>
+
+						<div class="form-group">
+							<label>Quyền</label> <select
+								class="form-control select2" name="quyen"
+								style="width: 100%;">
+							<c:forEach var="q" items="${listQuyen }">
+
+							</c:forEach>
+							<c:forEach var="q" items="${listQuyen }">
+								<c:set var="found" value="fasle" />
+								<c:forEach var="tq" items="${taikhoan.quyens}">
+									<c:choose>
+										<c:when test="${q == tq }">
+											<c:set var="found" value="true" />
+											<option selected value="${q.id }">${q.maquyen}- ${q.tenquyen}</option>
+										</c:when>
+									</c:choose>
+								</c:forEach>
+								<c:choose>
+									<c:when test="${!found}">
+										<option value="${q.id }">${q.maquyen}- ${q.tenquyen}</option>
+									</c:when>
+								</c:choose>
+							</c:forEach>
+
+						</select>
 							<label id="quyen-error" class="error" for="quyen" style="display: none;"></label>
 						</div>
 					</div>

@@ -189,61 +189,68 @@ function getHangHoaById() {
 			url : contextPath + "/admin/gethanghoabyid",
 			data: id,
 			success : function(result) {
-				
-				
-				
-				var id = result.id;
-		    	var soluong = Number($('#soluong').val());
-		    	var giaban = Number(result.giaban);
-		    	
-		    	var thanhtien = soluong * giaban;
-		    	
-		    	
-		    	
-				
-			    	if($('#idhh'+id).text() != ''){
-                        var soluongcu = Number($('#soluonghh'+id).val());
-                        $('#soluonghh'+id).val(soluongcu + soluong);
+                var kieugia = $('#kieugia').val();
 
-                        var soluongmoi = Number($('#soluonghh'+id).val());
-                        var giabanhhold = Number($('#giabanhh'+id).val().replace(/\.|,|\s/g,''));
+                if(result.giakhuyenmai == null && kieugia == 'giakhuyenmai'){
+                    $('#_hanghoa-error').css("display", "block");
+                    $('#_hanghoa-error').text("* Hàng Hóa Này Không Có Giá Khuyến Mãi");
+                }else {
+                    var giaban = 0;
+                    if (kieugia == 'giabansi') {
+                        giaban = Number(result.giaban);
+                    } else if (kieugia == 'giabanle') {
+                        giaban = Number(result.giabanle);
+                    } else if (kieugia == 'giakhuyenmai') {
+                        giaban = Number(result.giakhuyenmai);
+                    }
+                    var id = result.id;
+                    var soluong = Number($('#soluong').val());
 
-                        var thanhtiennew =soluongmoi * giabanhhold;
-                        $('#thanhtienhh'+id).val(changeNumberToString(thanhtiennew));
-			    	}else {
-			    		//console.log("else");
-			    		//Get the reference of the Table's TBODY element.
-						var tBody = $("#tblcthd > TBODY")[0];
-						 
-					    //Add Row.
-					    row = tBody.insertRow(-1);
+                    var thanhtien = soluong * giaban;
+                    if ($('#idhh' + id).text() != '') {
+                        var soluongcu = Number($('#soluonghh' + id).val());
+                        $('#soluonghh' + id).val(soluongcu + soluong);
 
-					    //Add Name cell.
-					    var cell = $(row.insertCell(-1));
-			    		cell.html('<input hidden value="0" name="idcthd" ><input hidden value="'+id+'" name="idhh" ><span id="idhh'+id+'">'+id+'</span>');
-				    	
-			    		cell = $(row.insertCell(-1));
-				    	cell.html('<span id="mahanghh'+id+'">'+result.mahang+'</span>');
-			    		
-				    	cell = $(row.insertCell(-1));
-				    	cell.html('<span id="tenhanghh'+id+'">'+result.tenhang+'</span>');
+                        var soluongmoi = Number($('#soluonghh' + id).val());
+                       /* var giabanhhold = Number($('#giabanhh' + id).val().replace(/\.|,|\s/g, ''));
+                        var thanhtiennew = soluongmoi * giabanhhold;*/
+                        var thanhtiennew =soluongmoi * giaban;
+                        $('#giabanhh'+id).val(changeNumberToString(giaban));
+                        $('#thanhtienhh' + id).val(changeNumberToString(thanhtiennew));
+                    } else {
+                        //console.log("else");
+                        //Get the reference of the Table's TBODY element.
+                        var tBody = $("#tblcthd > TBODY")[0];
 
-                        cell = $(row.insertCell(-1));
-                        cell.html('<input onkeyup="showNumberToString();" onchange="capnhatthanhtien('+id+');kiemTraGiaBan('+id+');"   name="giabanhh" id="giabanhh'+id+'" type="text" value="'+changeNumberToString(giaban)+'" >');
+                        //Add Row.
+                        row = tBody.insertRow(-1);
+
+                        //Add Name cell.
+                        var cell = $(row.insertCell(-1));
+                        cell.html('<input hidden value="0" name="idcthd" ><input hidden value="' + id + '" name="idhh" ><span id="idhh' + id + '">' + id + '</span>');
 
                         cell = $(row.insertCell(-1));
-                        cell.html('<input min="0" onchange="capnhatthanhtien('+id+');"  name="soluonghh" id="soluonghh'+id+'" type="number" value="'+soluong+'" >');
+                        cell.html('<span id="mahanghh' + id + '">' + result.mahang + '</span>');
 
                         cell = $(row.insertCell(-1));
-                        cell.html('<input onkeyup="showNumberToString();"  name="thanhtienhh" id="thanhtienhh'+id+'" type="text" value="'+changeNumberToString(thanhtien)+'" >');
+                        cell.html('<span id="tenhanghh' + id + '">' + result.tenhang + '</span>');
 
                         cell = $(row.insertCell(-1));
-				    	cell.html('<a onclick="Remove(this,'+id+',0);" href="javascript:void(0);"> <i style="color: red;" class="fa fa-close" aria-hidden="true" title="Sửa"> </i></a>');
-				    
-			    	}
-			    	settongtien();
-	                setcongno();
-				
+                        cell.html('<input onkeyup="showNumberToString();" onchange="capnhatthanhtien(' + id + ');kiemTraGiaBan(' + id + ');"   name="giabanhh" id="giabanhh' + id + '" type="text" value="' + changeNumberToString(giaban) + '" >');
+
+                        cell = $(row.insertCell(-1));
+                        cell.html('<input min="0" onchange="capnhatthanhtien(' + id + ');"  name="soluonghh" id="soluonghh' + id + '" type="number" value="' + soluong + '" >');
+
+                        cell = $(row.insertCell(-1));
+                        cell.html('<input onkeyup="showNumberToString();"  name="thanhtienhh" id="thanhtienhh' + id + '" type="text" value="' + changeNumberToString(thanhtien) + '" >');
+
+                        cell = $(row.insertCell(-1));
+                        cell.html('<a onclick="Remove(this,' + id + ',0);" href="javascript:void(0);"> <i style="color: red;" class="fa fa-close" aria-hidden="true" title="Sửa"> </i></a>');
+
+                    }
+                    settongtien();
+                    setcongno();
+                }
 			},
 			error : function(e) {
 

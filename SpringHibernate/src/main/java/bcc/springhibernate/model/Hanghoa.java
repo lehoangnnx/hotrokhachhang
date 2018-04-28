@@ -30,6 +30,7 @@ public class Hanghoa implements java.io.Serializable {
 	private String mota;
 	private Long gianhap;
 	private Long giaban;
+	private Long giabanle;
 	private Long giakhuyenmai;
 	private String trangthai;
 	private String ghichu;
@@ -46,7 +47,7 @@ public class Hanghoa implements java.io.Serializable {
 	}
 
 	public Hanghoa(Nhomhang nhomhang, String mahang, String tenhang, String donvitinh, String mota, Long gianhap,
-			Long giaban, Long giakhuyenmai, String trangthai, String ghichu, Set<Chitiethoadon> chitiethoadons,
+			Long giaban,Long giabanle, Long giakhuyenmai, String trangthai, String ghichu, Set<Chitiethoadon> chitiethoadons,
 			Set<Chitiethoadon> chitiethoadons_1) {
 		this.nhomhang = nhomhang;
 		this.mahang = mahang;
@@ -55,6 +56,7 @@ public class Hanghoa implements java.io.Serializable {
 		this.mota = mota;
 		this.gianhap = gianhap;
 		this.giaban = giaban;
+		this.giabanle = giabanle;
 		this.giakhuyenmai = giakhuyenmai;
 		this.trangthai = trangthai;
 		this.ghichu = ghichu;
@@ -136,6 +138,17 @@ public class Hanghoa implements java.io.Serializable {
 
 	public void setGiaban(Long giaban) {
 		this.giaban = giaban;
+	}
+
+
+
+	@Column(name = "giabanle", precision = 10, scale = 0)
+	public Long getGiabanle() {
+		return this.giabanle;
+	}
+
+	public void setGiabanle(Long giabanle) {
+		this.giabanle = giabanle;
 	}
 
 	@Column(name = "giakhuyenmai", precision = 10, scale = 0)

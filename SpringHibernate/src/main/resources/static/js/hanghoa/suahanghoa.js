@@ -92,43 +92,43 @@ function showNumberToString() {
 };
 $(document).ready(function() {
 	// Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
-	$("#formHangHoa").validate({
-		rules : {
-			mahang : {
-				required : true,
-				normalizer : function(value) {
+    $("#formHangHoa").validate({
+        rules : {
+            mahang : {
+                required : true,
+                normalizer : function(value) {
 
-					return $.trim(value);
-				}
+                    return $.trim(value);
+                }
 
-			},
-			tenhang : {
-				required : true,
-				
-				normalizer : function(value) {
+            },
+            tenhang : {
+                required : true,
 
-					return $.trim(value);
-				}
+                normalizer : function(value) {
 
-			},
-			gianhap : {
-				required : true,
-				
-				normalizer : function(value) {
+                    return $.trim(value);
+                }
 
-					return $.trim(value);
-				}
+            },
+            gianhap : {
+                required : true,
 
-			},
-			giaban : {
-				required : true,
-				
-				normalizer : function(value) {
+                normalizer : function(value) {
 
-					return $.trim(value);
-				}
+                    return $.trim(value);
+                }
 
-			}/*,
+            },
+            giaban : {
+                required : true,
+
+                normalizer : function(value) {
+
+                    return $.trim(value);
+                }
+
+            }/*,
 			giakhuyenmai : {
 				required : true,
 				
@@ -138,87 +138,116 @@ $(document).ready(function() {
 				}
 
 			}*/,
-			donvitinh : {
-				required : true,
-				
-				normalizer : function(value) {
+            giabanle : {
+                required : true,
 
-					return $.trim(value);
-				}
+                normalizer : function(value) {
 
-			},
-			nhomhang : {
-				required : true
-			}
-			/*,
-			mota : {
-				required : true,
-				normalizer : function(value) {
+                    return $.trim(value);
+                }
 
-					return $.trim(value);
-				}
-			}*/
+            },
+            donvitinh : {
+                required : true,
 
-		},
-		messages : {
-			mahang : {
-				required : "* Vui Lòng Nhập Mã Hàng"
-				
-			},
-			tenhang : {
-				required : "* Vui Lòng Nhập Tên Hàng"
-				
-				
+                normalizer : function(value) {
 
-			},
-			gianhap : {
-				required : "* Vui Lòng Nhập Giá Nhập"
-				
-				
+                    return $.trim(value);
+                }
 
-			},
-			giaban : {
-				required : "* Vui Lòng Nhập Giá Bán"
-				
+            },
+            nhomhang : {
+                required : true
+            }
+            /*,
+            mota : {
+                required : true,
+                normalizer : function(value) {
 
-			}/*,
+                    return $.trim(value);
+                }
+            }*/
+
+        },
+        messages : {
+            mahang : {
+                required : "* Vui Lòng Nhập Mã Hàng"
+
+            },
+            tenhang : {
+                required : "* Vui Lòng Nhập Tên Hàng"
+
+
+
+            },
+            gianhap : {
+                required : "* Vui Lòng Nhập Giá Nhập"
+
+
+
+            },
+            giaban : {
+                required : "* Vui Lòng Nhập Giá Bán Sỉ"
+
+
+            }/*,
 			giakhuyenmai : {
 				required : "* Vui Lòng Nhập Giá Khuyến Mãi"
-				
-				
+
+
 
 			}*/,
-			donvitinh : {
-				required : "* Vui Lòng Nhập Đơn Vị Tính"
-				
-				
+            giaban : {
+                required : "* Vui Lòng Nhập Giá Bán Lẻ"
 
-			},
-			nhomhang : {
-				required: " * Vui Lòng Chọn Nhóm Hàng Hóa"
-			}
-			/*,
-			mota : {
-				required : "* Vui Lòng Nhập Mô Tả"
-			}*/
 
-		}
-	});
+            },
+            donvitinh : {
+                required : "* Vui Lòng Nhập Đơn Vị Tính"
+
+
+
+            },
+            nhomhang : {
+                required: " * Vui Lòng Chọn Nhóm Hàng Hóa"
+            }
+            /*,
+            mota : {
+                required : "* Vui Lòng Nhập Mô Tả"
+            }*/
+
+        }
+    });
 });
 $("input").focusout(function(){
+	console.log("s");
+    kiemTraGia();
+});
+
+function kiemTraGia() {
     var giaban = Number($("#giaban").val().replace(/\.|,|\s/g,''));
+    var giabanle = Number($("#giabanle").val().replace(/\.|,|\s/g,''));
     var gianhap = Number($("#gianhap").val().replace(/\.|,|\s/g,''));
     var giakhuyenmai =Number($("#giakhuyenmai").val().replace(/\.|,|\s/g,''));
-
     if(giaban < gianhap)
     {
         $("#_giaban-error").css("display","block");
-        $('#_giaban-error').text("* Giá Bán Phải Lớn Hơn Giá Nhập");
+        $('#_giaban-error').text("* Giá Bán Sỉ Phải Lớn Hơn Giá Nhập");
         $('#btn-submit').attr('type','button');
     }else {
 
         $("#_giaban-error").css("display","none");
         $('#_giaban-error').text("");
+    }
+    if(giabanle < gianhap)
+    {
+        $("#_giabanle-error").css("display","block");
+        $('#_giabanle-error').text("* Giá Bán Lẻ Phải Lớn Hơn Giá Nhập");
+        $('#btn-submit').attr('type','button');
+    }else {
+
+        $("#_giabanle-error").css("display","none");
+        $('#_giabanle-error').text("");
     }
     if(giakhuyenmai != '' ){
         if(giakhuyenmai < gianhap)
@@ -229,20 +258,27 @@ $("input").focusout(function(){
         }else {
             $("#_giakhuyenmai-error").css("display","none");
             $('#_giakhuyenmai-error').text("");
-            $('#btn-submit').attr('type','submit');
+            /*$('#btn-submit').attr('type','submit');*/
         }
     }else {
         $("#_giakhuyenmai-error").css("display","none");
         $('#_giakhuyenmai-error').text("");
-        $('#btn-submit').attr('type','submit');
+
     }
 
+    if(giakhuyenmai != '' ){
+        if(giaban > gianhap && giakhuyenmai >= gianhap && giabanle > gianhap) {
 
-    if(giaban > gianhap && giakhuyenmai > gianhap) {
+            $('#btn-submit').attr('type','submit');
+        }
+    }else {
+        if(giaban > gianhap  && giabanle > gianhap) {
 
-        $('#btn-submit').attr('type','submit');
+            $('#btn-submit').attr('type','submit');
+        }
     }
-});
+
+}
 var timeout = null;
 function kiemtramahang(){
 	clearTimeout(timeout);

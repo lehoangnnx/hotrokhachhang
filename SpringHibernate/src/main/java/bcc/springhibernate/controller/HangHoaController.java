@@ -60,6 +60,7 @@ public class HangHoaController {
     @PostMapping("/hanghoa")
     String themHangHoa(@ModelAttribute("hanghoa") Hanghoa hanghoa,
                        @RequestParam("giaban_money") String giaban,
+                       @RequestParam("giabanle_money") String giabanle,
                        @RequestParam("gianhap_money") String gianhap,
                        @RequestParam(value = "_giakhuyenmai", defaultValue = "") String giakhuyenmai,
                        @RequestParam("nhomhang") Integer nhomhang,
@@ -69,6 +70,7 @@ public class HangHoaController {
             hanghoa.setTrangthai("active");
             hanghoa.setNhomhang(nhomhangById);
             hanghoa.setGiaban(Long.valueOf(giaban.replaceAll("\\.|\\,|\\s", "")));
+            hanghoa.setGiabanle(Long.valueOf(giabanle.replaceAll("\\.|\\,|\\s", "")));
             hanghoa.setGianhap(Long.valueOf(gianhap.replaceAll("\\.|\\,|\\s", "")));
             if (!giakhuyenmai.equals("")) {
                 hanghoa.setGiakhuyenmai(Long.valueOf(giakhuyenmai.replaceAll("\\.|\\,|\\s", "")));
@@ -86,6 +88,7 @@ public class HangHoaController {
     @PatchMapping(value = "/hanghoa", params = "update")
     String suaHangHoa(@ModelAttribute("hanghoa") Hanghoa hanghoa,
                       @RequestParam("giaban_money") String giaban,
+                      @RequestParam("giabanle_money") String giabanle,
                       @RequestParam("gianhap_money") String gianhap,
                       @RequestParam(value = "_giakhuyenmai", defaultValue = "") String giakhuyenmai,
                       @RequestParam("nhomhang") Integer nhomhang,
@@ -95,6 +98,7 @@ public class HangHoaController {
             //hanghoa.setTrangthai("active");
             hanghoa.setNhomhang(nhomhangById);
             hanghoa.setGiaban(Long.valueOf(giaban.replaceAll("\\.|\\,|\\s", "")));
+            hanghoa.setGiabanle(Long.valueOf(giabanle.replaceAll("\\.|\\,|\\s", "")));
             hanghoa.setGianhap(Long.valueOf(gianhap.replaceAll("\\.|\\,|\\s", "")));
             if (!giakhuyenmai.equals("")) {
                 hanghoa.setGiakhuyenmai(Long.valueOf(giakhuyenmai.replaceAll("\\.|\\,|\\s", "")));
