@@ -92,4 +92,20 @@ public class KhachHangRestController {
         }
 
     }
+
+    @PostMapping("/getthongtinkhachhang")
+    Map<String, Object> getThongTinKhachHang(@RequestBody Integer id) {
+
+        Map<String, Object> khachHangMap = new HashMap<String, Object>();
+        try {
+
+            Khachhang khachhang = khachHangService.findById(id);
+            khachHangMap.put("diachi", khachhang.getDiachi());
+
+            khachHangMap.put("sodienthoai", khachhang.getSodienthoai());
+        } catch (Exception e) {
+
+        }
+        return khachHangMap;
+    }
 }

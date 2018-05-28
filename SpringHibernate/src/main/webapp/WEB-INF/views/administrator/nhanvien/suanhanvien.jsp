@@ -169,11 +169,11 @@
 								style="width: 100%;">
 							<option value="0" ${nhanvien.idnhanviencaptren == 0 ? 'selected' : ''} >Không</option>
 							<c:forEach var="nv" items="${listNhanvien }">
-								<c:if test="${nhanvien.idnhanviencaptren != nv.idnhanviencaptren}">
+
 								<option ${nhanvien.idnhanviencaptren == nv.id ? 'selected' : ''}
 										value="${nv.id }">${nv.manhanvien}-
 										${nv.tennhanvien }</option>
-								</c:if>
+
 							</c:forEach>
 
 						</select>

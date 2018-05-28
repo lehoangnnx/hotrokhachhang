@@ -5,6 +5,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="security"
+		   uri="http://www.springframework.org/security/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <style>
 .lb-flat-red {
@@ -53,12 +55,19 @@ tr:nth-child(even) {
 							<label>Nhân Viên Bán Hàng</label> <select
 								class="form-control select2" name="nhanvienbanhang"
 								style="width: 100%;">
-							<option value="${taikhoan.nhanvien.id }">${taikhoan.nhanvien.manhanvien}-
-									${taikhoan.nhanvien.tennhanvien }</option>
-								<%--<c:forEach var="nv" items="${listNhanvien }">
-									<option value="${nv.id }">${nv.manhanvien}-
-										${nv.tennhanvien }</option>
-								</c:forEach>--%>
+							<%--<option value="${taikhoan.nhanvien.id }">${taikhoan.nhanvien.manhanvien}-
+									${taikhoan.nhanvien.tennhanvien }</option>--%>
+								<security:authorize access="hasAnyRole('ADMIN')">
+									<c:forEach var="nv" items="${listNhanvien }">
+										<option  ${taikhoan.nhanvien.id == nv.id ? 'selected' : '' }
+												value="${nv.id }">${nv.manhanvien}-
+											${nv.tennhanvien }</option>
+									</c:forEach>
+								</security:authorize>
+								<security:authorize access="!hasAnyRole('ADMIN')">
+									<option value="${taikhoan.nhanvien.id }">${taikhoan.nhanvien.manhanvien}-
+											${taikhoan.nhanvien.tennhanvien }</option>
+								</security:authorize>
 
 							</select>
 						</div>
@@ -87,7 +96,7 @@ tr:nth-child(even) {
 							</select>
 						</div>
 						<div class="form-group">
-							<label>Khách Hàng</label> <select class="form-control select2"
+							<label>Khách Hàng</label> <select class="form-control select2" id="khachhang"
 								name="khachhang" style="width: 100%;">
 
 								<c:forEach var="kh" items="${listKhachhang }">
@@ -271,7 +280,7 @@ tr:nth-child(even) {
 
 						<div class="form-group">
 							<label for="diachigiaohang">Địa Chỉ Giao Hàng</label>
-							<form:input path="diachigiaohang" type="text"
+							<input name="diachigiaohang" id="diachigiaohang" type="text" value="${listKhachhang[0].diachi}"
 								class="form-control" placeholder="Địa Chỉ Giao Hàng" />
 							<label id="_diachigiaohang-error" class="error"
 								style="display: none;"></label>
@@ -284,8 +293,8 @@ tr:nth-child(even) {
 								<div class="input-group-addon">
 									<i class="fa fa-phone"></i>
 								</div>
-								<input type="text" class="form-control" name="sodienthoai"
-									value="${hoadon.sodienthoai}"
+								<input type="text" class="form-control" name="sodienthoai" id="sodienthoai"
+									value="${listKhachhang[0].sodienthoai}"
 									data-inputmask="&quot;mask&quot;: &quot;999-999-99999&quot;"
 									data-mask=""> <label id="_sodienthoai-error"
 									class="error" style="display: none;"></label>

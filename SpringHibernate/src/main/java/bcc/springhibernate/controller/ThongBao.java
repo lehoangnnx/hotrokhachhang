@@ -44,7 +44,7 @@ public class ThongBao {
 
 
         List<Khachhang> khachhangs = new ArrayList<>();
-        List<Chamsoc> chamsocs = null;
+        List<Chamsoc> chamsocs = new ArrayList<>();
 
         if (request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_CHAMSOC")) {
             khachhangs = khachHangService.findByTrangthaiNotOrderByIdDesc("deleted");
@@ -75,6 +75,7 @@ public class ThongBao {
         List<Map<String, Object>> listKhachHang = new ArrayList<Map<String, Object>>();
 
         List<Map<String, Object>> listNhanVienKpi = new ArrayList<Map<String, Object>>();
+        if(!khachhangs.isEmpty()){
         for (Khachhang kh : khachhangs) {
             Date date = new Date();
             int dayn = date.getDate();
@@ -122,48 +123,51 @@ public class ThongBao {
                 }
             }
         }
+        }
+        if(!chamsocs.isEmpty()) {
+            for (Chamsoc cs : chamsocs) {
 
-        for (Chamsoc cs : chamsocs) {
+                Date date = new Date();
+                int day = cs.getNgaycstiep().getDate();
+                int month = cs.getNgaycstiep().getMonth();
+                int year = cs.getNgaycstiep().getYear();
+                int dayn = date.getDate();
+                int monthn = date.getMonth();
+                int yearn = date.getYear();
 
-            Date date = new Date();
-            int day = cs.getNgaycstiep().getDate();
-            int month = cs.getNgaycstiep().getMonth();
-            int year = cs.getNgaycstiep().getYear();
-            int dayn = date.getDate();
-            int monthn = date.getMonth();
-            int yearn = date.getYear();
+                int dayconlai = day - dayn;
+                //&& (dayconlai > 7)
+                if (year == yearn && month == monthn && (dayconlai <= 14)
+                        && cs.getTrangthai().equals("dachamsoc") && cs.getTrangthainhac().equals("chuanhac")) {
+                    cs.setTrangthai("chochamsoc");
+                    chamSocService.saveOrUpdate(cs);
+                    //&& (dayconlai >= 0)
+                }
+                if (year == yearn && month == monthn && (dayconlai <= 7)
+                        && cs.getTrangthai().equals("chochamsoc") && cs.getTrangthainhac().equals("chuanhac")) {
 
-            int dayconlai = day - dayn;
-            //&& (dayconlai > 7)
-            if (year == yearn && month == monthn && (dayconlai <= 14)
-                    && cs.getTrangthai().equals("dachamsoc") && cs.getTrangthainhac().equals("chuanhac")) {
-                cs.setTrangthai("chochamsoc");
-                chamSocService.saveOrUpdate(cs);
-                //&& (dayconlai >= 0)
-            }
-            if (year == yearn && month == monthn && (dayconlai <= 7)
-                    && cs.getTrangthai().equals("chochamsoc") && cs.getTrangthainhac().equals("chuanhac")) {
+                    Map<String, Object> map = new HashMap<String, Object>();
 
-                Map<String, Object> map = new HashMap<String, Object>();
+                    map.put("id", cs.getId());
+                    map.put("ngay", cs.getNgaycstiep());
+                    map.put("ngaycstiep", dayconlai);
+                    map.put("khachhang", cs.getKhachhang().getTen());
 
-                map.put("id", cs.getId());
-                map.put("ngay", cs.getNgaycstiep());
-                map.put("ngaycstiep", dayconlai);
-                map.put("khachhang", cs.getKhachhang().getTen());
-
-                listChamSoc.add(map);
+                    listChamSoc.add(map);
+                }
             }
         }
-
-        for (Nhanvienkpi nvk : nhanvienkpis) {
-            if (!nvk.getKpi().getTrangthai().equals("deleted")) {
-                Map<String, Object> map = new HashMap<String, Object>();
-                map.put("id", nvk.getId());
-                map.put("ngaydangky", nvk.getNgaydangky());
-                map.put("manhanvien", nvk.getNhanvien().getManhanvien());
-                map.put("tennhanvien", nvk.getNhanvien().getTennhanvien());
-                map.put("tenkpi", nvk.getKpi().getTen());
-                listNhanVienKpi.add(map);
+        if(!nhanvienkpis.isEmpty()) {
+            for (Nhanvienkpi nvk : nhanvienkpis) {
+                if (!nvk.getKpi().getTrangthai().equals("deleted")) {
+                    Map<String, Object> map = new HashMap<String, Object>();
+                    map.put("id", nvk.getId());
+                    map.put("ngaydangky", nvk.getNgaydangky());
+                    map.put("manhanvien", nvk.getNhanvien().getManhanvien());
+                    map.put("tennhanvien", nvk.getNhanvien().getTennhanvien());
+                    map.put("tenkpi", nvk.getKpi().getTen());
+                    listNhanVienKpi.add(map);
+                }
             }
         }
         List<HoadonCount> listHoaDonCount = hoaDonService.findHoadonWhereKhachhangChuathanhtoan();
@@ -185,38 +189,41 @@ public class ThongBao {
         // if(new Date(date.getYear(),date.getMonth(),date.getDate()).equals(new
         // Date(date.getYear(),date.getMonth(),01))){
         List<Nhanvien> listNhanvien = nhanVienService.findByTrangthaiNotOrderByIdDesc("deleted");
-        listNhanvien.forEach(x -> {
 
-            Luong luong = null;
-            try {
-                // Lấy Tháng Trước Ngày hiện tại
-                Date dt = new Date();
-                Calendar c = Calendar.getInstance();
-                c.add(Calendar.MONTH, -1);
-                int lastmonth = c.get(Calendar.MONTH) + 1; // beware of month indexing from zero
-                int lastyear = c.get(Calendar.YEAR);
+        if(!listNhanvien.isEmpty()) {
+            listNhanvien.forEach(x -> {
 
-                luong = luongService.findOneByNhanvienAndThangAndNam(x, splitDate[1], splitDate[2]);
-                if (luong == null) {
-                    String formatmonth = String.format("%02d", lastmonth);
-                    Luong lastluong = luongService.findOneByNhanvienAndThangAndNam(x, formatmonth,
-                            String.valueOf(lastyear));
-                    if (lastluong != null) {
-                        if (lastluong.getThuongcuahoadon() < 0L) {
-                            luong = new Luong(x, x.getLuong(), 0L, lastluong.getThuongcuahoadon(), splitDate[1], splitDate[2], "chuatraluong", "");
+                Luong luong = null;
+                try {
+                    // Lấy Tháng Trước Ngày hiện tại
+                    Date dt = new Date();
+                    Calendar c = Calendar.getInstance();
+                    c.add(Calendar.MONTH, -1);
+                    int lastmonth = c.get(Calendar.MONTH) + 1; // beware of month indexing from zero
+                    int lastyear = c.get(Calendar.YEAR);
+
+                    luong = luongService.findOneByNhanvienAndThangAndNam(x, splitDate[1], splitDate[2]);
+                    if (luong == null) {
+                        String formatmonth = String.format("%02d", lastmonth);
+                        Luong lastluong = luongService.findOneByNhanvienAndThangAndNam(x, formatmonth,
+                                String.valueOf(lastyear));
+                        if (lastluong != null) {
+                            if (lastluong.getThuongcuahoadon() < 0L) {
+                                luong = new Luong(x, x.getLuong(), 0L, lastluong.getThuongcuahoadon(), splitDate[1], splitDate[2], "chuatraluong", "");
+                            } else {
+                                luong = new Luong(x, x.getLuong(), 0L, 0L, splitDate[1], splitDate[2], "chuatraluong", "");
+                            }
                         } else {
                             luong = new Luong(x, x.getLuong(), 0L, 0L, splitDate[1], splitDate[2], "chuatraluong", "");
                         }
-                    } else {
-                        luong = new Luong(x, x.getLuong(), 0L, 0L, splitDate[1], splitDate[2], "chuatraluong", "");
-                    }
 
-                    luongService.saveOrUpdate(luong);
+                        luongService.saveOrUpdate(luong);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        // }
+            });
+        }
+
     }
 }

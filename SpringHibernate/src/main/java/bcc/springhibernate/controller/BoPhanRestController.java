@@ -17,28 +17,22 @@ public class BoPhanRestController {
 
     @PostMapping("/kiemtratenbophan")
     String kiemTraTenBoPhan(@RequestBody Bophan bophan) {
-
         Bophan bophanByTenBoPhan = null;
         try {
             bophanByTenBoPhan = boPhanService.findByTenbophan(bophan.getTenbophan());
             if (bophan.getId() == null) {
-
                 if (bophanByTenBoPhan == null) {
-
                     return "success";
                 }
             } else {
                 if (bophanByTenBoPhan != null) {
                     if (bophan.getId() == bophanByTenBoPhan.getId()) {
-
                         return "success";
-
                     }
                 } else {
                     return "success";
                 }
             }
-
         } catch (Exception e) {
             return "error";
         }

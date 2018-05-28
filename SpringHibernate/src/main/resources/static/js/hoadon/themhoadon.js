@@ -530,3 +530,34 @@ function checkngay(event) {
     }
 };
 
+$('#khachhang').change(function(){
+var idKhachHang = $(this).val();
+    clearTimeout(timeout);
+    timeout = setTimeout(function() {
+        var id = idKhachHang;
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        $(document).ajaxSend(function(e, xhr, options) {
+            xhr.setRequestHeader(header, token);
+        });
+
+        $.ajax({
+
+            type : "POST",
+            contentType : "application/json",
+            url : contextPath + "/admin/getthongtinkhachhang",
+            data: id ,
+            success : function(result) {
+                $('#diachigiaohang').val(result.diachi);
+                $('#sodienthoai').val(result.sodienthoai);
+            },
+            error : function(e) {
+
+            }
+        });
+    }, 100);
+});
+
+
+
+

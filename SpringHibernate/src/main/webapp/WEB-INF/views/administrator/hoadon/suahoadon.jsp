@@ -59,14 +59,19 @@
 
                            <%-- <option value="${taikhoan.nhanvien.id }">${taikhoan.nhanvien.manhanvien}-
                                     ${taikhoan.nhanvien.tennhanvien }</option>--%>
-
+                               <security:authorize access="hasAnyRole('ADMIN')">
                                 <c:forEach var="nv" items="${listNhanvien }">
-                                    <c:if test="${nv.id == hoadon.nhanvienByIdnhanvienban.id}">
+
                                     <option
                                         ${hoadon.nhanvienByIdnhanvienban.id == nv.id ? 'selected' : '' }
                                         value="${nv.id }">${nv.manhanvien}-${nv.tennhanvien }</option>
-                                    </c:if>
+
                                 </c:forEach>
+                               </security:authorize>
+                               <security:authorize access="!hasAnyRole('ADMIN')">
+                                   <option value="${taikhoan.nhanvien.id }">${taikhoan.nhanvien.manhanvien}-
+                                           ${taikhoan.nhanvien.tennhanvien }</option>
+                               </security:authorize>
 
                         </select>
                         </div>
@@ -97,7 +102,7 @@
                         </select>
                         </div>
                         <div class="form-group">
-                            <label>Khách Hàng</label> <select class="form-control select2"
+                            <label>Khách Hàng</label> <select class="form-control select2" id="khachhang"
                                                               name="khachhang" style="width: 100%;">
 
                             <c:forEach var="kh" items="${listKhachhang }">
@@ -341,7 +346,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-phone"></i>
                                 </div>
-                                <input type="text" class="form-control" name="sodienthoai"
+                                <input type="text" class="form-control" name="sodienthoai" id="sodienthoai"
                                        value="${hoadon.sodienthoai}"
                                        data-inputmask="&quot;mask&quot;: &quot;999-999-99999&quot;"
                                        data-mask=""> <label id="_sodienthoai-error"

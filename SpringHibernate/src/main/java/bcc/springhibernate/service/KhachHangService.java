@@ -2,8 +2,10 @@ package bcc.springhibernate.service;
 
 import bcc.springhibernate.model.Khachhang;
 import bcc.springhibernate.model.Loaikhachhang;
+import bcc.springhibernate.model.Nhanvien;
 import bcc.springhibernate.model.Nhomkhachhang;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -29,4 +31,23 @@ public interface KhachHangService {
 	
 	List<Khachhang> findByLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc(Loaikhachhang loaikhachhang,
 			Nhomkhachhang nhomkhachhang ,String trangthai, Pageable pageable);
+
+
+	List<Khachhang> findByNhanvienbanhangAndLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc
+			(Nhanvien nhanvienByIdnhanvienban,Loaikhachhang loaikhachhang, Nhomkhachhang nhomkhachhang ,String trangthai);
+	List<Khachhang> findByNhanvienbanhangAndLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc
+			(Nhanvien nhanvienByIdnhanvienban,Loaikhachhang loaikhachhang, Nhomkhachhang nhomkhachhang ,String trangthai,Pageable pageable);
+
+    List<Khachhang> findByNhanvienbanhangLoaikhachhangAndTrangthaiOrderByIdDesc
+            (Nhanvien nhanvienByIdnhanvienban,Loaikhachhang loaikhachhang,String trangthai);
+    List<Khachhang> findByNhanvienbanhangLoaikhachhangAndTrangthaiOrderByIdDesc
+            (Nhanvien nhanvienByIdnhanvienban,Loaikhachhang loaikhachhang,String trangthai,Pageable pageable);
+
+    List<Khachhang> findByNhanvienbanhangNhomkhachhangAndTrangthaiOrderByIdDesc
+            (Nhanvien nhanvienByIdnhanvienban,Nhomkhachhang nhomkhachhang ,String trangthai);
+    List<Khachhang> findByNhanvienbanhangNhomkhachhangAndTrangthaiOrderByIdDesc
+            (Nhanvien nhanvienByIdnhanvienban,Nhomkhachhang nhomkhachhang ,String trangthai,Pageable pageable);
+
+    List<Khachhang> findByNhanvienbanhangTrangthaiOrderByIdDesc(Nhanvien nhanvienByIdnhanvienban,String trangthai);
+    List<Khachhang> findByNhanvienbanhangTrangthaiOrderByIdDesc(Nhanvien nhanvienByIdnhanvienban,String trangthai,Pageable pageable);
 }

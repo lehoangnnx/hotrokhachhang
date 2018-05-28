@@ -1,13 +1,7 @@
 package bcc.springhibernate.controller;
 
-import bcc.springhibernate.model.Hoadon;
-import bcc.springhibernate.model.Khachhang;
-import bcc.springhibernate.model.Loaikhachhang;
-import bcc.springhibernate.model.Nhomkhachhang;
-import bcc.springhibernate.service.HoaDonService;
-import bcc.springhibernate.service.KhachHangService;
-import bcc.springhibernate.service.LoaiKhachHangService;
-import bcc.springhibernate.service.NhomKhachHangService;
+import bcc.springhibernate.model.*;
+import bcc.springhibernate.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,7 +23,8 @@ public class KhachHangController {
 
     @Autowired
     LoaiKhachHangService loaiKhachHangService;
-
+    @Autowired
+    TaikhoanService taikhoanService;
     @Autowired
     NhomKhachHangService nhomKhachHangService;
     @Autowired
@@ -50,36 +45,70 @@ public class KhachHangController {
         List<Khachhang> listKhachhang = null;
 
         int pageCount = 0;
+        if (request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_CHAMSOC")) {
+            if (loaikhachhang != 0 && nhomkhachhang != 0) {
+                Loaikhachhang getLoaiKhachHangById = loaiKhachHangService.findById(loaikhachhang);
+                Nhomkhachhang getNhomKhachHangById = nhomKhachHangService.findById(nhomkhachhang);
 
-        if (loaikhachhang != 0 && nhomkhachhang != 0) {
-            Loaikhachhang getLoaiKhachHangById = loaiKhachHangService.findById(loaikhachhang);
-            Nhomkhachhang getNhomKhachHangById = nhomKhachHangService.findById(nhomkhachhang);
+                int sizeListKhachHang = khachHangService.findByLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc(
+                        getLoaiKhachHangById, getNhomKhachHangById, trangthai).size();
 
-            int sizeListKhachHang = khachHangService.findByLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc(
-                    getLoaiKhachHangById, getNhomKhachHangById, trangthai).size();
+                pageCount = (sizeListKhachHang / limit + (sizeListKhachHang % limit > 0 ? 1 : 0));
 
-            pageCount = (sizeListKhachHang / limit + (sizeListKhachHang % limit > 0 ? 1 : 0));
+                listKhachhang = khachHangService.findByLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc(
+                        getLoaiKhachHangById, getNhomKhachHangById, trangthai, new PageRequest(page - 1, limit));
+            } else if (loaikhachhang != 0) {
+                Loaikhachhang getLoaiKhachHangById = loaiKhachHangService.findById(loaikhachhang);
+                int sizeListKhachHang = khachHangService
+                        .findByLoaikhachhangAndTrangthaiOrderByIdDesc(getLoaiKhachHangById, trangthai).size();
+                pageCount = (sizeListKhachHang / limit + (sizeListKhachHang % limit > 0 ? 1 : 0));
+                listKhachhang = khachHangService.findByLoaikhachhangAndTrangthaiOrderByIdDesc(getLoaiKhachHangById,
+                        trangthai, new PageRequest(page - 1, limit));
+            } else if (nhomkhachhang != 0) {
+                Nhomkhachhang getNhomKhachHangById = nhomKhachHangService.findById(nhomkhachhang);
+                int sizeListKhachHang = khachHangService
+                        .findByNhomkhachhangAndTrangthaiOrderByIdDesc(getNhomKhachHangById, trangthai).size();
+                pageCount = (sizeListKhachHang / limit + (sizeListKhachHang % limit > 0 ? 1 : 0));
+                listKhachhang = khachHangService.findByNhomkhachhangAndTrangthaiOrderByIdDesc(getNhomKhachHangById,
+                        trangthai, new PageRequest(page - 1, limit));
+            } else {
+                int sizeListKhachHang = khachHangService.findByTrangthaiOrderByIdDesc(trangthai).size();
+                pageCount = (sizeListKhachHang / limit + (sizeListKhachHang % limit > 0 ? 1 : 0));
+                listKhachhang = khachHangService.findByTrangthaiOrderByIdDesc(trangthai, new PageRequest(page - 1, limit));
+            }
+        }else {
+            Taikhoan taikhoan = taikhoanService.findByUsername(principal.getName());
 
-            listKhachhang = khachHangService.findByLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc(
-                    getLoaiKhachHangById, getNhomKhachHangById, trangthai, new PageRequest(page - 1, limit));
-        } else if (loaikhachhang != 0) {
-            Loaikhachhang getLoaiKhachHangById = loaiKhachHangService.findById(loaikhachhang);
-            int sizeListKhachHang = khachHangService
-                    .findByLoaikhachhangAndTrangthaiOrderByIdDesc(getLoaiKhachHangById, trangthai).size();
-            pageCount = (sizeListKhachHang / limit + (sizeListKhachHang % limit > 0 ? 1 : 0));
-            listKhachhang = khachHangService.findByLoaikhachhangAndTrangthaiOrderByIdDesc(getLoaiKhachHangById,
-                    trangthai, new PageRequest(page - 1, limit));
-        } else if (nhomkhachhang != 0) {
-            Nhomkhachhang getNhomKhachHangById = nhomKhachHangService.findById(nhomkhachhang);
-            int sizeListKhachHang = khachHangService
-                    .findByNhomkhachhangAndTrangthaiOrderByIdDesc(getNhomKhachHangById, trangthai).size();
-            pageCount = (sizeListKhachHang / limit + (sizeListKhachHang % limit > 0 ? 1 : 0));
-            listKhachhang = khachHangService.findByNhomkhachhangAndTrangthaiOrderByIdDesc(getNhomKhachHangById,
-                    trangthai, new PageRequest(page - 1, limit));
-        } else {
-            int sizeListKhachHang = khachHangService.findByTrangthaiOrderByIdDesc(trangthai).size();
-            pageCount = (sizeListKhachHang / limit + (sizeListKhachHang % limit > 0 ? 1 : 0));
-            listKhachhang = khachHangService.findByTrangthaiOrderByIdDesc(trangthai, new PageRequest(page - 1, limit));
+            if (loaikhachhang != 0 && nhomkhachhang != 0) {
+                Loaikhachhang getLoaiKhachHangById = loaiKhachHangService.findById(loaikhachhang);
+                Nhomkhachhang getNhomKhachHangById = nhomKhachHangService.findById(nhomkhachhang);
+
+                int sizeListKhachHang = khachHangService.findByNhanvienbanhangAndLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc
+                        (taikhoan.getNhanvien(),getLoaiKhachHangById,getNhomKhachHangById,trangthai).size();
+                pageCount = (sizeListKhachHang / limit + (sizeListKhachHang % limit > 0 ? 1 : 0));
+                listKhachhang =khachHangService.findByNhanvienbanhangAndLoaikhachhangAndNhomkhachhangAndTrangthaiOrderByIdDesc
+                        (taikhoan.getNhanvien(),getLoaiKhachHangById,getNhomKhachHangById,trangthai,new PageRequest(page - 1, limit));
+            }else if (loaikhachhang != 0) {
+                Loaikhachhang getLoaiKhachHangById = loaiKhachHangService.findById(loaikhachhang);
+                int sizeListKhachHang = khachHangService
+                        .findByNhanvienbanhangLoaikhachhangAndTrangthaiOrderByIdDesc
+                                (taikhoan.getNhanvien(),getLoaiKhachHangById, trangthai).size();
+                pageCount = (sizeListKhachHang / limit + (sizeListKhachHang % limit > 0 ? 1 : 0));
+                listKhachhang = khachHangService.findByNhanvienbanhangLoaikhachhangAndTrangthaiOrderByIdDesc
+                        (taikhoan.getNhanvien(),getLoaiKhachHangById, trangthai, new PageRequest(page - 1, limit));
+            }else if (nhomkhachhang != 0) {
+                Nhomkhachhang getNhomKhachHangById = nhomKhachHangService.findById(nhomkhachhang);
+                int sizeListKhachHang = khachHangService
+                        .findByNhanvienbanhangNhomkhachhangAndTrangthaiOrderByIdDesc(taikhoan.getNhanvien(),getNhomKhachHangById, trangthai).size();
+                pageCount = (sizeListKhachHang / limit + (sizeListKhachHang % limit > 0 ? 1 : 0));
+                listKhachhang = khachHangService.findByNhanvienbanhangNhomkhachhangAndTrangthaiOrderByIdDesc(taikhoan.getNhanvien(),getNhomKhachHangById,
+                        trangthai, new PageRequest(page - 1, limit));
+            } else {
+                int sizeListKhachHang = khachHangService.findByNhanvienbanhangTrangthaiOrderByIdDesc(taikhoan.getNhanvien(),trangthai).size();
+                pageCount = (sizeListKhachHang / limit + (sizeListKhachHang % limit > 0 ? 1 : 0));
+                listKhachhang = khachHangService.findByNhanvienbanhangTrangthaiOrderByIdDesc(taikhoan.getNhanvien(),trangthai, new PageRequest(page - 1, limit));
+            }
+
         }
         List<Loaikhachhang> listLoaikhachhang = loaiKhachHangService.findByTrangthaiOrderByIdDesc("active");
         List<Nhomkhachhang> listNhomkhachhang = nhomKhachHangService.findByTrangthaiOrderByIdDesc("active");
