@@ -2,6 +2,11 @@ function deleteOne(id) {
 	$("#arrayId").val(id);
 	$("#command").attr("action", contextPath + "/admin/hoadon");
 };
+
+function deletesOne(id) {
+    $("#idds").val(id);
+
+};
 $(document).ready(function() {
     var a = '123.456.789,.  123';
     var b = '123,456,789  123123';

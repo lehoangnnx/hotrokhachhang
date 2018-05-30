@@ -106,7 +106,12 @@
 
 									</c:otherwise>
 									</c:choose>
-									
+									<c:if test="${cs.trangthai == 'deleted' }">
+										<a onclick="deletesOne(${cs.id});" href="#" data-toggle="modal"
+										   data-target="#myModal_d" style="color: red; margin-left: 10px;">
+											<i class="fa fa-trash-o fa-lg" aria-hidden="true" title="Xóa"></i>
+										</a>
+									</c:if>
 									</td>
 								</tr>
 							</c:forEach>
@@ -201,6 +206,33 @@
 						value="${_csrf.token}" />
 					<input value="" id="arrayId" hidden="" name="arrayId" />
 					<button class="btn btn-danger" style="float: left;">Xóa</button>
+				</form:form>
+
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div class="modal fade" id="myModal_d" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4  style="text-align: center; font-weight: bold; color: red;"
+					 class="modal-title">Bạn Muốn Xóa Vĩnh Viễn ?</h4>
+			</div>
+
+			<div class="modal-footer">
+				<form:form id="command1" action="${contextPath }/admin/xoavinhvienchamsoc" method="patch">
+					<input type="hidden" name="${_csrf.parameterName}"
+						   value="${_csrf.token}"/>
+					<input value="" id="idds" hidden="" name="idds"/>
+					<button name="deleted" class="btn btn-danger" style="float: left;">Xóa</button>
 				</form:form>
 
 

@@ -71,7 +71,7 @@
 							<label for="thuongcuahoadon_money">Thưởng Của Hóa Đơn</label>
 							<div class="input-group">
 								<form:hidden path="thuongcuahoadon" />
-								<input id="thuongcuahoadon_money" name="thuongcuahoadon_money" type="text" readonly
+								<input id="thuongcuahoadon_money" name="thuongcuahoadon_money" type="text"
 									   value="<fmt:formatNumber type="number" pattern="###,###"
 									    value="${luong.thuongcuahoadon}"/>"
 									   class="form-control" placeholder="Thưởng Của Hóa Đơn" />

@@ -11,6 +11,11 @@
         padding-left: 10px;
         padding-right: 20px;
     }
+    .changetext {
+        font-weight: bold;
+        font-size: 15px;
+        color: green;
+    }
 </style>
 <style>
     table {
@@ -51,18 +56,13 @@
                     <dl class="col-md-4">
                         <dt>Nhân Viên Chăm Sóc</dt>
                         <dd>${map.nhanvienchamsoc}</dd>
-
                         <dt>Khách Hàng</dt>
                         <dd>${chamsoc.khachhang.makh} - ${chamsoc.khachhang.ten}</dd>
 
                         <dt>Ngày Chăm Sóc</dt>
                         <dd><fmt:formatDate pattern="dd-MM-yyyy" value="${chamsoc.ngay}"/></dd>
                         <dt>Số Lần Đã Chăm Sóc</dt>
-                        <dd>${chamsoc.khachhang.solanchamsoc }</dd>
-
-
-
-
+                        <dd class="changetext">${chamsoc.khachhang.solanchamsoc }</dd>
 
                     </dl>
                     <dl class="col-md-4">
@@ -73,13 +73,13 @@
                         <dt>Ngày Chăm Sóc Tiếp Theo</dt>
                         <dd><fmt:formatDate pattern="dd-MM-yyyy" value="${chamsoc.ngaycstiep}"/></dd>
                         <dt>Số Lần Đã Đàm Phán</dt>
-                        <dd>${chamsoc.khachhang.solandamphan }</dd>
+                        <dd class="changetext">${chamsoc.khachhang.solandamphan }</dd>
                     </dl>
                     <dl class="col-md-4">
                         <dt>Nhân Viên Giao Hàng</dt>
                         <dd>${map.nhanviengiaohang}</dd>
                         <dt>Lần Chăm Sóc</dt>
-                        <dd>${chamsoc.lan}</dd>
+                        <dd class="changetext">${chamsoc.lan}</dd>
                         <dt>Nội Dung Chăm Sóc</dt>
                         <dd>${chamsoc.noidung}</dd>
                         <dt>Ghi Chú</dt>
@@ -91,24 +91,18 @@
 
                             <dd>${ctcs.tieuchichamsoc.tentieuchi} - <c:if
                                     test="${ctcs.tieuchichamsoc.kieutieuchi == 'so' }">
-                                <input hidden value="${ctcs.diem}"
-                                       id="ikieutieuchitccs${ctcs.tieuchichamsoc.id}"
-                                       name="kieutieuchitccs">
-                                <span id="kieutieuchitccs${ctcs.tieuchichamsoc.id}">
+
+                                <span class="changetext" id="kieutieuchitccs${ctcs.tieuchichamsoc.id}">
                                         ${ctcs.diem} </span>
                             </c:if> <c:if
                                     test="${ctcs.tieuchichamsoc.kieutieuchi == 'cokhong' }">
-                                <input hidden value="${ctcs.cokhong}"
-                                       id="ikieutieuchitccs${ctcs.tieuchichamsoc.id}"
-                                       name="kieutieuchitccs">
-                                <span id="kieutieuchitccs${ctcs.tieuchichamsoc.id}">
+
+                                <span class="changetext" id="kieutieuchitccs${ctcs.tieuchichamsoc.id}">
 
                                         ${ctcs.cokhong == 'true' ? 'Tốt' : 'Chưa Tốt'} </span>
                             </c:if> <c:if test="${ctcs.tieuchichamsoc.kieutieuchi == 'tien' }">
-                                <input hidden value="${ctcs.tienchamsoc}"
-                                       id="ikieutieuchitccs${ctcs.tieuchichamsoc.id}"
-                                       name="kieutieuchitccs">
-                                <span id="kieutieuchitccs${ctcs.tieuchichamsoc.id}">
+
+                                <span class="changetext" id="kieutieuchitccs${ctcs.tieuchichamsoc.id}">
 														<fmt:formatNumber type="number" pattern="###,###"
                                                                           value="${ctcs.tienchamsoc}"/>
 														&#8363;</span>

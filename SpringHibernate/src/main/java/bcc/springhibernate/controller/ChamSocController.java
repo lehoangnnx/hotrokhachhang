@@ -423,7 +423,26 @@ public class ChamSocController {
 
         return "redirect:/admin/chamsoc?trangthai=chochamsoc&limit=100&page=1";
     }
+    @PatchMapping(value = "/xoavinhvienchamsoc")
+    String xoaVinhVienChamSocPopup(@RequestParam(value = "idds") Integer idds,
+                              RedirectAttributes redirectAttributes, Principal principal) {
+        List<Chitietchamsoc> chitietchamsocs = null;
+        try {
+            Chamsoc chamsoc = chamSocService.findById(idds);
+            chitietchamsocs = chiTietChamSocService.findByChamsoc(chamsoc);
+            if (!chitietchamsocs.isEmpty()) {
+                for (Chitietchamsoc ctcs : chitietchamsocs) {
+                    chiTietChamSocService.delete(ctcs);
+                }
+            }
+            chamSocService.deleted(chamsoc);
+            redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thành Công");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("msg", "Xóa Vĩnh Viễn Thất Bại");
+        }
 
+        return "redirect:/admin/chamsoc?trangthai=chochamsoc&limit=100&page=1";
+    }
     @DeleteMapping("/chamsoc")
     String xoaChamSoc(@RequestParam(value = "trangthai", defaultValue = "chochamsoc") String trangthai,
                       @RequestParam(value = "limit", defaultValue = "100") Integer limit,

@@ -98,6 +98,7 @@ public class LuongController {
     @PatchMapping(value = "/luong", params = "update")
     String suaLuong(@ModelAttribute("luong") Luong luong, @RequestParam("nhanvien") Integer nhanvien,
                     @RequestParam("luong_money") String tienluong, @RequestParam("thuong_money") String thuong,
+                    @RequestParam("thuongcuahoadon_money") String thuongcuahoadon_money,
                     @RequestParam("thang") String thang, @RequestParam("nam") String nam,
                     @RequestParam("trangthai") String trangthai, RedirectAttributes redirectAttributes) {
         try {
@@ -108,7 +109,7 @@ public class LuongController {
             luong.setTrangthai(trangthai);
             luong.setLuong(Long.valueOf(tienluong.replaceAll("\\.|\\,|\\s", "")));
             luong.setThuong(Long.valueOf(thuong.replaceAll("\\.|\\,|\\s", "")));
-
+            luong.setThuongcuahoadon(Long.valueOf(thuongcuahoadon_money.replaceAll("\\.|\\,|\\s", "")));
             LuongService.saveOrUpdate(luong);
             redirectAttributes.addFlashAttribute("msg", "Sửa Thành Công");
         } catch (Exception e) {
