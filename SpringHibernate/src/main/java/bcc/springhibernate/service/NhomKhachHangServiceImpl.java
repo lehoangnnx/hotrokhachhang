@@ -50,4 +50,9 @@ public class NhomKhachHangServiceImpl implements NhomKhachHangService {
 	public List<Nhomkhachhang> findByTrangthaiOrderByIdAsc(String trangthai) {
 		return nhomKhachHangRepository.findByTrangthaiOrderByIdAsc(trangthai);
 	}
+
+	@Override
+	public Nhomkhachhang findFirst1ByDiemLessThanEqualOrderByDiemDesc(Integer diem) {
+		return nhomKhachHangRepository.findFirst1ByDiemLessThanEqualOrderByDiemDesc(diem);
+	}
 }

@@ -39,7 +39,8 @@ public class HoaDonController {
     LuongService luongService;
     @Autowired
     NhanVienKpiService nhanVienKpiService;
-
+    @Autowired
+    NhomKhachHangService nhomKhachHangService;
     @PreAuthorize("hasAnyRole('ADMIN', 'BANHANG', 'GIAOHANG')")
     @GetMapping("/hoadon")
     String pageDanhSachHoaDon(@RequestParam(value = "hthd", required = false) String hthd,
@@ -336,10 +337,13 @@ public class HoaDonController {
                 getKhachHangById.setSotienchamsoc(sotienchamsoc);
                 getKhachHangById.setDiem(diem);
                 getKhachHangById.setLanmuahang(getKhachHangById.getLanmuahang() + 1);
+                Nhomkhachhang nhomkhachhang = nhomKhachHangService.findFirst1ByDiemLessThanEqualOrderByDiemDesc(diem);
+                if(nhomkhachhang != null){
+                    getKhachHangById.setNhomkhachhang(nhomkhachhang);
+                }
+
                 khachHangService.saveOrUpdate(getKhachHangById);
             }
-
-
             ArrayList<Nhanvien> nhanvienarr = new ArrayList<Nhanvien>();
             nhanvienarr.add(getNhanVienBanHangById);
 
@@ -541,6 +545,10 @@ public class HoaDonController {
 
                     getKhachHangById.setSotienchamsoc(sotienchamsoc);
                     getKhachHangById.setDiem(diem);
+                    Nhomkhachhang nhomkhachhang = nhomKhachHangService.findFirst1ByDiemLessThanEqualOrderByDiemDesc(diem);
+                    if(nhomkhachhang != null){
+                        getKhachHangById.setNhomkhachhang(nhomkhachhang);
+                    }
                     khachHangService.saveOrUpdate(getKhachHangById);
 
             }else if(hoadoncu.getTongtien().equals(hoadoncu.getTiendatra())){
@@ -832,6 +840,10 @@ public class HoaDonController {
                 khachhang.setSotienchamsoc(sotienchamsoc);
                 khachhang.setDiem(diem);
                 khachhang.setLanmuahang(khachhang.getLanmuahang() - 1);
+                Nhomkhachhang nhomkhachhang = nhomKhachHangService.findFirst1ByDiemLessThanEqualOrderByDiemDesc(diem);
+                if(nhomkhachhang != null){
+                    khachhang.setNhomkhachhang(nhomkhachhang);
+                }
                 khachHangService.saveOrUpdate(khachhang);
 
                 // Luong

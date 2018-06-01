@@ -14,4 +14,5 @@ public interface NhomKhachHangRepository extends JpaRepository<Nhomkhachhang, In
 	List<Nhomkhachhang> findByTrangthaiOrderByIdAsc(String trangthai);
 	Nhomkhachhang findByTennhom(String tennhom);
 	Nhomkhachhang findById(Integer id);
+	Nhomkhachhang findFirst1ByDiemLessThanEqualOrderByDiemDesc(Integer diem);
 }
