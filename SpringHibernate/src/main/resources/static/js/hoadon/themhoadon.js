@@ -497,7 +497,6 @@ function checkngay(event) {
 
     var ngaylap = parseDate($('#ngaylap').val()).getTime();
     var ngayxuat = parseDate($('#ngayxuat').val()).getTime();
-    var ngaythanhtoan = parseDate($('#ngaythanhtoan').val()).getTime();
     var ngayhientai = parseDate(day+'/'+month+'/'+year).getTime();
 
     if(ngaylap > ngayhientai){
@@ -512,12 +511,6 @@ function checkngay(event) {
 
         $('#ngayxuat-error').css("display", "block");
         $('#ngayxuat-error').text("* Ngày Xuất Không Lớn Hơn Ngày Hiện Tại");
-        return;
-    }else if(ngaythanhtoan > ngayhientai){
-        event.preventDefault();
-
-        $('#ngaythanhtoan-error').css("display", "block");
-        $('#ngaythanhtoan-error').text("* Ngày Thanh Toán Không Lớn Hơn Ngày Hiện Tại");
         return;
     }else {
         $('#ngaylap-error').css("display", "none");

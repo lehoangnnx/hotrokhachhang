@@ -6,7 +6,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
+<style>
+	.changetext {
+		font-weight: bold;
+		font-size: 15px;
+		color: green;
+	}
+</style>
 <input hidden="" id="msg" value="${msg }"></input>
 <!-- Content Header (Page header) -->
 <%--<section class="content-header">
@@ -101,12 +107,33 @@
 								<th>Tên Khách Hàng</th>
 								<th>Loại Khách Hàng</th>
 								<th>Nhóm Khách Hàng</th>
+								<th>Số Hóa Đơn Đã Mua</th>
+								<th>Tổng Tiền Đã Mua</th>
+								<th>Tổng Tiền Đã Trả</th>
+								<th>Tổng Nợ Còn</th>
+								<th>Số Tiền Chăm Sóc</th>
+								<th>Số Tiền Đã Chăm Sóc</th>
 								<th>Thao Tác</th>
 							</tr>
 						</thead>
 						<tbody>
 
 							<c:forEach var="kh" items="${listKhachhang }">
+								<c:set var="sohoadon" value="0" />
+								<c:set var="tongtien" value="0" />
+								<c:set var="tiendatra" value="0" />
+								<c:set var="congno" value="0" />
+
+								<c:forEach var="hd" items="${hoaDonList }">
+									<c:if test="${kh.id == hd.khachhang.id}">
+										<c:set var="sohoadon" value="${sohoadon + 1}" />
+										<c:set var="tongtien" value="${tongtien + hd.tongtien }" />
+										<c:set var="tiendatra" value="${tiendatra + hd.tiendatra }" />
+										<c:set var="congno" value="${congno + hd.congno }" />
+									</c:if>
+								</c:forEach>
+
+
 								<tr>
 									<td style="text-align: center;">
 										<div class="btn-group" data-toggle="buttons">
@@ -129,6 +156,18 @@
 									<td>${kh.ten }</td>
 									<td>${kh.loaikhachhang.tenloai }</td>
 									<td>${kh.nhomkhachhang.tennhom }</td>
+									<td class="text-bold"><fmt:formatNumber
+											type="number" pattern="###,###" value="${sohoadon }"/> &#8363;</td>
+									<td class="changetext"><fmt:formatNumber
+											type="number" pattern="###,###" value="${tongtien }"/> &#8363;</td>
+									<td class="changetext"><fmt:formatNumber
+											type="number" pattern="###,###" value="${tiendatra }"/> &#8363;</td>
+									<td class="changetext text-red"><fmt:formatNumber
+											type="number" pattern="###,###" value="${congno }"/> &#8363;</td>
+									<td class="changetext"><fmt:formatNumber
+											type="number" pattern="###,###" value="${kh.sotienchamsoc }"/> &#8363;</td>
+									<td class="changetext"><fmt:formatNumber
+											type="number" pattern="###,###" value="${kh.sotiendachamsoc }"/> &#8363;	</td>
 									<td><a href="${contextPath }/admin/khachhang/${kh.id}">
 											<i style="color: blue;" class="fa fa-pencil fa-lg"
 											aria-hidden="true" title="Sửa"> </i>
@@ -154,6 +193,12 @@
 								<th>Tên Khách Hàng</th>
 								<th>Loại Khách Hàng</th>
 								<th>Nhóm Khách Hàng</th>
+								<th>Số Hóa Đơn Đã Mua</th>
+								<th>Tổng Tiền Đã Mua</th>
+								<th>Tổng Tiền Đã Trả</th>
+								<th>Tổng Nợ Còn</th>
+								<th>Số Tiền Chăm Sóc</th>
+								<th>Số Tiền Đã Chăm Sóc</th>
 								<th>Thao Tác</th>
 							</tr>
 						</tfoot>

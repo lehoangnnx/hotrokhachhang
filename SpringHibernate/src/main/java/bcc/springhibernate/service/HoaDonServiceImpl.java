@@ -250,4 +250,9 @@ public class HoaDonServiceImpl implements HoaDonService {
 	public List<Hoadon> findByTrangthaiNotAndNhanvienByIdnhanvienbanOrderByIdDesc(String trangthai, Nhanvien nhanvienByIdnhanvienban, Pageable pageable) {
 		return hoaDonRepository.findByTrangthaiNotAndNhanvienByIdnhanvienbanOrderByIdDesc(trangthai,nhanvienByIdnhanvienban,pageable);
 	}
+
+	@Override
+	public List<Hoadon> findByKhachhangAndTrangthaiNotOrderByIdDesc(Khachhang khachhang, String trangthai) {
+		return hoaDonRepository.findByKhachhangAndTrangthaiNotOrderByIdDesc(khachhang,trangthai);
+	}
 }

@@ -145,8 +145,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="changetext" for="tiendatra">Tiền Đã Trả : <span><fmt:formatNumber
-                                        type="number" pattern="###,###" value="${tiendatra }"/></span>
-                                    &#8363;
+                                        type="number" pattern="###,###" value="${tiendatra }"/></span>&#8363;
                                 </label>
 
                             </div>

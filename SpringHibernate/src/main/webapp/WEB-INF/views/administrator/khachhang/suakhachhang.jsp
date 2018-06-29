@@ -11,7 +11,107 @@
         padding-left: 10px;
         padding-right: 20px;
     }
+    .changetext {
+        font-weight: bold;
+        font-size: 15px;
+        color: green;
+    }
 </style>
+
+<section class="content">
+    <div class="row">
+
+        <div class="col-xs-12">
+            <div class="box">
+
+                <div class="box-header">
+                    <h3 class="box-title">Danh Sách Hóa Đơn Của Khách Hàng</h3>
+
+                </div>
+
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>Số Hóa Đơn</th>
+                                <th>Nhân Viên Bán Hàng</th>
+                                <th>Nhân Viên Chăm Sóc</th>
+                                <th>Tổng Tiền</th>
+                                <th>Tiền Đã Trả</th>
+                                <th>Tiền Còn Nợ</th>
+                                <th>Ngày Lập</th>
+                                <th>Ngày Thanh Toán</th>
+                                <th>Trạng Thái</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="hd" items="${hoadonList }">
+                                <tr>
+                                    <td ><a class="${hd.tiendatra < hd.tongtien && hd.congno > 0 ? 'text-red' : '' } " href="${contextPath}/admin/hoadon/${hd.id}">${hd.sohoadon }</a></td>
+                                    <td>
+                                        <a href="${contextPath}/admin/nhanvien/${hd.nhanvienByIdnhanvienchamsoc.id}">${hd.nhanvienByIdnhanvienchamsoc.manhanvien }-
+                                                ${hd.nhanvienByIdnhanvienchamsoc.tennhanvien }</a>
+                                    </td>
+                                    <td><a href="${contextPath}/admin/nhanvien/${hd.nhanvienByIdnhanvienban.id}">${hd.nhanvienByIdnhanvienban.manhanvien }-
+                                            ${hd.nhanvienByIdnhanvienban.tennhanvien }</a></td>
+                                    <td class="changetext"><fmt:formatNumber type="number" pattern="###,###"
+                                                                             value="${hd.tongtien }" /> &#8363;</td>
+                                    <td class="changetext"><fmt:formatNumber type="number" pattern="###,###"
+                                                                             value="${hd.tiendatra }" /> &#8363;</td>
+                                    <td class="changetext text-red"><fmt:formatNumber type="number" pattern="###,###"
+                                                                                      value="${hd.congno }" /> &#8363;</td>
+                                    <td><fmt:formatDate pattern="dd-MM-yyyy"
+                                                        value="${hd.ngaylap }"/></td>
+                                    <td><fmt:formatDate pattern="dd-MM-yyyy"
+                                                        value="${hd.ngaythanhtoan }"/></td>
+                                    <c:if test="${hd.trangthai == 'dagiaohang' }">
+                                        <td>Đã Giao Hàng</td>
+                                    </c:if>
+                                    <c:if test="${hd.trangthai == 'chuagiaohang' }">
+                                        <td >Chưa Giao Hàng</td>
+                                    </c:if>
+                                    <c:if test="${hd.trangthai == 'deleted' }">
+                                        <td>Đã Xóa</td>
+                                    </c:if>
+                                    <td><a href="${contextPath }/admin/hoadon/${hd.id}"> <i
+                                            style="color: blue;" class="fa fa-pencil fa-lg"
+                                            aria-hidden="true" title="Sửa"> </i>
+                                    </a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>Số Hóa Đơn</th>
+                                <th>Nhân Viên Bán Hàng</th>
+                                <th>Nhân Viên Chăm Sóc</th>
+                                <th>Tổng Tiền</th>
+                                <th>Tiền Đã Trả</th>
+                                <th>Tiền Còn Nợ</th>
+                                <th>Ngày Lập</th>
+                                <th>Ngày Thanh Toán</th>
+                                <th>Trạng Thái</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+
+    <!-- /.row -->
+</section>
 <section class="content">
 
     <div class="row">
@@ -20,7 +120,7 @@
             <!-- general form elements -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Sửa Khách Hàng</h3>
+                    <h3 class="box-title">Sửa Thông Tin Khách Hàng</h3>
                     <button class="btn btn-info pull-right" type="button" onclick="goBack();">Quay Lại</button>
                 </div>
                 <!-- /.box-header -->

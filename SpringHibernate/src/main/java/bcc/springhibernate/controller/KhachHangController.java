@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class KhachHangController {
                                   @RequestParam(value = "nhomkhachhang", defaultValue = "0") Integer nhomkhachhang, Model model,
                                   HttpServletRequest request, Principal principal) {
 
-        List<Khachhang> listKhachhang = null;
+        List<Khachhang> listKhachhang = new ArrayList<Khachhang>();
 
         int pageCount = 0;
         if (request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_CHAMSOC")) {
@@ -112,8 +113,16 @@ public class KhachHangController {
         }
         List<Loaikhachhang> listLoaikhachhang = loaiKhachHangService.findByTrangthaiOrderByIdDesc("active");
         List<Nhomkhachhang> listNhomkhachhang = nhomKhachHangService.findByTrangthaiOrderByIdDesc("active");
+        List<Hoadon> listHoaDon = hoaDonService.findByTrangthaiNotOrderByIdDesc("deleted");
+
+        model.addAttribute("hoaDonList", listHoaDon);
+
+
         model.addAttribute("listLoaikhachhang", listLoaikhachhang);
         model.addAttribute("listNhomkhachhang", listNhomkhachhang);
+
+
+
         listKhachhang.sort(Comparator.comparing(Khachhang::getUutien));
 
         model.addAttribute("listKhachhang", listKhachhang);
@@ -121,6 +130,9 @@ public class KhachHangController {
         model.addAttribute("currentpage", page);
         model.addAttribute("pagecount", pageCount);
         thongBao.thongbao(model, request, principal);
+
+
+
         return "danhsachkhachhang";
     }
 
@@ -141,9 +153,11 @@ public class KhachHangController {
             if (khachhang != null) {
                 List<Loaikhachhang> listLoaikhachhang = loaiKhachHangService.findByTrangthaiOrderByIdDesc("active");
                 List<Nhomkhachhang> listNhomkhachhang = nhomKhachHangService.findByTrangthaiOrderByIdDesc("active");
+                List<Hoadon> hoadonList = hoaDonService.findByKhachhangAndTrangthaiNotOrderByIdDesc(khachhang,"deleted");
                 model.addAttribute("listLoaikhachhang", listLoaikhachhang);
                 model.addAttribute("listNhomkhachhang", listNhomkhachhang);
                 model.addAttribute("khachhang", khachhang);
+                model.addAttribute("hoadonList", hoadonList);
                 return "suakhachhang";
             } else {
                 return "redirect:/403";

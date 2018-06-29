@@ -347,8 +347,8 @@ public class HoaDonController {
             ArrayList<Nhanvien> nhanvienarr = new ArrayList<Nhanvien>();
             nhanvienarr.add(getNhanVienBanHangById);
 
+            themluong(hoadon, nhanvienarr, ngaythanhtoan, getNhanVienChamSocById);
 
-            themluong(hoadon, nhanvienarr, ngaythanhtoan);
             redirectAttributes.addFlashAttribute("msg", "Thêm Thành Công");
 
 
@@ -362,7 +362,7 @@ public class HoaDonController {
 
     }
 
-    boolean themluong(Hoadon hoadon, ArrayList<Nhanvien> nhanvien, String ngay) {
+    boolean themluong(Hoadon hoadon, ArrayList<Nhanvien> nhanvien, String ngay, Nhanvien nvchamsoc) {
 
         try {
             Date date = new Date();
@@ -374,6 +374,13 @@ public class HoaDonController {
             for (Chitiethoadon ct : chitiethoadons) {
 
                 tongtienvon += (ct.getHanghoa().getGianhap() * ct.getSoluong());
+            }
+            if (hoadon.getTongtien().equals(hoadon.getTiendatra())){
+                Luong luong = luongService.findOneByNhanvienAndThangAndNam(nvchamsoc, splitngay[1], splitngay[2]);
+                Long thuong = 0L;
+                thuong = (long) (((hoadon.getTiendatra() - (tongtienvon)) * nvchamsoc.getChietkhau()) / 100);
+                luong.setThuongcuahoadon(luong.getThuongcuahoadon() + (thuong));
+                luongService.saveOrUpdate(luong);
             }
             for (Nhanvien nv : nhanvien) {
 
@@ -579,7 +586,20 @@ public class HoaDonController {
             String ngaythanhtoanhoadoncu[] = df.format(hoadoncu.getNgaythanhtoan()).split("/|-");
             String ngaythanhtoanhoadon[] = df.format(hoadon.getNgaythanhtoan()).split("/|-");
 
-
+            if(hoadoncu.getTongtien().equals(hoadoncu.getTiendatra())){
+                Luong luong = luongService.findOneByNhanvienAndThangAndNam(getNhanVienChamSocById, splitngay[1],
+                        splitngay[2]);
+                Long thuongcu = (long) (luong.getThuongcuahoadon()
+                        - (((hoadoncu.getTiendatra() - (tongtienvoncu)) * getNhanVienChamSocById.getChietkhau()) / 100));
+                luong.setThuongcuahoadon(thuongcu);
+                luongService.saveOrUpdate(luong);
+            }
+            if (hoadon.getTongtien().equals(hoadon.getTiendatra())){
+                Luong luong = luongService.findOneByNhanvienAndThangAndNam(getNhanVienChamSocById, splitngay[1], splitngay[2]);
+                Long thuong = (long) (((hoadon.getTiendatra() - (tongtienvon)) * getNhanVienChamSocById.getChietkhau()) / 100);
+                luong.setThuongcuahoadon(luong.getThuongcuahoadon() + (thuong));
+                luongService.saveOrUpdate(luong);
+            }
             for (Nhanvien nv : nhanvienarr) {
                 Long thuongcu = 0L;
                 Long thuong = 0L;
@@ -587,7 +607,6 @@ public class HoaDonController {
                         splitngay[2]);
                 if (ngaythanhtoanhoadoncu[1].equals(ngaythanhtoanhoadon[1])
                         && ngaythanhtoanhoadoncu[2].equals(ngaythanhtoanhoadon[2])) {
-
 
                     if (hoadoncu.getTiendatra() < tongtienvoncu) {
                         thuongcu = (long) (luong.getThuongcuahoadon()
@@ -606,10 +625,9 @@ public class HoaDonController {
                 } else {
                     thuong = (long) (((hoadon.getTiendatra() - (tongtienvon)) * nv.getChietkhau()) / 100);
                 }
-
-
                 luong.setThuongcuahoadon(thuongcu + (thuong));
                 luongService.saveOrUpdate(luong);
+
                 if (nv.getIdnhanviencaptren() != 0) {
                     Long thuongcunhanviencaptren = 0L;
                     Long thuongnhanviencaptren = 0L;
@@ -674,8 +692,6 @@ public class HoaDonController {
             tongtienvon += ct.getHanghoa().getGianhap() * ct.getSoluong();
         }
 
-
-        System.out.println("Cu :" + tongtienvoncu +" Mới : " + tongtienvon);
 
         String ngaythanhtoanhoadoncu[] = df.format(hoadoncu.getNgaythanhtoan()).split("/|-");
         String ngaythanhtoanhoadon[] = df.format(hoadon.getNgaythanhtoan()).split("/|-");

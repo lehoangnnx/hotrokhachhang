@@ -121,4 +121,5 @@ public interface HoaDonRepository extends JpaRepository<Hoadon, Integer> {
 			"WHERE hd.tiendatra < hd.tongtien AND hd.congno > 0 GROUP BY hd.khachhang, hd.nhanvienByIdnhanvienban " +
 			"HAVING count(hd.id) >=2 ")
 	List<HoadonCount> findHoadonWhereKhachhangChuathanhtoan();
+	List<Hoadon> findByKhachhangAndTrangthaiNotOrderByIdDesc(Khachhang khachhang, String trangthai);
 }

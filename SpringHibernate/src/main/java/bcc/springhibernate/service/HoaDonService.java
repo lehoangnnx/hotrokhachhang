@@ -86,4 +86,5 @@ public interface HoaDonService {
 	List<Hoadon> findKhachhangDistinctByNhanvienByIdnhanvienbanAndTrangthaiNot(Nhanvien nhanvienByIdnhanvienban, String trangthai);
 
 	List<HoadonCount> findHoadonWhereKhachhangChuathanhtoan();
+	List<Hoadon> findByKhachhangAndTrangthaiNotOrderByIdDesc(Khachhang khachhang, String trangthai);
 }
