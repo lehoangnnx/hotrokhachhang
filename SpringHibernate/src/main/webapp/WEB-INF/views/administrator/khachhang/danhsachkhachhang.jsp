@@ -157,7 +157,7 @@
 									<td>${kh.loaikhachhang.tenloai }</td>
 									<td>${kh.nhomkhachhang.tennhom }</td>
 									<td class="text-bold"><fmt:formatNumber
-											type="number" pattern="###,###" value="${sohoadon }"/> &#8363;</td>
+											type="number" pattern="###,###" value="${sohoadon }"/></td>
 									<td class="changetext"><fmt:formatNumber
 											type="number" pattern="###,###" value="${tongtien }"/> &#8363;</td>
 									<td class="changetext"><fmt:formatNumber
